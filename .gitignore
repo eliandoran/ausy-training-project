@@ -1,1 +1,7 @@
 *.bak
+.metadata
+.project
+.settings
+.classpath
+Servers
+target
