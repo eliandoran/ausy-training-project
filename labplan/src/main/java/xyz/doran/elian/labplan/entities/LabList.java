@@ -1,18 +1,19 @@
 package xyz.doran.elian.labplan.entities;
 
-import java.util.Date;
+import java.util.*;
 
 public class LabList {
 	private Integer id;
 	private Integer patientId;
 	private Date creationDate;
-	
+	private List<LabResult> resultsList;
 	
 	public LabList() {
-		
+		resultsList = new ArrayList<LabResult>();
 	}
 	
 	public LabList(Integer id, Integer patientId, Date creationDate) {
+		this();
 		this.id = id;
 		this.patientId = patientId;
 		this.creationDate = creationDate;
@@ -45,5 +46,9 @@ public class LabList {
 
 	public void setCreationDate(Date creationDate) {
 		this.creationDate = creationDate;
+	}
+	
+	public List<LabResult> getResultsList() {
+		return resultsList;
 	}
 }
