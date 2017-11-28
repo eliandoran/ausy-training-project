@@ -3,5 +3,6 @@
 .project
 .settings
 .classpath
+.recommenders
 Servers
 target
