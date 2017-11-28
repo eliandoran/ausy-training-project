@@ -49,7 +49,7 @@ public class LabTest {
 	}
 	
 	public Float getValueMin() {
-		return this.valueMin;
+		return valueMin;
 	}
 	
 	public void setValueMin(Float valueMin) {
@@ -57,7 +57,7 @@ public class LabTest {
 	}
 	
 	public Float getValueMax() {
-		return this.valueMax;
+		return valueMax;
 	}
 	
 	public void setValueMax(Float valueMax) {

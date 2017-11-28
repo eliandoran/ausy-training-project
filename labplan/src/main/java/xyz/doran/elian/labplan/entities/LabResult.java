@@ -22,7 +22,7 @@ public class LabResult {
 	
 	
 	public Integer getTestId() {
-		return this.testId;
+		return testId;
 	}
 	
 	public void setTestId(Integer testId) {
@@ -30,7 +30,7 @@ public class LabResult {
 	}
 	
 	public Integer getListId() {
-		return this.listId;
+		return listId;
 	}
 	
 	public void setListId(Integer listId) {
@@ -38,7 +38,7 @@ public class LabResult {
 	}
 	
 	public Float getValue() {
-		return this.value;
+		return value;
 	}
 	
 	public void setValue(Float value) {
