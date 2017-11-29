@@ -67,7 +67,7 @@ public class DatabaseConnectionFactory {
 			props.setProperty("username", userName);
 			props.setProperty("password", password);
 			
-			props.save(out, "LabPlan Database Connection Parameters");
+			props.store(out, "LabPlan Database Connection Parameters");
 		} finally {
 			out.close();
 		}
