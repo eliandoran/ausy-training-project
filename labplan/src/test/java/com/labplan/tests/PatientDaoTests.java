@@ -55,6 +55,20 @@ public class PatientDaoTests {
 	}
 	
 	@Test
+	public void testUpdate() {
+		Patient dummyPatient = new Patient("Jane", "Doe", 34, 165, 54);
+		assertTrue("SQL insertion for single Patient failed.", patientDao.insertPatient(dummyPatient));
+		
+		dummyPatient.setLastName("Smith");
+		assertTrue("SQL update for single Patient failed.", patientDao.updatePatient(dummyPatient));
+		
+		Patient samePatient = patientDao.getPatientByName(dummyPatient.getFirstName(), dummyPatient.getLastName());
+		assertEquals(dummyPatient, samePatient);
+		
+		assertTrue("SQL deletion for single Patient failed.", patientDao.deletePatient(dummyPatient));
+	}
+	
+	@Test
 	public void testGetByName() {
 		Patient dummyPatient = new Patient("John", "Doe", 36, 180, 84);
 		assertTrue("SQL insertion for single Patient failed.", patientDao.insertPatient(dummyPatient));

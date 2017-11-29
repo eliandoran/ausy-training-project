@@ -103,11 +103,11 @@ public class PatientDao implements com.labplan.persistence.generic.IPatientDao {
 	public boolean updatePatient(Patient patient) {
 		Connection conn = DatabaseConnectionFactory.getConnection();
 		String query = "UPDATE `patients` SET "
-				+ "`first_name`=?,"
-				+ "`last_name`=?,"
-				+ "`age`=?"
-				+ "`height`=?"
-				+ "`weight`=?"
+				+ "`first_name`=?, "
+				+ "`last_name`=?, "
+				+ "`age`=?, "
+				+ "`height`=?, "
+				+ "`weight`=? "
 				+ "WHERE `patient_id`=?";
 		
 		try {
@@ -120,7 +120,7 @@ public class PatientDao implements com.labplan.persistence.generic.IPatientDao {
 			stmt.setInt(5, patient.getWeight());
 			stmt.setInt(6, patient.getId());
 			
-			stmt.executeQuery();
+			stmt.executeUpdate();
 		} catch (SQLException e) {
 			return false;
 		}
