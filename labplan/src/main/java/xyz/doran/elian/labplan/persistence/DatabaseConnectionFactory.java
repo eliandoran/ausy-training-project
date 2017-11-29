@@ -48,8 +48,7 @@ public class DatabaseConnectionFactory {
 				properties.getProperty("username").length() == 0)
 				throw new RuntimeException("User name not found in configuration file.");
 			
-			if (!properties.containsKey("password") ||
-				properties.getProperty("password").length() == 0)
+			if (!properties.containsKey("password"))
 				throw new RuntimeException("Password not found in configuration file.");
 		} finally {
 			in.close();
