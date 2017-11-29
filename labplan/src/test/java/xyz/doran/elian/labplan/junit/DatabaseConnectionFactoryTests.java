@@ -40,21 +40,10 @@ public class DatabaseConnectionFactoryTests {
 			assumeNoException(e);
 		}
 	}
-
-	@Test
-	public void testLoadConfiguration() {
-		try {
-			DatabaseConnectionFactory.setConfigFilePath(configFilePath);
-			DatabaseConnectionFactory.load();
-		} catch (Exception e) {
-			assumeNoException(e);
-		}
-	}
 	
 	@Test
 	public void testConnection() throws Exception {
 		DatabaseConnectionFactory.setConfigFilePath(configFilePath);
-		DatabaseConnectionFactory.load();
 		
 		Connection conn = DatabaseConnectionFactory.getConnection();
 		

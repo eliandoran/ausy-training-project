@@ -27,29 +27,18 @@ public class DatabaseConnectionFactory {
 		DriverManager.registerDriver(new Driver());
 		
 		return DriverManager.getConnection(
-				properties.getProperty("address"),
-				properties.getProperty("username"),
-				properties.getProperty("password"));
+				properties.getProperty("address", ""),
+				properties.getProperty("username", ""),
+				properties.getProperty("password", ""));
 	}
 	
-	public static void load() throws IOException {
+	private static void load() throws IOException {
 		FileInputStream in = null;
 		
 		try {
 			in = new FileInputStream(configFilePath);
 			properties = new Properties();
 			properties.load(in);
-			
-			if (!properties.containsKey("address") ||
-				properties.getProperty("address").length() == 0)
-				throw new RuntimeException("Database address not found in configuration file.");
-			
-			if (!properties.containsKey("username") ||
-				properties.getProperty("username").length() == 0)
-				throw new RuntimeException("User name not found in configuration file.");
-			
-			if (!properties.containsKey("password"))
-				throw new RuntimeException("Password not found in configuration file.");
 		} finally {
 			in.close();
 		}
