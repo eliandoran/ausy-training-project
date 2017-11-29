@@ -59,5 +59,6 @@ public class DatabaseConnectionFactoryTests {
 		Connection conn = DatabaseConnectionFactory.getConnection();
 		
 		PreparedStatement statement = conn.prepareStatement("SELECT * FROM `patients`");
+		statement.executeQuery();
 	}
 }
