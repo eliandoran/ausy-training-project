@@ -20,8 +20,7 @@ public class DatabaseConnectionFactoryTests {
 	
 	static String dummyAddress = "jdbc:mysql://localhost:3306/labplan";
 	static String dummyUserName = "root";
-	static String dummyPassword = "Development.";
-	static String dummyDatabase = "database";
+	static String dummyPassword = "eliandoran";
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -36,7 +35,7 @@ public class DatabaseConnectionFactoryTests {
 	public void testSaveConfiguration() {
 		try {
 			DatabaseConnectionFactory.setConfigFilePath(configFilePath);
-			DatabaseConnectionFactory.save(dummyAddress, dummyUserName, dummyPassword, dummyDatabase);
+			DatabaseConnectionFactory.save(dummyAddress, dummyUserName, dummyPassword);
 		} catch (Exception e) {
 			assumeNoException(e);
 		}

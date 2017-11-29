@@ -55,7 +55,7 @@ public class DatabaseConnectionFactory {
 		}
 	}
 	
-	public static void save(String address, String userName, String password, String database)
+	public static void save(String address, String userName, String password)
 			throws IOException {
 		FileOutputStream out = null;
 		
@@ -66,7 +66,6 @@ public class DatabaseConnectionFactory {
 			props.setProperty("address", address);
 			props.setProperty("username", userName);
 			props.setProperty("password", password);
-			props.setProperty("database", database);
 			
 			props.save(out, "LabPlan Database Connection Parameters");
 		} finally {
