@@ -6,6 +6,8 @@ import java.util.Properties;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+
+import com.labplan.persistence.exceptions.ConnectionFailedException;
 import com.mysql.cj.jdbc.Driver;
 
 public class DatabaseConnectionFactory {
@@ -21,16 +23,22 @@ public class DatabaseConnectionFactory {
 		configFilePath = path;
 	}
 	
-	public static Connection getConnection() throws IOException, SQLException {
-		if (properties == null)
-			load();
-		
-		DriverManager.registerDriver(new Driver());
-		
-		return DriverManager.getConnection(
-				properties.getProperty("address", ""),
-				properties.getProperty("username", ""),
-				properties.getProperty("password", ""));
+	public static Connection getConnection() throws ConnectionFailedException {
+		try {
+			if (properties == null)
+				load();
+			
+			DriverManager.registerDriver(new Driver());
+			
+			return DriverManager.getConnection(
+					properties.getProperty("address", ""),
+					properties.getProperty("username", ""),
+					properties.getProperty("password", ""));
+		} catch (IOException | SQLException e) {
+			ConnectionFailedException newException = new ConnectionFailedException();
+			newException.addSuppressed(e);
+			throw newException;
+		}
 	}
 	
 	private static void load() throws IOException {
