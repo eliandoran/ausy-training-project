@@ -6,6 +6,7 @@ import com.labplan.persistence.exceptions.ConnectionFailedException;
 
 public interface IPatientDao {
 	Patient getPatientById(int id) throws ConnectionFailedException;
+	Patient getPatientByName(String firstName, String lastName);
 	Set<Patient> getAllPatients();
 	boolean insertPatient(Patient patient);
 	boolean updatePatient(Patient patient);

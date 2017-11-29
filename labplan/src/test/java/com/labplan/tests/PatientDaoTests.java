@@ -53,4 +53,13 @@ public class PatientDaoTests {
 		assertTrue("SQL deletion for single Patient failed.", patientDao.deletePatient(dummyPatient1));
 		assertTrue("SQL deletion for single Patient failed.", patientDao.deletePatient(dummyPatient2));
 	}
+	
+	@Test
+	public void testGetByName() {
+		Patient dummyPatient = new Patient("John", "Doe", 36, 180, 84);
+		assertTrue("SQL insertion for single Patient failed.", patientDao.insertPatient(dummyPatient));
+		
+		Patient samePatient = patientDao.getPatientByName(dummyPatient.getFirstName(), dummyPatient.getLastName());
+		assertEquals(dummyPatient, samePatient);
+	}
 }

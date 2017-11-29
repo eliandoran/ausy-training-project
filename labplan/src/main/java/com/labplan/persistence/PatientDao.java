@@ -31,6 +31,26 @@ public class PatientDao implements com.labplan.persistence.generic.IPatientDao {
 		
 		return null;
 	}
+	
+	public Patient getPatientByName(String firstName, String lastName) {
+		Connection conn = DatabaseConnectionFactory.getConnection();
+		String query = "SELECT * FROM `patients` WHERE `first_name`=? AND `last_name`=?";
+		
+		try {			
+			PreparedStatement stmt = conn.prepareStatement(query);
+			stmt.setString(1, firstName);
+			stmt.setString(2, lastName);
+			ResultSet result = stmt.executeQuery();
+			
+			if (result.next()) {
+				return parsePatient(result);
+			}
+		} catch (SQLException e) {
+			return null;
+		}
+		
+		return null;
+	}
 
 	public Set<Patient> getAllPatients() {
 		Connection conn = DatabaseConnectionFactory.getConnection();
