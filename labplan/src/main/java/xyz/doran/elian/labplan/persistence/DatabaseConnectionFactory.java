@@ -47,22 +47,4 @@ public class DatabaseConnectionFactory {
 			in.close();
 		}
 	}
-	
-	public static void save(String address, String userName, String password)
-			throws IOException {
-		FileOutputStream out = null;
-		
-		try {
-			out = new FileOutputStream(configFilePath);
-			Properties props = new Properties();
-			
-			props.setProperty("address", address);
-			props.setProperty("username", userName);
-			props.setProperty("password", password);
-			
-			props.store(out, "LabPlan Database Connection Parameters");
-		} finally {
-			out.close();
-		}
-	}
 }

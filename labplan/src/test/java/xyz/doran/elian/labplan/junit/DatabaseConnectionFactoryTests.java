@@ -30,16 +30,6 @@ public class DatabaseConnectionFactoryTests {
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
 	}
-
-	@Test
-	public void testSaveConfiguration() {
-		try {
-			DatabaseConnectionFactory.setConfigFilePath(configFilePath);
-			DatabaseConnectionFactory.save(dummyAddress, dummyUserName, dummyPassword);
-		} catch (Exception e) {
-			assumeNoException(e);
-		}
-	}
 	
 	@Test
 	public void testConnection() throws Exception {
