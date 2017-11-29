@@ -1,6 +1,7 @@
 package xyz.doran.elian.labplan.persistence;
 
 import java.io.*;
+import java.net.URL;
 import java.util.Properties;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -33,10 +34,13 @@ public class DatabaseConnectionFactory {
 	}
 	
 	private static void load() throws IOException {
-		FileInputStream in = null;
+		ClassLoader loader = DatabaseConnectionFactory.class.getClassLoader();
+		URL resource = loader.getResource("db.properties");
+		InputStream in = null;
 		
 		try {
-			in = new FileInputStream(configFilePath);
+			in = resource.openStream();
+			
 			properties = new Properties();
 			properties.load(in);
 		} finally {

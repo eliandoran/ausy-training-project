@@ -6,4 +6,4 @@
 .recommenders
 Servers
 target
-labplan/db.properties
+labplan/src/main/resources/db.properties
