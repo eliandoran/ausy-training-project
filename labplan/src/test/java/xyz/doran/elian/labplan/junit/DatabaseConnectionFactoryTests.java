@@ -1,41 +1,15 @@
 package xyz.doran.elian.labplan.junit;
 
 import static org.junit.Assert.*;
-import static org.junit.Assume.assumeNoException;
-import static org.junit.Assume.assumeNotNull;
-import static org.junit.Assume.assumeTrue;
-
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
+import java.sql.*;
+import org.junit.*;
 
 import xyz.doran.elian.labplan.persistence.*;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
 public class DatabaseConnectionFactoryTests {
-	static String configFilePath = "db.properties";
-	
-	static String dummyAddress = "jdbc:mysql://localhost:3306/labplan";
-	static String dummyUserName = "root";
-	static String dummyPassword = "eliandoran";
-
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-		
-	}
-
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
-	}
-	
 	@Test
 	public void testConnection() throws Exception {
-		DatabaseConnectionFactory.setConfigFilePath(configFilePath);
-		
 		Connection conn = DatabaseConnectionFactory.getConnection();
-		assertNotNull(conn);
+		assertNotNull("SQL connection failed as it returned null.", conn);
 	}
 }
