@@ -1,4 +1,4 @@
-package xyz.doran.elian.labplan.entities;
+package com.labplan.entities;
 
 public class Patient {
 	private Integer id;

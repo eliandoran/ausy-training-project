@@ -1,4 +1,4 @@
-package xyz.doran.elian.labplan.entities;
+package com.labplan.entities;
 
 import java.util.*;
 

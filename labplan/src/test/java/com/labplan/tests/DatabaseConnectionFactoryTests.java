@@ -1,10 +1,10 @@
-package xyz.doran.elian.labplan.junit;
+package com.labplan.tests;
 
 import static org.junit.Assert.*;
 import java.sql.*;
 import org.junit.*;
 
-import xyz.doran.elian.labplan.persistence.*;
+import com.labplan.persistence.*;
 
 public class DatabaseConnectionFactoryTests {
 	@Test

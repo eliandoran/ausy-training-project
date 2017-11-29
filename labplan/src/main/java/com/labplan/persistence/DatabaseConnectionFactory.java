@@ -1,4 +1,4 @@
-package xyz.doran.elian.labplan.persistence;
+package com.labplan.persistence;
 
 import java.io.*;
 import java.net.URL;
