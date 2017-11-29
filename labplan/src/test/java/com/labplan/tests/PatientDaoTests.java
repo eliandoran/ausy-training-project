@@ -62,4 +62,9 @@ public class PatientDaoTests {
 		Patient samePatient = patientDao.getPatientByName(dummyPatient.getFirstName(), dummyPatient.getLastName());
 		assertEquals(dummyPatient, samePatient);
 	}
+	
+	@Test
+	public void testInexistentGetByName() {
+		assertNull(patientDao.getPatientByName("SDFFSDFD;FSKDSFB", "4254254NCVX"));
+	}
 }
