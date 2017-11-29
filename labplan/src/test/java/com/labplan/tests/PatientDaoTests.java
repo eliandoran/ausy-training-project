@@ -31,6 +31,7 @@ public class PatientDaoTests {
 		
 		samePatient = dao.getPatientById(dummyPatient.getId());
 		assertNotNull("SQL retrieval for single Patient failed.", samePatient);
+		assertTrue("Dummy patient and retrieved patient are not identical.", dummyPatient.equals(samePatient));
 		
 		assertTrue("SQL deletion for single Patient failed.", dao.deletePatient(dummyPatient));
 	}

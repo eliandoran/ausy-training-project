@@ -74,4 +74,28 @@ public class Patient {
 	public void setWeight(Integer weight) {
 		this.weight = weight;
 	}
+	
+	public boolean equals_no_id(Object obj) {
+		if (!(obj instanceof Patient))
+			return false;
+		
+		Patient patient = (Patient)obj;
+		
+		return (patient.firstName.equals(firstName) &&
+				patient.lastName.equals(lastName) &&
+				patient.age.equals(age) &&
+				patient.weight.equals(weight) &&
+				patient.height.equals(height));
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof Patient))
+			return false;
+		
+		Patient patient = (Patient)obj;
+		
+		return (patient.id.equals(id) &&
+				equals_no_id(obj));
+	}
 }
