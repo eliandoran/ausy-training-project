@@ -36,8 +36,6 @@ public class DatabaseConnectionFactoryTests {
 		DatabaseConnectionFactory.setConfigFilePath(configFilePath);
 		
 		Connection conn = DatabaseConnectionFactory.getConnection();
-		
-		PreparedStatement statement = conn.prepareStatement("SELECT * FROM `patients`");
-		statement.executeQuery();
+		assertNotNull(conn);
 	}
 }
