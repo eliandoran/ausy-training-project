@@ -93,9 +93,17 @@ public class Patient {
 		if (!(obj instanceof Patient))
 			return false;
 		
-		Patient patient = (Patient)obj;
-		
-		return (patient.id.equals(id) &&
-				equals_no_id(obj));
+		return hashCode() == obj.hashCode();
+	}
+	
+	@Override
+	public int hashCode() {
+		int hash = id.hashCode();
+		hash += firstName.hashCode();
+		hash += lastName.hashCode();
+		hash += age.hashCode();
+		hash += weight.hashCode();
+		hash += height.hashCode();
+		return hash;
 	}
 }

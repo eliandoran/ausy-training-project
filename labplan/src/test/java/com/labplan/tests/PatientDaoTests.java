@@ -2,6 +2,8 @@ package com.labplan.tests;
 
 import static org.junit.Assert.*;
 
+import java.util.Set;
+
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -10,11 +12,11 @@ import com.labplan.entities.Patient;
 import com.labplan.persistence.PatientDao;
 
 public class PatientDaoTests {
-	private static Patient dummyPatient;
+	private static PatientDao patientDao;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		dummyPatient = new Patient("John", "Doe", 36, 180, 84);
+		patientDao = new PatientDao();
 	}
 
 	@AfterClass
@@ -23,17 +25,32 @@ public class PatientDaoTests {
 
 	@Test
 	public void testInsertion() {
-		PatientDao dao = new PatientDao();
 		Patient samePatient;
+		Patient dummyPatient = new Patient("John", "Doe", 36, 180, 84);
 		
-		assertTrue("SQL insertion for single Patient failed.", dao.insertPatient(dummyPatient));
+		assertTrue("SQL insertion for single Patient failed.", patientDao.insertPatient(dummyPatient));
 		assertNotNull("Generated index retrieval for single Patient failed.", dummyPatient.getId());
 		
-		samePatient = dao.getPatientById(dummyPatient.getId());
+		samePatient = patientDao.getPatientById(dummyPatient.getId());
 		assertNotNull("SQL retrieval for single Patient failed.", samePatient);
 		assertTrue("Dummy patient and retrieved patient are not identical.", dummyPatient.equals(samePatient));
 		
-		assertTrue("SQL deletion for single Patient failed.", dao.deletePatient(dummyPatient));
+		assertTrue("SQL deletion for single Patient failed.", patientDao.deletePatient(dummyPatient));
 	}
-
+	
+	@Test
+	public void testGetAll() {
+		Patient dummyPatient1 = new Patient("Jane", "Doe", 34, 165, 54);
+		Patient dummyPatient2 = new Patient("John", "Doe", 36, 180, 84);
+		
+		assertTrue("SQL insertion for single Patient failed.", patientDao.insertPatient(dummyPatient1));
+		assertTrue("SQL insertion for single Patient failed.", patientDao.insertPatient(dummyPatient2));
+		
+		Set<Patient> patients = patientDao.getAllPatients();
+		assertTrue("Inserted patient1 not found in GetAll()", patients.contains(dummyPatient1));
+		assertTrue("Inserted patient2 not found in GetAll()", patients.contains(dummyPatient2));
+		
+		assertTrue("SQL deletion for single Patient failed.", patientDao.deletePatient(dummyPatient1));
+		assertTrue("SQL deletion for single Patient failed.", patientDao.deletePatient(dummyPatient2));
+	}
 }
