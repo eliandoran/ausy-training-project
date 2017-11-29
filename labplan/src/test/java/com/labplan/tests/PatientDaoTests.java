@@ -24,9 +24,14 @@ public class PatientDaoTests {
 	@Test
 	public void testInsertion() {
 		PatientDao dao = new PatientDao();
+		Patient samePatient;
 		
 		assertTrue("SQL insertion for single Patient failed.", dao.insertPatient(dummyPatient));
 		assertNotNull("Generated index retrieval for single Patient failed.", dummyPatient.getId());
+		
+		samePatient = dao.getPatientById(dummyPatient.getId());
+		assertNotNull("SQL retrieval for single Patient failed.", samePatient);
+		
 		assertTrue("SQL deletion for single Patient failed.", dao.deletePatient(dummyPatient));
 	}
 

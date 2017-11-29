@@ -15,7 +15,7 @@ public class PatientDao implements com.labplan.persistence.generic.IPatientDao {
 
 	public Patient getPatientById(int id) throws ConnectionFailedException {
 		Connection conn = DatabaseConnectionFactory.getConnection();
-		String query = "SELECT * FROM `patients` WHERE `id`=?";
+		String query = "SELECT * FROM `patients` WHERE `patient_id`=?";
 		
 		try {			
 			PreparedStatement stmt = conn.prepareStatement(query);
