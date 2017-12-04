@@ -3,6 +3,7 @@ package com.labplan.tests;
 import static org.junit.Assert.*;
 
 import java.util.Set;
+import java.util.UUID;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -70,7 +71,11 @@ public class PatientDaoTests {
 	
 	@Test
 	public void testGetByName() {
-		Patient dummyPatient = new Patient("John", "Doe", 36, 180, 84);
+		Patient dummyPatient = new Patient(
+				UUID.randomUUID().toString(),
+				UUID.randomUUID().toString(),
+				36, 180, 84);
+		
 		assertTrue("SQL insertion for single Patient failed.", patientDao.insertPatient(dummyPatient));
 		
 		Patient samePatient = patientDao.getPatientByName(dummyPatient.getFirstName(), dummyPatient.getLastName());
@@ -79,6 +84,8 @@ public class PatientDaoTests {
 	
 	@Test
 	public void testInexistentGetByName() {
-		assertNull(patientDao.getPatientByName("SDFFSDFD;FSKDSFB", "4254254NCVX"));
+		assertNull(patientDao.getPatientByName(
+				UUID.randomUUID().toString(),
+				UUID.randomUUID().toString()));
 	}
 }
