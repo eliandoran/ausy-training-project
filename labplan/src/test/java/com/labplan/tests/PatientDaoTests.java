@@ -10,7 +10,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.labplan.entities.Patient;
-import com.labplan.persistence.PatientDao;
+import com.labplan.persistence.sql.PatientDao;
 
 public class PatientDaoTests {
 	private static PatientDao patientDao;

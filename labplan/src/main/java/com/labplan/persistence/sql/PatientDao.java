@@ -1,4 +1,4 @@
-package com.labplan.persistence;
+package com.labplan.persistence.sql;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,11 +8,12 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.labplan.entities.Patient;
+import com.labplan.persistence.DatabaseConnectionFactory;
 import com.labplan.persistence.exceptions.ConnectionFailedException;
-import com.labplan.persistence.generic.GenericPatientDao;
+import com.labplan.persistence.generic.IPatientDao;
 import com.mysql.cj.api.jdbc.Statement;
 
-public class PatientDao implements GenericPatientDao {
+public class PatientDao implements IPatientDao {
 
 	public Patient get(int id) {
 		Connection conn = DatabaseConnectionFactory.getConnection();
