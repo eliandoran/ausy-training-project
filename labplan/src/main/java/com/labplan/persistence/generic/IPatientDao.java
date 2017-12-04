@@ -4,11 +4,6 @@ import java.util.Set;
 import com.labplan.entities.*;
 import com.labplan.persistence.exceptions.ConnectionFailedException;
 
-public interface IPatientDao {
-	Patient get(int id);
-	Patient get(String firstName, String lastName);
-	Set<Patient> getAll();
-	boolean insert(Patient patient);
-	boolean update(Patient patient);
-	boolean delete(Patient patient);
+public interface IPatientDao extends CrudInterface<Patient, Integer> {
+	Patient read(String firstName, String lastName);
 }

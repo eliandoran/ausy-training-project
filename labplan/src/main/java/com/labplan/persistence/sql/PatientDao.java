@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import com.labplan.entities.Patient;
@@ -14,8 +15,8 @@ import com.labplan.persistence.generic.IPatientDao;
 import com.mysql.cj.api.jdbc.Statement;
 
 public class PatientDao implements IPatientDao {
-
-	public Patient get(int id) {
+	@Override
+	public Patient read(Integer id) {
 		Connection conn = DatabaseConnectionFactory.getConnection();
 		String query = "SELECT * FROM `patients` WHERE `patient_id`=?";
 		
@@ -34,7 +35,8 @@ public class PatientDao implements IPatientDao {
 		return null;
 	}
 	
-	public Patient get(String firstName, String lastName) {
+	@Override
+	public Patient read(String firstName, String lastName) {
 		Connection conn = DatabaseConnectionFactory.getConnection();
 		String query = "SELECT * FROM `patients` WHERE `first_name`=? AND `last_name`=?";
 		
@@ -54,7 +56,8 @@ public class PatientDao implements IPatientDao {
 		return null;
 	}
 
-	public Set<Patient> getAll() {
+	@Override
+	public Set<Patient> readAll() {
 		Connection conn = DatabaseConnectionFactory.getConnection();
 		String query = "SELECT * FROM `patients`";
 		Set<Patient> patients = new HashSet<Patient>();
@@ -73,7 +76,8 @@ public class PatientDao implements IPatientDao {
 		return patients;
 	}
 
-	public boolean insert(Patient patient) {
+	@Override
+	public Integer create(Patient patient) {
 		Connection conn = DatabaseConnectionFactory.getConnection();
 		String query = "INSERT INTO `patients` "
 				+ "(`first_name`, `last_name`, `age`, `height`, `weight`)"
@@ -93,15 +97,16 @@ public class PatientDao implements IPatientDao {
 			generatedKeys = stmt.getGeneratedKeys();
 			
 			if (generatedKeys.next()) {
-				patient.setId(generatedKeys.getInt(1));
+				return generatedKeys.getInt(1);
 			}
 		} catch (SQLException e) {
-			return false;
+			return null;
 		}
 		
-		return true;
+		return null;
 	}
 
+	@Override
 	public boolean update(Patient patient) {
 		Connection conn = DatabaseConnectionFactory.getConnection();
 		String query = "UPDATE `patients` SET "
@@ -130,6 +135,7 @@ public class PatientDao implements IPatientDao {
 		return true;
 	}
 
+	@Override
 	public boolean delete(Patient patient) {
 		Connection conn = DatabaseConnectionFactory.getConnection();
 		String query = "DELETE FROM `patients` WHERE `patient_id`=?";
