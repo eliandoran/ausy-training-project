@@ -4,7 +4,7 @@ import java.util.Set;
 import com.labplan.entities.*;
 import com.labplan.persistence.exceptions.ConnectionFailedException;
 
-public interface IPatientDao {
+public interface GenericPatientDao {
 	Patient get(int id);
 	Patient get(String firstName, String lastName);
 	Set<Patient> getAll();
