@@ -9,7 +9,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.labplan.entities.Patient;
-import com.labplan.persistence.DatabaseConnectionFactory;
 import com.labplan.persistence.PatientDao;
 
 public class PatientDaoTests {
@@ -17,10 +16,7 @@ public class PatientDaoTests {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		DatabaseConnectionFactory.setDevMode(true);
-		
 		patientDao = new PatientDao();
-		patientDao.deleteAllPatients();
 	}
 
 	@AfterClass

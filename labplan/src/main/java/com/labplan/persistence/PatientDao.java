@@ -143,20 +143,6 @@ public class PatientDao implements com.labplan.persistence.generic.IPatientDao {
 		
 		return true;
 	}
-	
-	public boolean deleteAllPatients() {
-		Connection conn = DatabaseConnectionFactory.getConnection();
-		String query = "DELETE FROM `patients`";
-		
-		try {
-			PreparedStatement stmt = conn.prepareStatement(query);
-			stmt.execute();
-		} catch (SQLException e) {
-			return false;
-		}
-		
-		return true;
-	}
 
 	private Patient parsePatient(ResultSet result) throws SQLException {
 		Patient patient = new Patient();
