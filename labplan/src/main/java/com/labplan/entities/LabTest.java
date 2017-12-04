@@ -74,11 +74,12 @@ public class LabTest {
 	
 	@Override
 	public int hashCode() {
-		int hash = id.hashCode();
-		hash += name.hashCode();
-		hash += description.hashCode();
-		hash += valueMin.hashCode();
-		hash += valueMax.hashCode();
+		int hash = 17;
+		hash = 31 * hash + id.hashCode();
+		hash = 31 * hash + name.hashCode();
+		hash = 31 * hash + description.hashCode();
+		hash = 31 * hash + valueMin.hashCode();
+		hash = 31 * hash + valueMax.hashCode();
 		return hash;
 	}
 }

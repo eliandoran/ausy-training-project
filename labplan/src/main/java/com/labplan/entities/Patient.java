@@ -98,12 +98,13 @@ public class Patient {
 	
 	@Override
 	public int hashCode() {
-		int hash = id.hashCode();
-		hash += firstName.hashCode();
-		hash += lastName.hashCode();
-		hash += age.hashCode();
-		hash += weight.hashCode();
-		hash += height.hashCode();
+		int hash = 17;
+		hash = 31 * hash + id.hashCode();
+		hash = 31 * hash + firstName.hashCode();
+		hash = 31 * hash + lastName.hashCode();
+		hash = 31 * hash + age.hashCode();
+		hash = 31 * hash + weight.hashCode();
+		hash = 31 * hash + height.hashCode();
 		return hash;
 	}
 }
