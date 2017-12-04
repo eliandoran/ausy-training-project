@@ -13,6 +13,15 @@ import com.labplan.entities.LabTest;
 import com.labplan.persistence.generic.CrudInterface;
 import com.labplan.persistence.sql.LabTestDao;
 
+/**
+ * This is an abstract test suite which implements a set of predefined test cases for
+ * testing the CRUD capabilities of a {@link CrudInterface} implementation.
+ * @author adoran
+ *
+ * @param <TKey>	The key used to identify entities, usually same with the primary keys of a data source.
+ * @param <TEntity>	The type of {@link Entity} used to represent the data stored in the data source. 
+ * @param <TDao>	A {@link CrudInterface} which represents the DAO for the data source.
+ */
 public abstract class CrudTester <TKey,
 									TEntity extends Entity<TKey>,
 									TDao extends CrudInterface<TEntity, TKey>> {
@@ -74,7 +83,16 @@ public abstract class CrudTester <TKey,
 		assertNotEquals(dummyEntity, sameEntity);
 	}
 	
+	/**
+	 * Generates a random {@link Entity} whose fields should (theoretically) be unique to the ones
+	 * that are already present in the data source.
+	 * @return
+	 */
 	public abstract TEntity getRandomEntity();
 	
+	/**
+	 * Gets the {@link CrudInterface} DAO which can be used to access the data source.
+	 * @return The {@link CrudInterface} DAO which can be used to access the data source.
+	 */
 	public abstract TDao getDao();
 }
