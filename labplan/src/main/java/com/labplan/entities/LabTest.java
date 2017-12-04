@@ -63,4 +63,22 @@ public class LabTest {
 	public void setValueMax(Float valueMax) {
 		this.valueMax = valueMax;
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof LabTest))
+			return false;
+		
+		return hashCode() == obj.hashCode();
+	}
+	
+	@Override
+	public int hashCode() {
+		int hash = id.hashCode();
+		hash += name.hashCode();
+		hash += description.hashCode();
+		hash += valueMin.hashCode();
+		hash += valueMax.hashCode();
+		return hash;
+	}
 }
