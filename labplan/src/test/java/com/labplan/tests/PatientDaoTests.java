@@ -80,6 +80,8 @@ public class PatientDaoTests {
 		
 		Patient samePatient = patientDao.get(dummyPatient.getFirstName(), dummyPatient.getLastName());
 		assertEquals(dummyPatient, samePatient);
+		
+		patientDao.delete(dummyPatient);
 	}
 	
 	@Test
