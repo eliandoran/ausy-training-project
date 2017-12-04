@@ -96,9 +96,9 @@ public class LabTestDao implements com.labplan.persistence.generic.LabTestDao {
 			
 			stmt.setString(1, entity.getName());
 			stmt.setString(2, entity.getDescription());
-			stmt.setFloat(2, entity.getValueMin());
-			stmt.setFloat(3, entity.getValueMax());
-			stmt.setInt(4, entity.getId());
+			stmt.setFloat(3, entity.getValueMin());
+			stmt.setFloat(4, entity.getValueMax());
+			stmt.setInt(5, entity.getId());
 			
 			stmt.executeUpdate();
 		} catch (SQLException e) {

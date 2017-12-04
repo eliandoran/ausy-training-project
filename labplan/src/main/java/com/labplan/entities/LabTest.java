@@ -1,7 +1,6 @@
 package com.labplan.entities;
 
-public class LabTest {
-	private Integer id;
+public class LabTest extends Entity<Integer> {
 	private String name;
 	private String description;
 	private Float valueMin;
@@ -23,15 +22,6 @@ public class LabTest {
 		this(null, name, description, valueMin, valueMax);
 	}
 
-
-	public Integer getId() {
-		return id;
-	}
-	
-	public void setId(Integer id) {
-		this.id = id;
-	}
-	
 	public String getName() {
 		return name;
 	}

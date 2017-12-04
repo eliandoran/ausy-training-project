@@ -1,7 +1,6 @@
 package com.labplan.entities;
 
-public class Patient {
-	private Integer id;
+public class Patient extends Entity<Integer> {
 	private String firstName;
 	private String lastName;
 	private Integer age;
@@ -24,15 +23,6 @@ public class Patient {
 	
 	public Patient(String firstName, String lastName, Integer age, Integer height, Integer weight) {
 		this(null, firstName, lastName, age, height, weight);
-	}
-
-	
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
 	}
 	
 	public String getFirstName() {

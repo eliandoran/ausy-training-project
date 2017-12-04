@@ -2,6 +2,7 @@ package com.labplan.tests;
 
 import static org.junit.Assert.*;
 
+import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -11,8 +12,9 @@ import org.junit.Test;
 
 import com.labplan.entities.LabTest;
 import com.labplan.persistence.sql.LabTestDao;
+import com.labplan.tests.helpers.CrudTester;
 
-public class LabTestDaoTests {
+public class LabTestDaoTests extends CrudTester<Integer, LabTest, LabTestDao> {
 	private static LabTestDao labTestDao;
 
 	@BeforeClass
@@ -26,18 +28,16 @@ public class LabTestDaoTests {
 	public static void tearDownAfterClass() throws Exception {
 	}
 
-	@Test
-	public void testInsertion() {
-		LabTest dummyTest = new LabTest("Blood test", "A panel of blood tests", 1.0f, 2.5f);
-		LabTest sameTest;
-		
-		Integer testId = labTestDao.create(dummyTest);
-		assertNotNull("SQL insertion for single entity failed.", testId);
-		dummyTest.setId(testId);
-		
-		sameTest = labTestDao.read(dummyTest.getId());
-		assertNotNull("SQL retrieval for single entity failed.", sameTest);
-		assertEquals("Dummy entity and retrieved entity are not identical.", dummyTest, sameTest);
-		assertTrue("SQL deletion for single entity failed.", labTestDao.delete(dummyTest));
+	@Override
+	public LabTest getRandomEntity() {
+		return new LabTest(
+				UUID.randomUUID().toString(),
+				UUID.randomUUID().toString(),
+				1.0f, 2.5f);
+	}
+
+	@Override
+	public LabTestDao getDao() {
+		return new LabTestDao();
 	}
 }

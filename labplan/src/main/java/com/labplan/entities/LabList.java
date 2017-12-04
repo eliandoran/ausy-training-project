@@ -2,8 +2,7 @@ package com.labplan.entities;
 
 import java.util.*;
 
-public class LabList {
-	private Integer id;
+public class LabList extends Entity<Integer> {
 	private Integer patientId;
 	private Date creationDate;
 	private List<LabResult> resultsList;
@@ -21,15 +20,6 @@ public class LabList {
 	
 	public LabList(Integer patientId, Date creationDate) {
 		this(null, patientId, creationDate);
-	}
-	
-	
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	public Integer getPatientId() {

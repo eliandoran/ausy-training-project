@@ -1,6 +1,6 @@
 package com.labplan.entities;
 
-public class LabResult {
+public class LabResult extends Entity<Integer> {
 	private Integer testId;
 	private Integer listId;
 	private Float value;
