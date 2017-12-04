@@ -12,15 +12,14 @@ import com.mysql.cj.jdbc.Driver;
 
 public class DatabaseConnectionFactory {
 	private static Properties properties;
+	private static boolean devMode;
 	
-	private static String configFilePath;
-
-	public static String getConfigFilePath() {
-		return configFilePath;
+	public static boolean isDevMode() {
+		return devMode;
 	}
 
-	public static void setConfigFilePath(String path) {
-		configFilePath = path;
+	public static void setDevMode(boolean devMode) {
+		DatabaseConnectionFactory.devMode = devMode;
 	}
 	
 	public static Connection getConnection() throws ConnectionFailedException {
@@ -30,15 +29,21 @@ public class DatabaseConnectionFactory {
 			
 			DriverManager.registerDriver(new Driver());
 			
+			String prefix = getPropertiesPrefix();
+			
 			return DriverManager.getConnection(
-					properties.getProperty("address", ""),
-					properties.getProperty("username", ""),
-					properties.getProperty("password", ""));
+					properties.getProperty(prefix + "address", ""),
+					properties.getProperty(prefix + "username", ""),
+					properties.getProperty(prefix + "password", ""));
 		} catch (IOException | SQLException e) {
 			ConnectionFailedException newException = new ConnectionFailedException();
 			newException.addSuppressed(e);
 			throw newException;
 		}
+	}
+	
+	private static String getPropertiesPrefix() {
+		return (isDevMode() ? "dev" : "production") + ".";
 	}
 	
 	private static void load() throws IOException {
