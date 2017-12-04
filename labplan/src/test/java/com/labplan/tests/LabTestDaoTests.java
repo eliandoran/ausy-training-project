@@ -2,6 +2,9 @@ package com.labplan.tests;
 
 import static org.junit.Assert.*;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -15,6 +18,8 @@ public class LabTestDaoTests {
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		labTestDao = new LabTestDao();
+		
+		System.setProperty("java.util.logging.config.file", ClassLoader.getSystemResource("logging.properties").getPath());
 	}
 
 	@AfterClass
@@ -35,5 +40,4 @@ public class LabTestDaoTests {
 		assertEquals("Dummy entity and retrieved entity are not identical.", dummyTest, sameTest);
 		assertTrue("SQL deletion for single entity failed.", labTestDao.delete(dummyTest));
 	}
-
 }

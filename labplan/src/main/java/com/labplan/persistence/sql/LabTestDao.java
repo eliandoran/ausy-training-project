@@ -10,7 +10,7 @@ import com.labplan.entities.LabTest;
 import com.labplan.persistence.DatabaseConnectionFactory;
 
 public class LabTestDao implements com.labplan.persistence.generic.LabTestDao {
-	private static final Logger LOGGER = Logger.getLogger(LabTestDao.class.getName());
+	private static final Logger LOGGER = Logger.getGlobal();
 	
 	@Override
 	public LabTest read(Integer key) {
@@ -46,7 +46,7 @@ public class LabTestDao implements com.labplan.persistence.generic.LabTestDao {
 				labTests.add(parseLabTest(result));
 			}
 		} catch (SQLException e) {
-			return null;
+			LOGGER.log(Level.WARNING, "SQL connection failed.", e);
 		}
 		
 		return labTests;
@@ -60,7 +60,7 @@ public class LabTestDao implements com.labplan.persistence.generic.LabTestDao {
 				+ "VALUES (?, ?, ?, ?)";
 		
 		try {
-			PreparedStatement stmt = conn.prepareStatement(query);
+			PreparedStatement stmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 			ResultSet generatedKeys;
 			
 			stmt.setString(1, entity.getName());
@@ -75,8 +75,7 @@ public class LabTestDao implements com.labplan.persistence.generic.LabTestDao {
 				return generatedKeys.getInt(1);
 			}
 		} catch (SQLException e) {
-			
-			return null;
+			LOGGER.log(Level.WARNING, "SQL connection failed.", e);
 		}
 		
 		return null;
@@ -103,7 +102,7 @@ public class LabTestDao implements com.labplan.persistence.generic.LabTestDao {
 			
 			stmt.executeUpdate();
 		} catch (SQLException e) {
-			return false;
+			LOGGER.log(Level.WARNING, "SQL connection failed.", e);
 		}
 		
 		return true;
@@ -120,7 +119,7 @@ public class LabTestDao implements com.labplan.persistence.generic.LabTestDao {
 			stmt.setInt(1, entity.getId());
 			stmt.execute();
 		} catch (SQLException e) {
-			return false;
+			LOGGER.log(Level.WARNING, "SQL connection failed.", e);
 		}
 		
 		return true;
