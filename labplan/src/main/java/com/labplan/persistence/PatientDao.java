@@ -13,7 +13,7 @@ import com.mysql.cj.api.jdbc.Statement;
 
 public class PatientDao implements com.labplan.persistence.generic.IPatientDao {
 
-	public Patient getPatientById(int id) {
+	public Patient get(int id) {
 		Connection conn = DatabaseConnectionFactory.getConnection();
 		String query = "SELECT * FROM `patients` WHERE `patient_id`=?";
 		
@@ -32,7 +32,7 @@ public class PatientDao implements com.labplan.persistence.generic.IPatientDao {
 		return null;
 	}
 	
-	public Patient getPatientByName(String firstName, String lastName) {
+	public Patient get(String firstName, String lastName) {
 		Connection conn = DatabaseConnectionFactory.getConnection();
 		String query = "SELECT * FROM `patients` WHERE `first_name`=? AND `last_name`=?";
 		
@@ -52,7 +52,7 @@ public class PatientDao implements com.labplan.persistence.generic.IPatientDao {
 		return null;
 	}
 
-	public Set<Patient> getAllPatients() {
+	public Set<Patient> getAll() {
 		Connection conn = DatabaseConnectionFactory.getConnection();
 		String query = "SELECT * FROM `patients`";
 		Set<Patient> patients = new HashSet<Patient>();
@@ -71,7 +71,7 @@ public class PatientDao implements com.labplan.persistence.generic.IPatientDao {
 		return patients;
 	}
 
-	public boolean insertPatient(Patient patient) {
+	public boolean insert(Patient patient) {
 		Connection conn = DatabaseConnectionFactory.getConnection();
 		String query = "INSERT INTO `patients` "
 				+ "(`first_name`, `last_name`, `age`, `height`, `weight`)"
@@ -100,7 +100,7 @@ public class PatientDao implements com.labplan.persistence.generic.IPatientDao {
 		return true;
 	}
 
-	public boolean updatePatient(Patient patient) {
+	public boolean update(Patient patient) {
 		Connection conn = DatabaseConnectionFactory.getConnection();
 		String query = "UPDATE `patients` SET "
 				+ "`first_name`=?, "
@@ -128,7 +128,7 @@ public class PatientDao implements com.labplan.persistence.generic.IPatientDao {
 		return true;
 	}
 
-	public boolean deletePatient(Patient patient) {
+	public boolean delete(Patient patient) {
 		Connection conn = DatabaseConnectionFactory.getConnection();
 		String query = "DELETE FROM `patients` WHERE `patient_id`=?";
 		

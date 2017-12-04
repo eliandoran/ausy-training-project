@@ -29,14 +29,14 @@ public class PatientDaoTests {
 		Patient samePatient;
 		Patient dummyPatient = new Patient("John", "Doe", 36, 180, 84);
 		
-		assertTrue("SQL insertion for single Patient failed.", patientDao.insertPatient(dummyPatient));
+		assertTrue("SQL insertion for single Patient failed.", patientDao.insert(dummyPatient));
 		assertNotNull("Generated index retrieval for single Patient failed.", dummyPatient.getId());
 		
-		samePatient = patientDao.getPatientById(dummyPatient.getId());
+		samePatient = patientDao.get(dummyPatient.getId());
 		assertNotNull("SQL retrieval for single Patient failed.", samePatient);
 		assertTrue("Dummy patient and retrieved patient are not identical.", dummyPatient.equals(samePatient));
 		
-		assertTrue("SQL deletion for single Patient failed.", patientDao.deletePatient(dummyPatient));
+		assertTrue("SQL deletion for single Patient failed.", patientDao.delete(dummyPatient));
 	}
 	
 	@Test
@@ -44,29 +44,29 @@ public class PatientDaoTests {
 		Patient dummyPatient1 = new Patient("Jane", "Doe", 34, 165, 54);
 		Patient dummyPatient2 = new Patient("John", "Doe", 36, 180, 84);
 		
-		assertTrue("SQL insertion for single Patient failed.", patientDao.insertPatient(dummyPatient1));
-		assertTrue("SQL insertion for single Patient failed.", patientDao.insertPatient(dummyPatient2));
+		assertTrue("SQL insertion for single Patient failed.", patientDao.insert(dummyPatient1));
+		assertTrue("SQL insertion for single Patient failed.", patientDao.insert(dummyPatient2));
 		
-		Set<Patient> patients = patientDao.getAllPatients();
+		Set<Patient> patients = patientDao.getAll();
 		assertTrue("Inserted patient1 not found in GetAll()", patients.contains(dummyPatient1));
 		assertTrue("Inserted patient2 not found in GetAll()", patients.contains(dummyPatient2));
 		
-		assertTrue("SQL deletion for single Patient failed.", patientDao.deletePatient(dummyPatient1));
-		assertTrue("SQL deletion for single Patient failed.", patientDao.deletePatient(dummyPatient2));
+		assertTrue("SQL deletion for single Patient failed.", patientDao.delete(dummyPatient1));
+		assertTrue("SQL deletion for single Patient failed.", patientDao.delete(dummyPatient2));
 	}
 	
 	@Test
 	public void testUpdate() {
 		Patient dummyPatient = new Patient("Jane", "Doe", 34, 165, 54);
-		assertTrue("SQL insertion for single Patient failed.", patientDao.insertPatient(dummyPatient));
+		assertTrue("SQL insertion for single Patient failed.", patientDao.insert(dummyPatient));
 		
 		dummyPatient.setLastName("Smith");
-		assertTrue("SQL update for single Patient failed.", patientDao.updatePatient(dummyPatient));
+		assertTrue("SQL update for single Patient failed.", patientDao.update(dummyPatient));
 		
-		Patient samePatient = patientDao.getPatientByName(dummyPatient.getFirstName(), dummyPatient.getLastName());
+		Patient samePatient = patientDao.get(dummyPatient.getFirstName(), dummyPatient.getLastName());
 		assertEquals(dummyPatient, samePatient);
 		
-		assertTrue("SQL deletion for single Patient failed.", patientDao.deletePatient(dummyPatient));
+		assertTrue("SQL deletion for single Patient failed.", patientDao.delete(dummyPatient));
 	}
 	
 	@Test
@@ -76,15 +76,15 @@ public class PatientDaoTests {
 				UUID.randomUUID().toString(),
 				36, 180, 84);
 		
-		assertTrue("SQL insertion for single Patient failed.", patientDao.insertPatient(dummyPatient));
+		assertTrue("SQL insertion for single Patient failed.", patientDao.insert(dummyPatient));
 		
-		Patient samePatient = patientDao.getPatientByName(dummyPatient.getFirstName(), dummyPatient.getLastName());
+		Patient samePatient = patientDao.get(dummyPatient.getFirstName(), dummyPatient.getLastName());
 		assertEquals(dummyPatient, samePatient);
 	}
 	
 	@Test
 	public void testInexistentGetByName() {
-		assertNull(patientDao.getPatientByName(
+		assertNull(patientDao.get(
 				UUID.randomUUID().toString(),
 				UUID.randomUUID().toString()));
 	}
