@@ -22,6 +22,8 @@ public class PatientDaoTests extends CrudTester<Integer, Patient, PatientDao> {
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		dao = new PatientDao();
+		
+		System.setProperty("java.util.logging.config.file", ClassLoader.getSystemResource("logging.properties").getPath());
 	}
 	
 	@Test

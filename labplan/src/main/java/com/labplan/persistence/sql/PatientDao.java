@@ -6,12 +6,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import com.labplan.entities.Patient;
 import com.labplan.persistence.DatabaseConnectionFactory;
 import com.mysql.cj.api.jdbc.Statement;
 
 public class PatientDao implements com.labplan.persistence.generic.PatientDao {
+	private static final Logger LOGGER = Logger.getGlobal();
+	
 	@Override
 	public Patient read(Integer id) {
 		Connection conn = DatabaseConnectionFactory.getConnection();
@@ -26,7 +30,7 @@ public class PatientDao implements com.labplan.persistence.generic.PatientDao {
 				return parsePatient(result);
 			}
 		} catch (SQLException e) {
-			return null;
+			LOGGER.log(Level.WARNING, "SQL connection failed.", e);
 		}
 		
 		return null;
@@ -47,7 +51,7 @@ public class PatientDao implements com.labplan.persistence.generic.PatientDao {
 				return parsePatient(result);
 			}
 		} catch (SQLException e) {
-			return null;
+			LOGGER.log(Level.WARNING, "SQL connection failed.", e);
 		}
 		
 		return null;
@@ -66,7 +70,9 @@ public class PatientDao implements com.labplan.persistence.generic.PatientDao {
 			while (result.next()) {
 				patients.add(parsePatient(result));
 			}
+			
 		} catch (SQLException e) {
+			LOGGER.log(Level.WARNING, "SQL connection failed.", e);
 			return null;
 		}
 		
@@ -97,7 +103,7 @@ public class PatientDao implements com.labplan.persistence.generic.PatientDao {
 				return generatedKeys.getInt(1);
 			}
 		} catch (SQLException e) {
-			return null;
+			LOGGER.log(Level.WARNING, "SQL connection failed.", e);
 		}
 		
 		return null;
@@ -126,6 +132,7 @@ public class PatientDao implements com.labplan.persistence.generic.PatientDao {
 			
 			stmt.executeUpdate();
 		} catch (SQLException e) {
+			LOGGER.log(Level.WARNING, "SQL connection failed.", e);
 			return false;
 		}
 		
@@ -143,6 +150,7 @@ public class PatientDao implements com.labplan.persistence.generic.PatientDao {
 			stmt.setInt(1, patient.getId());
 			stmt.execute();
 		} catch (SQLException e) {
+			LOGGER.log(Level.WARNING, "SQL connection failed.", e);
 			return false;
 		}
 		
