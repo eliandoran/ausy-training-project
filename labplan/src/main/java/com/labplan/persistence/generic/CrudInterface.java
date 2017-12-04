@@ -11,7 +11,7 @@ import java.util.Set;
  * @param <TKey>	The key used for identifying an entity, could be a mirror of the database table's primary keys.
  * 
  * @see com.labplan.persistence.sql.PatientDao
- * @see com.labplan.persistence.generic.IPatientDao
+ * @see com.labplan.persistence.generic.PatientDao
  */
 public interface CrudInterface<TEntity, TKey> {
 	/**

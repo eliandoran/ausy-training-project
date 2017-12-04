@@ -5,16 +5,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import com.labplan.entities.Patient;
 import com.labplan.persistence.DatabaseConnectionFactory;
-import com.labplan.persistence.exceptions.ConnectionFailedException;
-import com.labplan.persistence.generic.IPatientDao;
 import com.mysql.cj.api.jdbc.Statement;
 
-public class PatientDao implements IPatientDao {
+public class PatientDao implements com.labplan.persistence.generic.PatientDao {
 	@Override
 	public Patient read(Integer id) {
 		Connection conn = DatabaseConnectionFactory.getConnection();
