@@ -12,10 +12,18 @@ import org.junit.Test;
 import com.labplan.entities.Entity;
 import com.labplan.entities.Patient;
 import com.labplan.persistence.generic.CrudInterface;
+import com.labplan.persistence.sql.LabTestDao;
 import com.labplan.persistence.sql.PatientDao;
 import com.labplan.tests.helpers.CrudTester;
 
 public class PatientDaoTests extends CrudTester<Integer, Patient, PatientDao> {
+	private static PatientDao dao;
+	
+	@BeforeClass
+	public static void setUpBeforeClass() throws Exception {
+		dao = new PatientDao();
+	}
+	
 	@Test
 	public void testGetByName() {
 		PatientDao patientDao = getDao();
@@ -50,6 +58,6 @@ public class PatientDaoTests extends CrudTester<Integer, Patient, PatientDao> {
 
 	@Override
 	public PatientDao getDao() {
-		return new PatientDao();
+		return dao;
 	}
 }

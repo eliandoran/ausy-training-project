@@ -15,19 +15,15 @@ import com.labplan.persistence.sql.LabTestDao;
 import com.labplan.tests.helpers.CrudTester;
 
 public class LabTestDaoTests extends CrudTester<Integer, LabTest, LabTestDao> {
-	private static LabTestDao labTestDao;
+	private static LabTestDao dao;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		labTestDao = new LabTestDao();
+		dao = new LabTestDao();
 		
 		System.setProperty("java.util.logging.config.file", ClassLoader.getSystemResource("logging.properties").getPath());
 	}
-
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
-	}
-
+	
 	@Override
 	public LabTest getRandomEntity() {
 		return new LabTest(
@@ -38,6 +34,6 @@ public class LabTestDaoTests extends CrudTester<Integer, LabTest, LabTestDao> {
 
 	@Override
 	public LabTestDao getDao() {
-		return new LabTestDao();
+		return dao;
 	}
 }
