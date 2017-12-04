@@ -13,7 +13,7 @@ import com.mysql.cj.api.jdbc.Statement;
 
 public class PatientDao implements com.labplan.persistence.generic.IPatientDao {
 
-	public Patient getPatientById(int id) throws ConnectionFailedException {
+	public Patient getPatientById(int id) {
 		Connection conn = DatabaseConnectionFactory.getConnection();
 		String query = "SELECT * FROM `patients` WHERE `patient_id`=?";
 		
