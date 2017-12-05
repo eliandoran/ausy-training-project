@@ -31,6 +31,26 @@ public class LabTestDao implements com.labplan.persistence.generic.LabTestDao {
 
 		return null;
 	}
+	
+	@Override
+	public LabTest read(String name) {
+		Connection conn = DatabaseConnectionFactory.getConnection();
+		String query = "SELECT * FROM `lab_tests` WHERE `name`=?";
+		
+		try {
+			PreparedStatement stmt = conn.prepareStatement(query);
+			stmt.setString(1, name);
+			ResultSet result = stmt.executeQuery();
+			
+			if (result.next()) {
+				return parseLabTest(result);
+			}
+		} catch (SQLException e) {
+			LOGGER.log(Level.WARNING, "SQL connection failed.", e);
+		}
+		
+		return null;
+	}
 
 	@Override
 	public Set<LabTest> readAll() {
