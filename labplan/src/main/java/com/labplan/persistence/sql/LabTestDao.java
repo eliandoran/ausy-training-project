@@ -67,6 +67,7 @@ public class LabTestDao implements com.labplan.persistence.generic.LabTestDao {
 			}
 		} catch (SQLException e) {
 			LOGGER.log(Level.WARNING, "SQL connection failed.", e);
+			return null;
 		}
 
 		return labTests;
@@ -118,6 +119,7 @@ public class LabTestDao implements com.labplan.persistence.generic.LabTestDao {
 			stmt.executeUpdate();
 		} catch (SQLException e) {
 			LOGGER.log(Level.WARNING, "SQL connection failed.", e);
+			return false;
 		}
 
 		return true;
@@ -135,6 +137,7 @@ public class LabTestDao implements com.labplan.persistence.generic.LabTestDao {
 			stmt.execute();
 		} catch (SQLException e) {
 			LOGGER.log(Level.WARNING, "SQL connection failed.", e);
+			return false;
 		}
 
 		return true;
