@@ -91,6 +91,9 @@ public abstract class CrudTester <TKey,
 		TEntity sameEntity = dao.read(entityId);
 		assertEquals(updatedEntity, sameEntity);
 		assertNotEquals(dummyEntity, sameEntity);
+		
+		// DELETE the entity.
+		assertTrue(MSG_DELETION_FAILED, dao.delete(updatedEntity));
 	}
 	
 	/**
