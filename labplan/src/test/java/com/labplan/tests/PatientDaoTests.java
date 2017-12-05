@@ -2,17 +2,12 @@ package com.labplan.tests;
 
 import static org.junit.Assert.*;
 
-import java.util.Set;
 import java.util.UUID;
 
-import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.labplan.entities.Entity;
 import com.labplan.entities.Patient;
-import com.labplan.persistence.generic.CrudInterface;
-import com.labplan.persistence.sql.LabTestDao;
 import com.labplan.persistence.sql.PatientDao;
 import com.labplan.tests.helpers.CrudTester;
 

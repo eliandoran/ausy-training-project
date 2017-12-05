@@ -1,15 +1,7 @@
 package com.labplan.tests;
 
-import static org.junit.Assert.*;
-
 import java.util.UUID;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import org.junit.AfterClass;
 import org.junit.BeforeClass;
-import org.junit.Test;
-
 import com.labplan.entities.LabTest;
 import com.labplan.persistence.sql.LabTestDao;
 import com.labplan.tests.helpers.CrudTester;

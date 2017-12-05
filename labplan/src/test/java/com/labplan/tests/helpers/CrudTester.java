@@ -1,17 +1,10 @@
 package com.labplan.tests.helpers;
 
 import static org.junit.Assert.*;
-
 import java.util.Set;
-
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.Test;
-
 import com.labplan.entities.Entity;
-import com.labplan.entities.LabTest;
 import com.labplan.persistence.generic.CrudInterface;
-import com.labplan.persistence.sql.LabTestDao;
 
 /**
  * This is an abstract test suite which implements a set of predefined test cases for
