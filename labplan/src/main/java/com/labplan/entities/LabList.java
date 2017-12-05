@@ -6,18 +6,18 @@ public class LabList extends Entity<Integer> {
 	private Integer patientId;
 	private Date creationDate;
 	private List<LabResult> resultsList;
-	
+
 	public LabList() {
 		resultsList = new ArrayList<LabResult>();
 	}
-	
+
 	public LabList(Integer id, Integer patientId, Date creationDate) {
 		this();
 		this.id = id;
 		this.patientId = patientId;
 		this.creationDate = creationDate;
 	}
-	
+
 	public LabList(Integer patientId, Date creationDate) {
 		this(null, patientId, creationDate);
 	}
@@ -37,7 +37,7 @@ public class LabList extends Entity<Integer> {
 	public void setCreationDate(Date creationDate) {
 		this.creationDate = creationDate;
 	}
-	
+
 	public List<LabResult> getResultsList() {
 		return resultsList;
 	}

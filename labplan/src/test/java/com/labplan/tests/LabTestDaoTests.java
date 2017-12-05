@@ -12,16 +12,14 @@ public class LabTestDaoTests extends CrudTester<Integer, LabTest, LabTestDao> {
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		dao = new LabTestDao();
-		
-		System.setProperty("java.util.logging.config.file", ClassLoader.getSystemResource("logging.properties").getPath());
+
+		System.setProperty("java.util.logging.config.file",
+				ClassLoader.getSystemResource("logging.properties").getPath());
 	}
-	
+
 	@Override
 	public LabTest getRandomEntity() {
-		return new LabTest(
-				UUID.randomUUID().toString(),
-				UUID.randomUUID().toString(),
-				1.0f, 2.5f);
+		return new LabTest(UUID.randomUUID().toString(), UUID.randomUUID().toString(), 1.0f, 2.5f);
 	}
 
 	@Override
