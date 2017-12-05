@@ -18,59 +18,76 @@ import com.labplan.persistence.generic.CrudInterface;
 public abstract class CrudTester <TKey,
 									TEntity extends Entity<TKey>,
 									TDao extends CrudInterface<TEntity, TKey>> {
+	private static final String MSG_ENTITY_NOT_FOUND = "Inserted entity not found";
+	private static final String MSG_ENTITIES_NOT_IDENTICAL = "Dummy entity and retrieved entity are not identical.";
+	private static final String MSG_DELETION_FAILED = "SQL deletion for single entity failed.";
+	private static final String MSG_UPDATE_FAILED = "SQL update for single entity failed.";
+	private static final String MSG_RETRIEVAL_FAILED = "SQL retrieval for single entity failed.";
+	private static final String MSG_INSERTION_FAILED = "SQL insertion failed.";
+	
 	@Test
 	public void testInsertion() {
 		TEntity dummyTest = getRandomEntity();
 		TEntity sameTest;
 		TDao dao = getDao();
 		
+		// First, CREATE a randomly generated entity.
 		TKey testId = dao.create(dummyTest);
-		assertNotNull("SQL insertion for single entity failed.", testId);
+		assertNotNull(MSG_INSERTION_FAILED, testId);
 		dummyTest.setId(testId);
 		
+		// READ it back and check whether it is identical to the first one.
 		sameTest = dao.read(dummyTest.getId());
-		assertNotNull("SQL retrieval for single entity failed.", sameTest);
-		assertEquals("Dummy entity and retrieved entity are not identical.", dummyTest, sameTest);
-		assertTrue("SQL deletion for single entity failed.", dao.delete(dummyTest));
+		assertNotNull(MSG_RETRIEVAL_FAILED, sameTest);
+		assertEquals(MSG_ENTITIES_NOT_IDENTICAL, dummyTest, sameTest);
+		
+		// DELETE it afterwards.
+		assertTrue(MSG_DELETION_FAILED, dao.delete(dummyTest));
 	}
 	
 	@Test
 	public void testGetAll() {
 		TDao dao = getDao();
 		
+		// CREATE two random entities
 		TEntity dummyEntity1 = getRandomEntity();
 		TEntity dummyEntity2 = getRandomEntity();
 		
 		TKey dummyEntityId1 = dao.create(dummyEntity1);
 		TKey dummyEntityId2 = dao.create(dummyEntity2);
 		
-		assertNotNull("SQL insertion for single entity failed.", dummyEntityId1);
-		assertNotNull("SQL insertion for single entity failed.", dummyEntityId2);
+		assertNotNull(MSG_INSERTION_FAILED, dummyEntityId1);
+		assertNotNull(MSG_INSERTION_FAILED, dummyEntityId2);
 		
 		dummyEntity1.setId(dummyEntityId1);
 		dummyEntity2.setId(dummyEntityId2);
 		
+		// READ all the entities and check whether the two generated ones can be found.
 		Set<TEntity> entities = dao.readAll();
-		assertTrue("Inserted entity #1 not found in GetAll()", entities.contains(dummyEntity1));
-		assertTrue("Inserted entity #2 not found in GetAll()", entities.contains(dummyEntity2));
+		assertTrue(MSG_ENTITY_NOT_FOUND, entities.contains(dummyEntity1));
+		assertTrue(MSG_ENTITY_NOT_FOUND, entities.contains(dummyEntity2));
 		
-		assertTrue("SQL deletion for single entity failed.", dao.delete(dummyEntity1));
-		assertTrue("SQL deletion for single entity failed.", dao.delete(dummyEntity2));
+		// DELETE the generated entities.
+		assertTrue(MSG_DELETION_FAILED, dao.delete(dummyEntity1));
+		assertTrue(MSG_DELETION_FAILED, dao.delete(dummyEntity2));
 	}
 	
 	@Test
 	public void testUpdate() {
 		TDao dao = getDao();
 		
+		// CREATE a random entity.
 		TEntity dummyEntity = getRandomEntity();
 		TKey entityId = dao.create(dummyEntity);
-		assertNotNull("SQL insertion for single entity failed.", entityId);
+		assertNotNull(MSG_INSERTION_FAILED, entityId);
 		dummyEntity.setId(entityId);
 		
+		// UPDATE the last entity with another generated entity, keeping the ID.
 		TEntity updatedEntity = getRandomEntity();
 		updatedEntity.setId(entityId);
-		assertTrue("SQL update for single entity failed.", dao.update(updatedEntity));
+		assertTrue(MSG_UPDATE_FAILED, dao.update(updatedEntity));
 		
+		// READ back the updated entity to see if it matches the last generated entity.
 		TEntity sameEntity = dao.read(entityId);
 		assertEquals(updatedEntity, sameEntity);
 		assertNotEquals(dummyEntity, sameEntity);
