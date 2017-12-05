@@ -24,6 +24,7 @@ public class PatientDaoTests extends CrudTester<Integer, Patient, PatientDao> {
 
 	@Test
 	public void testGetByName() {
+		// CREATE a random patient.
 		PatientDao patientDao = getDao();
 		Patient dummyPatient = getRandomEntity();
 
@@ -31,9 +32,11 @@ public class PatientDaoTests extends CrudTester<Integer, Patient, PatientDao> {
 		assertNotNull("SQL insertion for single Patient failed.", patientId);
 		dummyPatient.setId(patientId);
 
+		// READ the same patient, but searching by its name. Then compare it with its counterpart.
 		Patient samePatient = patientDao.read(dummyPatient.getFirstName(), dummyPatient.getLastName());
 		assertEquals(dummyPatient, samePatient);
 
+		// DELETE the generated patient.
 		patientDao.delete(dummyPatient);
 	}
 

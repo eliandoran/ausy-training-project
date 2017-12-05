@@ -25,14 +25,17 @@ public class LabTestDaoTests extends CrudTester<Integer, LabTest, LabTestDao> {
 	
 	@Test
 	public void testGetByName() {
+		// CREATE a random lab test.
 		LabTest dummyTest = getRandomEntity();
 		Integer testId = dao.create(dummyTest);
 		assertNotNull("SQL insertion for single LabTest failed.", testId);
 		dummyTest.setId(testId);
 		
+		// READ the same lab test, but searching by its name. Then compare it with its counterpart.
 		LabTest sameTest = dao.read(dummyTest.getName());
 		assertEquals(dummyTest, sameTest);
 		
+		// DELETE the generated lab test.
 		dao.delete(dummyTest);
 	}
 	
