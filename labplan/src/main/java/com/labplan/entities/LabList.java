@@ -5,6 +5,11 @@ import java.util.*;
 
 import com.labplan.entities.generic.Entity;
 
+/**
+ * Represents a batch of {@link LabResult}s for a given {@link Patient}.
+ * @author adoran
+ *
+ */
 public class LabList extends Entity<Integer> {
 	private Patient patient;
 	private Integer patientId;

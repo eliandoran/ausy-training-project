@@ -2,6 +2,12 @@ package com.labplan.entities;
 
 import com.labplan.entities.generic.Entity;
 
+/**
+ * Represents a patient/client registered in a medical laboratory.
+ * Each {@link Patient} can have multiple {@link LabList}s.
+ * @author adoran
+ *
+ */
 public class Patient extends Entity<Integer> {
 	private String firstName;
 	private String lastName;

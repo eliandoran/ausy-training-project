@@ -6,6 +6,11 @@ import com.labplan.entities.generic.CompositeKeyPair;
 import com.labplan.entities.generic.Entity;
 import com.labplan.entities.generic.LazyLoadedEntity;
 
+/**
+ * Represents the result of a {@link LabTest} taken for a {@link Patient}.
+ * @author adoran
+ *
+ */
 public class LabResult
 	extends Entity<CompositeKeyPair<
 					LazyLoadedEntity<Integer, LabTest>,

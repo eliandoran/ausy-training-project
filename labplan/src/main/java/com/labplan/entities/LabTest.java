@@ -2,6 +2,11 @@ package com.labplan.entities;
 
 import com.labplan.entities.generic.Entity;
 
+/**
+ * Represents a type of test a medical laboratory can offer for a {@link Patient}.
+ * @author adoran
+ *
+ */
 public class LabTest extends Entity<Integer> {
 	private String name;
 	private String description;
