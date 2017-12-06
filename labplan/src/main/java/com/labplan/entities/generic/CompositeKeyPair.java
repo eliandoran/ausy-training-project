@@ -1,4 +1,4 @@
-package com.labplan.entities;
+package com.labplan.entities.generic;
 
 /***
  * Represents a composite key identifying an {@link Entity} which is composed of two component keys of differing types.

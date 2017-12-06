@@ -1,5 +1,7 @@
 package com.labplan.entities;
 
+import com.labplan.entities.generic.Entity;
+
 public class LabTest extends Entity<Integer> {
 	private String name;
 	private String description;

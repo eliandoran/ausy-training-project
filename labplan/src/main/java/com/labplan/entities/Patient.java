@@ -1,5 +1,7 @@
 package com.labplan.entities;
 
+import com.labplan.entities.generic.Entity;
+
 public class Patient extends Entity<Integer> {
 	private String firstName;
 	private String lastName;

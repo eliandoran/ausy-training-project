@@ -3,6 +3,8 @@ package com.labplan.entities;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 
+import com.labplan.entities.generic.Entity;
+
 public class LabList extends Entity<Integer> {
 	private Patient patient;
 	private Integer patientId;

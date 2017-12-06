@@ -3,7 +3,8 @@ package com.labplan.tests.helpers;
 import static org.junit.Assert.*;
 import java.util.Set;
 import org.junit.Test;
-import com.labplan.entities.Entity;
+
+import com.labplan.entities.generic.Entity;
 import com.labplan.persistence.generic.CrudInterface;
 
 /**

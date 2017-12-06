@@ -9,11 +9,11 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.labplan.entities.CompositeKeyPair;
 import com.labplan.entities.LabList;
 import com.labplan.entities.LabResult;
 import com.labplan.entities.LabTest;
-import com.labplan.entities.LazyLoadedEntity;
+import com.labplan.entities.generic.CompositeKeyPair;
+import com.labplan.entities.generic.LazyLoadedEntity;
 import com.labplan.persistence.DatabaseConnectionFactory;
 
 public class LabResultDao implements com.labplan.persistence.generic.LabResultDao {

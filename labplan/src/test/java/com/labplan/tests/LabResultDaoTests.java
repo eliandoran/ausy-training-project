@@ -4,11 +4,11 @@ import java.util.Random;
 
 import org.junit.BeforeClass;
 
-import com.labplan.entities.CompositeKeyPair;
 import com.labplan.entities.LabList;
 import com.labplan.entities.LabResult;
 import com.labplan.entities.LabTest;
-import com.labplan.entities.LazyLoadedEntity;
+import com.labplan.entities.generic.CompositeKeyPair;
+import com.labplan.entities.generic.LazyLoadedEntity;
 import com.labplan.persistence.sql.LabListDao;
 import com.labplan.persistence.sql.LabResultDao;
 import com.labplan.persistence.sql.LabTestDao;
