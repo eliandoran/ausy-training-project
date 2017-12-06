@@ -1,6 +1,6 @@
 package com.labplan.entities;
 
-public class LabResult extends Entity<Integer> {
+public class LabResult extends Entity<CompositeKeyPair<LabTest, LabList>> {
 	private LabList list;
 	
 	private Float value;
@@ -10,7 +10,6 @@ public class LabResult extends Entity<Integer> {
 	}
 
 	public LabResult(Integer id, LabList list, Float value) {
-		this.id = id;
 		this.list = list;
 		this.value = value;
 	}
