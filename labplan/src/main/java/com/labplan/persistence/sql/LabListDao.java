@@ -52,9 +52,10 @@ public class LabListDao implements com.labplan.persistence.generic.LabListDao {
 			}
 		} catch (SQLException e) {
 			LOGGER.log(Level.WARNING, "SQL connection failed.", e);
+			return null;
 		}
 		
-		return null;
+		return labLists;
 	}
 
 	@Override
@@ -98,6 +99,8 @@ public class LabListDao implements com.labplan.persistence.generic.LabListDao {
 			stmt.setInt(1, entity.getPatientId());
 			stmt.setTimestamp(2, parseDate(entity.getCreationDate()));
 			stmt.setInt(3, entity.getId());
+			
+			stmt.executeUpdate();
 		} catch (SQLException e) {
 			LOGGER.log(Level.WARNING, "SQL connection failed.", e);
 			return false;
