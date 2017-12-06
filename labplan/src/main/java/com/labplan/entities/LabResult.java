@@ -1,5 +1,7 @@
 package com.labplan.entities;
 
+import java.math.BigDecimal;
+
 public class LabResult
 	extends Entity<CompositeKeyPair<
 					LazyLoadedEntity<Integer, LabTest>,
@@ -43,15 +45,28 @@ public class LabResult
 		if (!(obj instanceof LabResult))
 			return false;
 		
-		return hashCode() == obj.hashCode();
+		LabResult compared = (LabResult)obj;
+		
+		if (!compared.getId().equals(getId()))
+			return false;
+		
+		if (Math.abs(compared.getValue() - getValue()) > 0.05)
+			return false;
+		
+		return true;
 	}
 	
 	@Override
 	public int hashCode() {
 		int hash = 17;
 		hash = 31 * hash + getId().hashCode();
-		//hash = 31 * hash + value.hashCode();
+		hash = 31 * hash + new Float(round(value, 4)).hashCode();
 		return hash;
 	}
-	
+
+    public static float round(float d, int decimalPlace) {
+        BigDecimal bd = new BigDecimal(Float.toString(d));
+        bd = bd.setScale(decimalPlace, BigDecimal.ROUND_HALF_UP);
+        return bd.floatValue();
+    }
 }
