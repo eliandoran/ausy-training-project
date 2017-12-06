@@ -16,7 +16,7 @@ import com.labplan.entities.generic.CompositeKeyPair;
 import com.labplan.entities.generic.LazyLoadedEntity;
 import com.labplan.persistence.DatabaseConnectionFactory;
 
-public class LabResultDao implements com.labplan.persistence.generic.LabResultDao {
+public class LabResultDao implements com.labplan.persistence.generic.GenericLabResultDao {
 	private static final Logger LOGGER = Logger.getGlobal();
 	
 	@Override

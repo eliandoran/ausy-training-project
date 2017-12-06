@@ -13,7 +13,7 @@ import com.labplan.entities.Patient;
 import com.labplan.persistence.DatabaseConnectionFactory;
 import com.mysql.cj.api.jdbc.Statement;
 
-public class PatientDao implements com.labplan.persistence.generic.PatientDao {
+public class PatientDao implements com.labplan.persistence.generic.GenericPatientDao {
 	private static final Logger LOGGER = Logger.getGlobal();
 
 	@Override

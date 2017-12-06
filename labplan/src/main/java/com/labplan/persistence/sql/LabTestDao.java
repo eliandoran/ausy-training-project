@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 import com.labplan.entities.LabTest;
 import com.labplan.persistence.DatabaseConnectionFactory;
 
-public class LabTestDao implements com.labplan.persistence.generic.LabTestDao {
+public class LabTestDao implements com.labplan.persistence.generic.GenericLabTestDao {
 	private static final Logger LOGGER = Logger.getGlobal();
 
 	@Override

@@ -14,7 +14,7 @@ import com.labplan.entities.LabList;
 import com.labplan.persistence.DatabaseConnectionFactory;
 import com.mysql.cj.api.jdbc.Statement;
 
-public class LabListDao implements com.labplan.persistence.generic.LabListDao {
+public class LabListDao implements com.labplan.persistence.generic.GenericLabListDao {
 	private static final Logger LOGGER = Logger.getGlobal();
 	
 	@Override

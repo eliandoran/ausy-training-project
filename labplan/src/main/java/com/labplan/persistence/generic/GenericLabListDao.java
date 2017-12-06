@@ -2,6 +2,6 @@ package com.labplan.persistence.generic;
 
 import com.labplan.entities.LabList;
 
-public interface LabListDao extends CrudInterface<LabList, Integer> {
+public interface GenericLabListDao extends CrudInterface<LabList, Integer> {
 
 }
