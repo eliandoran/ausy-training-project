@@ -6,7 +6,7 @@ public class LabResult extends Entity<Integer> {
 	private Float value;
 
 	public LabResult() {
-
+		
 	}
 
 	public LabResult(Integer id, LabList list, Float value) {
