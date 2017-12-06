@@ -1,12 +1,7 @@
 package com.labplan.tests;
 
-import static org.junit.Assert.*;
-
-import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import org.junit.BeforeClass;
-import org.junit.Test;
-
 import com.labplan.entities.LabList;
 import com.labplan.entities.Patient;
 import com.labplan.persistence.sql.LabListDao;
