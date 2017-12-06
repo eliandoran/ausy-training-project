@@ -82,7 +82,8 @@ public class PatientDao implements com.labplan.persistence.generic.PatientDao {
 	@Override
 	public Integer create(Patient patient) {
 		Connection conn = DatabaseConnectionFactory.getConnection();
-		String query = "INSERT INTO `patients` " + "(`first_name`, `last_name`, `age`, `height`, `weight`)"
+		String query = "INSERT INTO `patients` " 
+				+ "(`first_name`, `last_name`, `age`, `height`, `weight`)"
 				+ "VALUES (?, ?, ?, ?, ?)";
 
 		try {
@@ -111,8 +112,13 @@ public class PatientDao implements com.labplan.persistence.generic.PatientDao {
 	@Override
 	public boolean update(Patient patient) {
 		Connection conn = DatabaseConnectionFactory.getConnection();
-		String query = "UPDATE `patients` SET " + "`first_name`=?, " + "`last_name`=?, " + "`age`=?, " + "`height`=?, "
-				+ "`weight`=? " + "WHERE `patient_id`=?";
+		String query = "UPDATE `patients` SET "
+				+ "`first_name`=?, "
+				+ "`last_name`=?, "
+				+ "`age`=?, "
+				+ "`height`=?, "
+				+ "`weight`=? "
+				+ "WHERE `patient_id`=?";
 
 		try {
 			PreparedStatement stmt = conn.prepareStatement(query);
