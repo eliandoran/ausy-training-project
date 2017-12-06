@@ -1,6 +1,10 @@
 package com.labplan.entities;
 
-public class LabResult extends Entity<CompositeKeyPair<LabTest, LabList>> {
+public class LabResult
+	extends Entity<CompositeKeyPair<
+					LazyLoadedEntity<Integer, LabTest>,
+					LazyLoadedEntity<Integer, LabList>>>
+{
 	private LabList list;
 	
 	private Float value;
@@ -46,7 +50,7 @@ public class LabResult extends Entity<CompositeKeyPair<LabTest, LabList>> {
 	public int hashCode() {
 		int hash = 17;
 		hash = 31 * hash + getId().hashCode();
-		hash = 31 * hash + value.hashCode();
+		//hash = 31 * hash + value.hashCode();
 		return hash;
 	}
 	

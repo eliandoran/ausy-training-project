@@ -13,20 +13,21 @@ import com.labplan.entities.CompositeKeyPair;
 import com.labplan.entities.LabList;
 import com.labplan.entities.LabResult;
 import com.labplan.entities.LabTest;
+import com.labplan.entities.LazyLoadedEntity;
 import com.labplan.persistence.DatabaseConnectionFactory;
 
 public class LabResultDao implements com.labplan.persistence.generic.LabResultDao {
 	private static final Logger LOGGER = Logger.getGlobal();
 	
 	@Override
-	public LabResult read(CompositeKeyPair<LabTest, LabList> key) {
+	public LabResult read(CompositeKeyPair<LazyLoadedEntity<Integer, LabTest>, LazyLoadedEntity<Integer, LabList>> key) {
 		Connection conn = DatabaseConnectionFactory.getConnection();
 		String query = "SELECT * FROM `lab_results` WHERE `test_id`=? AND `list_id`=?";
 		
 		try {
 			PreparedStatement stmt = conn.prepareStatement(query);
-			stmt.setInt(1, key.getFirstKey().getId());
-			stmt.setInt(2, key.getSecondKey().getId());
+			stmt.setInt(1, key.getFirstKey().getKey());
+			stmt.setInt(2, key.getSecondKey().getKey());
 			ResultSet result = stmt.executeQuery();
 			
 			if (result.next()) {
@@ -62,7 +63,7 @@ public class LabResultDao implements com.labplan.persistence.generic.LabResultDa
 	}
 
 	@Override
-	public CompositeKeyPair<LabTest, LabList> create(LabResult entity) {
+	public CompositeKeyPair<LazyLoadedEntity<Integer, LabTest>, LazyLoadedEntity<Integer, LabList>> create(LabResult entity) {
 		Connection conn = DatabaseConnectionFactory.getConnection();
 		String query = "INSERT INTO `lab_results` "
 				+ "(`test_id`, `list_id`, `value`) "
@@ -70,8 +71,8 @@ public class LabResultDao implements com.labplan.persistence.generic.LabResultDa
 		
 		try {
 			PreparedStatement stmt = conn.prepareStatement(query);
-			stmt.setInt(1, entity.getId().getFirstKey().getId());
-			stmt.setInt(2, entity.getId().getSecondKey().getId());
+			stmt.setInt(1, entity.getId().getFirstKey().getKey());
+			stmt.setInt(2, entity.getId().getSecondKey().getKey());
 			stmt.setFloat(3,  entity.getValue());
 			
 			stmt.execute();
@@ -94,8 +95,8 @@ public class LabResultDao implements com.labplan.persistence.generic.LabResultDa
 			PreparedStatement stmt = conn.prepareStatement(query);
 			
 			stmt.setFloat(1, entity.getValue());
-			stmt.setInt(2, entity.getId().getFirstKey().getId());
-			stmt.setInt(3, entity.getId().getSecondKey().getId());
+			stmt.setInt(2, entity.getId().getFirstKey().getKey());
+			stmt.setInt(3, entity.getId().getSecondKey().getKey());
 			
 			stmt.executeUpdate();
 			return true;
@@ -112,8 +113,8 @@ public class LabResultDao implements com.labplan.persistence.generic.LabResultDa
 		
 		try {
 			PreparedStatement stmt = conn.prepareStatement(query);
-			stmt.setInt(1, entity.getId().getFirstKey().getId());
-			stmt.setInt(2, entity.getId().getSecondKey().getId());
+			stmt.setInt(1, entity.getId().getFirstKey().getKey());
+			stmt.setInt(2, entity.getId().getSecondKey().getKey());
 			stmt.execute();
 			
 			return true;
@@ -132,7 +133,10 @@ public class LabResultDao implements com.labplan.persistence.generic.LabResultDa
 		mockTest.setId(result.getInt("test_id"));
 		mockList.setId(result.getInt("list_id"));
 		
-		labResult.setId(new CompositeKeyPair<LabTest, LabList>(mockTest, mockList));
+		LazyLoadedEntity<Integer, LabTest> lazyTest = new LazyLoadedEntity<Integer, LabTest>(mockTest);
+		LazyLoadedEntity<Integer, LabList> lazyList = new LazyLoadedEntity<Integer, LabList>(mockList);
+		
+		labResult.setId(new CompositeKeyPair<LazyLoadedEntity<Integer,LabTest>, LazyLoadedEntity<Integer,LabList>>(lazyTest, lazyList));
 		labResult.setValue(result.getFloat("value"));
 		
 		return labResult;

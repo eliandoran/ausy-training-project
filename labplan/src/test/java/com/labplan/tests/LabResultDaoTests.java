@@ -8,12 +8,13 @@ import com.labplan.entities.CompositeKeyPair;
 import com.labplan.entities.LabList;
 import com.labplan.entities.LabResult;
 import com.labplan.entities.LabTest;
+import com.labplan.entities.LazyLoadedEntity;
 import com.labplan.persistence.sql.LabListDao;
 import com.labplan.persistence.sql.LabResultDao;
 import com.labplan.persistence.sql.LabTestDao;
 import com.labplan.tests.helpers.CrudTester;
 
-public class LabResultDaoTests extends CrudTester<CompositeKeyPair<LabTest, LabList>, LabResult, LabResultDao> {
+public class LabResultDaoTests extends CrudTester<CompositeKeyPair<LazyLoadedEntity<Integer,LabTest>, LazyLoadedEntity<Integer,LabList>>, LabResult, LabResultDao> {
 	private static LabResultDao dao;
 
 	@BeforeClass
@@ -44,7 +45,10 @@ public class LabResultDaoTests extends CrudTester<CompositeKeyPair<LabTest, LabL
 		Integer dummyLabTestId = labTestDao.create(dummyLabTest);
 		dummyLabTest.setId(dummyLabTestId);
 		
-		result.setId(new CompositeKeyPair<>(dummyLabTest, dummyLabList));
+		LazyLoadedEntity<Integer, LabTest> lazyTest = new LazyLoadedEntity<Integer, LabTest>(dummyLabTest);
+		LazyLoadedEntity<Integer, LabList> lazyList = new LazyLoadedEntity<Integer, LabList>(dummyLabList);
+		
+		result.setId(new CompositeKeyPair<>(lazyTest, lazyList));
 		
 		Random random = new Random();
 		result.setValue(random.nextFloat());
