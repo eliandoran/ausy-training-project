@@ -33,4 +33,21 @@ public class LabResult extends Entity<CompositeKeyPair<LabTest, LabList>> {
 	public void setList(LabList list) {
 		this.list = list;
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof LabResult))
+			return false;
+		
+		return hashCode() == obj.hashCode();
+	}
+	
+	@Override
+	public int hashCode() {
+		int hash = 17;
+		hash = 31 * hash + getId().hashCode();
+		hash = 31 * hash + value.hashCode();
+		return hash;
+	}
+	
 }

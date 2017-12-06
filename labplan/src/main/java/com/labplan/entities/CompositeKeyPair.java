@@ -36,4 +36,20 @@ public class CompositeKeyPair<TFirst, TSecond> {
 	public void setSecondKey(TSecond secondKey) {
 		this.secondKey = secondKey;
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof CompositeKeyPair))
+			return false;
+
+		return hashCode() == obj.hashCode();
+	}
+	
+	@Override
+	public int hashCode() {
+		int hash = 17;
+		hash = 31 * hash + firstKey.hashCode();
+		hash = 31 * hash + secondKey.hashCode();
+		return hash;
+	}
 }
