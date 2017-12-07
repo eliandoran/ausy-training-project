@@ -1,8 +1,10 @@
 package com.labplan.persistence;
 
-import static org.junit.Assert.*;
-import java.sql.*;
-import org.junit.*;
+import static org.junit.Assert.assertNotNull;
+
+import java.sql.Connection;
+
+import org.junit.Test;
 
 public class DatabaseConnectionFactoryTests {
 	@Test

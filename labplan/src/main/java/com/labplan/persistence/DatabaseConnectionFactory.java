@@ -1,11 +1,12 @@
 package com.labplan.persistence;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
-import java.util.Properties;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
 
 import com.labplan.persistence.exceptions.ConnectionFailedException;
 import com.mysql.cj.jdbc.Driver;

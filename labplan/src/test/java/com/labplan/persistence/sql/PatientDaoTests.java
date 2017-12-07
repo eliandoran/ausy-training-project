@@ -1,6 +1,8 @@
 package com.labplan.persistence.sql;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 import java.util.UUID;
 
@@ -9,7 +11,6 @@ import org.junit.Test;
 
 import com.labplan.entities.Patient;
 import com.labplan.helpers.CrudTester;
-import com.labplan.persistence.sql.PatientDao;
 
 public class PatientDaoTests extends CrudTester<Integer, Patient, PatientDao> {
 	private static PatientDao dao;

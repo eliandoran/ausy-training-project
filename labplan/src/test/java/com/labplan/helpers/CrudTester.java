@@ -1,9 +1,18 @@
 package com.labplan.helpers;
 
-import static com.labplan.helpers.TestMessages.*;
-import static org.junit.Assert.*;
+import static com.labplan.helpers.TestMessages.MSG_DELETION_FAILED;
+import static com.labplan.helpers.TestMessages.MSG_ENTITIES_NOT_IDENTICAL;
+import static com.labplan.helpers.TestMessages.MSG_ENTITY_NOT_FOUND;
+import static com.labplan.helpers.TestMessages.MSG_INSERTION_FAILED;
+import static com.labplan.helpers.TestMessages.MSG_RETRIEVAL_FAILED;
+import static com.labplan.helpers.TestMessages.MSG_UPDATE_FAILED;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Set;
+
 import org.junit.Test;
 
 import com.labplan.entities.generic.Entity;

@@ -5,12 +5,12 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
 import java.util.UUID;
+
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.labplan.entities.LabTest;
 import com.labplan.helpers.CrudTester;
-import com.labplan.persistence.sql.LabTestDao;
 
 public class LabTestDaoTests extends CrudTester<Integer, LabTest, LabTestDao> {
 	private static LabTestDao dao;

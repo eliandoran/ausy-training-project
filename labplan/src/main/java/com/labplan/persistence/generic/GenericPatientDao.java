@@ -1,6 +1,6 @@
 package com.labplan.persistence.generic;
 
-import com.labplan.entities.*;
+import com.labplan.entities.Patient;
 
 /**
  * An interface which implements a Data Access Object (DAO) with CRUD (Create,

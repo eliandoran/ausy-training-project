@@ -1,11 +1,14 @@
 package com.labplan.persistence.sql;
 
-import static com.labplan.helpers.TestMessages.*;
+import static com.labplan.helpers.TestMessages.MSG_DELETION_FAILED;
+import static com.labplan.helpers.TestMessages.MSG_INSERTION_FAILED;
+import static com.labplan.helpers.TestMessages.MSG_RETRIEVAL_FAILED;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Date;
+
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -13,8 +16,6 @@ import com.labplan.entities.LabList;
 import com.labplan.entities.Patient;
 import com.labplan.entities.generic.LazyLoadedEntity;
 import com.labplan.helpers.CrudTester;
-import com.labplan.persistence.sql.LabListDao;
-import com.labplan.persistence.sql.PatientDao;
 
 public class LabListDaoTests extends CrudTester<Integer, LabList, LabListDao> {
 	private static LabListDao dao;
