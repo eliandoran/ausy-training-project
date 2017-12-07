@@ -1,4 +1,4 @@
-package com.labplan.tests.helpers;
+package com.labplan.helpers;
 
 public final class TestMessages {
 	public static final String MSG_ENTITY_NOT_FOUND = "Inserted entity not found";

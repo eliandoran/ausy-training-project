@@ -1,4 +1,4 @@
-package com.labplan.tests.persistence.sql;
+package com.labplan.persistence.sql;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -9,8 +9,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.labplan.entities.LabTest;
+import com.labplan.helpers.CrudTester;
 import com.labplan.persistence.sql.LabTestDao;
-import com.labplan.tests.helpers.CrudTester;
 
 public class LabTestDaoTests extends CrudTester<Integer, LabTest, LabTestDao> {
 	private static LabTestDao dao;

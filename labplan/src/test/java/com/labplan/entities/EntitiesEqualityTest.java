@@ -1,12 +1,10 @@
-package com.labplan.tests.entities;
+package com.labplan.entities;
 
 import static org.junit.Assert.*;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import com.labplan.entities.*;
 
 public class EntitiesEqualityTest {
 
