@@ -1,6 +1,7 @@
 package com.labplan.tests.helpers;
 
 import static org.junit.Assert.*;
+import static com.labplan.tests.helpers.TestMessages.*;
 import java.util.Set;
 import org.junit.Test;
 
@@ -25,13 +26,6 @@ import com.labplan.persistence.generic.CrudInterface;
  *            source.
  */
 public abstract class CrudTester<TKey, TEntity extends Entity<TKey>, TDao extends CrudInterface<TEntity, TKey>> {
-	private static final String MSG_ENTITY_NOT_FOUND = "Inserted entity not found";
-	private static final String MSG_ENTITIES_NOT_IDENTICAL = "Dummy entity and retrieved entity are not identical.";
-	private static final String MSG_DELETION_FAILED = "SQL deletion for single entity failed.";
-	private static final String MSG_UPDATE_FAILED = "SQL update for single entity failed.";
-	private static final String MSG_RETRIEVAL_FAILED = "SQL retrieval for single entity failed.";
-	private static final String MSG_INSERTION_FAILED = "SQL insertion failed.";
-
 	@Test
 	public void testInsertion() {
 		TEntity dummyTest = getRandomEntity();

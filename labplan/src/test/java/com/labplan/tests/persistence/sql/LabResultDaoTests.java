@@ -21,6 +21,7 @@ import com.labplan.persistence.sql.LabListDao;
 import com.labplan.persistence.sql.LabResultDao;
 import com.labplan.persistence.sql.LabTestDao;
 import com.labplan.tests.helpers.CrudTester;
+import static com.labplan.tests.helpers.TestMessages.*;
 
 public class LabResultDaoTests extends CrudTester<CompositeKeyPair<LazyLoadedEntity<Integer,LabTest>, LazyLoadedEntity<Integer,LabList>>, LabResult, LabResultDao> {
 	private static LabResultDao dao;
@@ -78,13 +79,13 @@ public class LabResultDaoTests extends CrudTester<CompositeKeyPair<LazyLoadedEnt
 		assertTrue("Entity should not be in this list.", !results.contains(alienResult));
 		
 		// DELETE all generated entities.
-		assertTrue("SQL deletion for single entity failed.", dao.delete(alienResult));
+		assertTrue(MSG_DELETION_FAILED, dao.delete(alienResult));
 		
 		for (LabResult generatedResult : generatedResults) {
-			assertTrue("SQL deletion for single entity failed.", dao.delete(generatedResult));
+			assertTrue(MSG_DELETION_FAILED, dao.delete(generatedResult));
 		}
 		
-		assertTrue("SQL deletion for single entity failed.", listDao.delete(dummyList));
+		assertTrue(MSG_DELETION_FAILED, listDao.delete(dummyList));
 	}
 	
 	@Test
@@ -92,11 +93,11 @@ public class LabResultDaoTests extends CrudTester<CompositeKeyPair<LazyLoadedEnt
 		// CREATE a random lab result.
 		LabResult dummyLabResult = getRandomEntity();
 		dummyLabResult.setId(dao.create(dummyLabResult));
-		assertNotNull("SQL insertion failed.", dummyLabResult.getId());
+		assertNotNull(MSG_INSERTION_FAILED, dummyLabResult.getId());
 		
 		// READ the lab result back.
 		LabResult sameLabResult = dao.read(dummyLabResult.getId());
-		assertNotNull("SQL retrieval failed.", sameLabResult);
+		assertNotNull(MSG_RETRIEVAL_FAILED, sameLabResult);
 		
 		// Check to see whether lazy entities are not null.
 		assertNotNull("Entity ID should not be null.", sameLabResult.getId());
@@ -118,7 +119,7 @@ public class LabResultDaoTests extends CrudTester<CompositeKeyPair<LazyLoadedEnt
 		assertEquals(dummyLabResult.getId().getSecondKey(), readLabList);
 		
 		// DELETE the generated lab result.
-		assertTrue("SQL deletion failed.", dao.delete(dummyLabResult));
+		assertTrue(MSG_DELETION_FAILED, dao.delete(dummyLabResult));
 	}
 
 	@Override

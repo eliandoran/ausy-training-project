@@ -14,6 +14,7 @@ import com.labplan.entities.generic.LazyLoadedEntity;
 import com.labplan.persistence.sql.LabListDao;
 import com.labplan.persistence.sql.PatientDao;
 import com.labplan.tests.helpers.CrudTester;
+import static com.labplan.tests.helpers.TestMessages.*;
 
 public class LabListDaoTests extends CrudTester<Integer, LabList, LabListDao> {
 	private static LabListDao dao;
@@ -31,12 +32,12 @@ public class LabListDaoTests extends CrudTester<Integer, LabList, LabListDao> {
 		// CREATE a random lab list.
 		LabList dummyLabList = getRandomEntity();
 		Integer dummyLabListId = dao.create(dummyLabList);
-		assertNotNull("SQL insertion failed.", dummyLabListId);
+		assertNotNull(MSG_INSERTION_FAILED, dummyLabListId);
 		dummyLabList.setId(dummyLabListId);
 		
 		// READ the lab list back.
 		LabList sameLabList = dao.read(dummyLabList.getId());
-		assertNotNull("SQL retrieval failed.", sameLabList);
+		assertNotNull(MSG_RETRIEVAL_FAILED, sameLabList);
 		
 		// Check to see whether patient is not null.
 		assertNotNull("Patient should not be null.", sameLabList.getPatient());
@@ -50,7 +51,7 @@ public class LabListDaoTests extends CrudTester<Integer, LabList, LabListDao> {
 		assertEquals(dummyLabList.getPatient().getEntity(), readPatient);
 		
 		// DELETE the generated lab list.
-		assertTrue("SQL deletion failed.", dao.delete(dummyLabList));
+		assertTrue(MSG_DELETION_FAILED, dao.delete(dummyLabList));
 	}
 
 	@Override
