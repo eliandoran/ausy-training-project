@@ -21,12 +21,14 @@ import com.labplan.entities.LabTest;
 import com.labplan.entities.generic.CompositeKeyPair;
 import com.labplan.entities.generic.LazyLoadedEntity;
 import com.labplan.helpers.CrudTester;
+import com.labplan.persistence.DatabaseConnectionFactory;
 
 public class LabResultDaoTests extends CrudTester<CompositeKeyPair<LazyLoadedEntity<Integer,LabTest>, LazyLoadedEntity<Integer,LabList>>, LabResult, LabResultDao> {
 	private static LabResultDao dao;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
+		DatabaseConnectionFactory.setProfile("test");
 		dao = new LabResultDao();
 
 		System.setProperty("java.util.logging.config.file",

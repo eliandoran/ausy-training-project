@@ -11,12 +11,15 @@ import org.junit.Test;
 
 import com.labplan.entities.Patient;
 import com.labplan.helpers.CrudTester;
+import com.labplan.persistence.DatabaseConnectionFactory;
 
 public class PatientDaoTests extends CrudTester<Integer, Patient, PatientDao> {
 	private static PatientDao dao;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
+		DatabaseConnectionFactory.setProfile("test");
+		
 		dao = new PatientDao();
 
 		System.setProperty("java.util.logging.config.file",

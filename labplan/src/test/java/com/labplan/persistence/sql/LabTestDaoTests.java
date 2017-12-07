@@ -11,12 +11,14 @@ import org.junit.Test;
 
 import com.labplan.entities.LabTest;
 import com.labplan.helpers.CrudTester;
+import com.labplan.persistence.DatabaseConnectionFactory;
 
 public class LabTestDaoTests extends CrudTester<Integer, LabTest, LabTestDao> {
 	private static LabTestDao dao;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
+		DatabaseConnectionFactory.setProfile("test");
 		dao = new LabTestDao();
 
 		System.setProperty("java.util.logging.config.file",

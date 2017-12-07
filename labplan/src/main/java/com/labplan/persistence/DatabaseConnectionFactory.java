@@ -14,16 +14,8 @@ import com.mysql.cj.jdbc.Driver;
 public class DatabaseConnectionFactory {
 	private static Properties properties;
 
-	private static String configFilePath;
-
-	public static String getConfigFilePath() {
-		return configFilePath;
-	}
-
-	public static void setConfigFilePath(String path) {
-		configFilePath = path;
-	}
-
+	private static String profile = "dev";
+	
 	public static Connection getConnection() throws ConnectionFailedException {
 		try {
 			if (properties == null)
@@ -31,8 +23,12 @@ public class DatabaseConnectionFactory {
 
 			DriverManager.registerDriver(new Driver());
 
-			return DriverManager.getConnection(properties.getProperty("address", ""),
-					properties.getProperty("username", ""), properties.getProperty("password", ""));
+			String prefix = profile + ".";
+			
+			return DriverManager.getConnection(
+					properties.getProperty(prefix + "address", ""),
+					properties.getProperty(prefix + "username", ""),
+					properties.getProperty(prefix + "password", ""));
 		} catch (IOException | SQLException e) {
 			ConnectionFailedException newException = new ConnectionFailedException();
 			newException.addSuppressed(e);
@@ -53,5 +49,13 @@ public class DatabaseConnectionFactory {
 		} finally {
 			in.close();
 		}
+	}
+
+	public static String getProfile() {
+		return profile;
+	}
+
+	public static void setProfile(String profile) {
+		DatabaseConnectionFactory.profile = profile;
 	}
 }

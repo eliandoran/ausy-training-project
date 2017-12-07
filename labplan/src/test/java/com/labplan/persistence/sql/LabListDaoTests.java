@@ -16,12 +16,14 @@ import com.labplan.entities.LabList;
 import com.labplan.entities.Patient;
 import com.labplan.entities.generic.LazyLoadedEntity;
 import com.labplan.helpers.CrudTester;
+import com.labplan.persistence.DatabaseConnectionFactory;
 
 public class LabListDaoTests extends CrudTester<Integer, LabList, LabListDao> {
 	private static LabListDao dao;
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
+		DatabaseConnectionFactory.setProfile("test");
 		dao = new LabListDao();
 
 		System.setProperty("java.util.logging.config.file",
