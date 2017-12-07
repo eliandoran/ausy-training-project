@@ -74,6 +74,15 @@ public class LabResultDaoTests extends CrudTester<CompositeKeyPair<LazyLoadedEnt
 		}
 		
 		assertTrue("Entity should not be in this list.", !results.contains(alienResult));
+		
+		// DELETE all generated entities.
+		assertTrue("SQL deletion for single entity failed.", dao.delete(alienResult));
+		
+		for (LabResult generatedResult : generatedResults) {
+			assertTrue("SQL deletion for single entity failed.", dao.delete(generatedResult));
+		}
+		
+		assertTrue("SQL deletion for single entity failed.", listDao.delete(dummyList));
 	}
 
 	@Override
