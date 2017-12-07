@@ -10,7 +10,7 @@ public class LazyLoadedEntity<TKey, TEntity extends Entity<TKey>> {
 	TKey key;
 
 	public LazyLoadedEntity() {
-		
+		isLoaded = false;
 	}
 	
 	public LazyLoadedEntity(TEntity entity) {
@@ -50,7 +50,10 @@ public class LazyLoadedEntity<TKey, TEntity extends Entity<TKey>> {
 		this.dao = dao;
 	}
 
-	void load() {
+	private void load() {
+		if (dao == null)
+			throw new NullPointerException("DAO used for lazy loading is null.");
+		
 		entity = dao.read(key);
 		isLoaded = true;
 	}

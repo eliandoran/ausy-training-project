@@ -158,6 +158,9 @@ public class LabResultDao implements com.labplan.persistence.generic.GenericLabR
 		LazyLoadedEntity<Integer, LabTest> lazyTest = new LazyLoadedEntity<Integer, LabTest>(mockTest);
 		LazyLoadedEntity<Integer, LabList> lazyList = new LazyLoadedEntity<Integer, LabList>(mockList);
 		
+		lazyTest.setDao(new LabTestDao());
+		lazyList.setDao(new LabListDao());
+		
 		labResult.setId(new CompositeKeyPair<LazyLoadedEntity<Integer,LabTest>, LazyLoadedEntity<Integer,LabList>>(lazyTest, lazyList));
 		labResult.setValue(result.getFloat("value"));
 		

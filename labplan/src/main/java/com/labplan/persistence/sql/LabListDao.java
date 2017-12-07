@@ -136,6 +136,7 @@ public class LabListDao implements com.labplan.persistence.generic.GenericLabLis
 		Integer patientId = result.getInt("patient_id");
 		LazyLoadedEntity<Integer, Patient> lazyPatient = new LazyLoadedEntity<>();
 		lazyPatient.setKey(patientId);
+		lazyPatient.setDao(new PatientDao());
 		
 		list.setPatient(lazyPatient);
 		
