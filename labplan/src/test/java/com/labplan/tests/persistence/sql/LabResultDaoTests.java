@@ -116,7 +116,7 @@ public class LabResultDaoTests extends CrudTester<CompositeKeyPair<LazyLoadedEnt
 		// Load the read LabResult and compare it against the initial one.
 		LabList readLabList = sameLabResult.getId().getSecondKey().getEntity();
 		assertTrue(sameLabResult.getId().getSecondKey().getIsLoaded());
-		assertEquals(dummyLabResult.getId().getSecondKey(), readLabList);
+		assertEquals(dummyLabResult.getId().getSecondKey().getEntity(), readLabList);
 		
 		// DELETE the generated lab result.
 		assertTrue(MSG_DELETION_FAILED, dao.delete(dummyLabResult));

@@ -149,14 +149,11 @@ public class LabResultDao implements com.labplan.persistence.generic.GenericLabR
 	private LabResult parseResult(ResultSet result) throws SQLException {
 		LabResult labResult = new LabResult();
 		
-		LabTest mockTest = new LabTest();
-		LabList mockList = new LabList();
+		LazyLoadedEntity<Integer, LabTest> lazyTest = new LazyLoadedEntity<Integer, LabTest>();
+		lazyTest.setKey(result.getInt("test_id"));
 		
-		mockTest.setId(result.getInt("test_id"));
-		mockList.setId(result.getInt("list_id"));
-		
-		LazyLoadedEntity<Integer, LabTest> lazyTest = new LazyLoadedEntity<Integer, LabTest>(mockTest);
-		LazyLoadedEntity<Integer, LabList> lazyList = new LazyLoadedEntity<Integer, LabList>(mockList);
+		LazyLoadedEntity<Integer, LabList> lazyList = new LazyLoadedEntity<Integer, LabList>();
+		lazyList.setKey(result.getInt("list_id"));
 		
 		lazyTest.setDao(new LabTestDao());
 		lazyList.setDao(new LabListDao());
