@@ -1,8 +1,14 @@
 package com.labplan.tests;
 
+import static org.junit.Assert.assertTrue;
+
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 import org.junit.BeforeClass;
+import org.junit.Test;
 
 import com.labplan.entities.LabList;
 import com.labplan.entities.LabResult;
@@ -24,11 +30,54 @@ public class LabResultDaoTests extends CrudTester<CompositeKeyPair<LazyLoadedEnt
 		System.setProperty("java.util.logging.config.file",
 				ClassLoader.getSystemResource("logging.properties").getPath());
 	}
+	
+	@Test
+	public void testReadAllByLabList() {
+		// Generate a random list
+		LabListDaoTests listTests = new LabListDaoTests();
+		LabListDao listDao = new LabListDao();
+		LabList dummyList = listTests.getRandomEntity();
+		
+		// Insert the dummy list into the database.
+		Integer dummyListId = listDao.create(dummyList);
+		dummyList.setId(dummyListId);
+		
+		// Generate a number of random lab results.
+		List<LabResult> generatedResults = new LinkedList<LabResult>();
+		
+		for (int i=0; i<5; i++) {
+			LabResult result = getRandomEntity(dummyList);
+			generatedResults.add(result);
+			dao.create(result);
+		}
+		
+		// Generate another lab result, this time belonging to another list.
+		LabResult alienResult = getRandomEntity();
+		dao.create(alienResult);
+		
+		// Check whether the entities are read back correctly.
+		Set<LabResult> results = dao.readAll(dummyList);
+		
+		assertTrue("Generated list is empty.", !results.isEmpty());
+		
+		for (LabResult generatedResult : generatedResults) {
+			boolean found = false;
+			
+			for (LabResult readResult : results) {
+				if (readResult.equals(generatedResult)) {
+					found = true;
+					break;
+				}
+			}
+			
+			assertTrue("Generated entity not found.", found);
+		}
+		
+		assertTrue("Entity should not be in this list.", !results.contains(alienResult));
+	}
 
 	@Override
 	public LabResult getRandomEntity() {
-		LabResult result = new LabResult();
-		
 		// Generate a random list for the result
 		LabListDaoTests labListDaoTests = new LabListDaoTests();
 		LabListDao labListDao = new LabListDao();
@@ -36,6 +85,12 @@ public class LabResultDaoTests extends CrudTester<CompositeKeyPair<LazyLoadedEnt
 		LabList dummyLabList = labListDaoTests.getRandomEntity();
 		Integer dummyLabListId = labListDao.create(dummyLabList);
 		dummyLabList.setId(dummyLabListId);
+		
+		return getRandomEntity(dummyLabList);
+	}
+	
+	private LabResult getRandomEntity(LabList list) {
+		LabResult result = new LabResult();
 		
 		// Generate a random test for the result
 		LabTestDaoTests labTestDaoTests = new LabTestDaoTests();
@@ -46,7 +101,7 @@ public class LabResultDaoTests extends CrudTester<CompositeKeyPair<LazyLoadedEnt
 		dummyLabTest.setId(dummyLabTestId);
 		
 		LazyLoadedEntity<Integer, LabTest> lazyTest = new LazyLoadedEntity<Integer, LabTest>(dummyLabTest);
-		LazyLoadedEntity<Integer, LabList> lazyList = new LazyLoadedEntity<Integer, LabList>(dummyLabList);
+		LazyLoadedEntity<Integer, LabList> lazyList = new LazyLoadedEntity<Integer, LabList>(list);
 		
 		result.setId(new CompositeKeyPair<>(lazyTest, lazyList));
 		

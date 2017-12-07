@@ -40,6 +40,28 @@ public class LabResultDao implements com.labplan.persistence.generic.GenericLabR
 			return null;
 		}
 	}
+	
+	@Override
+	public Set<LabResult> readAll(LabList list) {
+		Connection conn = DatabaseConnectionFactory.getConnection();
+		String query = "SELECT * FROM `lab_results` WHERE `list_id`=?";
+		Set<LabResult> results = new HashSet<>();
+		
+		try {
+			PreparedStatement stmt = conn.prepareStatement(query);
+			stmt.setInt(1, list.getId());
+			ResultSet result = stmt.executeQuery();
+			
+			while (result.next()) {
+				results.add(parseResult(result));
+			}
+			
+			return results;
+		} catch (SQLException e) {
+			LOGGER.log(Level.WARNING, "SQL connection failed.", e);
+			return null;
+		}
+	}
 
 	@Override
 	public Set<LabResult> readAll() {
