@@ -1,4 +1,4 @@
-package com.labplan.tests;
+package com.labplan.tests.persistence;
 
 import static org.junit.Assert.*;
 import java.sql.*;

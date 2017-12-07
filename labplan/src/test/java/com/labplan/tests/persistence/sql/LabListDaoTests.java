@@ -1,4 +1,4 @@
-package com.labplan.tests;
+package com.labplan.tests.persistence.sql;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
