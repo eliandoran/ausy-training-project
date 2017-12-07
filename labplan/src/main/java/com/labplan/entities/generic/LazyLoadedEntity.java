@@ -67,4 +67,9 @@ public class LazyLoadedEntity<TKey, TEntity extends Entity<TKey>> {
 	public int hashCode() {
 		return key.hashCode();
 	}
+	
+	@Override
+	public String toString() {
+		return String.format("<LazyLoadedEntity %s, ID: %s>", entity.getClass().getName(), key.toString());
+	}
 }

@@ -52,4 +52,9 @@ public class CompositeKeyPair<TFirst, TSecond> {
 		hash = 31 * hash + secondKey.hashCode();
 		return hash;
 	}
+	
+	@Override
+	public String toString() {
+		return String.format("<CompositeKeyPair %s %s>", firstKey.toString(), secondKey.toString());
+	}
 }
