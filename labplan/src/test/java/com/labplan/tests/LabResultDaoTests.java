@@ -1,5 +1,7 @@
 package com.labplan.tests;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.LinkedList;
@@ -83,6 +85,40 @@ public class LabResultDaoTests extends CrudTester<CompositeKeyPair<LazyLoadedEnt
 		}
 		
 		assertTrue("SQL deletion for single entity failed.", listDao.delete(dummyList));
+	}
+	
+	@Test
+	public void testKeyLazyLoading() {
+		// CREATE a random lab result.
+		LabResult dummyLabResult = getRandomEntity();
+		dummyLabResult.setId(dao.create(dummyLabResult));
+		assertNotNull("SQL insertion failed.", dummyLabResult.getId());
+		
+		// READ the lab result back.
+		LabResult sameLabResult = dao.read(dummyLabResult.getId());
+		assertNotNull("SQL retrieval failed.", sameLabResult);
+		
+		// Check to see whether lazy entities are not null.
+		assertNotNull("Entity ID should not be null.", sameLabResult.getId());
+		assertNotNull("LabTest from ID should not be null.", sameLabResult.getId().getFirstKey());
+		assertNotNull("LabList from ID should not be null.", sameLabResult.getId().getSecondKey());
+		
+		// Check to see that the lazy entities are not yet loaded.
+		assertTrue(!sameLabResult.getId().getFirstKey().getIsLoaded());
+		assertTrue(!sameLabResult.getId().getSecondKey().getIsLoaded());
+		
+		// Load the read LabTest and compare it against the initial one.
+		LabTest readLabTest = sameLabResult.getId().getFirstKey().getEntity();
+		assertTrue(sameLabResult.getId().getFirstKey().getIsLoaded());
+		assertEquals(dummyLabResult.getId().getFirstKey().getEntity(), readLabTest);
+		
+		// Load the read LabResult and compare it against the initial one.
+		LabList readLabList = sameLabResult.getId().getSecondKey().getEntity();
+		assertTrue(sameLabResult.getId().getSecondKey().getIsLoaded());
+		assertEquals(dummyLabResult.getId().getSecondKey(), readLabList);
+		
+		// DELETE the generated lab result.
+		assertTrue("SQL deletion failed.", dao.delete(dummyLabResult));
 	}
 
 	@Override

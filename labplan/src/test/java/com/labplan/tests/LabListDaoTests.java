@@ -49,6 +49,7 @@ public class LabListDaoTests extends CrudTester<Integer, LabList, LabListDao> {
 		assertTrue(sameLabList.getPatient().getIsLoaded());
 		assertEquals(dummyLabList.getPatient().getEntity(), readPatient);
 		
+		// DELETE the generated lab list.
 		assertTrue("SQL deletion failed.", dao.delete(dummyLabList));
 	}
 
