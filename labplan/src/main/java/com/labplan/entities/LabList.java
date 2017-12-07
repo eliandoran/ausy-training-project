@@ -4,6 +4,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 import com.labplan.entities.generic.Entity;
+import com.labplan.entities.generic.LazyLoadedEntity;
 
 /**
  * Represents a batch of {@link LabResult}s for a given {@link Patient}.
@@ -11,8 +12,7 @@ import com.labplan.entities.generic.Entity;
  *
  */
 public class LabList extends Entity<Integer> {
-	private Patient patient;
-	private Integer patientId;
+	private LazyLoadedEntity<Integer, Patient> patient;
 	private Date creationDate;
 	private List<LabResult> resultsList;
 
@@ -20,28 +20,23 @@ public class LabList extends Entity<Integer> {
 		resultsList = new ArrayList<LabResult>();
 	}
 
-	public LabList(Integer id, Patient patient, Date creationDate) {
+	public LabList(Integer id, LazyLoadedEntity<Integer, Patient> patient, Date creationDate) {
 		this();
 		this.id = id;
 		this.patient = patient;
 		this.creationDate = creationDate;
 	}
 
-	public LabList(Patient patient, Date creationDate) {
+	public LabList(LazyLoadedEntity<Integer, Patient> patient, Date creationDate) {
 		this(null, patient, creationDate);
 	}
-	
-	public LabList(Integer patientId) {
-		this.patientId = patientId;
-	}
 
-	public Patient getPatient() {
+	public LazyLoadedEntity<Integer, Patient> getPatient() {
 		return patient;
 	}
 
-	public void setPatient(Patient patient) {
+	public void setPatient(LazyLoadedEntity<Integer, Patient> patient) {
 		this.patient = patient;
-		this.patientId = (patient != null ? patient.getId() : null);
 	}
 
 	public Date getCreationDate() {
@@ -56,10 +51,6 @@ public class LabList extends Entity<Integer> {
 		return resultsList;
 	}
 	
-	public Integer getPatientId() {
-		return patientId;
-	}
-	
 	@Override
 	public boolean equals(Object obj) {
 		if (!(obj instanceof LabList))
@@ -71,7 +62,8 @@ public class LabList extends Entity<Integer> {
 	@Override
 	public int hashCode() {
 		int hash = 17;
-		hash = 31 * hash + patientId.hashCode();
+		hash = 31 * hash + id.hashCode();
+		hash = 31 * hash + patient.hashCode();
 		hash = 31 * hash + getCreationDate().hashCode();
 		return hash;
 	}

@@ -11,6 +11,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.labplan.entities.LabList;
+import com.labplan.entities.Patient;
+import com.labplan.entities.generic.LazyLoadedEntity;
 import com.labplan.persistence.DatabaseConnectionFactory;
 import com.mysql.cj.api.jdbc.Statement;
 
@@ -69,7 +71,7 @@ public class LabListDao implements com.labplan.persistence.generic.GenericLabLis
 			PreparedStatement stmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 			ResultSet generatedKeys;
 			
-			stmt.setInt(1, entity.getPatientId());
+			stmt.setInt(1, entity.getPatient().getKey());
 			stmt.setTimestamp(2, parseDate(entity.getCreationDate()));
 			
 			stmt.execute();
@@ -96,7 +98,7 @@ public class LabListDao implements com.labplan.persistence.generic.GenericLabLis
 		try {
 			PreparedStatement stmt = conn.prepareStatement(query);
 			
-			stmt.setInt(1, entity.getPatientId());
+			stmt.setInt(1, entity.getPatient().getKey());
 			stmt.setTimestamp(2, parseDate(entity.getCreationDate()));
 			stmt.setInt(3, entity.getId());
 			
@@ -128,10 +130,16 @@ public class LabListDao implements com.labplan.persistence.generic.GenericLabLis
 	}
 
 	private LabList parseLabList(ResultSet result) throws SQLException {
+		LabList list = new LabList();
+		
+		// Parse Patient by means of Patient ID.
 		Integer patientId = result.getInt("patient_id");
+		LazyLoadedEntity<Integer, Patient> lazyPatient = new LazyLoadedEntity<>();
+		lazyPatient.setKey(patientId);
 		
-		LabList list = new LabList(patientId);
+		list.setPatient(lazyPatient);
 		
+		// Parse the rest of the information.
 		list.setId(result.getInt("list_id"));
 		list.setCreationDate(parseDate(result.getTimestamp("creation_date")));
 		
