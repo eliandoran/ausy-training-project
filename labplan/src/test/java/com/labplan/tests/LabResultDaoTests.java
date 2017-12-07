@@ -51,7 +51,7 @@ public class LabResultDaoTests extends CrudTester<CompositeKeyPair<LazyLoadedEnt
 		result.setId(new CompositeKeyPair<>(lazyTest, lazyList));
 		
 		Random random = new Random();
-		result.setValue(random.nextFloat());
+		result.setValue(random.nextFloat() * 10);
 		
 		return result;
 	}
