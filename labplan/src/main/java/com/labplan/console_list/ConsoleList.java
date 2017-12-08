@@ -46,6 +46,7 @@ public class ConsoleList {
 		displayListTable(ids, firstNames, lastNames, creationDates);
 	}
 	
+	@SuppressWarnings("deprecation")
 	private static void displayList(Integer listId) {
 		LabList list = (new LabListDao()).read(listId, true);
 		
