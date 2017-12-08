@@ -76,6 +76,28 @@ public class LabListDao implements com.labplan.persistence.generic.GenericLabLis
 		
 		return labLists;
 	}
+	
+	@Override
+	public Set<LabList> readAllByPatient(Patient patient) {
+		Connection conn = DatabaseConnectionFactory.getConnection();
+		String query = "SELECT * FROM `lab_lists` WHERE `patient_id`=?";
+		Set<LabList> labLists = new HashSet<LabList>();
+		
+		try {
+			PreparedStatement stmt = conn.prepareStatement(query);
+			stmt.setInt(1, patient.getId());
+			ResultSet result = stmt.executeQuery();
+			
+			while (result.next()) {
+				labLists.add(parseLabList(result));
+			}
+		} catch (SQLException e) {
+			LOGGER.log(Level.WARNING, "SQL connection failed.", e);
+			return null;
+		}
+		
+		return labLists;
+	}
 
 	@Override
 	public Integer create(LabList entity) {
