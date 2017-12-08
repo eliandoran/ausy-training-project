@@ -1,7 +1,5 @@
 package com.labplan.persistence.generic;
 
-import java.util.Set;
-
 import com.labplan.entities.LabList;
 import com.labplan.entities.LabResult;
 import com.labplan.entities.LabTest;

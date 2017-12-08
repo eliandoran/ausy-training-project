@@ -4,8 +4,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
-import com.labplan.entities.*;
-import com.labplan.persistence.sql.*;
+import com.labplan.entities.LabList;
+import com.labplan.entities.LabResult;
+import com.labplan.entities.Patient;
+import com.labplan.persistence.sql.LabListDao;
 
 /**
  * A small application that prints to the console in a tabular fashion all the

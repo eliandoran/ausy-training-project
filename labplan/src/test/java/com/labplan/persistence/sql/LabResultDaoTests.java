@@ -17,11 +17,8 @@ import org.junit.Test;
 import com.labplan.entities.LabList;
 import com.labplan.entities.LabResult;
 import com.labplan.entities.LabTest;
-import com.labplan.entities.generic.Entity;
 import com.labplan.entities.generic.LazyLoadedEntity;
-import com.labplan.helpers.CrudTester;
 import com.labplan.helpers.DependentCrudTester;
-import com.labplan.persistence.generic.CrudInterface;
 
 public class LabResultDaoTests extends DependentCrudTester<LabList, LazyLoadedEntity<Integer, LabTest>, LabResult, LabResultDao> {
 	private static LabList dummyLabList;

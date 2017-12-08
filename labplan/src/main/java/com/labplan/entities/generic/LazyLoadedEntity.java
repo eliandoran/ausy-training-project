@@ -1,6 +1,5 @@
 package com.labplan.entities.generic;
 
-import com.labplan.entities.LabList;
 import com.labplan.persistence.generic.CrudInterface;
 
 /**

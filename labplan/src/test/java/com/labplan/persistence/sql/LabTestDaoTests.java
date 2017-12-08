@@ -1,5 +1,6 @@
 package com.labplan.persistence.sql;
 
+import static com.labplan.helpers.TestMessages.MSG_INSERTION_FAILED;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
@@ -12,8 +13,6 @@ import org.junit.Test;
 import com.labplan.entities.LabTest;
 import com.labplan.helpers.CrudTester;
 import com.labplan.persistence.DatabaseConnectionFactory;
-
-import static com.labplan.helpers.TestMessages.*;
 
 public class LabTestDaoTests extends CrudTester<Integer, LabTest, LabTestDao> {
 	private static LabTestDao dao;
