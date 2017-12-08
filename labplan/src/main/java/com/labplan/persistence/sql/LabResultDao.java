@@ -20,6 +20,10 @@ public class LabResultDao implements com.labplan.persistence.generic.GenericLabR
 	
 	private LabList list;
 	
+	public LabResultDao(LabList parentEntity) {
+		list = parentEntity;
+	}
+	
 	@Override
 	public LabResult read(LazyLoadedEntity<Integer, LabTest> key) {
 		// TODO Auto-generated method stub
@@ -127,10 +131,5 @@ public class LabResultDao implements com.labplan.persistence.generic.GenericLabR
 	@Override
 	public LabList getParentEntity() {
 		return list;
-	}
-
-	@Override
-	public void setParentEntity(LabList parentEntity) {
-		list = parentEntity;
 	}
 }

@@ -42,8 +42,7 @@ public class LabResultDaoTests {
 		dummyLabTest.setId(testDao.create(dummyLabTest));
 		assertNotNull(MSG_INSERTION_FAILED, dummyLabTest.getId());
 		
-		dao = new LabResultDao();
-		dao.setParentEntity(dummyLabList);
+		dao = new LabResultDao(dummyLabList);
 	}
 
 	@AfterClass
