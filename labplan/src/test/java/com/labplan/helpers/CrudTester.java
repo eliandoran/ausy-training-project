@@ -13,6 +13,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.Set;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import com.labplan.entities.generic.Entity;
@@ -36,6 +37,14 @@ import com.labplan.persistence.generic.CrudInterface;
  *            source.
  */
 public abstract class CrudTester<TKey, TEntity extends Entity<TKey>, TDao extends CrudInterface<TEntity, TKey>> {
+	public void beforeTest() {
+		
+	}
+	
+	public void afterTest() {
+		
+	}
+	
 	@Test
 	public void testInsertion() {
 		TEntity dummyTest = getRandomEntity();

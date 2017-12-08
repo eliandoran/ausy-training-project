@@ -1,6 +1,11 @@
 package com.labplan.persistence.sql;
 
-import static org.junit.Assert.*;
+import static com.labplan.helpers.TestMessages.MSG_DELETION_FAILED;
+import static com.labplan.helpers.TestMessages.MSG_ENTITY_NOT_FOUND;
+import static com.labplan.helpers.TestMessages.MSG_INSERTION_FAILED;
+import static com.labplan.helpers.TestMessages.MSG_RETRIEVAL_FAILED;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Random;
 import java.util.Set;
@@ -12,11 +17,13 @@ import org.junit.Test;
 import com.labplan.entities.LabList;
 import com.labplan.entities.LabResult;
 import com.labplan.entities.LabTest;
+import com.labplan.entities.generic.Entity;
 import com.labplan.entities.generic.LazyLoadedEntity;
+import com.labplan.helpers.CrudTester;
+import com.labplan.helpers.DependentCrudTester;
+import com.labplan.persistence.generic.CrudInterface;
 
-import static com.labplan.helpers.TestMessages.*;
-
-public class LabResultDaoTests {
+public class LabResultDaoTests extends DependentCrudTester<LabList, LazyLoadedEntity<Integer, LabTest>, LabResult, LabResultDao> {
 	private static LabList dummyLabList;
 	private static LabTest dummyLabTest;
 	
@@ -24,8 +31,22 @@ public class LabResultDaoTests {
 	private static LabListDao listDao;
 	private static LabTestDao testDao;
 	
+	public LabResultDaoTests() {
+		
+	}
+	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
+		
+	}
+	
+	@AfterClass
+	public static void tearDownAfterClass() throws Exception {
+		assertNotNull(MSG_DELETION_FAILED, listDao.delete(dummyLabList));
+	}
+
+	@Override
+	public LabResult getRandomEntity() {
 		// Generate a random LabList.
 		listDao = new LabListDao();
 		
@@ -43,15 +64,20 @@ public class LabResultDaoTests {
 		assertNotNull(MSG_INSERTION_FAILED, dummyLabTest.getId());
 		
 		dao = new LabResultDao(dummyLabList);
+				
+		LabResult dummyResult = new LabResult();
+		
+		dummyResult.setId(new LazyLoadedEntity<Integer, LabTest>(dummyLabTest));
+		
+		// Set a random value
+		Random random = new Random();
+		dummyResult.setValue(random.nextFloat() * 10);
+		
+		return dummyResult;
 	}
-
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
-		assertNotNull(MSG_DELETION_FAILED, listDao.delete(dummyLabList));
-	}
-
+	
 	@Test
-	public void testInsertion() {
+	public void testInsertion2() {
 		// CREATE a generated LabResult.
 		LabResult dummyResult = getRandomEntity();
 		dummyResult.setId(dao.create(dummyResult));
@@ -72,16 +98,9 @@ public class LabResultDaoTests {
 		
 		assertTrue(MSG_ENTITY_NOT_FOUND, found);
 	}
-	
-	public LabResult getRandomEntity() {
-		LabResult dummyResult = new LabResult();
-		
-		dummyResult.setId(new LazyLoadedEntity<Integer, LabTest>(dummyLabTest));
-		
-		// Set a random value
-		Random random = new Random();
-		dummyResult.setValue(random.nextFloat() * 10);
-		
-		return dummyResult;
+
+	@Override
+	public LabResultDao getDao() {
+		return dao;
 	}
 }

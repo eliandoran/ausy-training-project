@@ -26,8 +26,25 @@ public class LabResultDao implements com.labplan.persistence.generic.GenericLabR
 	
 	@Override
 	public LabResult read(LazyLoadedEntity<Integer, LabTest> key) {
-		// TODO Auto-generated method stub
-		return null;
+		Connection conn = DatabaseConnectionFactory.getConnection();
+		String query = "SELECT * FROM `lab_results` WHERE `list_id`=? AND `test_id`=?";
+		Set<LabResult> results = new HashSet<>();
+		
+		try {
+			PreparedStatement stmt = conn.prepareStatement(query);
+			stmt.setInt(1, list.getId());
+			stmt.setInt(2, key.getKey());
+			ResultSet result = stmt.executeQuery();
+			
+			if (result.next()) {
+				return parseResult(result);
+			}
+
+			return null;
+		} catch (SQLException e) {
+			LOGGER.log(Level.WARNING, "SQL connection failed.", e);
+			return null;
+		}
 	}
 
 	@Override
