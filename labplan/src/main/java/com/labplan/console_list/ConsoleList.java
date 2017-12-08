@@ -11,7 +11,16 @@ import com.labplan.persistence.sql.*;
 
 import io.bretty.console.table.*;
 
+/**
+ * A small application that prints to the console in a tabular fashion all the {@link LabList} and their corresponding {@link LabResult}.
+ * @author adoran
+ *
+ */
 public class ConsoleList {
+	/**
+	 * The main entry point of the application.
+	 * @param args	The arguments to be passed to the application.
+	 */
 	public static void main(String[] args) {
 		Set<LabList> lists = getLists();
 		
@@ -22,6 +31,19 @@ public class ConsoleList {
 		}
 	}
 	
+	/**
+	 * Obtains all the {@link LabList} from the data source.
+	 * @return
+	 */
+	private static Set<LabList> getLists() {
+		LabListDao labListDao = new LabListDao();
+		return labListDao.readAll();
+	}
+	
+	/**
+	 * Given a set of {@link LabList} displays a table containing the IDs, the full name of the list's patient and the creation date of the list.
+	 * @param lists A set of {@link LabList} to be displayed.
+	 */
 	private static void displayLists(Set<LabList> lists) {
 		int count = lists.size();
 		
@@ -46,6 +68,11 @@ public class ConsoleList {
 		displayListTable(ids, firstNames, lastNames, creationDates);
 	}
 	
+	/**
+	 * Given the ID of a {@link LabList}, displays information about the list (like the ID, full name of the patient, creation date)
+	 * and all the {@link LabResult}s of the {@link LabList} (name of the test, result value, minimum and maximum value).
+	 * @param listId
+	 */
 	@SuppressWarnings("deprecation")
 	private static void displayList(Integer listId) {
 		LabList list = (new LabListDao()).read(listId, true);
@@ -73,11 +100,13 @@ public class ConsoleList {
 		displaySingleListTable(testNames, values, minimums, maximums);
 	}
 	
-	private static Set<LabList> getLists() {
-		LabListDao labListDao = new LabListDao();
-		return labListDao.readAll();
-	}
-	
+	/**
+	 * Displays a table showing information about multiple {@link LabList}s.
+	 * @param ids				A {@link Number[]} containing the IDs of each {@link LabList}.
+	 * @param firstNames		A {@link String[]) containing the first names of the {@link Patient} of each {@link LabList}.
+	 * @param lastNames			A {@link String[]) containing the last names of the {@link Patient} of each {@link LabList}.
+	 * @param creationDates		A {@link Date[]} containing the creation dates of every {@link LabList}.
+	 */
 	private static void displayListTable(Number[] ids, String[] firstNames, String[] lastNames, Date[] creationDates) {
 		DateFormat df = DateFormat.getDateTimeInstance();
 		
@@ -88,6 +117,13 @@ public class ConsoleList {
 		System.out.println(builder.build());
 	}
 	
+	/**
+	 * Displays a table showing information about a single {@link LabList}.
+	 * @param testNames			A {@link String[]} containing the name of the {@link LabTest} of every {@link LabResult}.
+	 * @param values			A {@link Number[]} containing the {@code value} of every {@link LabResult}.
+	 * @param minimums			A {@link Number[]} containing the {@code minimumValue} of the {@link LabTest} of every {@link LabResult}.
+	 * @param maximums			A {@link Number[]} containing the {@code maximumValue} of the {@link LabTest} of every {@link LabResult}.
+	 */
 	private static void displaySingleListTable(String[] testNames, Number[] values, Number[] minimums, Number[] maximums) {
 		Table.Builder builder = new Table.Builder("Test Name", testNames, ColumnFormatter.text(Alignment.LEFT, 40));
 		builder.addColumn("Min", minimums, ColumnFormatter.number(Alignment.LEFT, 5, Precision.TWO));
