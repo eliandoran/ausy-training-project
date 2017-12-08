@@ -62,10 +62,10 @@ public class ConsoleList {
 		Number[] maximums = new Float[count];
 		
 		for (LabResult result : results) {
-			testNames[index] = result.getId().getEntity().getName();
+			testNames[index] = result.getTest().getName();
 			values[index] = result.getValue();
-			minimums[index] = result.getId().getEntity().getValueMin();
-			maximums[index] = result.getId().getEntity().getValueMax();
+			minimums[index] = result.getTest().getValueMin();
+			maximums[index] = result.getTest().getValueMax();
 			index++;
 		}
 		

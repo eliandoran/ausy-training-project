@@ -35,6 +35,13 @@ public class LabResult
 		this.value = value;
 	}
 	
+	public LabTest getTest() {
+		if (getId() == null || getId().getEntity() == null)
+			return null;
+		
+		return getId().getEntity();
+	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (!(obj instanceof LabResult))
