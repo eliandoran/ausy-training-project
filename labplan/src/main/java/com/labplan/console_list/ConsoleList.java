@@ -52,7 +52,7 @@ public class ConsoleList {
 		
 		System.out.println("\n\nList: " + list.getId()
 			+ "\t Patient: " + list.getPatient().getEntity().getFirstName() + " " + list.getPatient().getEntity().getLastName()
-			+ "\t Creation date: " + list.getCreationDate().toGMTString());
+			+ "\t Creation date: " + list.getCreationDate().toLocaleString());
 		
 		List<LabResult> results = list.getResults();
 		int count = results.size(), index = 0;
