@@ -43,9 +43,8 @@ public abstract class CrudTester<TKey, TEntity extends Entity<TKey>, TDao extend
 		TDao dao = getDao();
 
 		// First, CREATE a randomly generated entity.
-		TKey testId = dao.create(dummyTest);
-		assertNotNull(MSG_INSERTION_FAILED, testId);
-		dummyTest.setId(testId);
+		dummyTest.setId(dao.create(dummyTest));
+		assertNotNull(MSG_INSERTION_FAILED, dummyTest.getId());
 
 		// READ it back and check whether it is identical to the first one.
 		sameTest = dao.read(dummyTest.getId());
@@ -64,14 +63,11 @@ public abstract class CrudTester<TKey, TEntity extends Entity<TKey>, TDao extend
 		TEntity dummyEntity1 = getRandomEntity();
 		TEntity dummyEntity2 = getRandomEntity();
 
-		TKey dummyEntityId1 = dao.create(dummyEntity1);
-		TKey dummyEntityId2 = dao.create(dummyEntity2);
-
-		assertNotNull(MSG_INSERTION_FAILED, dummyEntityId1);
-		assertNotNull(MSG_INSERTION_FAILED, dummyEntityId2);
-
-		dummyEntity1.setId(dummyEntityId1);
-		dummyEntity2.setId(dummyEntityId2);
+		dummyEntity1.setId(dao.create(dummyEntity1));
+		dummyEntity2.setId(dao.create(dummyEntity2));
+		
+		assertNotNull(MSG_INSERTION_FAILED, dummyEntity1.getId());
+		assertNotNull(MSG_INSERTION_FAILED, dummyEntity2.getId());
 
 		// READ all the entities and check whether the two generated ones can be found.
 		Set<TEntity> entities = dao.readAll();
@@ -89,17 +85,16 @@ public abstract class CrudTester<TKey, TEntity extends Entity<TKey>, TDao extend
 
 		// CREATE a random entity.
 		TEntity dummyEntity = getRandomEntity();
-		TKey entityId = dao.create(dummyEntity);
-		assertNotNull(MSG_INSERTION_FAILED, entityId);
-		dummyEntity.setId(entityId);
-
+		dummyEntity.setId(dao.create(dummyEntity));
+		assertNotNull(MSG_INSERTION_FAILED, dummyEntity.getId());
+		
 		// UPDATE the last entity with another generated entity, keeping the ID.
 		TEntity updatedEntity = getRandomEntity();
-		updatedEntity.setId(entityId);
+		updatedEntity.setId(dummyEntity.getId());
 		assertTrue(MSG_UPDATE_FAILED, dao.update(updatedEntity));
 
 		// READ back the updated entity to see if it matches the last generated entity.
-		TEntity sameEntity = dao.read(entityId);
+		TEntity sameEntity = dao.read(dummyEntity.getId());
 		assertEquals(updatedEntity, sameEntity);
 		assertNotEquals(dummyEntity, sameEntity);
 

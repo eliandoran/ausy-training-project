@@ -34,9 +34,8 @@ public class LabListDaoTests extends CrudTester<Integer, LabList, LabListDao> {
 	public void testPatientLazyLoading() {
 		// CREATE a random lab list.
 		LabList dummyLabList = getRandomEntity();
-		Integer dummyLabListId = dao.create(dummyLabList);
-		assertNotNull(MSG_INSERTION_FAILED, dummyLabListId);
-		dummyLabList.setId(dummyLabListId);
+		dummyLabList.setId(dao.create(dummyLabList));
+		assertNotNull(MSG_INSERTION_FAILED, dummyLabList.getId());
 		
 		// READ the lab list back.
 		LabList sameLabList = dao.read(dummyLabList.getId());
@@ -66,8 +65,8 @@ public class LabListDaoTests extends CrudTester<Integer, LabList, LabListDao> {
 		PatientDao patientDao = new PatientDao();
 		
 		Patient patient = patientDaoTests.getRandomEntity();
-		Integer patientId = patientDao.create(patient);
-		patient.setId(patientId);
+		patient.setId(patientDao.create(patient));
+		assertNotNull(MSG_INSERTION_FAILED, patient.getId());
 		
 		list.setPatient(new LazyLoadedEntity<>(patient));
 		

@@ -13,6 +13,8 @@ import com.labplan.entities.LabTest;
 import com.labplan.helpers.CrudTester;
 import com.labplan.persistence.DatabaseConnectionFactory;
 
+import static com.labplan.helpers.TestMessages.*;
+
 public class LabTestDaoTests extends CrudTester<Integer, LabTest, LabTestDao> {
 	private static LabTestDao dao;
 
@@ -29,9 +31,8 @@ public class LabTestDaoTests extends CrudTester<Integer, LabTest, LabTestDao> {
 	public void testGetByName() {
 		// CREATE a random lab test.
 		LabTest dummyTest = getRandomEntity();
-		Integer testId = dao.create(dummyTest);
-		assertNotNull("SQL insertion for single LabTest failed.", testId);
-		dummyTest.setId(testId);
+		dummyTest.setId(dao.create(dummyTest));
+		assertNotNull(MSG_INSERTION_FAILED, dummyTest.getId());
 		
 		// READ the same lab test, but searching by its name. Then compare it with its counterpart.
 		LabTest sameTest = dao.read(dummyTest.getName());

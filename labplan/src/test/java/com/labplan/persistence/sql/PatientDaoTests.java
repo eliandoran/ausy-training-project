@@ -12,6 +12,7 @@ import org.junit.Test;
 import com.labplan.entities.Patient;
 import com.labplan.helpers.CrudTester;
 import com.labplan.persistence.DatabaseConnectionFactory;
+import static com.labplan.helpers.TestMessages.*;
 
 public class PatientDaoTests extends CrudTester<Integer, Patient, PatientDao> {
 	private static PatientDao dao;
@@ -32,9 +33,8 @@ public class PatientDaoTests extends CrudTester<Integer, Patient, PatientDao> {
 		PatientDao patientDao = getDao();
 		Patient dummyPatient = getRandomEntity();
 
-		Integer patientId = patientDao.create(dummyPatient);
-		assertNotNull("SQL insertion for single Patient failed.", patientId);
-		dummyPatient.setId(patientId);
+		dummyPatient.setId(patientDao.create(dummyPatient));
+		assertNotNull(MSG_INSERTION_FAILED, dummyPatient.getId());
 
 		// READ the same patient, but searching by its name. Then compare it with its counterpart.
 		Patient samePatient = patientDao.read(dummyPatient.getFirstName(), dummyPatient.getLastName());

@@ -43,8 +43,8 @@ public class LabResultDaoTests extends CrudTester<CompositeKeyPair<LazyLoadedEnt
 		LabList dummyList = listTests.getRandomEntity();
 		
 		// Insert the dummy list into the database.
-		Integer dummyListId = listDao.create(dummyList);
-		dummyList.setId(dummyListId);
+		dummyList.setId(listDao.create(dummyList));
+		assertNotNull(MSG_INSERTION_FAILED, dummyList.getId());
 		
 		// Generate a number of random lab results.
 		List<LabResult> generatedResults = new LinkedList<LabResult>();
@@ -57,7 +57,8 @@ public class LabResultDaoTests extends CrudTester<CompositeKeyPair<LazyLoadedEnt
 		
 		// Generate another lab result, this time belonging to another list.
 		LabResult alienResult = getRandomEntity();
-		dao.create(alienResult);
+		alienResult.setId(dao.create(alienResult));
+		assertNotNull(MSG_INSERTION_FAILED, alienResult);
 		
 		// Check whether the entities are read back correctly.
 		Set<LabResult> results = dao.readAll(dummyList);
@@ -130,8 +131,8 @@ public class LabResultDaoTests extends CrudTester<CompositeKeyPair<LazyLoadedEnt
 		LabListDao labListDao = new LabListDao();
 		
 		LabList dummyLabList = labListDaoTests.getRandomEntity();
-		Integer dummyLabListId = labListDao.create(dummyLabList);
-		dummyLabList.setId(dummyLabListId);
+		dummyLabList.setId(labListDao.create(dummyLabList));
+		assertNotNull(MSG_INSERTION_FAILED, dummyLabList.getId());
 		
 		return getRandomEntity(dummyLabList);
 	}
@@ -144,8 +145,8 @@ public class LabResultDaoTests extends CrudTester<CompositeKeyPair<LazyLoadedEnt
 		LabTestDao labTestDao = new LabTestDao();
 		
 		LabTest dummyLabTest = labTestDaoTests.getRandomEntity();
-		Integer dummyLabTestId = labTestDao.create(dummyLabTest);
-		dummyLabTest.setId(dummyLabTestId);
+		dummyLabTest.setId(labTestDao.create(dummyLabTest));
+		assertNotNull(dummyLabTest.getId());
 		
 		LazyLoadedEntity<Integer, LabTest> lazyTest = new LazyLoadedEntity<Integer, LabTest>(dummyLabTest);
 		LazyLoadedEntity<Integer, LabList> lazyList = new LazyLoadedEntity<Integer, LabList>(list);
