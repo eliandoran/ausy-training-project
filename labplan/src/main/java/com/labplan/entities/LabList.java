@@ -18,10 +18,19 @@ public class LabList extends Entity<Integer> {
 	private Date creationDate;
 	private List<LabResult> results;
 
+	/**
+	 * Creates a new instance of {@link LabList}.
+	 */
 	public LabList() {
 		
 	}
 
+	/**
+	 * Creates a new instance of {@link LabList} with predefined information.
+	 * @param id			The numerical ID of the patient, also known as the entity's key.
+	 * @param patient		A {@link LazyLoadedEntity} that contains a {@link Patient}.
+	 * @param creationDate	The creation date of the {@link LabList}.
+	 */
 	public LabList(Integer id, LazyLoadedEntity<Integer, Patient> patient, Date creationDate) {
 		this();
 		this.id = id;
@@ -29,30 +38,59 @@ public class LabList extends Entity<Integer> {
 		this.creationDate = creationDate;
 	}
 
+	/**
+	 * Creates a new instance of {@link LabList} with predefined information.
+	 * @param patient		A {@link LazyLoadedEntity} that contains a {@link Patient}.
+	 * @param creationDate	The creation date of the {@link LabList}.
+	 */
 	public LabList(LazyLoadedEntity<Integer, Patient> patient, Date creationDate) {
 		this(null, patient, creationDate);
 	}
 
+	/**
+	 * Obtains the {@link Patient} whose {@link LabList} belongs to. The entity is wrapped in a {@link LazyLoadedEntity}.
+	 * @return A {@link Patient} wrapped in a {@link LazyLoadedEntity}.
+	 */
 	public LazyLoadedEntity<Integer, Patient> getPatient() {
 		return patient;
 	}
 
+	/**
+	 * Sets the {@link Patient} whose {@link LabList} belongs to. The entity is wrapped in a {@link LazyLoadedEntity}.
+	 * @param patient	A {@link Patient} wrapped in a {@link LazyLoadedEntity}.
+	 */
 	public void setPatient(LazyLoadedEntity<Integer, Patient> patient) {
 		this.patient = patient;
 	}
 
+	/**
+	 * Gets the creation date of the {@link LabList}.
+	 * @return The creation date of the {@link LabList}.
+	 */
 	public Date getCreationDate() {
 		return creationDate;
 	}
-
+	
+	/**
+	 * Sets the creation date of the {@link LabList}.
+	 * @param creationDate The creation date of the {@link LabList}.
+	 */
 	public void setCreationDate(Date creationDate) {
 		this.creationDate = Date.from(creationDate.toInstant().truncatedTo(ChronoUnit.SECONDS));
 	}
 
+	/**
+	 * Obtains a {@link List} of all the {@link LabResult}s belonging to this {@link LabList}.
+	 * @return A {@link List} of all the {@link LabResult}s belonging to this {@link LabList}.
+	 */
 	public List<LabResult> getResults() {
 		return results;
 	}
 	
+	/**
+	 * Sets the {@link List} of all the {@link LabResult}s belonging to this {@link LabList}.
+	 * @param list The {@link List} of all the {@link LabResult}s belonging to this {@link LabList}
+	 */
 	public void setResults(List<LabResult> list) {
 		results = list;
 	}

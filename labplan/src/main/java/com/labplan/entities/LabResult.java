@@ -15,6 +15,9 @@ public class LabResult
 {
 	private Float value;
 
+	/**
+	 * Creates a new instance of {@link LabResult}.
+	 */
 	public LabResult() {
 		
 	}
@@ -27,14 +30,30 @@ public class LabResult
 		this(null, null, value);
 	}
 
+	/**
+	 * Gets the numerical value of this {@link LabResult}.
+	 * This value can be compared with the {@code minimumValue} and {@code maximumValue} of the corresponding {@link LabTest} to see
+	 * whether the {@link Patient} is within normal ranges.
+	 * @return The numerical value of this {@link LabResult}.
+	 */
 	public Float getValue() {
 		return value;
 	}
 
+	/**
+	 * Sets the numerical value of this {@link LabResult}.
+	 * @param value The numerical value of this {@link LabResult}.
+	 */
 	public void setValue(Float value) {
 		this.value = value;
 	}
 	
+	/**
+	 * Obtains the corresponding {@link LabTest} of this {@link LabResult}.
+	 * 
+	 * <p><em>Note that this is a short-hand for {@code getId().getEntity()} with null-checking in place.</em></p>
+	 * @return The corresponding {@link LabTest} of this {@link LabResult}, or {@code null} otherwise.
+	 */
 	public LabTest getTest() {
 		if (getId() == null || getId().getEntity() == null)
 			return null;
