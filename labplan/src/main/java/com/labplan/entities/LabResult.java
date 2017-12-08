@@ -13,8 +13,6 @@ import com.labplan.entities.generic.LazyLoadedEntity;
 public class LabResult
 	extends Entity<LazyLoadedEntity<Integer, LabTest>>
 {
-	private LabList list;
-	
 	private Float value;
 
 	public LabResult() {
@@ -22,7 +20,6 @@ public class LabResult
 	}
 
 	public LabResult(Integer id, LabList list, Float value) {
-		this.list = list;
 		this.value = value;
 	}
 
@@ -36,14 +33,6 @@ public class LabResult
 
 	public void setValue(Float value) {
 		this.value = value;
-	}
-
-	public LabList getList() {
-		return list;
-	}
-
-	public void setList(LabList list) {
-		this.list = list;
 	}
 	
 	@Override
