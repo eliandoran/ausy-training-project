@@ -80,7 +80,7 @@ public class LazyLoadedEntity<TKey, TEntity extends Entity<TKey>> {
 	
 	@Override
 	public boolean equals(Object obj) {
-		if (!(obj instanceof LabList))
+		if (!(obj instanceof LazyLoadedEntity))
 			return false;
 		
 		return hashCode() == obj.hashCode();
@@ -88,11 +88,14 @@ public class LazyLoadedEntity<TKey, TEntity extends Entity<TKey>> {
 	
 	@Override
 	public int hashCode() {
-		return key.hashCode();
+		return (key != null ? key.hashCode() : 0);
 	}
 	
 	@Override
 	public String toString() {
-		return String.format("<LazyLoadedEntity %s, ID: %s>", entity.getClass().getName(), key.toString());
+		String entityName = (entity != null ? entity.getClass().getName() : "null");
+		String keyName = (key != null ? key.toString() : "null");
+		
+		return String.format("<LazyLoadedEntity %s, ID: %s>", entityName, keyName);
 	}
 }
