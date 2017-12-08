@@ -43,13 +43,7 @@ public class ConsoleList {
 			index++;
 		}
 		
-		DateFormat df = DateFormat.getDateTimeInstance();
-		
-		Table.Builder builder = new Table.Builder("ID", ids, ColumnFormatter.number(Alignment.RIGHT, 5, Precision.ZERO));
-		builder.addColumn("First Name", firstNames, ColumnFormatter.text(Alignment.LEFT, 15));
-		builder.addColumn("Last Name", lastNames, ColumnFormatter.text(Alignment.LEFT, 15));
-		builder.addColumn("Creation date", creationDates, ColumnFormatter.dateTime(Alignment.LEFT, 20, df));
-		System.out.println(builder.build());
+		displayListTable(ids, firstNames, lastNames, creationDates);
 	}
 	
 	private static void displayList(Integer listId) {
@@ -75,15 +69,29 @@ public class ConsoleList {
 			index++;
 		}
 		
-		Table.Builder builder = new Table.Builder("Test Name", testNames, ColumnFormatter.text(Alignment.LEFT, 40));
-		builder.addColumn("Min", minimums, ColumnFormatter.number(Alignment.LEFT, 5, Precision.TWO));
-		builder.addColumn("Max", maximums, ColumnFormatter.number(Alignment.LEFT, 5, Precision.TWO));
-		builder.addColumn("Value", values, ColumnFormatter.number(Alignment.LEFT, 5, Precision.TWO));
-		System.out.println(builder.build());
+		displaySingleListTable(testNames, values, minimums, maximums);
 	}
 	
 	private static Set<LabList> getLists() {
 		LabListDao labListDao = new LabListDao();
 		return labListDao.readAll();
+	}
+	
+	private static void displayListTable(Number[] ids, String[] firstNames, String[] lastNames, Date[] creationDates) {
+		DateFormat df = DateFormat.getDateTimeInstance();
+		
+		Table.Builder builder = new Table.Builder("ID", ids, ColumnFormatter.number(Alignment.RIGHT, 5, Precision.ZERO));
+		builder.addColumn("First Name", firstNames, ColumnFormatter.text(Alignment.LEFT, 15));
+		builder.addColumn("Last Name", lastNames, ColumnFormatter.text(Alignment.LEFT, 15));
+		builder.addColumn("Creation date", creationDates, ColumnFormatter.dateTime(Alignment.LEFT, 20, df));
+		System.out.println(builder.build());
+	}
+	
+	private static void displaySingleListTable(String[] testNames, Number[] values, Number[] minimums, Number[] maximums) {
+		Table.Builder builder = new Table.Builder("Test Name", testNames, ColumnFormatter.text(Alignment.LEFT, 40));
+		builder.addColumn("Min", minimums, ColumnFormatter.number(Alignment.LEFT, 5, Precision.TWO));
+		builder.addColumn("Max", maximums, ColumnFormatter.number(Alignment.LEFT, 5, Precision.TWO));
+		builder.addColumn("Value", values, ColumnFormatter.number(Alignment.LEFT, 5, Precision.TWO));
+		System.out.println(builder.build());
 	}
 }
