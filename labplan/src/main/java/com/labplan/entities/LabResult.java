@@ -22,14 +22,6 @@ public class LabResult
 		
 	}
 
-	public LabResult(Integer id, LabList list, Float value) {
-		this.value = value;
-	}
-
-	public LabResult(Float value) {
-		this(null, null, value);
-	}
-
 	/**
 	 * Gets the numerical value of this {@link LabResult}.
 	 * This value can be compared with the {@code minimumValue} and {@code maximumValue} of the corresponding {@link LabTest} to see
