@@ -16,7 +16,7 @@ import com.labplan.entities.generic.LazyLoadedEntity;
 public class LabList extends Entity<Integer> {
 	private LazyLoadedEntity<Integer, Patient> patient;
 	private Date creationDate;
-	private List<LabResult> resultsList;
+	private List<LabResult> results;
 
 	public LabList() {
 		
@@ -49,12 +49,12 @@ public class LabList extends Entity<Integer> {
 		this.creationDate = Date.from(creationDate.toInstant().truncatedTo(ChronoUnit.SECONDS));
 	}
 
-	public List<LabResult> getResultsList() {
-		return resultsList;
+	public List<LabResult> getResults() {
+		return results;
 	}
 	
-	public void setLabResultsList(List<LabResult> list) {
-		resultsList = list;
+	public void setResults(List<LabResult> list) {
+		results = list;
 	}
 	
 	@Override

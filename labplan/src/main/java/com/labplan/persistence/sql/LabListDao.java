@@ -49,7 +49,7 @@ public class LabListDao implements com.labplan.persistence.generic.GenericLabLis
 		LabResultDao resultDao = new LabResultDao();
 		List<LabResult> results = new LinkedList<>();
 		results.addAll(resultDao.read(list));
-		list.setLabResultsList(results);
+		list.setResults(results);
 		
 		return list;
 	}

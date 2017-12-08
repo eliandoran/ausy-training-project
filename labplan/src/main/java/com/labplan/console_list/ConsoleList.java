@@ -53,7 +53,7 @@ public class ConsoleList {
 			+ "\t Patient: " + list.getPatient().getEntity().getFirstName() + " " + list.getPatient().getEntity().getLastName()
 			+ "\t Creation date: " + list.getCreationDate().toGMTString());
 		
-		List<LabResult> results = list.getResultsList();
+		List<LabResult> results = list.getResults();
 		int count = results.size(), index = 0;
 		
 		String[] testNames = new String[count];
