@@ -19,7 +19,7 @@ public class LabList extends Entity<Integer> {
 	private List<LabResult> resultsList;
 
 	public LabList() {
-		resultsList = new ArrayList<LabResult>();
+		
 	}
 
 	public LabList(Integer id, LazyLoadedEntity<Integer, Patient> patient, Date creationDate) {
@@ -51,6 +51,10 @@ public class LabList extends Entity<Integer> {
 
 	public List<LabResult> getResultsList() {
 		return resultsList;
+	}
+	
+	public void setLabResultsList(List<LabResult> list) {
+		resultsList = list;
 	}
 	
 	@Override

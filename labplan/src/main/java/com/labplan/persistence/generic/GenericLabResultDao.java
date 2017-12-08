@@ -5,7 +5,6 @@ import java.util.Set;
 import com.labplan.entities.LabList;
 import com.labplan.entities.LabResult;
 import com.labplan.entities.LabTest;
-import com.labplan.entities.generic.CompositeKeyPair;
 import com.labplan.entities.generic.LazyLoadedEntity;
 
 /**
@@ -16,14 +15,17 @@ import com.labplan.entities.generic.LazyLoadedEntity;
  *
  */
 public interface GenericLabResultDao
-	extends CrudInterface<LabResult, CompositeKeyPair<
-										LazyLoadedEntity<Integer, LabTest>,
-										LazyLoadedEntity<Integer, LabList>>>
-{
+{	
 	/**
 	 * Obtains all {@link LabResult} from a data source which belong to the given {@link LabList}.
 	 * @param list	The {@link LabTest} for searching its {@link LabResult}s.
 	 * @return A list of all {@link LabResult} which belong to {@code list}.
 	 */
-	Set<LabResult> readAll(LabList list);
+	Set<LabResult> read(LabList list);
+	
+	LazyLoadedEntity<Integer, LabTest> create(LabList list, LabResult entity);
+	
+	boolean update(LabList list, LabResult entity);
+	
+	boolean delete(LabList list, LabResult entity);
 }

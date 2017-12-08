@@ -12,7 +12,6 @@ import java.util.logging.Logger;
 import com.labplan.entities.LabList;
 import com.labplan.entities.LabResult;
 import com.labplan.entities.LabTest;
-import com.labplan.entities.generic.CompositeKeyPair;
 import com.labplan.entities.generic.LazyLoadedEntity;
 import com.labplan.persistence.DatabaseConnectionFactory;
 
@@ -20,29 +19,7 @@ public class LabResultDao implements com.labplan.persistence.generic.GenericLabR
 	private static final Logger LOGGER = Logger.getGlobal();
 	
 	@Override
-	public LabResult read(CompositeKeyPair<LazyLoadedEntity<Integer, LabTest>, LazyLoadedEntity<Integer, LabList>> key) {
-		Connection conn = DatabaseConnectionFactory.getConnection();
-		String query = "SELECT * FROM `lab_results` WHERE `test_id`=? AND `list_id`=?";
-		
-		try {
-			PreparedStatement stmt = conn.prepareStatement(query);
-			stmt.setInt(1, key.getFirstKey().getKey());
-			stmt.setInt(2, key.getSecondKey().getKey());
-			ResultSet result = stmt.executeQuery();
-			
-			if (result.next()) {
-				return parseResult(result);
-			}
-			
-			return null;
-		} catch (SQLException e) {
-			LOGGER.log(Level.WARNING, "SQL connection failed.", e);
-			return null;
-		}
-	}
-	
-	@Override
-	public Set<LabResult> readAll(LabList list) {
+	public Set<LabResult> read(LabList list) {
 		Connection conn = DatabaseConnectionFactory.getConnection();
 		String query = "SELECT * FROM `lab_results` WHERE `list_id`=?";
 		Set<LabResult> results = new HashSet<>();
@@ -53,7 +30,7 @@ public class LabResultDao implements com.labplan.persistence.generic.GenericLabR
 			ResultSet result = stmt.executeQuery();
 			
 			while (result.next()) {
-				results.add(parseResult(result));
+				results.add(parseResult(list, result));
 			}
 			
 			return results;
@@ -64,28 +41,7 @@ public class LabResultDao implements com.labplan.persistence.generic.GenericLabR
 	}
 
 	@Override
-	public Set<LabResult> readAll() {
-		Connection conn = DatabaseConnectionFactory.getConnection();
-		String query = "SELECT * FROM `lab_results`";
-		Set<LabResult> results = new HashSet<LabResult>();
-		
-		try {
-			PreparedStatement stmt = conn.prepareStatement(query);
-			ResultSet result = stmt.executeQuery();
-			
-			while (result.next()) {
-				results.add(parseResult(result));
-			}
-			
-			return results;
-		} catch (SQLException e) {
-			LOGGER.log(Level.WARNING, "SQL connection failed.", e);
-			return null;
-		}
-	}
-
-	@Override
-	public CompositeKeyPair<LazyLoadedEntity<Integer, LabTest>, LazyLoadedEntity<Integer, LabList>> create(LabResult entity) {
+	public LazyLoadedEntity<Integer, LabTest> create(LabList list, LabResult entity) {
 		Connection conn = DatabaseConnectionFactory.getConnection();
 		String query = "INSERT INTO `lab_results` "
 				+ "(`test_id`, `list_id`, `value`) "
@@ -93,8 +49,8 @@ public class LabResultDao implements com.labplan.persistence.generic.GenericLabR
 		
 		try {
 			PreparedStatement stmt = conn.prepareStatement(query);
-			stmt.setInt(1, entity.getId().getFirstKey().getKey());
-			stmt.setInt(2, entity.getId().getSecondKey().getKey());
+			stmt.setInt(1, entity.getId().getKey());
+			stmt.setInt(2, list.getId());
 			stmt.setFloat(3,  entity.getValue());
 			
 			stmt.execute();
@@ -107,7 +63,7 @@ public class LabResultDao implements com.labplan.persistence.generic.GenericLabR
 	}
 
 	@Override
-	public boolean update(LabResult entity) {
+	public boolean update(LabList list, LabResult entity) {
 		Connection conn = DatabaseConnectionFactory.getConnection();
 		String query = "UPDATE `lab_results` SET"
 				+ "`value`=? "
@@ -117,8 +73,8 @@ public class LabResultDao implements com.labplan.persistence.generic.GenericLabR
 			PreparedStatement stmt = conn.prepareStatement(query);
 			
 			stmt.setFloat(1, entity.getValue());
-			stmt.setInt(2, entity.getId().getFirstKey().getKey());
-			stmt.setInt(3, entity.getId().getSecondKey().getKey());
+			stmt.setInt(2, entity.getId().getKey());
+			stmt.setInt(3, list.getId());
 			
 			stmt.executeUpdate();
 			return true;
@@ -129,14 +85,14 @@ public class LabResultDao implements com.labplan.persistence.generic.GenericLabR
 	}
 
 	@Override
-	public boolean delete(LabResult entity) {
+	public boolean delete(LabList list, LabResult entity) {
 		Connection conn = DatabaseConnectionFactory.getConnection();
 		String query = "DELETE FROM `lab_results` WHERE `test_id`=? AND `list_id`=?";
 		
 		try {
 			PreparedStatement stmt = conn.prepareStatement(query);
-			stmt.setInt(1, entity.getId().getFirstKey().getKey());
-			stmt.setInt(2, entity.getId().getSecondKey().getKey());
+			stmt.setInt(1, entity.getId().getKey());
+			stmt.setInt(2, list.getId());
 			stmt.execute();
 			
 			return true;
@@ -146,19 +102,15 @@ public class LabResultDao implements com.labplan.persistence.generic.GenericLabR
 		}
 	}
 	
-	private LabResult parseResult(ResultSet result) throws SQLException {
+	private LabResult parseResult(LabList list, ResultSet result) throws SQLException {
 		LabResult labResult = new LabResult();
 		
 		LazyLoadedEntity<Integer, LabTest> lazyTest = new LazyLoadedEntity<Integer, LabTest>();
 		lazyTest.setKey(result.getInt("test_id"));
 		
-		LazyLoadedEntity<Integer, LabList> lazyList = new LazyLoadedEntity<Integer, LabList>();
-		lazyList.setKey(result.getInt("list_id"));
-		
 		lazyTest.setDao(new LabTestDao());
-		lazyList.setDao(new LabListDao());
 		
-		labResult.setId(new CompositeKeyPair<LazyLoadedEntity<Integer,LabTest>, LazyLoadedEntity<Integer,LabList>>(lazyTest, lazyList));
+		labResult.setId(new LazyLoadedEntity<Integer,LabTest>());
 		labResult.setValue(result.getFloat("value"));
 		
 		return labResult;

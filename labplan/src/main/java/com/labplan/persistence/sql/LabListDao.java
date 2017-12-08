@@ -6,11 +6,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.labplan.entities.LabList;
+import com.labplan.entities.LabResult;
 import com.labplan.entities.Patient;
 import com.labplan.entities.generic.LazyLoadedEntity;
 import com.labplan.persistence.DatabaseConnectionFactory;
@@ -37,6 +40,18 @@ public class LabListDao implements com.labplan.persistence.generic.GenericLabLis
 		}
 		
 		return null;
+	}
+	
+	@Override
+	public LabList read(Integer key, boolean loadResults) {
+		LabList list = read(key);
+		
+		LabResultDao resultDao = new LabResultDao();
+		List<LabResult> results = new LinkedList<>();
+		results.addAll(resultDao.read(list));
+		list.setLabResultsList(results);
+		
+		return list;
 	}
 
 	@Override

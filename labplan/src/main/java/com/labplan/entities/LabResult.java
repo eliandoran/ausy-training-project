@@ -2,7 +2,6 @@ package com.labplan.entities;
 
 import java.math.BigDecimal;
 
-import com.labplan.entities.generic.CompositeKeyPair;
 import com.labplan.entities.generic.Entity;
 import com.labplan.entities.generic.LazyLoadedEntity;
 
@@ -12,9 +11,7 @@ import com.labplan.entities.generic.LazyLoadedEntity;
  *
  */
 public class LabResult
-	extends Entity<CompositeKeyPair<
-					LazyLoadedEntity<Integer, LabTest>,
-					LazyLoadedEntity<Integer, LabList>>>
+	extends Entity<LazyLoadedEntity<Integer, LabTest>>
 {
 	private LabList list;
 	

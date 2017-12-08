@@ -10,5 +10,5 @@ import com.labplan.entities.LabList;
  *
  */
 public interface GenericLabListDao extends CrudInterface<LabList, Integer> {
-
+	LabList read(Integer key, boolean loadResults);
 }
