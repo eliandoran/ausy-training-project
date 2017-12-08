@@ -48,8 +48,9 @@ public class LabListDao implements com.labplan.persistence.generic.GenericLabLis
 		
 		if (loadResults) {
 			LabResultDao resultDao = new LabResultDao();
+			resultDao.setParentEntity(list);
 			List<LabResult> results = new LinkedList<>();
-			results.addAll(resultDao.read(list));
+			results.addAll(resultDao.readAll());
 			list.setResults(results);
 		}
 		

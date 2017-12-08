@@ -18,8 +18,16 @@ import com.labplan.persistence.DatabaseConnectionFactory;
 public class LabResultDao implements com.labplan.persistence.generic.GenericLabResultDao {
 	private static final Logger LOGGER = Logger.getGlobal();
 	
+	private LabList list;
+	
 	@Override
-	public Set<LabResult> read(LabList list) {
+	public LabResult read(LazyLoadedEntity<Integer, LabTest> key) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Set<LabResult> readAll() {
 		Connection conn = DatabaseConnectionFactory.getConnection();
 		String query = "SELECT * FROM `lab_results` WHERE `list_id`=?";
 		Set<LabResult> results = new HashSet<>();
@@ -30,7 +38,7 @@ public class LabResultDao implements com.labplan.persistence.generic.GenericLabR
 			ResultSet result = stmt.executeQuery();
 			
 			while (result.next()) {
-				results.add(parseResult(list, result));
+				results.add(parseResult(result));
 			}
 			
 			return results;
@@ -41,7 +49,7 @@ public class LabResultDao implements com.labplan.persistence.generic.GenericLabR
 	}
 
 	@Override
-	public LazyLoadedEntity<Integer, LabTest> create(LabList list, LabResult entity) {
+	public LazyLoadedEntity<Integer, LabTest> create(LabResult entity) {
 		Connection conn = DatabaseConnectionFactory.getConnection();
 		String query = "INSERT INTO `lab_results` "
 				+ "(`test_id`, `list_id`, `value`) "
@@ -63,7 +71,7 @@ public class LabResultDao implements com.labplan.persistence.generic.GenericLabR
 	}
 
 	@Override
-	public boolean update(LabList list, LabResult entity) {
+	public boolean update(LabResult entity) {
 		Connection conn = DatabaseConnectionFactory.getConnection();
 		String query = "UPDATE `lab_results` SET"
 				+ "`value`=? "
@@ -85,7 +93,7 @@ public class LabResultDao implements com.labplan.persistence.generic.GenericLabR
 	}
 
 	@Override
-	public boolean delete(LabList list, LabResult entity) {
+	public boolean delete(LabResult entity) {
 		Connection conn = DatabaseConnectionFactory.getConnection();
 		String query = "DELETE FROM `lab_results` WHERE `test_id`=? AND `list_id`=?";
 		
@@ -102,7 +110,7 @@ public class LabResultDao implements com.labplan.persistence.generic.GenericLabR
 		}
 	}
 	
-	private LabResult parseResult(LabList list, ResultSet result) throws SQLException {
+	private LabResult parseResult(ResultSet result) throws SQLException {
 		LabResult labResult = new LabResult();
 		
 		LazyLoadedEntity<Integer, LabTest> lazyTest = new LazyLoadedEntity<Integer, LabTest>();
@@ -114,5 +122,15 @@ public class LabResultDao implements com.labplan.persistence.generic.GenericLabR
 		labResult.setValue(result.getFloat("value"));
 		
 		return labResult;
+	}
+
+	@Override
+	public LabList getParentEntity() {
+		return list;
+	}
+
+	@Override
+	public void setParentEntity(LabList parentEntity) {
+		list = parentEntity;
 	}
 }

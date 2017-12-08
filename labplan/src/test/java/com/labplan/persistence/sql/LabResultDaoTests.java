@@ -26,8 +26,6 @@ public class LabResultDaoTests {
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		dao = new LabResultDao();
-		
 		// Generate a random LabList.
 		listDao = new LabListDao();
 		
@@ -43,6 +41,9 @@ public class LabResultDaoTests {
 		dummyLabTest = testTests.getRandomEntity();
 		dummyLabTest.setId(testDao.create(dummyLabTest));
 		assertNotNull(MSG_INSERTION_FAILED, dummyLabTest.getId());
+		
+		dao = new LabResultDao();
+		dao.setParentEntity(dummyLabList);
 	}
 
 	@AfterClass
@@ -54,11 +55,11 @@ public class LabResultDaoTests {
 	public void testInsertion() {
 		// CREATE a generated LabResult.
 		LabResult dummyResult = getRandomEntity();
-		dummyResult.setId(dao.create(dummyLabList, dummyResult));
+		dummyResult.setId(dao.create(dummyResult));
 		assertNotNull(MSG_INSERTION_FAILED, dummyResult.getId());
 		
 		// READ it back and compare it.
-		Set<LabResult> results = dao.read(dummyLabList);
+		Set<LabResult> results = dao.readAll();
 		assertTrue(MSG_RETRIEVAL_FAILED, !results.isEmpty());
 		
 		boolean found = false;
