@@ -28,7 +28,6 @@ public class LabResultDao implements com.labplan.persistence.generic.GenericLabR
 	public LabResult read(LazyLoadedEntity<Integer, LabTest> key) {
 		Connection conn = DatabaseConnectionFactory.getConnection();
 		String query = "SELECT * FROM `lab_results` WHERE `list_id`=? AND `test_id`=?";
-		Set<LabResult> results = new HashSet<>();
 		
 		try {
 			PreparedStatement stmt = conn.prepareStatement(query);
