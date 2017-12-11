@@ -12,7 +12,7 @@ import com.labplan.entities.Patient;
  * @author Elian Doran
  *
  */
-public interface GenericLabListDao extends Dao<LabList, Integer> {
+public interface LabListDao extends Dao<LabList, Integer> {
 	LabList read(Integer key, boolean loadResults);
 	
 	Set<LabList> readAllByPatient(Patient patient);

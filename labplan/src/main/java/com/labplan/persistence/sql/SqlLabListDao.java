@@ -21,7 +21,7 @@ import com.mysql.cj.api.jdbc.Statement;
 
 import static com.labplan.persistence.DatabaseConnectionFactory.MSG_CONNECTION_FAILED;
 
-public class SqlLabListDao implements com.labplan.persistence.generic.GenericLabListDao {
+public class SqlLabListDao implements com.labplan.persistence.generic.LabListDao {
 	private static final Logger LOGGER = Logger.getGlobal();
 	
 	@Override

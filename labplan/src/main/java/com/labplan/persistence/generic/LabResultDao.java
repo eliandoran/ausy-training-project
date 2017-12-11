@@ -10,13 +10,13 @@ import com.labplan.entities.generic.LazyLoadedEntity;
  * CRUD (Create, Read, Update, Delete) functionality for the {@link LabResult} entity.
  * 
  * <p><em>The creation, reading, update and deletion of a {@link LabResult} is dependent on its parent {@link LabList}.
- * Due to this, {@linkplain GenericLabResultDao} is not compatible with {@link Dao}.
+ * Due to this, {@linkplain LabResultDao} is not compatible with {@link Dao}.
  * </em></p>
  * 
  * @author Elian Doran
  *
  */
-public interface GenericLabResultDao extends ChildDao<LabList, LabResult, LazyLoadedEntity<Integer, LabTest>>
+public interface LabResultDao extends ChildDao<LabList, LabResult, LazyLoadedEntity<Integer, LabTest>>
 {
 	boolean updateOrCreate(LabResult entity);
 }

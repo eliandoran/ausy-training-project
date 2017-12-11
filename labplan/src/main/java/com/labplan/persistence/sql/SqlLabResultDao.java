@@ -17,7 +17,7 @@ import com.labplan.persistence.DatabaseConnectionFactory;
 
 import static com.labplan.persistence.DatabaseConnectionFactory.MSG_CONNECTION_FAILED;
 
-public class SqlLabResultDao implements com.labplan.persistence.generic.GenericLabResultDao {
+public class SqlLabResultDao implements com.labplan.persistence.generic.LabResultDao {
 	private static final Logger LOGGER = Logger.getGlobal();
 	
 	private LabList list;

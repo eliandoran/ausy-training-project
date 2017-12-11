@@ -16,7 +16,7 @@ import java.util.Set;
  *            database table's primary keys.
  * 
  * @see com.labplan.persistence.sql.SqlPatientDao
- * @see com.labplan.persistence.generic.GenericPatientDao
+ * @see com.labplan.persistence.generic.PatientDao
  */
 public interface Dao<TEntity, TKey> {
 	/**
