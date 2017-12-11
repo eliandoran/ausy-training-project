@@ -7,6 +7,7 @@ import java.util.Set;
 import com.labplan.entities.LabList;
 import com.labplan.entities.LabResult;
 import com.labplan.entities.Patient;
+import com.labplan.persistence.exceptions.ConnectionFailedException;
 import com.labplan.persistence.sql.LabListDao;
 
 /**
@@ -29,7 +30,11 @@ public class ConsoleList {
 		displayLists(lists);
 
 		for (LabList list : lists) {
-			displayList(list.getId());
+			try {
+				displayList(list.getId());
+			} catch (ConnectionFailedException e) {
+				System.out.println("<Connection error>");
+			}
 		}
 	}
 
