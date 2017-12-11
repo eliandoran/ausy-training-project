@@ -19,10 +19,10 @@ import com.labplan.entities.LabList;
 import com.labplan.entities.LabResult;
 import com.labplan.entities.Patient;
 import com.labplan.entities.generic.LazyLoadedEntity;
-import com.labplan.helpers.CrudTester;
+import com.labplan.helpers.DaoTester;
 import com.labplan.persistence.DatabaseConnectionFactory;
 
-public class LabListDaoTests extends CrudTester<Integer, LabList, LabListDao> {
+public class LabListDaoTests extends DaoTester<Integer, LabList, LabListDao> {
 	private static LabListDao dao;
 	
 	@BeforeClass

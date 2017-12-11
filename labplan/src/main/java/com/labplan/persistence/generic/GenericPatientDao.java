@@ -9,7 +9,7 @@ import com.labplan.entities.Patient;
  * @author Elian Doran
  *
  */
-public interface GenericPatientDao extends CrudInterface<Patient, Integer> {
+public interface GenericPatientDao extends Dao<Patient, Integer> {
 	/**
 	 * Obtains a single {@link Patient} from a data source, searching by their name.
 	 * 

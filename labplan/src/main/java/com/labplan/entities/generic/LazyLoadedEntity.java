@@ -1,6 +1,6 @@
 package com.labplan.entities.generic;
 
-import com.labplan.persistence.generic.CrudInterface;
+import com.labplan.persistence.generic.Dao;
 
 /**
  * A {@link LazyLoadedEntity} is a wrapper around a {@link Entity} that delays the loading of the said entity until it is actually needed.
@@ -17,7 +17,7 @@ import com.labplan.persistence.generic.CrudInterface;
 public class LazyLoadedEntity<TKey, TEntity extends Entity<TKey>> {
 	TEntity entity;
 	Boolean isLoaded;
-	CrudInterface<TEntity, TKey> dao;
+	Dao<TEntity, TKey> dao;
 	TKey key;
 
 	/**
@@ -61,11 +61,11 @@ public class LazyLoadedEntity<TKey, TEntity extends Entity<TKey>> {
 		return isLoaded;
 	}
 
-	public CrudInterface<TEntity, TKey> getDao() {
+	public Dao<TEntity, TKey> getDao() {
 		return dao;
 	}
 	
-	public void setDao(CrudInterface<TEntity, TKey> dao) {
+	public void setDao(Dao<TEntity, TKey> dao) {
 		this.dao = dao;
 	}
 

@@ -16,11 +16,11 @@ import java.util.Set;
 import org.junit.Test;
 
 import com.labplan.entities.generic.Entity;
-import com.labplan.persistence.generic.CrudInterface;
+import com.labplan.persistence.generic.Dao;
 
 /**
  * This is an abstract test suite which implements a set of predefined test
- * cases for testing the CRUD capabilities of a {@link CrudInterface}
+ * cases for testing the CRUD capabilities of a {@link Dao}
  * implementation.
  * 
  * @author Elian Doran
@@ -32,10 +32,10 @@ import com.labplan.persistence.generic.CrudInterface;
  *            The type of {@link Entity} used to represent the data stored in
  *            the data source.
  * @param <TDao>
- *            A {@link CrudInterface} which represents the DAO for the data
+ *            A {@link Dao} which represents the DAO for the data
  *            source.
  */
-public abstract class CrudTester<TKey, TEntity extends Entity<TKey>, TDao extends CrudInterface<TEntity, TKey>> {
+public abstract class DaoTester<TKey, TEntity extends Entity<TKey>, TDao extends Dao<TEntity, TKey>> {
 	public void beforeTest() {
 		
 	}
@@ -119,10 +119,10 @@ public abstract class CrudTester<TKey, TEntity extends Entity<TKey>, TDao extend
 	public abstract TEntity getRandomEntity();
 
 	/**
-	 * Gets the {@link CrudInterface} DAO which can be used to access the data
+	 * Gets the {@link Dao} DAO which can be used to access the data
 	 * source.
 	 * 
-	 * @return The {@link CrudInterface} DAO which can be used to access the data
+	 * @return The {@link Dao} DAO which can be used to access the data
 	 *         source.
 	 */
 	public abstract TDao getDao();

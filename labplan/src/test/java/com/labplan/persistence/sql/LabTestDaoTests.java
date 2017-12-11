@@ -11,10 +11,10 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.labplan.entities.LabTest;
-import com.labplan.helpers.CrudTester;
+import com.labplan.helpers.DaoTester;
 import com.labplan.persistence.DatabaseConnectionFactory;
 
-public class LabTestDaoTests extends CrudTester<Integer, LabTest, LabTestDao> {
+public class LabTestDaoTests extends DaoTester<Integer, LabTest, LabTestDao> {
 	private static LabTestDao dao;
 
 	@BeforeClass

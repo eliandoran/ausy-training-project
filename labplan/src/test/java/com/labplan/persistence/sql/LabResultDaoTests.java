@@ -20,9 +20,9 @@ import com.labplan.entities.LabList;
 import com.labplan.entities.LabResult;
 import com.labplan.entities.LabTest;
 import com.labplan.entities.generic.LazyLoadedEntity;
-import com.labplan.helpers.DependentCrudTester;
+import com.labplan.helpers.ChildDaoTester;
 
-public class LabResultDaoTests extends DependentCrudTester<LabList, LazyLoadedEntity<Integer, LabTest>, LabResult, LabResultDao> {
+public class LabResultDaoTests extends ChildDaoTester<LabList, LazyLoadedEntity<Integer, LabTest>, LabResult, LabResultDao> {
 	private static LabList dummyLabList;
 	private static LabTest dummyLabTest;
 	

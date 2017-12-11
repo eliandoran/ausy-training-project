@@ -9,7 +9,7 @@ import com.labplan.entities.LabTest;
  * @author Elian Doran
  *
  */
-public interface GenericLabTestDao extends CrudInterface<LabTest, Integer> {
+public interface GenericLabTestDao extends Dao<LabTest, Integer> {
 	/**
 	 * Obtains a single {@link LabTest} from a data source, searching by its name.
 	 * @param name The full name of the lab test.
