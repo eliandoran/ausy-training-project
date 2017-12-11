@@ -4,7 +4,7 @@ import com.labplan.entities.generic.Entity;
 
 /**
  * Represents a type of test a medical laboratory can offer for a {@link Patient}.
- * @author adoran
+ * @author Elian Doran
  *
  */
 public class LabTest extends Entity<Integer> {

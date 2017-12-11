@@ -9,7 +9,7 @@ import com.labplan.persistence.generic.CrudInterface;
  * <p>In order for the lazy loading to work, the {@link LazyLoadedEntity} stores the {@code Key} of the entity. When the entity is requested
  * via {@code getEntity()}, if it was not previously loaded the {@link LazyLoadedEntity} will call the DAO stored in the {@code Dao} to
  * obtain the entity. Any future calls will obtain the cached entity.</p>
- * @author adoran
+ * @author Elian Doran
  *
  * @param <TKey>		The type of the key used by {@code TKey}.
  * @param <TEntity>		The {@link Entity} wrapped around this {@link LazyLoadedEntity}.

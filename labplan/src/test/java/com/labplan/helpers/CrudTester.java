@@ -23,7 +23,7 @@ import com.labplan.persistence.generic.CrudInterface;
  * cases for testing the CRUD capabilities of a {@link CrudInterface}
  * implementation.
  * 
- * @author adoran
+ * @author Elian Doran
  *
  * @param <TKey>
  *            The key used to identify entities, usually same with the primary

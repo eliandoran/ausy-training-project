@@ -9,7 +9,7 @@ import com.labplan.entities.generic.LazyLoadedEntity;
 
 /**
  * Represents a batch of {@link LabResult}s for a given {@link Patient}.
- * @author adoran
+ * @author Elian Doran
  *
  */
 public class LabList extends Entity<Integer> {

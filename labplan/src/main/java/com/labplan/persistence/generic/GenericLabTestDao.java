@@ -6,7 +6,7 @@ import com.labplan.entities.LabTest;
  * An interface which implements a Data Access Object (DAO) with CRUD (Create,
  * Read, Update, Delete) functionality for the {@link LabTest} entity.
  * 
- * @author adoran
+ * @author Elian Doran
  *
  */
 public interface GenericLabTestDao extends CrudInterface<LabTest, Integer> {

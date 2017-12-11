@@ -7,7 +7,7 @@ package com.labplan.entities.generic;
  * <p>In the context of a data source that is a database, each useful table could be represented as distinct entities, while the
  * key of the entity would actually be the table's primary key.</p>
  * 
- * @author adoran
+ * @author Elian Doran
  *
  * @param <TKey>	The type used by the key to identify this {@link Entity}.
  */

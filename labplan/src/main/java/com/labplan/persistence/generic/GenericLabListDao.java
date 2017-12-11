@@ -9,7 +9,7 @@ import com.labplan.entities.Patient;
  * An interface which implements a Data Access Object (DAO) with CRUD (Create,
  * Read, Update, Delete) functionality for the {@link LabList} entity.
  * 
- * @author adoran
+ * @author Elian Doran
  *
  */
 public interface GenericLabListDao extends CrudInterface<LabList, Integer> {

@@ -23,7 +23,7 @@ import com.mysql.cj.jdbc.Driver;
  * </ul>
  * 
  * Where <i>profile</i> defaults to "dev" and can be set to any value with {@code setProfile}.
- * @author adoran
+ * @author Elian Doran
  * @see Properties
  *
  */

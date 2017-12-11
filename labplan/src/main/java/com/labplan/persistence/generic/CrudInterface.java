@@ -6,7 +6,7 @@ import java.util.Set;
  * An interface which describes a Data Access Object (DAO) which implements the
  * Create, Read, Update and Delete (CRUD) functionality for a given entity.
  * 
- * @author adoran
+ * @author Elian Doran
  *
  * @param <TEntity>
  *            The entity or a model around which the CRUD functionality is

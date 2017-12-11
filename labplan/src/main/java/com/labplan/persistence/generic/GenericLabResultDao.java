@@ -13,7 +13,7 @@ import com.labplan.entities.generic.LazyLoadedEntity;
  * Due to this, {@linkplain GenericLabResultDao} is not compatible with {@link CrudInterface}.
  * </em></p>
  * 
- * @author adoran
+ * @author Elian Doran
  *
  */
 public interface GenericLabResultDao extends DependentCrudInterface<LabList, LabResult, LazyLoadedEntity<Integer, LabTest>>

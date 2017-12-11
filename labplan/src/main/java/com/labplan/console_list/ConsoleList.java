@@ -14,7 +14,7 @@ import com.labplan.persistence.sql.LabListDao;
  * A small application that prints to the console in a tabular fashion all the
  * {@link LabList} and their corresponding {@link LabResult}.
  * 
- * @author adoran
+ * @author Elian Doran
  *
  */
 public class ConsoleList {

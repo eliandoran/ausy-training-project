@@ -7,7 +7,7 @@ import com.labplan.entities.generic.LazyLoadedEntity;
 
 /**
  * Represents the result of a {@link LabTest} taken for a {@link Patient}.
- * @author adoran
+ * @author Elian Doran
  *
  */
 public class LabResult
