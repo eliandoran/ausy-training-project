@@ -36,14 +36,6 @@ import com.labplan.persistence.generic.Dao;
  *            source.
  */
 public abstract class DaoTester<TKey, TEntity extends Entity<TKey>, TDao extends Dao<TEntity, TKey>> {
-	public void beforeTest() {
-		
-	}
-	
-	public void afterTest() {
-		
-	}
-	
 	@Test
 	public void testInsertion() {
 		TEntity dummyTest = getRandomEntity();
