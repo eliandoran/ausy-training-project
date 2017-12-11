@@ -10,12 +10,12 @@ import com.labplan.persistence.generic.DependentCrudInterface;
  * 
  * @author Elian Doran
  *
- * @param <TParent>	A type which represents the parent entity of the {@code TEntity}.
- * @param <TKey>	The type which represents the key of the {@code TEntity}.
- * @param <TEntity>	A type which represents the actual entity, child of {@code TParent}.
- * @param <TDao>	A {@link DependentCrudInterface} representing the DAO for {@code TEntity}.
+ * @param <TParentEntity>	A type which represents the parent entity of the {@code TChildEntity}.
+ * @param <TChildKey>		The type which represents the key of the {@code TChildEntity}.
+ * @param <TChildEntity>	A type which represents the actual entity, child of {@code TParentEntity}.
+ * @param <TChildDao>		A {@link DependentCrudInterface} representing the DAO for {@code TEntity}.
  */
-public abstract class DependentCrudTester<TParent extends Entity<?>, TKey, TEntity extends Entity<TKey>, TDao extends DependentCrudInterface<TParent, TEntity, TKey>>
-	extends CrudTester<TKey, TEntity, TDao> {
+public abstract class DependentCrudTester<TParentEntity extends Entity<?>, TChildKey, TChildEntity extends Entity<TChildKey>, TChildDao extends DependentCrudInterface<TParentEntity, TChildEntity, TChildKey>>
+	extends CrudTester<TChildKey, TChildEntity, TChildDao> {
 	
 }
