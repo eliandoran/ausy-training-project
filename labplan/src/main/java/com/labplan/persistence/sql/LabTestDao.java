@@ -13,6 +13,8 @@ import java.util.logging.Logger;
 import com.labplan.entities.LabTest;
 import com.labplan.persistence.DatabaseConnectionFactory;
 
+import static com.labplan.persistence.DatabaseConnectionFactory.MSG_CONNECTION_FAILED;
+
 public class LabTestDao implements com.labplan.persistence.generic.GenericLabTestDao {
 	private static final Logger LOGGER = Logger.getGlobal();
 
@@ -30,7 +32,7 @@ public class LabTestDao implements com.labplan.persistence.generic.GenericLabTes
 				return parseLabTest(result);
 			}
 		} catch (SQLException e) {
-			LOGGER.log(Level.WARNING, "SQL connection failed.", e);
+			LOGGER.log(Level.WARNING, MSG_CONNECTION_FAILED, e);
 		}
 
 		return null;
@@ -50,7 +52,7 @@ public class LabTestDao implements com.labplan.persistence.generic.GenericLabTes
 				return parseLabTest(result);
 			}
 		} catch (SQLException e) {
-			LOGGER.log(Level.WARNING, "SQL connection failed.", e);
+			LOGGER.log(Level.WARNING, MSG_CONNECTION_FAILED, e);
 		}
 		
 		return null;
@@ -70,7 +72,7 @@ public class LabTestDao implements com.labplan.persistence.generic.GenericLabTes
 				labTests.add(parseLabTest(result));
 			}
 		} catch (SQLException e) {
-			LOGGER.log(Level.WARNING, "SQL connection failed.", e);
+			LOGGER.log(Level.WARNING, MSG_CONNECTION_FAILED, e);
 			return null;
 		}
 
@@ -99,7 +101,7 @@ public class LabTestDao implements com.labplan.persistence.generic.GenericLabTes
 				return generatedKeys.getInt(1);
 			}
 		} catch (SQLException e) {
-			LOGGER.log(Level.WARNING, "SQL connection failed.", e);
+			LOGGER.log(Level.WARNING, MSG_CONNECTION_FAILED, e);
 		}
 
 		return null;
@@ -122,7 +124,7 @@ public class LabTestDao implements com.labplan.persistence.generic.GenericLabTes
 
 			stmt.executeUpdate();
 		} catch (SQLException e) {
-			LOGGER.log(Level.WARNING, "SQL connection failed.", e);
+			LOGGER.log(Level.WARNING, MSG_CONNECTION_FAILED, e);
 			return false;
 		}
 
@@ -140,7 +142,7 @@ public class LabTestDao implements com.labplan.persistence.generic.GenericLabTes
 			stmt.setInt(1, entity.getId());
 			stmt.execute();
 		} catch (SQLException e) {
-			LOGGER.log(Level.WARNING, "SQL connection failed.", e);
+			LOGGER.log(Level.WARNING, MSG_CONNECTION_FAILED, e);
 			return false;
 		}
 

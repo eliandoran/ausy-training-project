@@ -15,6 +15,8 @@ import com.labplan.entities.LabTest;
 import com.labplan.entities.generic.LazyLoadedEntity;
 import com.labplan.persistence.DatabaseConnectionFactory;
 
+import static com.labplan.persistence.DatabaseConnectionFactory.MSG_CONNECTION_FAILED;
+
 public class LabResultDao implements com.labplan.persistence.generic.GenericLabResultDao {
 	private static final Logger LOGGER = Logger.getGlobal();
 	
@@ -41,7 +43,7 @@ public class LabResultDao implements com.labplan.persistence.generic.GenericLabR
 
 			return null;
 		} catch (SQLException e) {
-			LOGGER.log(Level.WARNING, "SQL connection failed.", e);
+			LOGGER.log(Level.WARNING, MSG_CONNECTION_FAILED, e);
 			return null;
 		}
 	}
@@ -63,7 +65,7 @@ public class LabResultDao implements com.labplan.persistence.generic.GenericLabR
 			
 			return results;
 		} catch (SQLException e) {
-			LOGGER.log(Level.WARNING, "SQL connection failed.", e);
+			LOGGER.log(Level.WARNING, MSG_CONNECTION_FAILED, e);
 			return null;
 		}
 	}
@@ -85,7 +87,7 @@ public class LabResultDao implements com.labplan.persistence.generic.GenericLabR
 
 			return entity.getId();
 		} catch (SQLException e) {
-			LOGGER.log(Level.WARNING, "SQL connection failed.", e);
+			LOGGER.log(Level.WARNING, MSG_CONNECTION_FAILED, e);
 			return null;
 		}
 	}
@@ -107,7 +109,7 @@ public class LabResultDao implements com.labplan.persistence.generic.GenericLabR
 			stmt.executeUpdate();
 			return true;
 		} catch (SQLException e) {
-			LOGGER.log(Level.WARNING, "SQL connection failed.", e);
+			LOGGER.log(Level.WARNING, MSG_CONNECTION_FAILED, e);
 			return false;
 		}
 	}
@@ -125,7 +127,7 @@ public class LabResultDao implements com.labplan.persistence.generic.GenericLabR
 			
 			return true;
 		} catch (SQLException e) {
-			LOGGER.log(Level.WARNING, "SQL connection failed.", e);
+			LOGGER.log(Level.WARNING, MSG_CONNECTION_FAILED, e);
 			return false;
 		}
 	}
@@ -149,7 +151,7 @@ public class LabResultDao implements com.labplan.persistence.generic.GenericLabR
 			
 			return true;
 		} catch (SQLException e) {
-			LOGGER.log(Level.WARNING, "SQL connection failed.", e);
+			LOGGER.log(Level.WARNING, MSG_CONNECTION_FAILED, e);
 			return false;
 		}
 	}

@@ -19,6 +19,8 @@ import com.labplan.entities.generic.LazyLoadedEntity;
 import com.labplan.persistence.DatabaseConnectionFactory;
 import com.mysql.cj.api.jdbc.Statement;
 
+import static com.labplan.persistence.DatabaseConnectionFactory.MSG_CONNECTION_FAILED;
+
 public class LabListDao implements com.labplan.persistence.generic.GenericLabListDao {
 	private static final Logger LOGGER = Logger.getGlobal();
 	
@@ -36,7 +38,7 @@ public class LabListDao implements com.labplan.persistence.generic.GenericLabLis
 				return parseLabList(result);
 			}
 		} catch (SQLException e) {
-			LOGGER.log(Level.WARNING, "SQL connection failed.", e);
+			LOGGER.log(Level.WARNING, MSG_CONNECTION_FAILED, e);
 		}
 		
 		return null;
@@ -70,7 +72,7 @@ public class LabListDao implements com.labplan.persistence.generic.GenericLabLis
 				labLists.add(parseLabList(result));
 			}
 		} catch (SQLException e) {
-			LOGGER.log(Level.WARNING, "SQL connection failed.", e);
+			LOGGER.log(Level.WARNING, MSG_CONNECTION_FAILED, e);
 			return null;
 		}
 		
@@ -92,7 +94,7 @@ public class LabListDao implements com.labplan.persistence.generic.GenericLabLis
 				labLists.add(parseLabList(result));
 			}
 		} catch (SQLException e) {
-			LOGGER.log(Level.WARNING, "SQL connection failed.", e);
+			LOGGER.log(Level.WARNING, MSG_CONNECTION_FAILED, e);
 			return null;
 		}
 		
@@ -124,7 +126,7 @@ public class LabListDao implements com.labplan.persistence.generic.GenericLabLis
 				return key;
 			}
 		} catch (SQLException e) {
-			LOGGER.log(Level.WARNING, "SQL connection failed.", e);
+			LOGGER.log(Level.WARNING, MSG_CONNECTION_FAILED, e);
 		}
 		
 		return null;
@@ -149,7 +151,7 @@ public class LabListDao implements com.labplan.persistence.generic.GenericLabLis
 			
 			updateResults(entity.getId(), entity);
 		} catch (SQLException e) {
-			LOGGER.log(Level.WARNING, "SQL connection failed.", e);
+			LOGGER.log(Level.WARNING, MSG_CONNECTION_FAILED, e);
 			return false;
 		}
 		
@@ -167,7 +169,7 @@ public class LabListDao implements com.labplan.persistence.generic.GenericLabLis
 			stmt.setInt(1, entity.getId());
 			stmt.execute();
 		} catch (SQLException e) {
-			LOGGER.log(Level.WARNING, "SQL connection failed.", e);
+			LOGGER.log(Level.WARNING, MSG_CONNECTION_FAILED, e);
 			return false;
 		}
 		

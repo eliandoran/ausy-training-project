@@ -32,6 +32,8 @@ public class DatabaseConnectionFactory {
 
 	private static String profile = "dev";
 	
+	public static final String MSG_CONNECTION_FAILED = "SQL connection failed.";
+	
 	/**
 	 * Obtains a {@link Connection} by using a default {@link DriverManager} and using authentication data obtained from {@code db.properties}.
 	 * The authentication data loaded are those belonging to the profile set with {@code setProfile()} or {@code "dev"} if not specified.
