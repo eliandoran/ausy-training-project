@@ -22,7 +22,7 @@ import com.labplan.entities.generic.LazyLoadedEntity;
 import com.labplan.helpers.DaoTester;
 import com.labplan.persistence.DatabaseConnectionFactory;
 
-public class LabListDaoTests extends DaoTester<Integer, LabList, SqlLabListDao> {
+public class SqlLabListDaoTests extends DaoTester<Integer, LabList, SqlLabListDao> {
 	private static SqlLabListDao dao;
 	
 	@BeforeClass
@@ -64,7 +64,7 @@ public class LabListDaoTests extends DaoTester<Integer, LabList, SqlLabListDao> 
 	public void testReadAllByPatient() {
 		// CREATE a random patient.
 		SqlPatientDao patientDao = new SqlPatientDao();
-		PatientDaoTests patientDaoTests = new PatientDaoTests();
+		SqlPatientDaoTests patientDaoTests = new SqlPatientDaoTests();
 		
 		Patient dummyPatient = patientDaoTests.getRandomEntity();
 		dummyPatient.setId(patientDao.create(dummyPatient));
@@ -99,7 +99,7 @@ public class LabListDaoTests extends DaoTester<Integer, LabList, SqlLabListDao> 
 		// Insert multiple LabResult.
 		dummyLabList.setResults(new LinkedList<LabResult>());
 		
-		LabResultDaoTests resultDaoTests = new LabResultDaoTests();
+		SqlLabResultDaoTests resultDaoTests = new SqlLabResultDaoTests();
 		
 		for (int i=0; i<5; i++) {
 			LabResult randomResult = resultDaoTests.getRandomEntity();
@@ -123,7 +123,7 @@ public class LabListDaoTests extends DaoTester<Integer, LabList, SqlLabListDao> 
 		LabList list = new LabList();
 		
 		// Generate a random patient.
-		PatientDaoTests patientDaoTests = new PatientDaoTests();
+		SqlPatientDaoTests patientDaoTests = new SqlPatientDaoTests();
 		SqlPatientDao patientDao = new SqlPatientDao();
 		
 		Patient patient = patientDaoTests.getRandomEntity();
