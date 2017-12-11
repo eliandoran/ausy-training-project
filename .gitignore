@@ -1,9 +1,8 @@
 *.bak
 .metadata
-.project
 .settings
-.classpath
 .recommenders
 Servers
 target
 labplan/src/main/resources/db.properties
+RemoteSystemsTempFiles
