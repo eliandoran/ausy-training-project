@@ -3,8 +3,9 @@ package com.labplan.entities;
 import com.labplan.entities.generic.Entity;
 
 /**
- * Represents a patient/client registered in a medical laboratory.
- * Each {@link Patient} can have multiple {@link LabList}s.
+ * Represents a patient/client registered in a medical laboratory. Each
+ * {@link Patient} can have multiple {@link LabList}s.
+ * 
  * @author Elian Doran
  *
  */
@@ -19,17 +20,27 @@ public class Patient extends Entity<Integer> {
 	 * Creates a new instance of a {@link Patient}.
 	 */
 	public Patient() {
-		
+
 	}
 
 	/**
 	 * Creates a new instance of a {@link Patient} with the given information.
-	 * @param id			The numerical ID of the {@link Patient}, also known as an entity key.
-	 * @param firstName		The first name of the {@link Patient}.
-	 * @param lastName		The last name of the {@link Patient}.
-	 * @param age			The age of the {@link Patient}, expressed in <em>years</em>.
-	 * @param height		The height of the {@link Patient}, expressed in <em>centimeters</em>.
-	 * @param weight		The weight of the {@link Patient}, expressed in <em>kilograms</em>.
+	 * 
+	 * @param id
+	 *            The numerical ID of the {@link Patient}, also known as an entity
+	 *            key.
+	 * @param firstName
+	 *            The first name of the {@link Patient}.
+	 * @param lastName
+	 *            The last name of the {@link Patient}.
+	 * @param age
+	 *            The age of the {@link Patient}, expressed in <em>years</em>.
+	 * @param height
+	 *            The height of the {@link Patient}, expressed in
+	 *            <em>centimeters</em>.
+	 * @param weight
+	 *            The weight of the {@link Patient}, expressed in
+	 *            <em>kilograms</em>.
 	 */
 	public Patient(Integer id, String firstName, String lastName, Integer age, Integer height, Integer weight) {
 		this.id = id;
@@ -42,11 +53,19 @@ public class Patient extends Entity<Integer> {
 
 	/**
 	 * Creates a new instance of a {@link Patient} with the given information.
-	 * @param firstName		The first name of the {@link Patient}.
-	 * @param lastName		The last name of the {@link Patient}.
-	 * @param age			The age of the {@link Patient}, expressed in <em>years</em>.
-	 * @param height		The height of the {@link Patient}, expressed in <em>centimeters</em>.
-	 * @param weight		The weight of the {@link Patient}, expressed in <em>kilograms</em>.
+	 * 
+	 * @param firstName
+	 *            The first name of the {@link Patient}.
+	 * @param lastName
+	 *            The last name of the {@link Patient}.
+	 * @param age
+	 *            The age of the {@link Patient}, expressed in <em>years</em>.
+	 * @param height
+	 *            The height of the {@link Patient}, expressed in
+	 *            <em>centimeters</em>.
+	 * @param weight
+	 *            The weight of the {@link Patient}, expressed in
+	 *            <em>kilograms</em>.
 	 */
 	public Patient(String firstName, String lastName, Integer age, Integer height, Integer weight) {
 		this(null, firstName, lastName, age, height, weight);
@@ -54,6 +73,7 @@ public class Patient extends Entity<Integer> {
 
 	/**
 	 * Gets the first name of this {@link Patient}.
+	 * 
 	 * @return The first name of this {@link Patient}.
 	 */
 	public String getFirstName() {
@@ -62,7 +82,9 @@ public class Patient extends Entity<Integer> {
 
 	/**
 	 * Sets the first name of this {@link Patient}.
-	 * @param firstName  The first name of this {@link Patient}.
+	 * 
+	 * @param firstName
+	 *            The first name of this {@link Patient}.
 	 */
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
@@ -70,6 +92,7 @@ public class Patient extends Entity<Integer> {
 
 	/**
 	 * Gets the last name of this {@link Patient}.
+	 * 
 	 * @return The last name of this {@link Patient}.
 	 */
 	public String getLastName() {
@@ -78,7 +101,9 @@ public class Patient extends Entity<Integer> {
 
 	/**
 	 * Sets the last name of this {@link Patient}.
-	 * @param lastName The last name of this {@link Patient}.
+	 * 
+	 * @param lastName
+	 *            The last name of this {@link Patient}.
 	 */
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
@@ -86,6 +111,7 @@ public class Patient extends Entity<Integer> {
 
 	/**
 	 * Gets the age of this {@link Patient}, expressed in <em>years</em>.
+	 * 
 	 * @return The age of this {@link Patient}.
 	 */
 	public Integer getAge() {
@@ -94,7 +120,9 @@ public class Patient extends Entity<Integer> {
 
 	/**
 	 * Sets the age of this {@link Patient}, expressed in <em>years</em>.
-	 * @param age The age of this {@link Patient}.
+	 * 
+	 * @param age
+	 *            The age of this {@link Patient}.
 	 */
 	public void setAge(Integer age) {
 		this.age = age;
@@ -102,6 +130,7 @@ public class Patient extends Entity<Integer> {
 
 	/**
 	 * Gets the height of this {@link Patient}, expressed in <em>centimeters</em>.
+	 * 
 	 * @return The height of this {@link Patient}.
 	 */
 	public Integer getHeight() {
@@ -110,7 +139,9 @@ public class Patient extends Entity<Integer> {
 
 	/**
 	 * Sets the height of this {@link Patient}, expressed in <em>centimeters</em>.
-	 * @param height The height of this {@link Patient}.
+	 * 
+	 * @param height
+	 *            The height of this {@link Patient}.
 	 */
 	public void setHeight(Integer height) {
 		this.height = height;
@@ -118,6 +149,7 @@ public class Patient extends Entity<Integer> {
 
 	/**
 	 * Gets the weight of this {@link Patient}, expressed in <em>kilograms</em>.
+	 * 
 	 * @return The weight of this {@link Patient}.
 	 */
 	public Integer getWeight() {
@@ -126,7 +158,9 @@ public class Patient extends Entity<Integer> {
 
 	/**
 	 * Sets the weight of this {@link Patient}, expressed in <em>kilograms</em>.
-	 * @param weight The weight of this {@link Patient}
+	 * 
+	 * @param weight
+	 *            The weight of this {@link Patient}
 	 */
 	public void setWeight(Integer weight) {
 		this.weight = weight;

@@ -22,23 +22,24 @@ import com.labplan.entities.LabTest;
 import com.labplan.entities.generic.LazyLoadedEntity;
 import com.labplan.helpers.ChildDaoTester;
 
-public class SqlLabResultDaoTest extends ChildDaoTester<LabList, LazyLoadedEntity<Integer, LabTest>, LabResult, SqlLabResultDao> {
+public class SqlLabResultDaoTest
+		extends ChildDaoTester<LabList, LazyLoadedEntity<Integer, LabTest>, LabResult, SqlLabResultDao> {
 	private static LabList dummyLabList;
 	private static LabTest dummyLabTest;
-	
+
 	private static SqlLabResultDao dao;
 	private static SqlLabListDao listDao;
 	private static SqlLabTestDao testDao;
-	
+
 	public SqlLabResultDaoTest() {
-		
+
 	}
-	
+
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		
+
 	}
-	
+
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
 		assertNotNull(MSG_DELETION_FAILED, listDao.delete(dummyLabList));
@@ -48,75 +49,75 @@ public class SqlLabResultDaoTest extends ChildDaoTester<LabList, LazyLoadedEntit
 	public LabResult getRandomEntity() {
 		// Generate a random LabList.
 		listDao = new SqlLabListDao();
-		
+
 		SqlLabListDaoTest listTests = new SqlLabListDaoTest();
 		dummyLabList = listTests.getRandomEntity();
 		dummyLabList.setId(listDao.create(dummyLabList));
 		assertNotNull(MSG_INSERTION_FAILED, dummyLabList.getId());
-		
+
 		// Generate a random LabTest.
 		testDao = new SqlLabTestDao();
-		
+
 		SqlLabTestDaoTest testTests = new SqlLabTestDaoTest();
 		dummyLabTest = testTests.getRandomEntity();
 		dummyLabTest.setId(testDao.create(dummyLabTest));
 		assertNotNull(MSG_INSERTION_FAILED, dummyLabTest.getId());
-		
+
 		dao = new SqlLabResultDao(dummyLabList);
-				
+
 		LabResult dummyResult = new LabResult();
-		
+
 		dummyResult.setId(new LazyLoadedEntity<Integer, LabTest>(dummyLabTest));
-		
+
 		// Set a random value
 		Random random = new Random();
 		dummyResult.setValue(random.nextFloat() * 10);
-		
+
 		return dummyResult;
 	}
-	
+
 	@Test
 	public void testInsertion2() {
 		// CREATE a generated LabResult.
 		LabResult dummyResult = getRandomEntity();
 		dummyResult.setId(dao.create(dummyResult));
 		assertNotNull(MSG_INSERTION_FAILED, dummyResult.getId());
-		
+
 		// READ it back and compare it.
 		Set<LabResult> results = dao.readAll();
 		assertTrue(MSG_RETRIEVAL_FAILED, !results.isEmpty());
-		
+
 		boolean found = false;
-		
+
 		for (LabResult result : results) {
 			if (result.equals(dummyResult)) {
 				found = true;
 				break;
 			}
 		}
-		
+
 		assertTrue(MSG_ENTITY_NOT_FOUND, found);
 	}
-	
+
 	@Test
 	public void testUpdateOrCreate() {
 		// CREATE a generated LabResult.
 		LabResult dummyResult = getRandomEntity();
 		dummyResult.setId(dao.create(dummyResult));
 		assertNotNull(MSG_INSERTION_FAILED, dummyResult.getId());
-		
+
 		// READ it back and compare it.
 		LabResult sameResult = dao.read(dummyResult.getId());
 		assertEquals(MSG_RETRIEVAL_FAILED, dummyResult, sameResult);
-		
+
 		// UPDATE the same LabResult.
 		dummyResult.setValue(dummyResult.getValue() + 1);
-		
+
 		assertTrue("Update failed.", dao.updateOrCreate(dummyResult));
 		LabResult updatedResult = dao.read(dummyResult.getId());
 		assertEquals("Update failed.", dummyResult, updatedResult);
 		assertNotEquals("Update failed.", sameResult, updatedResult);
-		
+
 		// DELETE the LabResult.
 		assertTrue(MSG_DELETION_FAILED, dao.delete(dummyResult));
 	}

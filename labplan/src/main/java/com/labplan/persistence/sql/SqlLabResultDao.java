@@ -20,30 +20,31 @@ import static com.labplan.persistence.DatabaseConnectionFactory.MSG_CONNECTION_F
 
 /**
  * A MySQL-compatible implementation of the {@link LabResultDao}.
+ * 
  * @author Elian Doran
  * @see LabResult
  * @see LabResultDao
  */
 public class SqlLabResultDao implements LabResultDao {
 	private static final Logger LOGGER = Logger.getGlobal();
-	
+
 	private LabList list;
-	
+
 	public SqlLabResultDao(LabList parentEntity) {
 		list = parentEntity;
 	}
-	
+
 	@Override
 	public LabResult read(LazyLoadedEntity<Integer, LabTest> key) {
 		Connection conn = DatabaseConnectionFactory.getConnection();
 		String query = "SELECT * FROM `lab_results` WHERE `list_id`=? AND `test_id`=?";
-		
+
 		try {
 			PreparedStatement stmt = conn.prepareStatement(query);
 			stmt.setInt(1, list.getId());
 			stmt.setInt(2, key.getKey());
 			ResultSet result = stmt.executeQuery();
-			
+
 			if (result.next()) {
 				return parseResult(result);
 			}
@@ -60,16 +61,16 @@ public class SqlLabResultDao implements LabResultDao {
 		Connection conn = DatabaseConnectionFactory.getConnection();
 		String query = "SELECT * FROM `lab_results` WHERE `list_id`=?";
 		Set<LabResult> results = new HashSet<>();
-		
+
 		try {
 			PreparedStatement stmt = conn.prepareStatement(query);
 			stmt.setInt(1, list.getId());
 			ResultSet result = stmt.executeQuery();
-			
+
 			while (result.next()) {
 				results.add(parseResult(result));
 			}
-			
+
 			return results;
 		} catch (SQLException e) {
 			LOGGER.log(Level.WARNING, MSG_CONNECTION_FAILED, e);
@@ -80,16 +81,14 @@ public class SqlLabResultDao implements LabResultDao {
 	@Override
 	public LazyLoadedEntity<Integer, LabTest> create(LabResult entity) {
 		Connection conn = DatabaseConnectionFactory.getConnection();
-		String query = "INSERT INTO `lab_results` "
-				+ "(`test_id`, `list_id`, `value`) "
-				+ "VALUES (?, ?, ?)";
-		
+		String query = "INSERT INTO `lab_results` " + "(`test_id`, `list_id`, `value`) " + "VALUES (?, ?, ?)";
+
 		try {
 			PreparedStatement stmt = conn.prepareStatement(query);
 			stmt.setInt(1, entity.getId().getKey());
 			stmt.setInt(2, list.getId());
-			stmt.setFloat(3,  entity.getValue());
-			
+			stmt.setFloat(3, entity.getValue());
+
 			stmt.execute();
 
 			return entity.getId();
@@ -102,17 +101,15 @@ public class SqlLabResultDao implements LabResultDao {
 	@Override
 	public boolean update(LabResult entity) {
 		Connection conn = DatabaseConnectionFactory.getConnection();
-		String query = "UPDATE `lab_results` SET"
-				+ "`value`=? "
-				+ "WHERE `test_id`=? AND `list_id`=?";
-		
+		String query = "UPDATE `lab_results` SET" + "`value`=? " + "WHERE `test_id`=? AND `list_id`=?";
+
 		try {
 			PreparedStatement stmt = conn.prepareStatement(query);
-			
+
 			stmt.setFloat(1, entity.getValue());
 			stmt.setInt(2, entity.getId().getKey());
 			stmt.setInt(3, list.getId());
-			
+
 			stmt.executeUpdate();
 			return true;
 		} catch (SQLException e) {
@@ -125,29 +122,26 @@ public class SqlLabResultDao implements LabResultDao {
 	public boolean delete(LabResult entity) {
 		Connection conn = DatabaseConnectionFactory.getConnection();
 		String query = "DELETE FROM `lab_results` WHERE `test_id`=? AND `list_id`=?";
-		
+
 		try {
 			PreparedStatement stmt = conn.prepareStatement(query);
 			stmt.setInt(1, entity.getId().getKey());
 			stmt.setInt(2, list.getId());
 			stmt.execute();
-			
+
 			return true;
 		} catch (SQLException e) {
 			LOGGER.log(Level.WARNING, MSG_CONNECTION_FAILED, e);
 			return false;
 		}
 	}
-	
+
 	@Override
 	public boolean updateOrCreate(LabResult entity) {
 		Connection conn = DatabaseConnectionFactory.getConnection();
-		String query = "INSERT INTO `lab_results` "
-				+ "(`test_id`, `list_id`, `value`) "
-				+ "VALUES (?, ?, ?) "
-				+ "ON DUPLICATE KEY UPDATE "
-				+ "`value`=?";
-		
+		String query = "INSERT INTO `lab_results` " + "(`test_id`, `list_id`, `value`) " + "VALUES (?, ?, ?) "
+				+ "ON DUPLICATE KEY UPDATE " + "`value`=?";
+
 		try {
 			PreparedStatement stmt = conn.prepareStatement(query);
 			stmt.setInt(1, entity.getId().getKey());
@@ -155,25 +149,25 @@ public class SqlLabResultDao implements LabResultDao {
 			stmt.setFloat(3, entity.getValue());
 			stmt.setFloat(4, entity.getValue());
 			stmt.execute();
-			
+
 			return true;
 		} catch (SQLException e) {
 			LOGGER.log(Level.WARNING, MSG_CONNECTION_FAILED, e);
 			return false;
 		}
 	}
-	
+
 	private LabResult parseResult(ResultSet result) throws SQLException {
 		LabResult labResult = new LabResult();
-		
+
 		LazyLoadedEntity<Integer, LabTest> lazyTest = new LazyLoadedEntity<Integer, LabTest>();
 		lazyTest.setKey(result.getInt("test_id"));
-		
+
 		lazyTest.setDao(new SqlLabTestDao());
-		
+
 		labResult.setId(lazyTest);
 		labResult.setValue(result.getFloat("value"));
-		
+
 		return labResult;
 	}
 

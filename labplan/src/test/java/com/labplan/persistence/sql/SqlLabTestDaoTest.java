@@ -25,22 +25,23 @@ public class SqlLabTestDaoTest extends DaoTester<Integer, LabTest, SqlLabTestDao
 		System.setProperty("java.util.logging.config.file",
 				ClassLoader.getSystemResource("logging.properties").getPath());
 	}
-	
+
 	@Test
 	public void testGetByName() {
 		// CREATE a random lab test.
 		LabTest dummyTest = getRandomEntity();
 		dummyTest.setId(dao.create(dummyTest));
 		assertNotNull(MSG_INSERTION_FAILED, dummyTest.getId());
-		
-		// READ the same lab test, but searching by its name. Then compare it with its counterpart.
+
+		// READ the same lab test, but searching by its name. Then compare it with its
+		// counterpart.
 		LabTest sameTest = dao.read(dummyTest.getName());
 		assertEquals(dummyTest, sameTest);
-		
+
 		// DELETE the generated lab test.
 		dao.delete(dummyTest);
 	}
-	
+
 	@Test
 	public void testInexistentGetByName() {
 		assertNull(dao.read(UUID.randomUUID().toString()));

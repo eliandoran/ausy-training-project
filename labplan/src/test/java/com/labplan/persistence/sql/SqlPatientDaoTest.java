@@ -20,7 +20,7 @@ public class SqlPatientDaoTest extends DaoTester<Integer, Patient, SqlPatientDao
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		DatabaseConnectionFactory.setProfile("test");
-		
+
 		dao = new SqlPatientDao();
 
 		System.setProperty("java.util.logging.config.file",
@@ -36,7 +36,8 @@ public class SqlPatientDaoTest extends DaoTester<Integer, Patient, SqlPatientDao
 		dummyPatient.setId(patientDao.create(dummyPatient));
 		assertNotNull(MSG_INSERTION_FAILED, dummyPatient.getId());
 
-		// READ the same patient, but searching by its name. Then compare it with its counterpart.
+		// READ the same patient, but searching by its name. Then compare it with its
+		// counterpart.
 		Patient samePatient = patientDao.read(dummyPatient.getFirstName(), dummyPatient.getLastName());
 		assertEquals(dummyPatient, samePatient);
 

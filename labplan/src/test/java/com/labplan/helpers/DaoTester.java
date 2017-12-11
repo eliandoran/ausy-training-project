@@ -20,8 +20,7 @@ import com.labplan.persistence.generic.Dao;
 
 /**
  * This is an abstract test suite which implements a set of predefined test
- * cases for testing the CRUD capabilities of a {@link Dao}
- * implementation.
+ * cases for testing the CRUD capabilities of a {@link Dao} implementation.
  * 
  * @author Elian Doran
  *
@@ -32,8 +31,7 @@ import com.labplan.persistence.generic.Dao;
  *            The type of {@link Entity} used to represent the data stored in
  *            the data source.
  * @param <TDao>
- *            A {@link Dao} which represents the DAO for the data
- *            source.
+ *            A {@link Dao} which represents the DAO for the data source.
  */
 public abstract class DaoTester<TKey, TEntity extends Entity<TKey>, TDao extends Dao<TEntity, TKey>> {
 	@Test
@@ -65,7 +63,7 @@ public abstract class DaoTester<TKey, TEntity extends Entity<TKey>, TDao extends
 
 		dummyEntity1.setId(dao.create(dummyEntity1));
 		dummyEntity2.setId(dao.create(dummyEntity2));
-		
+
 		assertNotNull(MSG_INSERTION_FAILED, dummyEntity1.getId());
 		assertNotNull(MSG_INSERTION_FAILED, dummyEntity2.getId());
 
@@ -87,7 +85,7 @@ public abstract class DaoTester<TKey, TEntity extends Entity<TKey>, TDao extends
 		TEntity dummyEntity = getRandomEntity();
 		dummyEntity.setId(dao.create(dummyEntity));
 		assertNotNull(MSG_INSERTION_FAILED, dummyEntity.getId());
-		
+
 		// UPDATE the last entity with another generated entity, keeping the ID.
 		TEntity updatedEntity = getRandomEntity();
 		updatedEntity.setId(dummyEntity.getId());
@@ -111,11 +109,9 @@ public abstract class DaoTester<TKey, TEntity extends Entity<TKey>, TDao extends
 	public abstract TEntity getRandomEntity();
 
 	/**
-	 * Gets the {@link Dao} DAO which can be used to access the data
-	 * source.
+	 * Gets the {@link Dao} DAO which can be used to access the data source.
 	 * 
-	 * @return The {@link Dao} DAO which can be used to access the data
-	 *         source.
+	 * @return The {@link Dao} DAO which can be used to access the data source.
 	 */
 	public abstract TDao getDao();
 }

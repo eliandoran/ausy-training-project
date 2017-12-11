@@ -12,7 +12,9 @@ import com.labplan.entities.LabTest;
 public interface LabTestDao extends Dao<LabTest, Integer> {
 	/**
 	 * Obtains a single {@link LabTest} from a data source, searching by its name.
-	 * @param name The full name of the lab test.
+	 * 
+	 * @param name
+	 *            The full name of the lab test.
 	 * @return The {@link TabTest} with a matching name.
 	 */
 	LabTest read(String name);

@@ -18,6 +18,7 @@ import static com.labplan.persistence.DatabaseConnectionFactory.MSG_CONNECTION_F
 
 /**
  * A MySQL-compatible implementation of the {@link LabTestDao}.
+ * 
  * @author Elian Doran
  * @see LabTest
  * @see LabTestDao
@@ -44,24 +45,24 @@ public class SqlLabTestDao implements LabTestDao {
 
 		return null;
 	}
-	
+
 	@Override
 	public LabTest read(String name) {
 		Connection conn = DatabaseConnectionFactory.getConnection();
 		String query = "SELECT * FROM `lab_tests` WHERE `name`=?";
-		
+
 		try {
 			PreparedStatement stmt = conn.prepareStatement(query);
 			stmt.setString(1, name);
 			ResultSet result = stmt.executeQuery();
-			
+
 			if (result.next()) {
 				return parseLabTest(result);
 			}
 		} catch (SQLException e) {
 			LOGGER.log(Level.WARNING, MSG_CONNECTION_FAILED, e);
 		}
-		
+
 		return null;
 	}
 
