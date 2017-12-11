@@ -18,8 +18,10 @@ import com.labplan.entities.generic.Entity;
 public interface ChildDao<TParentEntity extends Entity<?>, TChildEntity extends Entity<TChildKey>, TChildKey>
 		extends Dao<TChildEntity, TChildKey> {
 	/**
-	 * Obtains the parent entity of this entity.
-	 * @return The parent entity of this entity.
+	 * Obtains the parent {@link Entity} of this entity.
+	 * <p>See class description for more details.</p>
+	 * @return The parent {@link Entity} of this entity.
+	 * @see ChildDao
 	 */
 	public TParentEntity getParentEntity();
 }

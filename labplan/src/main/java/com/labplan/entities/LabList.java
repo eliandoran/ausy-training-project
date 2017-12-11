@@ -111,6 +111,10 @@ public class LabList extends Entity<Integer> {
 		return hash;
 	}
 	
+	/**
+	 * Creates a field-by-field copy of this {@link LabList}. The two {@link LabList}s will use a shared reference to {@code getResults}.
+	 * @return A shallow copy of this {@link LabList}.
+	 */
 	public LabList shallowCopy() {
 		LabList copy = new LabList();
 		copy.setId(getId());

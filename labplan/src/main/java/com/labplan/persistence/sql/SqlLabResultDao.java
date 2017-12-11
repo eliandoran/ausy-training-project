@@ -14,9 +14,16 @@ import com.labplan.entities.LabResult;
 import com.labplan.entities.LabTest;
 import com.labplan.entities.generic.LazyLoadedEntity;
 import com.labplan.persistence.DatabaseConnectionFactory;
+import com.labplan.persistence.generic.LabResultDao;
 
 import static com.labplan.persistence.DatabaseConnectionFactory.MSG_CONNECTION_FAILED;
 
+/**
+ * A MySQL-compatible implementation of the {@link LabResultDao}.
+ * @author Elian Doran
+ * @see LabResult
+ * @see LabResultDao
+ */
 public class SqlLabResultDao implements com.labplan.persistence.generic.LabResultDao {
 	private static final Logger LOGGER = Logger.getGlobal();
 	

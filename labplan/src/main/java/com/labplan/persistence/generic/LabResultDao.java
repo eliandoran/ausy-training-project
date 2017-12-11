@@ -18,5 +18,11 @@ import com.labplan.entities.generic.LazyLoadedEntity;
  */
 public interface LabResultDao extends ChildDao<LabList, LabResult, LazyLoadedEntity<Integer, LabTest>>
 {
+	/**
+	 * Adds the given {@link LabResult} into the data source. Should the {@link LabResult} already exist (identified by
+	 * its key), then its values are updated instead.
+	 * @param entity The {@link LabResult} to create or update.
+	 * @return {@code true} if the update/create operation succeeded, {@code false} otherwise.
+	 */
 	boolean updateOrCreate(LabResult entity);
 }

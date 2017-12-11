@@ -21,6 +21,12 @@ import com.mysql.cj.api.jdbc.Statement;
 
 import static com.labplan.persistence.DatabaseConnectionFactory.MSG_CONNECTION_FAILED;
 
+/**
+ * A MySQL-compatible implementation of the {@link LabListDao}.
+ * @author Elian Doran
+ * @see LabListDao
+ * @see LabList
+ */
 public class SqlLabListDao implements com.labplan.persistence.generic.LabListDao {
 	private static final Logger LOGGER = Logger.getGlobal();
 	

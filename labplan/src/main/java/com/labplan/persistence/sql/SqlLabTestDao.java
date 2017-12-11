@@ -15,6 +15,12 @@ import com.labplan.persistence.DatabaseConnectionFactory;
 
 import static com.labplan.persistence.DatabaseConnectionFactory.MSG_CONNECTION_FAILED;
 
+/**
+ * A MySQL-compatible implementation of the {@link LabTestDao}.
+ * @author Elian Doran
+ * @see LabTest
+ * @see LabTestDao
+ */
 public class SqlLabTestDao implements com.labplan.persistence.generic.LabTestDao {
 	private static final Logger LOGGER = Logger.getGlobal();
 

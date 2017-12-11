@@ -38,6 +38,14 @@ public class LazyLoadedEntity<TKey, TEntity extends Entity<TKey>> {
 		isLoaded = true;
 	}
 	
+	/**
+	 * Obtains the {@link Entity} wrapped in this {@link LazyLoadedEntity}. If the {@link Entity} has not yet been loaded, calling
+	 * this method will determine the loading of the {@link Entity}. The loading is handled by using {@code getDao()} to
+	 * obtain the appropriate DAO and then using it to read the {@link Entity} with the ID specified in {@code getKey()}.
+	 * Future calls of this method will obtain the cached version of the {@link Entity}, so if modifications are made to
+	 * the {@link Entity}, it will not update.
+	 * @return The entity wrapped in this {@link LazyLoadedEntity}
+	 */
 	public TEntity getEntity() {
 		if (!isLoaded)
 			load();
@@ -45,26 +53,55 @@ public class LazyLoadedEntity<TKey, TEntity extends Entity<TKey>> {
 		return entity;
 	}
 
+	/**
+	 * Sets the {@link Entity} wrapped in this {@link LazyLoadedEntity}. This is useful in case the {@link Entity} was already loaded
+	 * prior to instantiating the {@link LazyLoadedEntity}.
+	 * @param entity The {@link Entity} to be wrapped in this {@link LazyLoadedEntity}.
+	 */
 	public void setEntity(TEntity entity) {
 		this.entity = entity;
 	}
 	
+	/**
+	 * Obtains the key that is used for identifying the {@link Entity}. It should be equal to {@code getEntity().getId()}. This will
+	 * be used by {@code getEntity()} to load the {@link Entity} from the data source with the help of {@code getDao()}.
+	 * @return The key that is used for identifying the {@link Entity}.
+	 */
 	public TKey getKey() {
 		return key;
 	}
 
+	/**
+	 * Sets the key that is used for identifying the {@link Entity}. It should be equal to {@code getEntity().getId()}. This will
+	 * be used by {@code getEntity()} to load the {@link Entity} from the data source with the help of {@code getDao()}.
+	 * @param key The key that is used for identifying the {@link Entity}.
+	 */
 	public void setKey(TKey key) {
 		this.key = key;
 	}
 	
+	/**
+	 * Indicates whether the {@link Entity} stored in {@code getEntity()} has been loaded from the data source.
+	 * @return {@code true} if the {@link Entity} stored in {@code getEntity()} has been loaded from the data source, {@code false} otherwise.
+	 */
 	public Boolean getIsLoaded() {
 		return isLoaded;
 	}
 
+	/**
+	 * Obtains the {@link Dao} which will be used by {@code getEntity()} to load the {@link Entity} from the data source if it had not been
+	 * loaded before.
+	 * @return The {@link Dao} which will be used by {@code getEntity()} to load the {@link Entity}.
+	 */
 	public Dao<TEntity, TKey> getDao() {
 		return dao;
 	}
 	
+	/**
+	 * Sets the {@link Dao} which will be used by {@code getEntity()} to load the {@link Entity} from the data source if it had not been
+	 * loaded before.
+	 * @param dao he {@link Dao} which will be used by {@code getEntity()} to load the {@link Entity}.
+	 */
 	public void setDao(Dao<TEntity, TKey> dao) {
 		this.dao = dao;
 	}
