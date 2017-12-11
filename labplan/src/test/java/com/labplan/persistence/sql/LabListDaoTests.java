@@ -9,6 +9,8 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.Date;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -56,6 +58,38 @@ public class LabListDaoTests extends CrudTester<Integer, LabList, LabListDao> {
 		
 		// DELETE the generated lab list.
 		assertTrue(MSG_DELETION_FAILED, dao.delete(dummyLabList));
+	}
+	
+	@Test
+	public void testReadAllByPatient() {
+		// CREATE a random patient.
+		PatientDao patientDao = new PatientDao();
+		PatientDaoTests patientDaoTests = new PatientDaoTests();
+		
+		Patient dummyPatient = patientDaoTests.getRandomEntity();
+		dummyPatient.setId(patientDao.create(dummyPatient));
+		assertNotNull(MSG_INSERTION_FAILED, dummyPatient.getId());
+		
+		// CREATE a few random lab list.
+		List<LabList> lists = new LinkedList<>();
+		
+		for (int i=0; i<3; i++) {
+			LabList dummyLabList = getRandomEntity();
+			dummyLabList.setPatient(new LazyLoadedEntity<>(dummyPatient));
+			dummyLabList.setId(dao.create(dummyLabList));
+			assertNotNull(MSG_INSERTION_FAILED, dummyLabList.getId());
+			
+			lists.add(dummyLabList);
+		}
+		
+		// READ all by patient.
+		Set<LabList> sameLists = dao.readAllByPatient(dummyPatient);
+		
+		assertTrue("List is empty.", !sameLists.isEmpty());
+		
+		for (LabList labList : lists) {
+			assertTrue("Not found.", sameLists.contains(labList));
+		}
 	}
 	
 	@Test
