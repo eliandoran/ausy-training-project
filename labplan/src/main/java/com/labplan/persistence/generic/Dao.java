@@ -15,7 +15,7 @@ import java.util.Set;
  *            The key used for identifying an entity, could be a mirror of the
  *            database table's primary keys.
  * 
- * @see com.labplan.persistence.sql.PatientDao
+ * @see com.labplan.persistence.sql.SqlPatientDao
  * @see com.labplan.persistence.generic.GenericPatientDao
  */
 public interface Dao<TEntity, TKey> {

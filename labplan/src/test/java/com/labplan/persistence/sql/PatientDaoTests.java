@@ -14,14 +14,14 @@ import com.labplan.entities.Patient;
 import com.labplan.helpers.DaoTester;
 import com.labplan.persistence.DatabaseConnectionFactory;
 
-public class PatientDaoTests extends DaoTester<Integer, Patient, PatientDao> {
-	private static PatientDao dao;
+public class PatientDaoTests extends DaoTester<Integer, Patient, SqlPatientDao> {
+	private static SqlPatientDao dao;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		DatabaseConnectionFactory.setProfile("test");
 		
-		dao = new PatientDao();
+		dao = new SqlPatientDao();
 
 		System.setProperty("java.util.logging.config.file",
 				ClassLoader.getSystemResource("logging.properties").getPath());
@@ -30,7 +30,7 @@ public class PatientDaoTests extends DaoTester<Integer, Patient, PatientDao> {
 	@Test
 	public void testGetByName() {
 		// CREATE a random patient.
-		PatientDao patientDao = getDao();
+		SqlPatientDao patientDao = getDao();
 		Patient dummyPatient = getRandomEntity();
 
 		dummyPatient.setId(patientDao.create(dummyPatient));
@@ -46,7 +46,7 @@ public class PatientDaoTests extends DaoTester<Integer, Patient, PatientDao> {
 
 	@Test
 	public void testInexistentGetByName() {
-		PatientDao patientDao = getDao();
+		SqlPatientDao patientDao = getDao();
 
 		assertNull(patientDao.read(UUID.randomUUID().toString(), UUID.randomUUID().toString()));
 	}
@@ -57,7 +57,7 @@ public class PatientDaoTests extends DaoTester<Integer, Patient, PatientDao> {
 	}
 
 	@Override
-	public PatientDao getDao() {
+	public SqlPatientDao getDao() {
 		return dao;
 	}
 }

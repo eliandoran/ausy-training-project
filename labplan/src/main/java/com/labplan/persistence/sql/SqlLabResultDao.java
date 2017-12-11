@@ -17,12 +17,12 @@ import com.labplan.persistence.DatabaseConnectionFactory;
 
 import static com.labplan.persistence.DatabaseConnectionFactory.MSG_CONNECTION_FAILED;
 
-public class LabResultDao implements com.labplan.persistence.generic.GenericLabResultDao {
+public class SqlLabResultDao implements com.labplan.persistence.generic.GenericLabResultDao {
 	private static final Logger LOGGER = Logger.getGlobal();
 	
 	private LabList list;
 	
-	public LabResultDao(LabList parentEntity) {
+	public SqlLabResultDao(LabList parentEntity) {
 		list = parentEntity;
 	}
 	
@@ -162,7 +162,7 @@ public class LabResultDao implements com.labplan.persistence.generic.GenericLabR
 		LazyLoadedEntity<Integer, LabTest> lazyTest = new LazyLoadedEntity<Integer, LabTest>();
 		lazyTest.setKey(result.getInt("test_id"));
 		
-		lazyTest.setDao(new LabTestDao());
+		lazyTest.setDao(new SqlLabTestDao());
 		
 		labResult.setId(lazyTest);
 		labResult.setValue(result.getFloat("value"));

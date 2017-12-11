@@ -14,13 +14,13 @@ import com.labplan.entities.LabTest;
 import com.labplan.helpers.DaoTester;
 import com.labplan.persistence.DatabaseConnectionFactory;
 
-public class LabTestDaoTests extends DaoTester<Integer, LabTest, LabTestDao> {
-	private static LabTestDao dao;
+public class LabTestDaoTests extends DaoTester<Integer, LabTest, SqlLabTestDao> {
+	private static SqlLabTestDao dao;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		DatabaseConnectionFactory.setProfile("test");
-		dao = new LabTestDao();
+		dao = new SqlLabTestDao();
 
 		System.setProperty("java.util.logging.config.file",
 				ClassLoader.getSystemResource("logging.properties").getPath());
@@ -52,7 +52,7 @@ public class LabTestDaoTests extends DaoTester<Integer, LabTest, LabTestDao> {
 	}
 
 	@Override
-	public LabTestDao getDao() {
+	public SqlLabTestDao getDao() {
 		return dao;
 	}
 }

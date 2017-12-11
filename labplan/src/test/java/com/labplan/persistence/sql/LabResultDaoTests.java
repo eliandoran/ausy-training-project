@@ -22,13 +22,13 @@ import com.labplan.entities.LabTest;
 import com.labplan.entities.generic.LazyLoadedEntity;
 import com.labplan.helpers.ChildDaoTester;
 
-public class LabResultDaoTests extends ChildDaoTester<LabList, LazyLoadedEntity<Integer, LabTest>, LabResult, LabResultDao> {
+public class LabResultDaoTests extends ChildDaoTester<LabList, LazyLoadedEntity<Integer, LabTest>, LabResult, SqlLabResultDao> {
 	private static LabList dummyLabList;
 	private static LabTest dummyLabTest;
 	
-	private static LabResultDao dao;
-	private static LabListDao listDao;
-	private static LabTestDao testDao;
+	private static SqlLabResultDao dao;
+	private static SqlLabListDao listDao;
+	private static SqlLabTestDao testDao;
 	
 	public LabResultDaoTests() {
 		
@@ -47,7 +47,7 @@ public class LabResultDaoTests extends ChildDaoTester<LabList, LazyLoadedEntity<
 	@Override
 	public LabResult getRandomEntity() {
 		// Generate a random LabList.
-		listDao = new LabListDao();
+		listDao = new SqlLabListDao();
 		
 		LabListDaoTests listTests = new LabListDaoTests();
 		dummyLabList = listTests.getRandomEntity();
@@ -55,14 +55,14 @@ public class LabResultDaoTests extends ChildDaoTester<LabList, LazyLoadedEntity<
 		assertNotNull(MSG_INSERTION_FAILED, dummyLabList.getId());
 		
 		// Generate a random LabTest.
-		testDao = new LabTestDao();
+		testDao = new SqlLabTestDao();
 		
 		LabTestDaoTests testTests = new LabTestDaoTests();
 		dummyLabTest = testTests.getRandomEntity();
 		dummyLabTest.setId(testDao.create(dummyLabTest));
 		assertNotNull(MSG_INSERTION_FAILED, dummyLabTest.getId());
 		
-		dao = new LabResultDao(dummyLabList);
+		dao = new SqlLabResultDao(dummyLabList);
 				
 		LabResult dummyResult = new LabResult();
 		
@@ -122,7 +122,7 @@ public class LabResultDaoTests extends ChildDaoTester<LabList, LazyLoadedEntity<
 	}
 
 	@Override
-	public LabResultDao getDao() {
+	public SqlLabResultDao getDao() {
 		return dao;
 	}
 }

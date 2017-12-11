@@ -8,7 +8,7 @@ import com.labplan.entities.LabList;
 import com.labplan.entities.LabResult;
 import com.labplan.entities.Patient;
 import com.labplan.persistence.exceptions.ConnectionFailedException;
-import com.labplan.persistence.sql.LabListDao;
+import com.labplan.persistence.sql.SqlLabListDao;
 
 /**
  * A small application that prints to the console in a tabular fashion all the
@@ -44,7 +44,7 @@ public class ConsoleList {
 	 * @return
 	 */
 	private static Set<LabList> getLists() {
-		LabListDao labListDao = new LabListDao();
+		SqlLabListDao labListDao = new SqlLabListDao();
 		return labListDao.readAll();
 	}
 
@@ -89,7 +89,7 @@ public class ConsoleList {
 	 */
 	@SuppressWarnings("deprecation")
 	private static void displayList(Integer listId) {
-		LabList list = (new LabListDao()).read(listId, true);
+		LabList list = (new SqlLabListDao()).read(listId, true);
 
 		System.out.println("\n\nList: " + list.getId() + "\t Patient: " + list.getPatient().getEntity().getFirstName()
 				+ " " + list.getPatient().getEntity().getLastName() + "\t Creation date: "

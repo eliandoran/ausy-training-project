@@ -21,7 +21,7 @@ import com.mysql.cj.api.jdbc.Statement;
 
 import static com.labplan.persistence.DatabaseConnectionFactory.MSG_CONNECTION_FAILED;
 
-public class LabListDao implements com.labplan.persistence.generic.GenericLabListDao {
+public class SqlLabListDao implements com.labplan.persistence.generic.GenericLabListDao {
 	private static final Logger LOGGER = Logger.getGlobal();
 	
 	@Override
@@ -49,7 +49,7 @@ public class LabListDao implements com.labplan.persistence.generic.GenericLabLis
 		LabList list = read(key);
 		
 		if (loadResults) {
-			LabResultDao resultDao = new LabResultDao(list);
+			SqlLabResultDao resultDao = new SqlLabResultDao(list);
 			List<LabResult> results = new LinkedList<>();
 			results.addAll(resultDao.readAll());
 			list.setResults(results);
@@ -183,7 +183,7 @@ public class LabListDao implements com.labplan.persistence.generic.GenericLabLis
 		Integer patientId = result.getInt("patient_id");
 		LazyLoadedEntity<Integer, Patient> lazyPatient = new LazyLoadedEntity<>();
 		lazyPatient.setKey(patientId);
-		lazyPatient.setDao(new PatientDao());
+		lazyPatient.setDao(new SqlPatientDao());
 		
 		list.setPatient(lazyPatient);
 		
@@ -201,7 +201,7 @@ public class LabListDao implements com.labplan.persistence.generic.GenericLabLis
 		LabList entity = _entity.shallowCopy();
 		entity.setId(key);
 		
-		LabResultDao resultDao = new LabResultDao(entity);
+		SqlLabResultDao resultDao = new SqlLabResultDao(entity);
 	
 		for (LabResult result : entity.getResults()) {
 			resultDao.updateOrCreate(result);

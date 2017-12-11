@@ -22,13 +22,13 @@ import com.labplan.entities.generic.LazyLoadedEntity;
 import com.labplan.helpers.DaoTester;
 import com.labplan.persistence.DatabaseConnectionFactory;
 
-public class LabListDaoTests extends DaoTester<Integer, LabList, LabListDao> {
-	private static LabListDao dao;
+public class LabListDaoTests extends DaoTester<Integer, LabList, SqlLabListDao> {
+	private static SqlLabListDao dao;
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		DatabaseConnectionFactory.setProfile("test");
-		dao = new LabListDao();
+		dao = new SqlLabListDao();
 
 		System.setProperty("java.util.logging.config.file",
 				ClassLoader.getSystemResource("logging.properties").getPath());
@@ -63,7 +63,7 @@ public class LabListDaoTests extends DaoTester<Integer, LabList, LabListDao> {
 	@Test
 	public void testReadAllByPatient() {
 		// CREATE a random patient.
-		PatientDao patientDao = new PatientDao();
+		SqlPatientDao patientDao = new SqlPatientDao();
 		PatientDaoTests patientDaoTests = new PatientDaoTests();
 		
 		Patient dummyPatient = patientDaoTests.getRandomEntity();
@@ -124,7 +124,7 @@ public class LabListDaoTests extends DaoTester<Integer, LabList, LabListDao> {
 		
 		// Generate a random patient.
 		PatientDaoTests patientDaoTests = new PatientDaoTests();
-		PatientDao patientDao = new PatientDao();
+		SqlPatientDao patientDao = new SqlPatientDao();
 		
 		Patient patient = patientDaoTests.getRandomEntity();
 		patient.setId(patientDao.create(patient));
@@ -139,7 +139,7 @@ public class LabListDaoTests extends DaoTester<Integer, LabList, LabListDao> {
 	}
 
 	@Override
-	public LabListDao getDao() {
+	public SqlLabListDao getDao() {
 		return dao;
 	}
 
