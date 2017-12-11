@@ -8,11 +8,13 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Date;
+import java.util.LinkedList;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.labplan.entities.LabList;
+import com.labplan.entities.LabResult;
 import com.labplan.entities.Patient;
 import com.labplan.entities.generic.LazyLoadedEntity;
 import com.labplan.helpers.CrudTester;
@@ -54,6 +56,32 @@ public class LabListDaoTests extends CrudTester<Integer, LabList, LabListDao> {
 		
 		// DELETE the generated lab list.
 		assertTrue(MSG_DELETION_FAILED, dao.delete(dummyLabList));
+	}
+	
+	@Test
+	public void testResultsInsertion() {
+		LabList dummyLabList = getRandomEntity();
+		
+		// Insert multiple LabResult.
+		dummyLabList.setResults(new LinkedList<LabResult>());
+		
+		LabResultDaoTests resultDaoTests = new LabResultDaoTests();
+		
+		for (int i=0; i<5; i++) {
+			LabResult randomResult = resultDaoTests.getRandomEntity();
+			dummyLabList.getResults().add(randomResult);
+		}
+		
+		// INSERT the LabList.
+		dummyLabList.setId(dao.create(dummyLabList));
+		assertNotNull(MSG_INSERTION_FAILED, dummyLabList.getId());
+		
+		// READ back the LabList.
+		LabList sameLabList = dao.read(dummyLabList.getId(), true);
+		
+		for (LabResult result : dummyLabList.getResults()) {
+			assertTrue(sameLabList.getResults().contains(result));
+		}
 	}
 
 	@Override

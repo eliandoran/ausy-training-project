@@ -110,4 +110,13 @@ public class LabList extends Entity<Integer> {
 		hash = 31 * hash + getCreationDate().hashCode();
 		return hash;
 	}
+	
+	public LabList shallowCopy() {
+		LabList copy = new LabList();
+		copy.setId(getId());
+		copy.setCreationDate(getCreationDate());
+		copy.setPatient(getPatient());
+		copy.setResults(getResults());
+		return copy;
+	}
 }

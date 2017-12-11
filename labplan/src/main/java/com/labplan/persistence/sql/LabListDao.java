@@ -117,7 +117,11 @@ public class LabListDao implements com.labplan.persistence.generic.GenericLabLis
 			generatedKeys = stmt.getGeneratedKeys();
 			
 			if (generatedKeys.next()) {
-				return generatedKeys.getInt(1);
+				Integer key = generatedKeys.getInt(1);
+				
+				updateResults(key, entity);
+				
+				return key;
 			}
 		} catch (SQLException e) {
 			LOGGER.log(Level.WARNING, "SQL connection failed.", e);
@@ -142,6 +146,8 @@ public class LabListDao implements com.labplan.persistence.generic.GenericLabLis
 			stmt.setInt(3, entity.getId());
 			
 			stmt.executeUpdate();
+			
+			updateResults(entity.getId(), entity);
 		} catch (SQLException e) {
 			LOGGER.log(Level.WARNING, "SQL connection failed.", e);
 			return false;
@@ -184,6 +190,20 @@ public class LabListDao implements com.labplan.persistence.generic.GenericLabLis
 		list.setCreationDate(parseDate(result.getTimestamp("creation_date")));
 		
 		return list;
+	}
+	
+	private void updateResults(Integer key, LabList _entity) {
+		if (_entity.getResults() == null)
+			return;
+			
+		LabList entity = _entity.shallowCopy();
+		entity.setId(key);
+		
+		LabResultDao resultDao = new LabResultDao(entity);
+	
+		for (LabResult result : entity.getResults()) {
+			resultDao.updateOrCreate(result);
+		}
 	}
 	
 	private Timestamp parseDate(java.util.Date creationDate) {

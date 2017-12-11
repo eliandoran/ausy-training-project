@@ -18,5 +18,5 @@ import com.labplan.entities.generic.LazyLoadedEntity;
  */
 public interface GenericLabResultDao extends DependentCrudInterface<LabList, LabResult, LazyLoadedEntity<Integer, LabTest>>
 {
-	
+	boolean updateOrCreate(LabResult entity);
 }

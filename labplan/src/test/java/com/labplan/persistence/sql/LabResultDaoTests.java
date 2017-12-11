@@ -4,6 +4,8 @@ import static com.labplan.helpers.TestMessages.MSG_DELETION_FAILED;
 import static com.labplan.helpers.TestMessages.MSG_ENTITY_NOT_FOUND;
 import static com.labplan.helpers.TestMessages.MSG_INSERTION_FAILED;
 import static com.labplan.helpers.TestMessages.MSG_RETRIEVAL_FAILED;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -94,6 +96,29 @@ public class LabResultDaoTests extends DependentCrudTester<LabList, LazyLoadedEn
 		}
 		
 		assertTrue(MSG_ENTITY_NOT_FOUND, found);
+	}
+	
+	@Test
+	public void testUpdateOrCreate() {
+		// CREATE a generated LabResult.
+		LabResult dummyResult = getRandomEntity();
+		dummyResult.setId(dao.create(dummyResult));
+		assertNotNull(MSG_INSERTION_FAILED, dummyResult.getId());
+		
+		// READ it back and compare it.
+		LabResult sameResult = dao.read(dummyResult.getId());
+		assertEquals(MSG_RETRIEVAL_FAILED, dummyResult, sameResult);
+		
+		// UPDATE the same LabResult.
+		dummyResult.setValue(dummyResult.getValue() + 1);
+		
+		assertTrue("Update failed.", dao.updateOrCreate(dummyResult));
+		LabResult updatedResult = dao.read(dummyResult.getId());
+		assertEquals("Update failed.", dummyResult, updatedResult);
+		assertNotEquals("Update failed.", sameResult, updatedResult);
+		
+		// DELETE the LabResult.
+		assertTrue(MSG_DELETION_FAILED, dao.delete(dummyResult));
 	}
 
 	@Override

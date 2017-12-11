@@ -131,6 +131,30 @@ public class LabResultDao implements com.labplan.persistence.generic.GenericLabR
 		}
 	}
 	
+	@Override
+	public boolean updateOrCreate(LabResult entity) {
+		Connection conn = DatabaseConnectionFactory.getConnection();
+		String query = "INSERT INTO `lab_results` "
+				+ "(`test_id`, `list_id`, `value`) "
+				+ "VALUES (?, ?, ?) "
+				+ "ON DUPLICATE KEY UPDATE "
+				+ "`value`=?";
+		
+		try {
+			PreparedStatement stmt = conn.prepareStatement(query);
+			stmt.setInt(1, entity.getId().getKey());
+			stmt.setInt(2, list.getId());
+			stmt.setFloat(3, entity.getValue());
+			stmt.setFloat(4, entity.getValue());
+			stmt.execute();
+			
+			return true;
+		} catch (SQLException e) {
+			LOGGER.log(Level.WARNING, "SQL connection failed.", e);
+			return false;
+		}
+	}
+	
 	private LabResult parseResult(ResultSet result) throws SQLException {
 		LabResult labResult = new LabResult();
 		
