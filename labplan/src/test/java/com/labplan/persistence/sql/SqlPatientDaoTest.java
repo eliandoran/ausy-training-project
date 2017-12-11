@@ -14,7 +14,7 @@ import com.labplan.entities.Patient;
 import com.labplan.helpers.DaoTester;
 import com.labplan.persistence.DatabaseConnectionFactory;
 
-public class SqlPatientDaoTests extends DaoTester<Integer, Patient, SqlPatientDao> {
+public class SqlPatientDaoTest extends DaoTester<Integer, Patient, SqlPatientDao> {
 	private static SqlPatientDao dao;
 
 	@BeforeClass

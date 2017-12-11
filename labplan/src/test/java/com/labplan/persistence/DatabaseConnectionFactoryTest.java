@@ -7,7 +7,7 @@ import java.sql.Connection;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class DatabaseConnectionFactoryTests {
+public class DatabaseConnectionFactoryTest {
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		DatabaseConnectionFactory.setProfile("test");
