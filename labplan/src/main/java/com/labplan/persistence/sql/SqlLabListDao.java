@@ -17,6 +17,7 @@ import com.labplan.entities.LabResult;
 import com.labplan.entities.Patient;
 import com.labplan.entities.generic.LazyLoadedEntity;
 import com.labplan.persistence.DatabaseConnectionFactory;
+import com.labplan.persistence.generic.LabListDao;
 import com.mysql.cj.api.jdbc.Statement;
 
 import static com.labplan.persistence.DatabaseConnectionFactory.MSG_CONNECTION_FAILED;
@@ -27,7 +28,7 @@ import static com.labplan.persistence.DatabaseConnectionFactory.MSG_CONNECTION_F
  * @see LabListDao
  * @see LabList
  */
-public class SqlLabListDao implements com.labplan.persistence.generic.LabListDao {
+public class SqlLabListDao implements LabListDao {
 	private static final Logger LOGGER = Logger.getGlobal();
 	
 	@Override

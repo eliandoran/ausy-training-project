@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 
 import com.labplan.entities.Patient;
 import com.labplan.persistence.DatabaseConnectionFactory;
+import com.labplan.persistence.generic.PatientDao;
 import com.mysql.cj.api.jdbc.Statement;
 
 import static com.labplan.persistence.DatabaseConnectionFactory.MSG_CONNECTION_FAILED;
@@ -21,7 +22,7 @@ import static com.labplan.persistence.DatabaseConnectionFactory.MSG_CONNECTION_F
  * @see Patient
  * @see PatientDao
  */
-public class SqlPatientDao implements com.labplan.persistence.generic.PatientDao {
+public class SqlPatientDao implements PatientDao {
 	private static final Logger LOGGER = Logger.getGlobal();
 
 	@Override

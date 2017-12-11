@@ -12,6 +12,7 @@ import java.util.logging.Logger;
 
 import com.labplan.entities.LabTest;
 import com.labplan.persistence.DatabaseConnectionFactory;
+import com.labplan.persistence.generic.LabTestDao;
 
 import static com.labplan.persistence.DatabaseConnectionFactory.MSG_CONNECTION_FAILED;
 
@@ -21,7 +22,7 @@ import static com.labplan.persistence.DatabaseConnectionFactory.MSG_CONNECTION_F
  * @see LabTest
  * @see LabTestDao
  */
-public class SqlLabTestDao implements com.labplan.persistence.generic.LabTestDao {
+public class SqlLabTestDao implements LabTestDao {
 	private static final Logger LOGGER = Logger.getGlobal();
 
 	@Override

@@ -24,7 +24,7 @@ import static com.labplan.persistence.DatabaseConnectionFactory.MSG_CONNECTION_F
  * @see LabResult
  * @see LabResultDao
  */
-public class SqlLabResultDao implements com.labplan.persistence.generic.LabResultDao {
+public class SqlLabResultDao implements LabResultDao {
 	private static final Logger LOGGER = Logger.getGlobal();
 	
 	private LabList list;
