@@ -18,6 +18,6 @@ public class PatientService extends Service<Patient, PatientDao> {
 		if (entriesPerPage < 1)
 			throw new RuntimeException("`entriesPerPage` should be a positive number.");
 		
-		return dao.readOffset(entriesPerPage, (page-1)*entriesPerPage);
+		return dao.read(entriesPerPage, (page-1)*entriesPerPage);
 	}
 }

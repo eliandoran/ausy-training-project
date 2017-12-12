@@ -29,7 +29,7 @@ public interface PatientDao extends Dao<Patient, Integer> {
 	 * @param offset	The number of {@link Patient} to skip.
 	 * @return			A {@link List} of {@link Patient} obtained form the data source.
 	 */
-	List<Patient> readOffset(Integer limit, Integer offset);
+	List<Patient> read(Integer limit, Integer offset);
 	
 	/**
 	 * Removes all {@link Patient} from the data source.

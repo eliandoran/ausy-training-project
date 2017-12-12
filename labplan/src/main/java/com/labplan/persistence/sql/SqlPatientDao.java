@@ -70,7 +70,7 @@ public class SqlPatientDao implements PatientDao {
 	}
 	
 	@Override
-	public List<Patient> readOffset(Integer limit, Integer offset) {
+	public List<Patient> read(Integer limit, Integer offset) {
 		Connection conn = DatabaseConnectionFactory.getConnection();
 		String query = "SELECT * FROM `patients` LIMIT ? OFFSET ?";
 		List<Patient> patients = new LinkedList<>();
