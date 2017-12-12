@@ -2,7 +2,6 @@ package com.labplan.services;
 
 import java.util.List;
 
-import com.labplan.entities.Patient;
 import com.labplan.entities.generic.Entity;
 import com.labplan.persistence.generic.Dao;
 
