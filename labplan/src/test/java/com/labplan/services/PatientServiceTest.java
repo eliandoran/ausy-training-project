@@ -47,6 +47,8 @@ public class PatientServiceTest {
 		int entriesPerPage = 2;
 		int pageCount = Math.round((float)patientCount / entriesPerPage);
 		
+		assertEquals(pageCount, (int)patientService.getPageCount(entriesPerPage));
+		
 		List<Patient> samePatients = new LinkedList<>();
 		
 		for (int pageNum=1; pageNum <= pageCount; pageNum++) {

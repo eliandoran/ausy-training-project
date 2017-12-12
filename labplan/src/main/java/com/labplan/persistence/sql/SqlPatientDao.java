@@ -199,6 +199,26 @@ public class SqlPatientDao implements PatientDao {
 
 		return patient;
 	}
+	
+	@Override
+	public Integer getPatientsCount() {
+		Connection conn = DatabaseConnectionFactory.getConnection();
+		String query = "SELECT COUNT(*) FROM `patients`";
+
+		try {
+			PreparedStatement stmt = conn.prepareStatement(query);
+			ResultSet result = stmt.executeQuery();
+			
+			if (result.next()) {
+				return result.getInt(1);
+			}
+			
+			return null;
+		} catch (SQLException e) {
+			LOGGER.log(Level.WARNING, MSG_CONNECTION_FAILED, e);
+			return null;
+		}
+	}
 
 	@Override
 	public boolean truncate() {

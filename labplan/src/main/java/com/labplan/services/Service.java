@@ -13,4 +13,6 @@ public abstract class Service<TEntity extends Entity<?>, TDao extends Dao<TEntit
 	}
 	
 	public abstract List<TEntity> getPage(int page, int entriesPerPage);
+	
+	public abstract Integer getPageCount(int entriesPerPage);
 }

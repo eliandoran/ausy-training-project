@@ -32,6 +32,12 @@ public interface PatientDao extends Dao<Patient, Integer> {
 	List<Patient> read(Integer limit, Integer offset);
 	
 	/**
+	 * Obtains the total number of {@link Patient}s from the data source.
+	 * @return The total number of {@link Patient}s from the data source.
+	 */
+	Integer getPatientsCount();
+	
+	/**
 	 * Removes all {@link Patient} from the data source.
 	 */
 	boolean truncate();
