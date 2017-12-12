@@ -1,9 +1,20 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url('https://fonts.googleapis.com/css?family=Roboto:100,400,700');
 
 html {
     font-family: 'Roboto', sans-serif;
 }
 
+h1, h2 {
+	font-weight: 100;
+}
+
+h1 {
+	font-size: 30pt;
+}
+
+/*
+ * SIDEBAR
+ */
 body > aside {
 	position: absolute;
 	top: 0;
@@ -13,6 +24,29 @@ body > aside {
 	background-color: #fafafa;
 	box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
+
+body > aside header {
+	font-size: 30pt;
+	padding: 0.3em;
+	border-bottom: 1px solid #dedede;
+}
+
+body > aside header .logo {
+	width: 80px;
+	height: auto;
+	vertical-align: middle;
+}
+
+body > aside header h1 {
+	display: inline-block;
+	margin: 0;
+	padding: 0;
+	font-weight: 100;
+}
+
+/*
+ * MAIN CONTENT
+ */
 
 body > main {
 	position: absolute;

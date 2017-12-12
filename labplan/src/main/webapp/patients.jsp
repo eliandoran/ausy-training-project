@@ -25,7 +25,11 @@
 		%>
 		
 		<aside>
-			
+			<header>
+				<img class="logo" src="assets/logo.svg" alt="Platform logo" />
+				
+				<h1>LabTest</h1>
+			</header>
 		</aside>
 		
 		<main>
