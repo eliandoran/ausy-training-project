@@ -4,39 +4,38 @@
 <%@ page import="com.labplan.services.PatientService" %>
 <%@ page import="com.labplan.persistence.generic.PatientDao" %>
 <%@ page import="com.labplan.persistence.sql.SqlPatientDao" %>
+<%
+PatientDao patientDao = new SqlPatientDao();
+PatientService patientService = new PatientService(patientDao);
+
+int currentPage = 1;
+int entriesPerPage = 3;
+int pageCount = patientService.getPageCount(entriesPerPage);
+
+String pageQuery = request.getParameter("page");
+
+if (pageQuery != null) {
+	try {
+		Integer parsedPageNum = Integer.parseInt(pageQuery);	
+		
+		if (parsedPageNum > 0 && parsedPageNum <= pageCount)
+			currentPage = parsedPageNum;
+	} catch (NumberFormatException e) {
+		// No action needed.
+	}
+}
+
+List<Patient> patients = patientService.getPage(currentPage, entriesPerPage);
+%>
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-		<title>Insert title here</title>
+		<title>Patients (<%= currentPage %>/<%= pageCount %>) &rsaquo; LabPlan</title>
 		<link rel="stylesheet" type="text/css" href="style.css" />
 	</head>
 	
 	<body>
-		<%
-		PatientDao patientDao = new SqlPatientDao();
-		PatientService patientService = new PatientService(patientDao);
-		
-		int currentPage = 1;
-		int entriesPerPage = 3;
-		int pageCount = patientService.getPageCount(entriesPerPage);
-		
-		String pageQuery = request.getParameter("page");
-		
-		if (pageQuery != null) {
-			try {
-				Integer parsedPageNum = Integer.parseInt(pageQuery);	
-				
-				if (parsedPageNum > 0 && parsedPageNum <= pageCount)
-					currentPage = parsedPageNum;
-			} catch (NumberFormatException e) {
-				// No action needed.
-			}
-		}
-		
-		List<Patient> patients = patientService.getPage(currentPage, entriesPerPage);
-		%>
-		
 		<aside>
 			<header>
 				<img class="logo" src="assets/logo.svg" alt="Platform logo" />
