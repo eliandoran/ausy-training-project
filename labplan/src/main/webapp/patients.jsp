@@ -21,6 +21,19 @@
 		int entriesPerPage = 3;
 		int pageCount = patientService.getPageCount(entriesPerPage);
 		
+		String pageQuery = request.getParameter("page");
+		
+		if (pageQuery != null) {
+			try {
+				Integer parsedPageNum = Integer.parseInt(pageQuery);	
+				
+				if (parsedPageNum > 0 && parsedPageNum <= pageCount)
+					currentPage = parsedPageNum;
+			} catch (NumberFormatException e) {
+				// No action needed.
+			}
+		}
+		
 		List<Patient> patients = patientService.getPage(currentPage, entriesPerPage);
 		%>
 		
