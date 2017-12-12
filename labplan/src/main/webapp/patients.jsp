@@ -41,9 +41,9 @@
 						<tr>
 							<th>First Name</th>
 							<th>Last Name</th>
-							<th>Age</th>
-							<th>Weight</th>
-							<th>Height</th>
+							<th class="centered">Age</th>
+							<th class="centered">Weight</th>
+							<th class="centered">Height</th>
 						</tr>
 					</thead>
 				
@@ -52,9 +52,9 @@
 							<tr>
 								<td><%= patient.getFirstName() %></td>
 								<td><%= patient.getLastName() %></td>
-								<td><%= patient.getAge() %></td>
-								<td><%= patient.getWeight() %></td>
-								<td><%= patient.getHeight() %></td>
+								<td class="centered"><%= patient.getAge() %></td>
+								<td class="centered"><%= patient.getWeight() %></td>
+								<td class="centered"><%= patient.getHeight() %></td>
 							</tr>
 						<% } %>
 					</tbody>

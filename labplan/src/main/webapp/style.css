@@ -12,6 +12,10 @@ h1 {
 	font-size: 30pt;
 }
 
+.centered {
+	text-align: center;
+}
+
 /*
  * SIDEBAR
  */
