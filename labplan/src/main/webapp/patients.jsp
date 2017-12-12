@@ -58,11 +58,23 @@
 							</tr>
 						<% } %>
 					</tbody>
+					
+					<tfoot>
+						<tr class="pagination">
+							<td colspan="5">
+								<table>
+									<tr>
+										<td><a href="#">First</a></td>
+										<td><a href="#">Previous</a></td>
+										<td class="page-indicator">Page <%= currentPage %> out of <%= pageCount %></td>
+										<td><a href="#">Next</a></td>
+										<td><a href="#">Last</a></td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+					</tfoot>
 				</table>
-				
-				<footer class="pagination">
-					Page <%= currentPage %> out of <%= pageCount %>
-				</footer>
 			</div>
 		</main>
 	</body>
