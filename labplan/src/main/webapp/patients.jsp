@@ -9,6 +9,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<title>Insert title here</title>
+		<link rel="stylesheet" type="text/css" href="style.css" />
 	</head>
 	
 	<body>
@@ -23,34 +24,42 @@
 		List<Patient> patients = patientService.getPage(currentPage, entriesPerPage);
 		%>
 		
-		<section class="patients-list">
-			<table class="patients">
-				<thead>
-					<tr>
-						<th>First Name</th>
-						<th>Last Name</th>
-						<th>Age</th>
-						<th>Weight</th>
-						<th>Height</th>
-					</tr>
-				</thead>
+		<aside>
 			
-				<tbody>
-					<% for (Patient patient : patients) { %>
+		</aside>
+		
+		<main>
+			<div class="content-wrapper">
+				<h1>Patients</h1>
+			
+				<table class="patients">
+					<thead>
 						<tr>
-							<td><%= patient.getFirstName() %></td>
-							<td><%= patient.getLastName() %></td>
-							<td><%= patient.getAge() %></td>
-							<td><%= patient.getWeight() %></td>
-							<td><%= patient.getHeight() %></td>
+							<th>First Name</th>
+							<th>Last Name</th>
+							<th>Age</th>
+							<th>Weight</th>
+							<th>Height</th>
 						</tr>
-					<% } %>
-				</tbody>
-			</table>
-			
-			<footer class="pagination">
-				Page <%= currentPage %> out of <%= pageCount %>
-			</footer>
-		</section>
+					</thead>
+				
+					<tbody>
+						<% for (Patient patient : patients) { %>
+							<tr>
+								<td><%= patient.getFirstName() %></td>
+								<td><%= patient.getLastName() %></td>
+								<td><%= patient.getAge() %></td>
+								<td><%= patient.getWeight() %></td>
+								<td><%= patient.getHeight() %></td>
+							</tr>
+						<% } %>
+					</tbody>
+				</table>
+				
+				<footer class="pagination">
+					Page <%= currentPage %> out of <%= pageCount %>
+				</footer>
+			</div>
+		</main>
 	</body>
 </html>
