@@ -104,3 +104,13 @@ th, td {
 	width: 100%;
 	text-align: center;
 }
+
+.pagination a {
+	display: block;
+}
+
+.pagination img {
+	display: block;
+	width: 24px;
+	height: 24px;
+}

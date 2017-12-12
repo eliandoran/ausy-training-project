@@ -64,11 +64,11 @@
 							<td colspan="5">
 								<table>
 									<tr>
-										<td><a href="#">First</a></td>
-										<td><a href="#">Previous</a></td>
+										<td><a href="#"><img src="assets/pagination-first.png" alt="First" title="Go to the first page" /></a></td>
+										<td><a href="#"><img src="assets/pagination-previous.png" alt="Previous" title="Go to the previous page" /></a></td>
 										<td class="page-indicator">Page <%= currentPage %> out of <%= pageCount %></td>
-										<td><a href="#">Next</a></td>
-										<td><a href="#">Last</a></td>
+										<td><a href="#"><img src="assets/pagination-next.png" alt="Next" title="Go to the next page" /></a></td>
+										<td><a href="#"><img src="assets/pagination-last.png" alt="Last" title="Go to the last page" /></a></td>
 									</tr>
 								</table>
 							</td>
