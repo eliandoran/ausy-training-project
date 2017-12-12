@@ -29,23 +29,54 @@ body > aside {
 	box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
 
-body > aside header {
+body > aside > header {
 	font-size: 30pt;
 	padding: 0.3em;
 	border-bottom: 1px solid #dedede;
 }
 
-body > aside header .logo {
+body > aside > header .logo {
 	width: 80px;
 	height: auto;
 	vertical-align: middle;
 }
 
-body > aside header h1 {
+body > aside > header h1 {
 	display: inline-block;
 	margin: 0;
 	padding: 0;
 	font-weight: 100;
+}
+
+body > aside section {
+	padding: 2em;
+}
+
+body > aside section header {
+	font-weight: 300;
+	border-bottom: 1px solid #dedede;
+	padding: 0.5em 0;
+}
+
+body > aside section header img {
+	width: 24px;
+	height: auto;
+	margin-right: 0.5em;
+	vertical-align: middle;
+}
+
+body > aside section ul {
+	list-style-type: none;
+	padding: 0;
+}
+
+body > aside section a {
+	color: black;
+	text-decoration: none;
+}
+
+body > aside section a:hover {
+	text-decoration: underline;
 }
 
 /*

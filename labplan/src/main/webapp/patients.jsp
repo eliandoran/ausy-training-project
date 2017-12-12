@@ -43,6 +43,19 @@
 				
 				<h1>LabTest</h1>
 			</header>
+			
+			<section class="patients">
+				<header>
+					<img src="assets/icon-patients.png" />
+					Patients
+				</header>
+				
+				<ul>
+					<li>
+						<a href="patients.jsp">View all patients</a>
+					</li>
+				</ul>
+			</section>
 		</aside>
 		
 		<main>
