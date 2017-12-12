@@ -109,6 +109,11 @@ th, td {
 	display: block;
 }
 
+.pagination a[href=""] {
+	opacity: 0.5;
+	cursor: pointer;
+}
+
 .pagination img {
 	display: block;
 	width: 24px;

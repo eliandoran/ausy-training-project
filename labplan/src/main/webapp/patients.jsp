@@ -60,15 +60,25 @@
 					</tbody>
 					
 					<tfoot>
+						<%
+						String pageUrlFormat = "?page=%d";
+						
+						String paginationFirstUrl = (currentPage != 1 ? String.format(pageUrlFormat, 1) : "");
+						String paginationPreviousUrl = (currentPage > 1 ? String.format(pageUrlFormat, currentPage - 1) : "");
+						String paginationNextUrl = (currentPage < pageCount ? String.format(pageUrlFormat, currentPage + 1) : "");
+						String paginationLastUrl = (currentPage < pageCount ? String.format(pageUrlFormat, pageCount) : "");
+						%>
 						<tr class="pagination">
 							<td colspan="5">
 								<table>
 									<tr>
-										<td><a href="#"><img src="assets/pagination-first.png" alt="First" title="Go to the first page" /></a></td>
-										<td><a href="#"><img src="assets/pagination-previous.png" alt="Previous" title="Go to the previous page" /></a></td>
+										<td><a href="<%= paginationFirstUrl %>"><img src="assets/pagination-first.png" alt="First" title="Go to the first page" /></a></td>
+										<td><a href="<%= paginationPreviousUrl %>"><img src="assets/pagination-previous.png" alt="Previous" title="Go to the previous page" /></a></td>
+										
 										<td class="page-indicator">Page <%= currentPage %> out of <%= pageCount %></td>
-										<td><a href="#"><img src="assets/pagination-next.png" alt="Next" title="Go to the next page" /></a></td>
-										<td><a href="#"><img src="assets/pagination-last.png" alt="Last" title="Go to the last page" /></a></td>
+										
+										<td><a href="<%= paginationNextUrl %>"><img src="assets/pagination-next.png" alt="Next" title="Go to the next page" /></a></td>
+										<td><a href="<%= paginationLastUrl %>"><img src="assets/pagination-last.png" alt="Last" title="Go to the last page" /></a></td>
 									</tr>
 								</table>
 							</td>
