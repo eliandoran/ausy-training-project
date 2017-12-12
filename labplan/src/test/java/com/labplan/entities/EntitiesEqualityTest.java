@@ -8,15 +8,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class EntitiesEqualityTest {
-
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-	}
-
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
-	}
-
 	@Test
 	public void testEqualPatients() {
 		Patient a = new Patient(2, "John", "Doe", 10, 170, 90);
