@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
+import java.util.Random;
 import java.util.UUID;
 
 import org.junit.BeforeClass;
@@ -54,7 +55,14 @@ public class SqlPatientDaoTest extends DaoTester<Integer, Patient, SqlPatientDao
 
 	@Override
 	public Patient getRandomEntity() {
-		return new Patient(UUID.randomUUID().toString(), UUID.randomUUID().toString(), 12, 160, 80);
+		Random random = new Random();
+		
+		return new Patient(
+				UUID.randomUUID().toString(),
+				UUID.randomUUID().toString(),
+				10 + random.nextInt(80), 
+				150 + random.nextInt(70),
+				50 + random.nextInt(100));
 	}
 
 	@Override
