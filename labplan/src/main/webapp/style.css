@@ -267,3 +267,12 @@ form label {
 	text-transform: uppercase;
 	opacity: 0.7;
 }
+
+/*
+ * Error section
+ */
+section.error {
+	background-color: #E91E63;
+	padding: 2em;
+	color: white;
+}
