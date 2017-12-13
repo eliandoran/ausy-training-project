@@ -70,6 +70,7 @@ if (pageCount == 0) {
 				<table class="patients">
 					<thead>
 						<tr>
+							<th>#</th>
 							<th>First Name</th>
 							<th>Last Name</th>
 							<th class="centered">Age</th>
@@ -80,8 +81,10 @@ if (pageCount == 0) {
 				
 					<tbody>
 						<%
+						int index = (currentPage - 1) * entriesPerPage + 1;
 						for (Patient patient : patients) { %>
 						<tr>
+							<td class="right-aligned"><%= index++ %>
 							<td><%= patient.getFirstName() %></td>
 							<td><%= patient.getLastName() %></td>
 							<td class="centered"><%= patient.getAge() %> yrs</td>
@@ -92,7 +95,7 @@ if (pageCount == 0) {
 					
 						<% if (patients.size() < 1) { %>
 							<tr>
-								<td colspan="5">No data.</td>
+								<td colspan="6">No data.</td>
 							</tr>
 						<% } %>
 					</tbody>
@@ -107,7 +110,7 @@ if (pageCount == 0) {
 						String paginationLastUrl = (currentPage < pageCount ? String.format(pageUrlFormat, pageCount) : "");
 						%>
 						<tr class="pagination">
-							<td colspan="5">
+							<td colspan="6">
 								<table>
 									<tr>
 										<td><a href="<%= paginationFirstUrl %>"><img src="assets/pagination-first.png" alt="First" title="Go to the first page" /></a></td>

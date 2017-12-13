@@ -16,6 +16,10 @@ h1 {
 	text-align: center;
 }
 
+.right-aligned {
+	text-align: right;
+}
+
 /*
  * SIDEBAR
  */
