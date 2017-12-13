@@ -85,7 +85,7 @@ if (pageCount == 0) {
 						int index = (currentPage - 1) * entriesPerPage + 1;
 						for (Patient patient : patients) { %>
 						<tr>
-							<td class="right-aligned"><%= index++ %>
+							<td class="right-aligned"><%= index++ %></td>
 							<td><%= patient.getFirstName() %></td>
 							<td><%= patient.getLastName() %></td>
 							<td class="centered"><%= patient.getAge() %> yrs</td>
