@@ -246,6 +246,20 @@ form input[type="submit"]:hover {
 	background-color: #5C6BC0;
 }
 
+form .has-unit {
+	overflow: auto;
+}
+
+form .has-unit::after {
+	float: right;
+	top: 0;
+	right: 0;
+	content: attr(data-unit);
+	font-weight: 300;
+	opacity: 0.6;
+	font-size: 0.9em;
+}
+
 form label {
 	display: block;
 	font-size: 0.9em;

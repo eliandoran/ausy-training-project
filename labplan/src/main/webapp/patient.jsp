@@ -55,17 +55,26 @@
 					<div class="three-columns">
 						<div class="row">
 							<label for="age">Age</label>
-							<input type="text" name="age" class="fill" />
+							
+							<div class="has-unit" data-unit="years">
+								<input type="text" name="age" class="fill" />
+							</div>
 						</div>
 						
 						<div class="row">
 							<label for="weight">Weight</label>
-							<input type="text" name="weight" class="fill" />
+							
+							<div class="has-unit" data-unit="kg">
+								<input type="text" name="weight" class="fill" />
+							</div>
 						</div>
 						
 						<div class="row">
 							<label for="height">Height</label>
-							<input type="text" name="height" class="fill" />
+							
+							<div class="has-unit" data-unit="cm">
+								<input type="text" name="height" class="fill" />
+							</div>
 						</div>
 					</div>
 					
