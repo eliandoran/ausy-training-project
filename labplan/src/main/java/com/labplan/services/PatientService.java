@@ -23,6 +23,6 @@ public class PatientService extends Service<Patient, PatientDao> {
 
 	@Override
 	public Integer getPageCount(int entriesPerPage) {
-		return Math.round((float)dao.getPatientsCount() / entriesPerPage);
+		return (int)Math.round(Math.ceil(((double)dao.getPatientsCount() / entriesPerPage)));
 	}
 }

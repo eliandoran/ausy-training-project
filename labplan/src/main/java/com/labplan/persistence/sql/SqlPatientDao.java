@@ -213,7 +213,7 @@ public class SqlPatientDao implements PatientDao {
 				return result.getInt(1);
 			}
 			
-			return null;
+			return 0;
 		} catch (SQLException e) {
 			LOGGER.log(Level.WARNING, MSG_CONNECTION_FAILED, e);
 			return null;

@@ -2,9 +2,11 @@
 <%@ page import="java.util.*" %>
 <%@ page import="com.labplan.entities.Patient" %>
 <%@ page import="com.labplan.services.PatientService" %>
+<%@ page import="com.labplan.persistence.DatabaseConnectionFactory" %>
 <%@ page import="com.labplan.persistence.generic.PatientDao" %>
 <%@ page import="com.labplan.persistence.sql.SqlPatientDao" %>
 <%
+DatabaseConnectionFactory.setProfile("production");
 PatientDao patientDao = new SqlPatientDao();
 PatientService patientService = new PatientService(patientDao);
 
@@ -26,6 +28,10 @@ if (pageQuery != null) {
 }
 
 List<Patient> patients = patientService.getPage(currentPage, entriesPerPage);
+
+if (pageCount == 0) {
+	currentPage = 0;
+}
 %>
 <!DOCTYPE html>
 <html>
@@ -73,13 +79,20 @@ List<Patient> patients = patientService.getPage(currentPage, entriesPerPage);
 					</thead>
 				
 					<tbody>
-						<% for (Patient patient : patients) { %>
+						<%
+						for (Patient patient : patients) { %>
+						<tr>
+							<td><%= patient.getFirstName() %></td>
+							<td><%= patient.getLastName() %></td>
+							<td class="centered"><%= patient.getAge() %></td>
+							<td class="centered"><%= patient.getWeight() %></td>
+							<td class="centered"><%= patient.getHeight() %></td>
+						</tr>
+						<% } %>
+					
+						<% if (patients.size() < 1) { %>
 							<tr>
-								<td><%= patient.getFirstName() %></td>
-								<td><%= patient.getLastName() %></td>
-								<td class="centered"><%= patient.getAge() %></td>
-								<td class="centered"><%= patient.getWeight() %></td>
-								<td class="centered"><%= patient.getHeight() %></td>
+								<td colspan="5">No data.</td>
 							</tr>
 						<% } %>
 					</tbody>
@@ -88,7 +101,7 @@ List<Patient> patients = patientService.getPage(currentPage, entriesPerPage);
 						<%
 						String pageUrlFormat = "?page=%d";
 						
-						String paginationFirstUrl = (currentPage != 1 ? String.format(pageUrlFormat, 1) : "");
+						String paginationFirstUrl = (currentPage > 1 ? String.format(pageUrlFormat, 1) : "");
 						String paginationPreviousUrl = (currentPage > 1 ? String.format(pageUrlFormat, currentPage - 1) : "");
 						String paginationNextUrl = (currentPage < pageCount ? String.format(pageUrlFormat, currentPage + 1) : "");
 						String paginationLastUrl = (currentPage < pageCount ? String.format(pageUrlFormat, pageCount) : "");
