@@ -76,6 +76,7 @@ if (pageCount == 0) {
 							<th class="centered">Age</th>
 							<th class="centered">Weight</th>
 							<th class="centered">Height</th>
+							<th>Actions</th>
 						</tr>
 					</thead>
 				
@@ -90,12 +91,15 @@ if (pageCount == 0) {
 							<td class="centered"><%= patient.getAge() %> yrs</td>
 							<td class="centered"><%= patient.getWeight() %> kg</td>
 							<td class="centered"><%= patient.getHeight() %> cm</td>
+							<td class="actions">
+								<a href="patient.jsp?id=<%= patient.getId().toString() %>" title="Edit this patient"><img src="assets/action-edit.png" alt="Edit" /></a>
+							</td>
 						</tr>
 						<% } %>
 					
 						<% if (patients.size() < 1) { %>
 							<tr>
-								<td colspan="6">No data.</td>
+								<td colspan="7">No data.</td>
 							</tr>
 						<% } %>
 					</tbody>
@@ -110,7 +114,7 @@ if (pageCount == 0) {
 						String paginationLastUrl = (currentPage < pageCount ? String.format(pageUrlFormat, pageCount) : "");
 						%>
 						<tr class="pagination">
-							<td colspan="6">
+							<td colspan="7">
 								<table>
 									<tr>
 										<td><a href="<%= paginationFirstUrl %>"><img src="assets/pagination-first.png" alt="First" title="Go to the first page" /></a></td>
