@@ -49,7 +49,7 @@ if (request.getParameter("commit") != null) {
 		
 		newPatient.setId(patientId);
 	} catch (ValidationError e) {
-		error = "Validation error: " + e.getMessage();	
+		error = e.getMessage();	
 	}
 }
 %>
