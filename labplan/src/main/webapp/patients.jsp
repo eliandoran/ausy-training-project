@@ -84,9 +84,9 @@ if (pageCount == 0) {
 						<tr>
 							<td><%= patient.getFirstName() %></td>
 							<td><%= patient.getLastName() %></td>
-							<td class="centered"><%= patient.getAge() %></td>
-							<td class="centered"><%= patient.getWeight() %></td>
-							<td class="centered"><%= patient.getHeight() %></td>
+							<td class="centered"><%= patient.getAge() %> yrs</td>
+							<td class="centered"><%= patient.getWeight() %> kg</td>
+							<td class="centered"><%= patient.getHeight() %> cm</td>
 						</tr>
 						<% } %>
 					
