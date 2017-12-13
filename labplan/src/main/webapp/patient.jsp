@@ -78,12 +78,12 @@ if (isEditing && patient == null) {
 						<div class="two-columns">
 							<div class="row">
 								<label for="first_name">First Name</label>
-								<input type="text" name="first_name" class="fill" />
+								<input type="text" name="first_name" value="<%= patient.getFirstName() %>" class="fill" />
 							</div>
 							
 							<div class="row">
 								<label for="last_name">Last Name</label>
-								<input type="text" name="last_name" class="fill" />
+								<input type="text" name="last_name" value="<%= patient.getLastName() %>" class="fill" />
 							</div>
 						</div>
 						
@@ -92,7 +92,7 @@ if (isEditing && patient == null) {
 								<label for="age">Age</label>
 								
 								<div class="has-unit" data-unit="years">
-									<input type="text" name="age" class="fill" />
+									<input type="text" name="age" value="<%= patient.getAge() %>" class="fill" />
 								</div>
 							</div>
 							
@@ -100,7 +100,7 @@ if (isEditing && patient == null) {
 								<label for="weight">Weight</label>
 								
 								<div class="has-unit" data-unit="kg">
-									<input type="text" name="weight" class="fill" />
+									<input type="text" name="weight" value="<%= patient.getWeight() %>" class="fill" />
 								</div>
 							</div>
 							
@@ -108,7 +108,7 @@ if (isEditing && patient == null) {
 								<label for="height">Height</label>
 								
 								<div class="has-unit" data-unit="cm">
-									<input type="text" name="height" class="fill" />
+									<input type="text" name="height" value="<%= patient.getHeight() %>" class="fill" />
 								</div>
 							</div>
 						</div>
