@@ -1,3 +1,4 @@
+<%@page import="com.labplan.exceptions.ValidationError"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>
 <%@ page import="java.util.*" %>
 <%@ page import="com.labplan.entities.Patient" %>
@@ -12,6 +13,7 @@ Integer patientId = null;
 String patientIdQuery = request.getParameter("id");
 String error = null;
 Boolean isEditing = false;
+Boolean fatalError = false;
 
 if (patientIdQuery != null) {
 	isEditing = true;
@@ -23,16 +25,32 @@ if (patientIdQuery != null) {
 	}
 }
 
-if (patientId != null) {
-	DatabaseConnectionFactory.setProfile("production");
-	PatientDao patientDao = new SqlPatientDao();
-	PatientService patientService = new PatientService(patientDao);
+DatabaseConnectionFactory.setProfile("production");
+PatientDao patientDao = new SqlPatientDao();
+PatientService patientService = new PatientService(patientDao);
 
+if (patientId != null) {
 	patient = patientDao.read(patientId);
 }
 
 if (isEditing && patient == null) {
 	error = "The patient you have requested for editing does not exist.";
+	fatalError = true;
+}
+
+if (request.getParameter("commit") != null) {	
+	try {
+		Patient newPatient = patientService.parse(
+				request.getParameter("first_name"),
+				request.getParameter("last_name"),
+				request.getParameter("age"),
+				request.getParameter("weight"),
+				request.getParameter("height"));
+		
+		newPatient.setId(patientId);
+	} catch (ValidationError e) {
+		error = "Validation error: " + e.getMessage();	
+	}
 }
 %>
 <!DOCTYPE html>
@@ -73,8 +91,12 @@ if (isEditing && patient == null) {
 					<section class="error">
 						<%= error %>
 					</section>
-				<% } else { %>
-					<form class="patient-form">
+				<% } %>
+				
+				<% if (!fatalError) { %>
+					<form class="patient-form" method="post">
+						<input type="hidden" name="commit" value="" />
+					
 						<div class="two-columns">
 							<div class="row">
 								<label for="first_name">First Name</label>

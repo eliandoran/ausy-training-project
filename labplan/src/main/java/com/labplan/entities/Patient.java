@@ -185,4 +185,9 @@ public class Patient extends Entity<Integer> {
 		hash = 31 * hash + height.hashCode();
 		return hash;
 	}
+	
+	@Override
+	public String toString() {
+		return String.format("<Patient ID=%s, FirstName=%s, LastName=%s, Age=%d, Weight=%d, Height=%d>", id, firstName, lastName, age, weight, height);
+	}
 }
