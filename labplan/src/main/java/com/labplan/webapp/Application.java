@@ -6,11 +6,11 @@ import org.glassfish.jersey.server.ServerProperties;
 import org.glassfish.jersey.server.TracingConfig;
 import org.glassfish.jersey.server.mvc.jsp.JspMvcFeature;
 
-import com.labplan.webapp.resource.Patient;
+import com.labplan.webapp.resource.PatientListing;
 
 public class Application extends ResourceConfig {
 	public Application() {
-		packages(Patient.class.getPackage().getName());
+		packages(PatientListing.class.getPackage().getName());
 		register(JspMvcFeature.class);
 		register(LoggingFeature.class);
 		property(ServerProperties.TRACING, TracingConfig.ON_DEMAND.name());

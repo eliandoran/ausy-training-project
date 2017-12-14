@@ -21,7 +21,7 @@ import com.labplan.services.PatientService;
 @XmlAccessorType(XmlAccessType.FIELD)
 @Path("/patients/")
 @Singleton
-public class Patient {
+public class PatientListing {
 	@GET
     @Produces({MediaType.APPLICATION_XML, MediaType.TEXT_XML, MediaType.APPLICATION_JSON})
     public List<com.labplan.entities.Patient> listPatients() {
