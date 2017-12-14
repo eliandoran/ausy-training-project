@@ -1,5 +1,9 @@
 package com.labplan.entities;
 
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlAccessType;
+
 import com.labplan.entities.generic.Entity;
 
 /**
@@ -9,6 +13,8 @@ import com.labplan.entities.generic.Entity;
  * @author Elian Doran
  *
  */
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Patient extends Entity<Integer> {
 	private String firstName;
 	private String lastName;

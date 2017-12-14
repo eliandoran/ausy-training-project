@@ -11,6 +11,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import org.glassfish.jersey.server.mvc.*;
 
+import com.labplan.entities.Patient;
+import com.labplan.persistence.DatabaseConnectionFactory;
 import com.labplan.persistence.generic.PatientDao;
 import com.labplan.persistence.sql.SqlPatientDao;
 import com.labplan.services.PatientService;
@@ -22,12 +24,36 @@ import com.labplan.services.PatientService;
 @Path("/patients/")
 @Singleton
 public class PatientListing {
+	private List<Patient> patients;
+	
+	public PatientListing() {
+		try {
+			DatabaseConnectionFactory.setProfile("production");
+			PatientDao dao = new SqlPatientDao();
+			PatientService service = new PatientService(dao);
+	        patients = service.getPage(1, 5);
+		} catch (Exception e) {
+			System.err.print(e.toString());
+		}
+	}
+	
+	public List<Patient> getPatients() {
+		return patients;
+	}
+	
 	@GET
     @Produces({MediaType.APPLICATION_XML, MediaType.TEXT_XML, MediaType.APPLICATION_JSON})
-    public List<com.labplan.entities.Patient> listPatients() {
-		PatientDao dao = new SqlPatientDao();
-		PatientService service = new PatientService(dao);
-        List<com.labplan.entities.Patient> patients = service.getPage(1, 5);
-        return patients;
+    public PatientListing listPatients() {
+        System.out.println("Hi");
+        return this;
     }
+	
+	@Override
+	public String toString() {
+		if (patients == null) {
+			return "Patients is null.";
+		}
+		
+		return "Patients is not null.";
+	}
 }
