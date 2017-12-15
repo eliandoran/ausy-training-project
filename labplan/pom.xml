@@ -21,42 +21,6 @@
 			<artifactId>console-table-builder</artifactId>
 			<version>1.2</version>
 		</dependency>
-	
-	    <dependency>
-	        <groupId>org.glassfish.jersey.core</groupId>
-	        <artifactId>jersey-server</artifactId>
-	        <version>2.26</version>
-	    </dependency>
-	    
-	    <dependency>
-	        <groupId>org.glassfish.jersey.core</groupId>
-	        <artifactId>jersey-client</artifactId>
-	        <version>2.26</version>
-	    </dependency>
-	
-	    <dependency>
-	        <groupId>org.glassfish.jersey.containers</groupId>
-	        <artifactId>jersey-container-servlet</artifactId>
-	        <version>2.26</version>
-	    </dependency>
-	
-	    <dependency>
-	        <groupId>org.glassfish.jersey.ext</groupId>
-	        <artifactId>jersey-mvc</artifactId>
-	        <version>2.26</version>
-	    </dependency>
-	
-	    <dependency>
-	        <groupId>org.glassfish.jersey.ext</groupId>
-	        <artifactId>jersey-mvc-jsp</artifactId>
-	        <version>2.26</version>
-	    </dependency>
-	    
-	    <dependency>
-		    <groupId>org.glassfish.jersey.inject</groupId>
-		    <artifactId>jersey-hk2</artifactId>
-		    <version>2.26</version>
-		</dependency>
 		
 		<dependency>
 		    <groupId>javax.servlet</groupId>
