@@ -17,24 +17,19 @@ import com.labplan.persistence.DatabaseConnectionFactory;
 import com.labplan.persistence.generic.PatientDao;
 import com.labplan.persistence.sql.SqlPatientDao;
 import com.labplan.services.PatientService;
-import com.labplan.webapp.PaginatedModel;
 
 @Template
 @Produces(MediaType.TEXT_HTML)
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-public class PatientListing extends PaginatedModel {
+public class PatientListing {
 	private List<Patient> patients;
 	
 	public PatientListing(int pageNumber) throws PageOutOfRangeError {
-		int entriesPerPage = 3;
-		
 		DatabaseConnectionFactory.setProfile("production");
 		PatientDao dao = new SqlPatientDao();
 		PatientService service = new PatientService(dao);
-        patients = service.getPage(pageNumber, entriesPerPage);
-        setCurrentPage(pageNumber);
-        setTotalPages(service.getPageCount(entriesPerPage));
+        patients = service.getPage(pageNumber, 3);
 	}
 	
 	public List<Patient> getPatients() {
