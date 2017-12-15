@@ -22,6 +22,9 @@ import com.labplan.exceptions.PageOutOfRangeError;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Root {
+	/*
+	 * Patients handling
+	 */
 	@Path("patients/page-{page}/")
 	public PatientListing getPatientsByPage(@PathParam("page") Integer page) {
 		System.out.println("Listing Patients page " + page.toString());
@@ -34,5 +37,10 @@ public class Root {
 					.entity("Page not found")
 					.build());
 		}
+	}
+	
+	@Path("patients/")
+	public PatientListing getPatientsFirstPage() {
+		return getPatientsByPage(1);
 	}
 }
