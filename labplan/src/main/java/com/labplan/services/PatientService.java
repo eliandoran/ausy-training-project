@@ -3,6 +3,7 @@ package com.labplan.services;
 import java.util.List;
 
 import com.labplan.entities.Patient;
+import com.labplan.exceptions.PageOutOfRangeError;
 import com.labplan.exceptions.ValidationError;
 import com.labplan.helpers.IntUtils;
 import com.labplan.persistence.generic.PatientDao;
@@ -13,12 +14,12 @@ public class PatientService extends Service<Patient, PatientDao> {
 	}
 	
 	@Override
-	public List<Patient> getPage(int page, int entriesPerPage) {		
-		if (page < 1)
-			throw new RuntimeException("`page` argument should be a positive number.");
-		
+	public List<Patient> getPage(int page, int entriesPerPage) throws PageOutOfRangeError {				
 		if (entriesPerPage < 1)
 			throw new RuntimeException("`entriesPerPage` should be a positive number.");
+		
+		if (page < 1 || page > getPageCount(entriesPerPage))
+			throw new PageOutOfRangeError();
 		
 		return dao.read(entriesPerPage, (page-1)*entriesPerPage);
 	}
