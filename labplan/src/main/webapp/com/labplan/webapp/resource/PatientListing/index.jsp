@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Patients &rsaquo; LabPlan</title>
+		<title>Patients (${it.currentPage}/${it.totalPages}) &rsaquo; LabPlan</title>
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style.css" />
 	</head>
 	
@@ -47,9 +47,13 @@
 					</thead>
 				
 					<tbody>
+						<c:set var="patientIndex" value="0" />
+					
 						<c:forEach var="patient" items="${it.patients}">
+							<c:set var="patientIndex" value="${patientIndex + 1}" />
+						
 							<tr>
-								<td class="right-aligned">0</td>
+								<td class="right-aligned">${patientIndex}</td>
 								<td>${patient.firstName}</td>
 								<td>${patient.lastName}</td>
 								<td class="centered">${patient.age} yrs</td>
