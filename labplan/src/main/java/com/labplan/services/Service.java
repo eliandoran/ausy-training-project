@@ -3,7 +3,6 @@ package com.labplan.services;
 import java.util.List;
 
 import com.labplan.entities.generic.Entity;
-import com.labplan.exceptions.PageOutOfRangeError;
 import com.labplan.persistence.generic.Dao;
 
 public abstract class Service<TEntity extends Entity<?>, TDao extends Dao<TEntity, ?>> {
@@ -13,7 +12,7 @@ public abstract class Service<TEntity extends Entity<?>, TDao extends Dao<TEntit
 		this.dao = dao;
 	}
 	
-	public abstract List<TEntity> getPage(int page, int entriesPerPage) throws PageOutOfRangeError;
+	public abstract List<TEntity> getPage(int page, int entriesPerPage);
 	
 	public abstract Integer getPageCount(int entriesPerPage);
 }
