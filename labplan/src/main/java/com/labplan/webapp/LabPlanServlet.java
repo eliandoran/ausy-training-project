@@ -19,12 +19,12 @@ public class LabPlanServlet extends HttpServlet {
 	
 	private String message;
 	
-	private Map<String, ResourceHandler> handlers;
+	private HandlerContainer handlers;
 
 	   public void init() throws ServletException {
-		   handlers = new HashMap<>();
+		   handlers = new HandlerContainer();
 		   
-		   registerHandler("patients", new PatientsResourceHandler());
+		   handlers.register("patients", new PatientsResourceHandler());
 	   }
 
 	   public void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -39,7 +39,7 @@ public class LabPlanServlet extends HttpServlet {
 	     
 	      if (path.length > 0) {
 	    	  String handlerName = path[0];
-	    	  ResourceHandler handler = obtainHandler(handlerName);
+	    	  ResourceHandler handler = handlers.obtain(handlerName);
 	    	  
 	    	  if (handler != null) {
 	    		  handler.doGet(request, response);
@@ -57,17 +57,6 @@ public class LabPlanServlet extends HttpServlet {
 	      } catch (URISyntaxException e) {
 	    	  throw new RuntimeException("Unable to determine server base URI.");
 	      }
-	   }
-	   
-	   void registerHandler(String name, ResourceHandler handler) {
-		   handlers.put(name, handler);
-	   }
-	   
-	   ResourceHandler obtainHandler(String name) {
-		   if (!handlers.containsKey(name))
-			   return null;
-		   
-		   return handlers.get(name);
 	   }
 
 	   public void destroy() {
