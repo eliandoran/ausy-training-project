@@ -35,8 +35,9 @@ public class LabPlanServlet extends HttpServlet {
 
 	      String[] path = getPath(request);
 	      ServletContext context = getServletContext();
+	      HandlerParameters params = new HandlerParameters(context, request, response, path);
 	      
-	      System.out.println("GET " + request.getRequestURI());
+	      System.out.println("GET " + request.getRequestURI());	      	      
 	     
 	      if (path.length > 0) {
 	    	  String handlerName = path[0];
@@ -45,7 +46,7 @@ public class LabPlanServlet extends HttpServlet {
 	    	  if (handler != null) {
 	    		  System.out.println("Invoking " + handlerName);
 	    		  
-	    		  handler.doGet(path, context, request, response);
+	    		  handler.doGet(params);
 	    		  return;
 	    	  }
 	      }

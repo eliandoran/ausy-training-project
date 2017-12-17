@@ -8,5 +8,5 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public interface ResourceHandler {
-	void doGet(String[] path, ServletContext context, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException;
+	void doGet(HandlerParameters params) throws ServletException, IOException;
 }
