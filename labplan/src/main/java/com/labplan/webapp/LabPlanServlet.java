@@ -31,20 +31,22 @@ public class LabPlanServlet extends HttpServlet {
 
 	   public void doGet(HttpServletRequest request, HttpServletResponse response)
 	      throws ServletException, IOException {	      		   
-	      // Set response content type
 	      response.setContentType("text/html");	      	      
 
-	      // Actual logic goes here.
-	      PrintWriter out = response.getWriter();
-	      
 	      String[] path = getPath(request);
+	      ServletContext context = getServletContext();
+	      
+	      System.out.println("GET " + request.getRequestURI());
 	     
 	      if (path.length > 0) {
 	    	  String handlerName = path[0];
 	    	  ResourceHandler handler = handlers.obtain(handlerName);
 	    	  
 	    	  if (handler != null) {
-	    		  handler.doGet(path, request, response);
+	    		  System.out.println("Invoking " + handlerName);
+	    		  
+	    		  handler.doGet(path, context, request, response);
+	    		  return;
 	    	  }
 	      }
 	   }
