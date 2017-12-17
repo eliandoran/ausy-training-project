@@ -44,7 +44,7 @@ public class LabPlanServlet extends HttpServlet {
 	    	  ResourceHandler handler = handlers.obtain(handlerName);
 	    	  
 	    	  if (handler != null) {
-	    		  handler.doGet(request, response);
+	    		  handler.doGet(path, request, response);
 	    	  }
 	      }
 	   }

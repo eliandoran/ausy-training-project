@@ -7,9 +7,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.labplan.webapp.ResourceHandler;
 
-public class PatientsResourceHandler extends ResourceHandler {
+public class PatientsResourceHandler implements ResourceHandler {
 	@Override
-	public void doGet(HttpServletRequest request, HttpServletResponse response) {
+	public void doGet(String[] path, HttpServletRequest request, HttpServletResponse response) {
 		try {
 			response.getWriter().println("Patient handler here.");
 		} catch (IOException e) {
