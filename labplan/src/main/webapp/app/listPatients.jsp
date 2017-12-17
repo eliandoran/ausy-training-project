@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-Patients listing goes here.
+Page ${page.current}
 </body>
 </html>
