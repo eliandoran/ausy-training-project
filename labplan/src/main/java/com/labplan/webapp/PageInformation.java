@@ -45,4 +45,20 @@ public class PageInformation {
 		
 		return (entriesPerPage * (current - 1)) + 1;
 	}
+	
+	public Integer getPreviousPage() {
+		return (current > 1 ? current - 1 : null);
+	}
+	
+	public Integer getNextPage() {
+		return (current < total ? current + 1 : null);
+	}
+	
+	public PaginationUrlBuilder getPaginationUrlBuilder() {
+		return new PaginationUrlBuilder(this);
+	}
+	
+	public PaginationUrlBuilder getPaginationUrlBuilder(String baseUri) {
+		return new PaginationUrlBuilder(baseUri, this);
+	}
 }
