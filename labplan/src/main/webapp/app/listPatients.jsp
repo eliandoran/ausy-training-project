@@ -11,26 +11,7 @@
 	</head>
 	
 	<body>
-		<aside>
-			<header>
-				<img class="logo" src="<c:url value="/assets/logo.svg" />" alt="Platform logo" />
-				
-				<h1>LabTest</h1>
-			</header>
-			
-			<section class="patients">
-				<header>
-					<img src="<c:url value="/assets/icon-patients.png" />" />
-					Patients
-				</header>
-				
-				<ul>
-					<li>
-						<a href="patients.jsp">View all patients</a>
-					</li>
-				</ul>
-			</section>
-		</aside>
+		<ex:sidebar />
 		
 		<main>
 			<div class="content-wrapper">
