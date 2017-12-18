@@ -16,4 +16,9 @@ public class DefaultResourceHandler implements ResourceHandler {
 		
 		return true;
 	}
+
+	@Override
+	public boolean doPost(HandlerParameters params) throws ServletException, IOException {
+		return false;
+	}
 }
