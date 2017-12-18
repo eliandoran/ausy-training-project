@@ -16,10 +16,13 @@ import com.labplan.webapp.ResourceHandler;
 
 public class PatientsResourceHandler implements ResourceHandler {
 	@Override
-	public void doGet(HandlerParameters params) throws ServletException, IOException {
+	public boolean doGet(HandlerParameters params) throws ServletException, IOException {
 		if (params.getPath().length == 1) {
 			listPatients(params);
+			return true;
 		}
+		
+		return false;
 	}
 
 	void listPatients(HandlerParameters params) throws ServletException, IOException {

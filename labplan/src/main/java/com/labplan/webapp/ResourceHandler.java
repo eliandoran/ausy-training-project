@@ -5,5 +5,5 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 
 public interface ResourceHandler {
-	void doGet(HandlerParameters params) throws ServletException, IOException;
+	boolean doGet(HandlerParameters params) throws ServletException, IOException;
 }

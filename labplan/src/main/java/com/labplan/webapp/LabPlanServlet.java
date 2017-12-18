@@ -40,7 +40,10 @@ public class LabPlanServlet extends HttpServlet {
 		ResourceHandler handler = obtainHandler(path);
 		
 		if (handler != null) {
-			handler.doGet(params);
+			if (!handler.doGet(params)) {
+				response.sendError(404);
+				System.out.println("Handler returned 404.");
+			};
 		}
 	}
 	
