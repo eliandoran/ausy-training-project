@@ -1,6 +1,6 @@
 package com.labplan.exceptions;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class ValidationError extends RuntimeException {
@@ -9,7 +9,7 @@ public class ValidationError extends RuntimeException {
 	private Map<String, String> fields;
 
 	public ValidationError() {
-		fields = new HashMap<>();
+		fields = new LinkedHashMap<>();
 	}
 	
 	public void addField(String fieldName, String message) {
