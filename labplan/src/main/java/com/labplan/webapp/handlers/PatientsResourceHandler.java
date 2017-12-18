@@ -152,7 +152,7 @@ public class PatientsResourceHandler implements ResourceHandler {
 				params.getResponse().sendRedirect(params.getContext().getContextPath() + "/patients/");
 			}
 		} catch (ValidationError e) {
-			message.setContent(e.getMessage());
+			message.setContent(e.toString());
 			message.setType(Message.MessageType.MSG_ERROR);
 			
 			session.setAttribute("message", message);
