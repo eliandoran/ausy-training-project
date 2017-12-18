@@ -37,6 +37,9 @@ public class PatientsResourceHandler implements ResourceHandler {
 		
 		RequestDispatcher dispatcher = params.getContext().getRequestDispatcher("/app/listPatients.jsp");
 		HttpServletRequest request = params.getRequest();
+					
+		page = Math.max(page, 1);
+		page = Math.min(page, pageCount);
 		
 		PageInformation pageInfo = new PageInformation();
 		pageInfo.setCurrent(page);		
@@ -44,7 +47,7 @@ public class PatientsResourceHandler implements ResourceHandler {
 		pageInfo.setTotal(pageCount);			
 		request.setAttribute("page", pageInfo);
 		
-		List<Patient> patients = patientService.getPage(1, entriesPerPage);
+		List<Patient> patients = patientService.getPage(page, entriesPerPage);
 		request.setAttribute("patients", patients);
 		
 		dispatcher.forward(params.getRequest(), params.getResponse());
