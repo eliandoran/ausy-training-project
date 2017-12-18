@@ -3,6 +3,7 @@ package com.labplan.webapp;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.logging.Logger;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -17,6 +18,8 @@ import com.labplan.webapp.handlers.PatientsResourceHandler;
 public class LabPlanServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	private static final Logger LOGGER = Logger.getLogger(LabPlanServlet.class.getName());
+	
 	private HandlerContainer handlers;
 
 	@Override
@@ -35,14 +38,14 @@ public class LabPlanServlet extends HttpServlet {
 		ServletContext context = getServletContext();
 		HandlerParameters params = new HandlerParameters(context, request, response, path);
 
-		System.out.println("GET " + request.getRequestURI());
+		LOGGER.info("GET " + request.getRequestURI());
 		
 		ResourceHandler handler = obtainHandler(path);
 		
 		if (handler != null) {
 			if (!handler.doGet(params)) {
 				response.sendError(404);
-				System.out.println("Handler returned 404.");
+				LOGGER.info("Handler returned 404.");
 			};
 		}
 	}
@@ -53,12 +56,12 @@ public class LabPlanServlet extends HttpServlet {
 			ResourceHandler handler = handlers.obtain(handlerName);
 			
 			if (handler != null) {
-				System.out.println("Invoking " + handlerName);
+				LOGGER.info("Obtained handler: " + handlerName);
 				return handler;
 			}
 		}
 		
-		System.out.println("Invoking default handler.");
+		LOGGER.info("Using default handler.");
 		return new DefaultResourceHandler();
 	}
 
