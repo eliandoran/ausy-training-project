@@ -3,7 +3,8 @@ package com.labplan.webapp;
 public class Message {
 	public enum MessageType {
 		MSG_ERROR,
-		MSG_SUCCESS
+		MSG_SUCCESS,
+		MSG_INFO
 	}
 	
 	MessageType type;
@@ -11,24 +12,24 @@ public class Message {
 	String content;
 	
 	public Message() {
-		
+		this.type = MessageType.MSG_INFO;
 	}
 	
 	public Message(String content) {
+		this();
 		this.content = content;
-		this.type = MessageType.MSG_SUCCESS;
 	}
 	
 	public Message(String title, String content) {
+		this();
 		this.title = title;
 		this.content = content;
-		this.type = MessageType.MSG_SUCCESS;
 	}
 	
 	public Message(String title, String content, MessageType type) {
+		this();
 		this.title = title;
 		this.content = content;
-		this.type = type;
 	}
 	
 	public MessageType getType() {
