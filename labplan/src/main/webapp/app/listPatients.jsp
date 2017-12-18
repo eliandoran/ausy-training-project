@@ -6,7 +6,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<title>Patients (${page.current}/${page.total}) &rsaquo; LabPlan</title>
-		<link rel="stylesheet" type="text/css" href="style.css" />
+		<link rel="stylesheet" type="text/css" href="<c:url value="/assets/style.css" />" />
 	</head>
 	
 	<body>
