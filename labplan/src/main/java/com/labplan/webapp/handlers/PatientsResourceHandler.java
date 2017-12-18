@@ -41,6 +41,9 @@ public class PatientsResourceHandler implements ResourceHandler {
 		if (params.getPath().length >= 2) {
 			String action = params.getPath()[1];
 			
+			if (action.equals("add"))
+				return addPatient(params);
+			
 			if (action.equals("edit"))
 				return editPatient(params);
 			
@@ -83,6 +86,14 @@ public class PatientsResourceHandler implements ResourceHandler {
 		dispatcher.forward(params.getRequest(), params.getResponse());
 	}
 	
+	// GET /patients/add
+	boolean addPatient(HandlerParameters params) throws ServletException, IOException {
+		RequestDispatcher dispatcher = params.getContext().getRequestDispatcher("/app/patients/add.jsp");
+		dispatcher.forward(params.getRequest(), params.getResponse());
+		
+		return true;
+	}
+	
 	// GET /patients/edit?id={id}
 	boolean editPatient(HandlerParameters params) throws ServletException, IOException {
 		Integer patientId = IntUtils.tryParse(params.getRequest().getParameter("id"));
@@ -102,7 +113,7 @@ public class PatientsResourceHandler implements ResourceHandler {
 		request.setAttribute("weight", patient.getWeight());
 		request.setAttribute("height", patient.getHeight());
 		
-		RequestDispatcher dispatcher = params.getContext().getRequestDispatcher("/app/patients/addEdit.jsp");
+		RequestDispatcher dispatcher = params.getContext().getRequestDispatcher("/app/patients/edit.jsp");
 		request.setAttribute("patient", patient);
 		dispatcher.forward(params.getRequest(), params.getResponse());
 		
@@ -156,7 +167,7 @@ public class PatientsResourceHandler implements ResourceHandler {
 			message.setType(Message.MessageType.MSG_ERROR);
 			
 			session.setAttribute("message", message);
-			RequestDispatcher dispatcher = params.getContext().getRequestDispatcher("/app/patients/addEdit.jsp");
+			RequestDispatcher dispatcher = params.getContext().getRequestDispatcher("/app/patients/edit.jsp");
 			dispatcher.forward(params.getRequest(), params.getResponse());
 		}
 

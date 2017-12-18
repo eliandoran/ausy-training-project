@@ -17,6 +17,10 @@
 			<li>
 				<a href="<c:url value="/patients/" />">View all patients</a>
 			</li>
+			
+			<li>
+				<a href="<c:url value="/patients/add" />">Add a patient</a>
+			</li>
 		</ul>
 	</section>
 </aside>
