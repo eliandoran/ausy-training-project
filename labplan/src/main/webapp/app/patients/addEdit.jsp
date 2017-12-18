@@ -24,12 +24,12 @@
 					<div class="two-columns">
 						<div class="row">
 							<label for="first_name">First Name</label>
-							<input type="text" name="first_name" value="${patient.firstName}" class="fill" />
+							<input type="text" name="first_name" value="${first_name}" class="fill" />
 						</div>
 						
 						<div class="row">
 							<label for="last_name">Last Name</label>
-							<input type="text" name="last_name" value="${patient.lastName}" class="fill" />
+							<input type="text" name="last_name" value="${last_name}" class="fill" />
 						</div>
 					</div>
 					
@@ -38,7 +38,7 @@
 							<label for="age">Age</label>
 							
 							<div class="has-unit" data-unit="years">
-								<input type="text" name="age" value="${patient.age}" class="fill" />
+								<input type="text" name="age" value="${age}" class="fill" />
 							</div>
 						</div>
 						
@@ -46,7 +46,7 @@
 							<label for="weight">Weight</label>
 							
 							<div class="has-unit" data-unit="kg">
-								<input type="text" name="weight" value="${patient.weight}" class="fill" />
+								<input type="text" name="weight" value="${weight}" class="fill" />
 							</div>
 						</div>
 						
@@ -54,7 +54,7 @@
 							<label for="height">Height</label>
 							
 							<div class="has-unit" data-unit="cm">
-								<input type="text" name="height" value="${patient.height}" class="fill" />
+								<input type="text" name="height" value="${height}" class="fill" />
 							</div>
 						</div>
 					</div>

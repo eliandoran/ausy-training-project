@@ -96,6 +96,12 @@ public class PatientsResourceHandler implements ResourceHandler {
 			return false;
 		
 		HttpServletRequest request = params.getRequest();
+		request.setAttribute("first_name", patient.getFirstName());
+		request.setAttribute("last_name", patient.getLastName());
+		request.setAttribute("age", patient.getAge());
+		request.setAttribute("weight", patient.getWeight());
+		request.setAttribute("height", patient.getHeight());
+		
 		RequestDispatcher dispatcher = params.getContext().getRequestDispatcher("/app/patients/addEdit.jsp");
 		request.setAttribute("patient", patient);
 		dispatcher.forward(params.getRequest(), params.getResponse());
@@ -118,6 +124,10 @@ public class PatientsResourceHandler implements ResourceHandler {
 		
 		if (patient == null)
 			return false;
+		
+		for (String field : new String[] { "first_name", "last_name", "age", "weight", "height" }) {
+			request.setAttribute(field, request.getParameter(field));
+		}
 		
 		Message message = new Message();
 		HttpSession session = params.getRequest().getSession(true);
