@@ -7,12 +7,12 @@ import com.labplan.persistence.generic.Dao;
 
 public abstract class Service<TEntity extends Entity<?>, TDao extends Dao<TEntity, ?>> {
 	TDao dao;
-	
+
 	public Service(TDao dao) {
 		this.dao = dao;
 	}
-	
+
 	public abstract List<TEntity> getPage(int page, int entriesPerPage);
-	
+
 	public abstract Integer getPageCount(int entriesPerPage);
 }

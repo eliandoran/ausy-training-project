@@ -68,24 +68,24 @@ public class SqlPatientDao implements PatientDao {
 
 		return null;
 	}
-	
+
 	@Override
 	public List<Patient> read(Integer limit, Integer offset) {
 		Connection conn = DatabaseConnectionFactory.getConnection();
 		String query = "SELECT * FROM `patients` LIMIT ? OFFSET ?";
 		List<Patient> patients = new LinkedList<>();
-		
+
 		try {
 			PreparedStatement stmt = conn.prepareStatement(query);
 			stmt.setInt(1, limit);
 			stmt.setInt(2, offset);
-			
+
 			ResultSet result = stmt.executeQuery();
-			
+
 			while (result.next()) {
 				patients.add(parsePatient(result));
 			}
-			
+
 			return patients;
 		} catch (SQLException e) {
 			LOGGER.log(Level.WARNING, MSG_CONNECTION_FAILED, e);
@@ -199,7 +199,7 @@ public class SqlPatientDao implements PatientDao {
 
 		return patient;
 	}
-	
+
 	@Override
 	public Integer getPatientsCount() {
 		Connection conn = DatabaseConnectionFactory.getConnection();
@@ -208,11 +208,11 @@ public class SqlPatientDao implements PatientDao {
 		try {
 			PreparedStatement stmt = conn.prepareStatement(query);
 			ResultSet result = stmt.executeQuery();
-			
+
 			if (result.next()) {
 				return result.getInt(1);
 			}
-			
+
 			return 0;
 		} catch (SQLException e) {
 			LOGGER.log(Level.WARNING, MSG_CONNECTION_FAILED, e);
@@ -224,7 +224,7 @@ public class SqlPatientDao implements PatientDao {
 	public boolean truncate() {
 		Connection conn = DatabaseConnectionFactory.getConnection();
 		String query = "DELETE FROM `patients`";
-		
+
 		try {
 			PreparedStatement stmt = conn.prepareStatement(query);
 			stmt.executeUpdate();

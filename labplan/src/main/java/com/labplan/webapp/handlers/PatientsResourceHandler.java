@@ -16,30 +16,30 @@ import com.labplan.webapp.ResourceHandler;
 
 public class PatientsResourceHandler implements ResourceHandler {
 	@Override
-	public void doGet(HandlerParameters params) throws ServletException, IOException {	
+	public void doGet(HandlerParameters params) throws ServletException, IOException {
 		if (params.getPath().length == 1) {
 			listPatients(params);
 		}
 	}
-	
-	void listPatients(HandlerParameters params) throws ServletException, IOException {		
+
+	void listPatients(HandlerParameters params) throws ServletException, IOException {
 		RequestDispatcher dispatcher = params.getContext().getRequestDispatcher("/app/listPatients.jsp");
 		HttpServletRequest request = params.getRequest();
-		
+
 		PatientDao patientDao = new SqlPatientDao();
 		PatientService patientService = new PatientService(patientDao);
-		
+
 		Integer entriesPerPage = 3;
 		Integer pageCount = patientService.getPageCount(entriesPerPage);
 		Integer page = IntUtils.tryParse(params.getRequest().getParameter("page"));
-							
+
 		page = (page != null ? page : 1);
 		page = Math.max(page, 1);
 		page = Math.min(page, pageCount);
-		
-		request.setAttribute("page", new PageInformation(page, pageCount, entriesPerPage));	
+
+		request.setAttribute("page", new PageInformation(page, pageCount, entriesPerPage));
 		request.setAttribute("patients", patientService.getPage(page, entriesPerPage));
-		
+
 		dispatcher.forward(params.getRequest(), params.getResponse());
 	}
 }

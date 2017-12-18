@@ -42,7 +42,7 @@ public final class TestMessages {
 	 * Message to be displayed when a {@link Dao} INSERT fails.
 	 */
 	public static final String MSG_INSERTION_FAILED = "SQL insertion failed.";
-	
+
 	/**
 	 * Message to be displayed when a {@link Dao} TRUNCATE operation fails.
 	 */

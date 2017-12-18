@@ -74,11 +74,11 @@ public class DatabaseConnectionFactory {
 	private static void load() throws IOException {
 		ClassLoader loader = DatabaseConnectionFactory.class.getClassLoader();
 		URL resource = loader.getResource("db.properties");
-		
+
 		if (resource == null)
-			throw new ConnectionFailedException("Unable to read database properties file from resources.");	
-		
-		try (InputStream in = resource.openStream()) {			
+			throw new ConnectionFailedException("Unable to read database properties file from resources.");
+
+		try (InputStream in = resource.openStream()) {
 			properties = new Properties();
 			properties.load(in);
 		}

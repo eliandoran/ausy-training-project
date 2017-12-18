@@ -56,13 +56,9 @@ public class SqlPatientDaoTest extends DaoTester<Integer, Patient, SqlPatientDao
 	@Override
 	public Patient getRandomEntity() {
 		Random random = new Random();
-		
-		return new Patient(
-				UUID.randomUUID().toString(),
-				UUID.randomUUID().toString(),
-				10 + random.nextInt(80), 
-				150 + random.nextInt(70),
-				50 + random.nextInt(100));
+
+		return new Patient(UUID.randomUUID().toString(), UUID.randomUUID().toString(), 10 + random.nextInt(80),
+				150 + random.nextInt(70), 50 + random.nextInt(100));
 	}
 
 	@Override
