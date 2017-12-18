@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.crypto.URIReferenceException;
 
+import com.labplan.persistence.DatabaseConnectionFactory;
 import com.labplan.webapp.handlers.PatientsResourceHandler;
 
 public class LabPlanServlet extends HttpServlet {
@@ -24,8 +25,9 @@ public class LabPlanServlet extends HttpServlet {
 	private HandlerContainer handlers;
 
 	   public void init() throws ServletException {
-		   handlers = new HandlerContainer();
+		   DatabaseConnectionFactory.setProfile("production");
 		   
+		   handlers = new HandlerContainer();		   
 		   handlers.register("patients", new PatientsResourceHandler());
 	   }
 
