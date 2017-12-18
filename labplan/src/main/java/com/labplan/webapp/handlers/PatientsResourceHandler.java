@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import com.labplan.entities.Patient;
 import com.labplan.helpers.IntUtils;
@@ -14,6 +15,7 @@ import com.labplan.persistence.sql.SqlPatientDao;
 import com.labplan.services.PatientService;
 import com.labplan.webapp.HandlerParameters;
 import com.labplan.webapp.LabPlanServlet;
+import com.labplan.webapp.Message;
 import com.labplan.webapp.PageInformation;
 import com.labplan.webapp.ResourceHandler;
 
@@ -130,7 +132,13 @@ public class PatientsResourceHandler implements ResourceHandler {
 			patientDao.update(parsedPatient);
 		}
 		
-		listPatients(params);
+		HttpSession session = params.getRequest().getSession(true);
+		Message message = new Message();
+		message.setContent("Patient updated successfully.");
+		message.setType(Message.MessageType.MSG_SUCCESS);
+		session.setAttribute("message", message);
+		params.getResponse().sendRedirect(params.getContext().getContextPath() + "/patients/");
+
 		return true;
 	}
 }

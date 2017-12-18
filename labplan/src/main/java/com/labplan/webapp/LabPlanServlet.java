@@ -10,6 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.labplan.persistence.DatabaseConnectionFactory;
 import com.labplan.webapp.handlers.DefaultResourceHandler;
@@ -37,8 +38,17 @@ public class LabPlanServlet extends HttpServlet {
 		String[] path = getPath(request);
 		ServletContext context = getServletContext();
 		HandlerParameters params = new HandlerParameters(context, request, response, path);
-
+		
 		LOGGER.info("GET " + request.getRequestURI());
+
+		HttpSession session = params.getRequest().getSession();
+		Message message = (Message)session.getAttribute("message");
+		
+		if (message != null) {
+			params.getRequest().setAttribute("message", message);
+			session.removeAttribute("message");
+			LOGGER.info("Got a message: " + message.content);
+		}
 		
 		ResourceHandler handler = obtainHandler(path);
 		

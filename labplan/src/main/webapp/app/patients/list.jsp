@@ -15,6 +15,8 @@
 		<main>
 			<div class="content-wrapper">
 				<h1>Patients</h1>
+				
+				<ex:message message="${message}" />
 			
 				<table class="patients">
 					<thead>
