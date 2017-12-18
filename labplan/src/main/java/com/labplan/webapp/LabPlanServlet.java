@@ -112,9 +112,4 @@ public class LabPlanServlet extends HttpServlet {
 			throw new RuntimeException("Unable to determine server base URI.");
 		}
 	}
-
-	@Override
-	public void destroy() {
-		// do nothing.
-	}
 }
