@@ -285,3 +285,7 @@ section.message.Error {
 section.message.Success {
 	background-color: #8bc34a;
 }
+
+section.message .content {
+	white-space: pre;
+}
