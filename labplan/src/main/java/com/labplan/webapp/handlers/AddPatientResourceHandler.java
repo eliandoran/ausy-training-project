@@ -71,7 +71,7 @@ public class AddPatientResourceHandler implements ResourceHandler {
 			message.setType(Message.MessageType.MSG_ERROR);
 			
 			params.getRequest().setAttribute("message", message);
-			RequestDispatcher dispatcher = params.getContext().getRequestDispatcher("/app/patients/edit.jsp");
+			RequestDispatcher dispatcher = params.getContext().getRequestDispatcher("/app/patients/add.jsp");
 			dispatcher.forward(params.getRequest(), params.getResponse());
 		}
 
