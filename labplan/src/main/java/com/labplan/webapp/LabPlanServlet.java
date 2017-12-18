@@ -18,9 +18,7 @@ import com.labplan.persistence.DatabaseConnectionFactory;
 import com.labplan.webapp.handlers.PatientsResourceHandler;
 
 public class LabPlanServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-	
-	private String message;
+	private static final long serialVersionUID = 1L;	
 	
 	private HandlerContainer handlers;
 
