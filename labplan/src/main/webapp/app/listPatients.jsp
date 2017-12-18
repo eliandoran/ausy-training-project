@@ -40,7 +40,7 @@
 							<td class="centered">${patient.weight} kg</td>
 							<td class="centered">${patient.height} cm</td>
 							<td class="actions">
-								<a href="patient.jsp?id=${patient.id}" title="Edit this patient">
+								<a href="<c:url value="/patients/edit?id=${patient.id}" />" title="Edit this patient">
 									<img src="<c:url value="/assets/action-edit.png" />" alt="Edit" />
 								</a>
 							</td>
