@@ -24,10 +24,10 @@ import com.labplan.persistence.generic.Dao;
  *            The {@link Entity} wrapped around this {@link LazyLoadedEntity}.
  */
 public class LazyLoadedEntity<TKey, TEntity extends Entity<TKey>> {
-	TEntity entity;
-	Boolean isLoaded;
-	Dao<TEntity, TKey> dao;
-	TKey key;
+	private TEntity entity;
+	private Boolean isLoaded;
+	private Dao<TEntity, TKey> dao;
+	private TKey key;
 
 	/**
 	 * Create a new instance of {@link LazyLoadedEntity}. Its status is set to

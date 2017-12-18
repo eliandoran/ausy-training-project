@@ -76,7 +76,7 @@ public class LabPlanServlet extends HttpServlet {
 		}
 	}
 	
-	void processMessages(HandlerParameters params) {
+	private void processMessages(HandlerParameters params) {
 		HttpSession session = params.getRequest().getSession();
 		Message message = (Message)session.getAttribute("message");
 		
@@ -87,7 +87,7 @@ public class LabPlanServlet extends HttpServlet {
 		}
 	}
 	
-	ResourceHandler obtainHandler(String path) {
+	private ResourceHandler obtainHandler(String path) {
 		LOGGER.info("Searching for handler: " + path);
 		
 		ResourceHandler handler = handlers.obtain(path);
@@ -101,7 +101,7 @@ public class LabPlanServlet extends HttpServlet {
 		return new DefaultResourceHandler();
 	}
 
-	String getPath(HttpServletRequest request) {
+	private String getPath(HttpServletRequest request) {
 		try {
 			URI basePath = new URI(request.getContextPath());
 			URI currentPath = new URI(request.getRequestURI());
