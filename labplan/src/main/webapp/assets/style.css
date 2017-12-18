@@ -269,10 +269,19 @@ form label {
 }
 
 /*
- * Error section
+ * Message section
  */
-section.error {
-	background-color: #E91E63;
-	padding: 2em;
+section.message {
+	padding: 1.5em;
+	margin: 2em 0;
 	color: white;
+	background-color: #3F51B5;
+}
+
+section.message.Error {
+	background-color: #E91E63;
+}
+ 
+section.message.Success {
+	background-color: #8bc34a;
 }

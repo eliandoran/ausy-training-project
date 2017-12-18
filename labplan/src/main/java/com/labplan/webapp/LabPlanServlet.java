@@ -47,7 +47,7 @@ public class LabPlanServlet extends HttpServlet {
 		if (message != null) {
 			params.getRequest().setAttribute("message", message);
 			session.removeAttribute("message");
-			LOGGER.info("Got a message: " + message.content);
+			LOGGER.info("Got a message: " + message.getType() + ": " + message.getContent());
 		}
 		
 		ResourceHandler handler = obtainHandler(path);

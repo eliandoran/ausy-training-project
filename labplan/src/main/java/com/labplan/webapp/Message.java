@@ -2,14 +2,25 @@ package com.labplan.webapp;
 
 public class Message {
 	public enum MessageType {
-		MSG_ERROR,
-		MSG_SUCCESS,
-		MSG_INFO
+		MSG_ERROR("Error"),
+		MSG_SUCCESS("Success"),
+		MSG_INFO("Info");
+		
+		private final String text;
+		
+		private MessageType(final String text) {
+			this.text = text;
+		}
+		
+		@Override
+		public String toString() {
+			return text;
+		}
 	}
 	
-	MessageType type;
-	String title;
-	String content;
+	private MessageType type;
+	private String title;
+	private String content;
 	
 	public Message() {
 		this.type = MessageType.MSG_INFO;
