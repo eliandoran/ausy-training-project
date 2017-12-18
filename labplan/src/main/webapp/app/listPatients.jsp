@@ -12,14 +12,14 @@
 	<body>
 		<aside>
 			<header>
-				<img class="logo" src="assets/logo.svg" alt="Platform logo" />
+				<img class="logo" src="<c:url value="/assets/logo.svg" />" alt="Platform logo" />
 				
 				<h1>LabTest</h1>
 			</header>
 			
 			<section class="patients">
 				<header>
-					<img src="assets/icon-patients.png" />
+					<img src="<c:url value="/assets/icon-patients.png" />" />
 					Patients
 				</header>
 				
@@ -59,7 +59,7 @@
 							<td class="centered">${patient.height} cm</td>
 							<td class="actions">
 								<a href="patient.jsp?id=${patient.id}" title="Edit this patient">
-									<img src="assets/action-edit.png" alt="Edit" />
+									<img src="<c:url value="/assets/action-edit.png" />" alt="Edit" />
 								</a>
 							</td>
 						</tr>
