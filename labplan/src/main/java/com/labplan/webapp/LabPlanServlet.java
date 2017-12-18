@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.labplan.persistence.DatabaseConnectionFactory;
+import com.labplan.webapp.handlers.DefaultResourceHandler;
 import com.labplan.webapp.handlers.PatientsResourceHandler;
 
 public class LabPlanServlet extends HttpServlet {
@@ -35,17 +36,25 @@ public class LabPlanServlet extends HttpServlet {
 		HandlerParameters params = new HandlerParameters(context, request, response, path);
 
 		System.out.println("GET " + request.getRequestURI());
+		
+		ResourceHandler handler = null;
 
 		if (path.length > 0) {
 			String handlerName = path[0];
-			ResourceHandler handler = handlers.obtain(handlerName);
+			
+			handler = handlers.obtain(handlerName);
 
-			if (handler != null) {
-				System.out.println("Invoking " + handlerName);
-
-				handler.doGet(params);
-				return;
-			}
+			System.out.println("Invoking " + handlerName);
+		}
+		
+		if (handler == null) {
+			handler = new DefaultResourceHandler();
+			
+			System.out.println("Invoking default handler.");
+		}
+		
+		if (handler != null) {
+			handler.doGet(params);
 		}
 	}
 
