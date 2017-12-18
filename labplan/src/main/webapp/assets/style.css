@@ -53,7 +53,11 @@ body > aside > header h1 {
 }
 
 body > aside section {
-	padding: 2em;
+	padding: 0.5em 2em;
+}
+
+body > aside section:first-of-type {
+	padding-top: 1.5em;
 }
 
 body > aside section header {
