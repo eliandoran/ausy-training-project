@@ -18,6 +18,7 @@ public class LabPlanServlet extends HttpServlet {
 
 	private HandlerContainer handlers;
 
+	@Override
 	public void init() throws ServletException {
 		DatabaseConnectionFactory.setProfile("production");
 
@@ -25,6 +26,7 @@ public class LabPlanServlet extends HttpServlet {
 		handlers.register("patients", new PatientsResourceHandler());
 	}
 
+	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
 
@@ -59,6 +61,7 @@ public class LabPlanServlet extends HttpServlet {
 		}
 	}
 
+	@Override
 	public void destroy() {
 		// do nothing.
 	}

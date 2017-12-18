@@ -122,7 +122,7 @@ public class SqlPatientDao implements PatientDao {
 				+ "VALUES (?, ?, ?, ?, ?)";
 
 		try {
-			PreparedStatement stmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+			PreparedStatement stmt = conn.prepareStatement(query, java.sql.Statement.RETURN_GENERATED_KEYS);
 			ResultSet generatedKeys;
 
 			stmt.setString(1, patient.getFirstName());

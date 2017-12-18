@@ -115,7 +115,7 @@ public class SqlLabListDao implements LabListDao {
 		String query = "INSERT INTO `lab_lists` " + "(`patient_id`, `creation_date`) " + "VALUES (?, ?)";
 
 		try {
-			PreparedStatement stmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+			PreparedStatement stmt = conn.prepareStatement(query, java.sql.Statement.RETURN_GENERATED_KEYS);
 			ResultSet generatedKeys;
 
 			stmt.setInt(1, entity.getPatient().getKey());
