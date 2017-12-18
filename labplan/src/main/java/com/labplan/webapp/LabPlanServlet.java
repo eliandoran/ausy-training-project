@@ -1,18 +1,14 @@
 package com.labplan.webapp;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.crypto.URIReferenceException;
 
 import com.labplan.persistence.DatabaseConnectionFactory;
 import com.labplan.webapp.handlers.PatientsResourceHandler;

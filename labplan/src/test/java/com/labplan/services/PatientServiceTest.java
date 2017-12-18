@@ -1,6 +1,10 @@
 package com.labplan.services;
 
-import static org.junit.Assert.*;
+import static com.labplan.helpers.TestMessages.MSG_INSERTION_FAILED;
+import static com.labplan.helpers.TestMessages.MSG_TRUNCATE_FAILED;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -12,8 +16,6 @@ import com.labplan.entities.Patient;
 import com.labplan.persistence.generic.PatientDao;
 import com.labplan.persistence.sql.SqlPatientDao;
 import com.labplan.persistence.sql.SqlPatientDaoTest;
-
-import static com.labplan.helpers.TestMessages.*;
 
 public class PatientServiceTest {
 	private static PatientDao patientDao;

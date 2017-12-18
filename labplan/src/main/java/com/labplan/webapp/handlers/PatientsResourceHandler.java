@@ -1,15 +1,11 @@
 package com.labplan.webapp.handlers;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
-import com.labplan.entities.Patient;
 import com.labplan.helpers.IntUtils;
 import com.labplan.persistence.generic.PatientDao;
 import com.labplan.persistence.sql.SqlPatientDao;

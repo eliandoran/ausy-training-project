@@ -1,5 +1,7 @@
 package com.labplan.helpers;
 
+import com.labplan.persistence.generic.Dao;
+
 /**
  * Contains a set of constant string messages which can be used for displaying
  * unit testing errors related to common CRUD operations like the ones defined

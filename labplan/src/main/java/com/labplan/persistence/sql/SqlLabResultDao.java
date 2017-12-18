@@ -1,5 +1,7 @@
 package com.labplan.persistence.sql;
 
+import static com.labplan.persistence.DatabaseConnectionFactory.MSG_CONNECTION_FAILED;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,8 +17,6 @@ import com.labplan.entities.LabTest;
 import com.labplan.entities.generic.LazyLoadedEntity;
 import com.labplan.persistence.DatabaseConnectionFactory;
 import com.labplan.persistence.generic.LabResultDao;
-
-import static com.labplan.persistence.DatabaseConnectionFactory.MSG_CONNECTION_FAILED;
 
 /**
  * A MySQL-compatible implementation of the {@link LabResultDao}.
