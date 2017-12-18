@@ -38,4 +38,11 @@ public class PageInformation {
 	public Integer getEntriesPerPage() {
 		return entriesPerPage;
 	}
+	
+	public Integer getStartIndex() {
+		if (entriesPerPage == null || current == null)
+			return null;
+		
+		return (entriesPerPage * (current - 1)) + 1;
+	}
 }

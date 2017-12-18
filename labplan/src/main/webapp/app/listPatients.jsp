@@ -49,9 +49,10 @@
 					</thead>
 				
 					<tbody>
+						<c:set var="patientIndex" value="${page.startIndex}" />
 						<c:forEach items="${patients}" var="patient">
 						<tr>
-							<td class="right-aligned">0</td>
+							<td class="right-aligned">${patientIndex}</td>
 							<td>${patient.firstName}</td>
 							<td>${patient.lastName}</td>
 							<td class="centered">${patient.age} yrs</td>
@@ -62,6 +63,8 @@
 									<img src="<c:url value="/assets/action-edit.png" />" alt="Edit" />
 								</a>
 							</td>
+							
+							<c:set var="patientIndex" value="${patientIndex + 1}" />
 						</tr>
 						</c:forEach>
 					</tbody>
