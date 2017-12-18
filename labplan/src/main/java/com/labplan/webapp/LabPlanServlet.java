@@ -13,10 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.labplan.persistence.DatabaseConnectionFactory;
-import com.labplan.webapp.handlers.AddPatientResourceHandler;
 import com.labplan.webapp.handlers.DefaultResourceHandler;
-import com.labplan.webapp.handlers.EditPatientResourceHandler;
-import com.labplan.webapp.handlers.ListPatientResourceHandler;
+import com.labplan.webapp.handlers.patient.AddPatientResourceHandler;
+import com.labplan.webapp.handlers.patient.EditPatientResourceHandler;
+import com.labplan.webapp.handlers.patient.ListPatientResourceHandler;
 
 public class LabPlanServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

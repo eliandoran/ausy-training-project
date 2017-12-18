@@ -1,4 +1,4 @@
-package com.labplan.webapp.handlers;
+package com.labplan.webapp.handlers.patient;
 
 import java.io.IOException;
 
