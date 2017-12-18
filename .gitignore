@@ -5,4 +5,5 @@
 Servers
 target
 labplan/src/main/resources/db.properties
+labplan/src/main/webapp/WEB-INF/lib
 RemoteSystemsTempFiles
