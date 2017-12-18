@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import com.labplan.entities.Patient;
+import com.labplan.exceptions.ValidationError;
 import com.labplan.helpers.IntUtils;
 import com.labplan.persistence.generic.PatientDao;
 import com.labplan.persistence.sql.SqlPatientDao;
@@ -118,26 +119,36 @@ public class PatientsResourceHandler implements ResourceHandler {
 		if (patient == null)
 			return false;
 		
-		// Parse the patient data in POST.
-		Patient parsedPatient = patientService.parse(
-				request.getParameter("first_name"),
-				request.getParameter("last_name"),
-				request.getParameter("age"),
-				request.getParameter("weight"),
-				request.getParameter("height"));
-		
-		
-		if (parsedPatient != null) {
-			parsedPatient.setId(patientId);
-			patientDao.update(parsedPatient);
-		}
-		
-		HttpSession session = params.getRequest().getSession(true);
 		Message message = new Message();
-		message.setContent("Patient updated successfully.");
-		message.setType(Message.MessageType.MSG_SUCCESS);
-		session.setAttribute("message", message);
-		params.getResponse().sendRedirect(params.getContext().getContextPath() + "/patients/");
+		HttpSession session = params.getRequest().getSession(true);
+
+		// Parse the patient data in POST.
+		try {
+			Patient parsedPatient = patientService.parse(
+					request.getParameter("first_name"),
+					request.getParameter("last_name"),
+					request.getParameter("age"),
+					request.getParameter("weight"),
+					request.getParameter("height"));
+			
+			if (parsedPatient != null) {
+				parsedPatient.setId(patientId);
+				patientDao.update(parsedPatient);
+				
+				message.setContent("Patient updated successfully.");
+				message.setType(Message.MessageType.MSG_SUCCESS);
+				
+				session.setAttribute("message", message);
+				params.getResponse().sendRedirect(params.getContext().getContextPath() + "/patients/");
+			}
+		} catch (ValidationError e) {
+			message.setContent(e.getMessage());
+			message.setType(Message.MessageType.MSG_ERROR);
+			
+			session.setAttribute("message", message);
+			RequestDispatcher dispatcher = params.getContext().getRequestDispatcher("/app/patients/addEdit.jsp");
+			dispatcher.forward(params.getRequest(), params.getResponse());
+		}
 
 		return true;
 	}

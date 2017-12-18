@@ -16,6 +16,8 @@
 			<div class="content-wrapper">
 				<h1>Edit a patient</h1>
 				
+				<ex:message message="${message}" />
+				
 				<form class="patient-form" method="post">
 					<input type="hidden" name="commit" value="" />
 				
