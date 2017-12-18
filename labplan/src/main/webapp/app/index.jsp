@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<title>LabPlan</title>
 		<%@ include file="header.jspf" %>
 	</head>
 	

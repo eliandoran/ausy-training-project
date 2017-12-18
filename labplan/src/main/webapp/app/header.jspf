@@ -1,5 +1,4 @@
 <meta charset="utf-8" />
-<title>Patients (${page.current}/${page.total}) &rsaquo; LabPlan</title>
 <link rel="stylesheet" type="text/css" href="<c:url value="/assets/style.css" />" />
 
 <link rel="apple-touch-icon" sizes="180x180" href="<c:url value="/assets/favicon/apple-touch-icon.png" />"/>
