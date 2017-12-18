@@ -61,6 +61,9 @@ public class PatientsResourceHandler implements ResourceHandler {
 			if (action.equals("edit"))
 				return commitPatient(params);
 			
+			if (action.equals("add"))
+				return commitAddPatient(params);
+			
 			LOGGER.warning("Unknown action: " + action);
 		}
 		
@@ -154,6 +157,46 @@ public class PatientsResourceHandler implements ResourceHandler {
 			if (parsedPatient != null) {
 				parsedPatient.setId(patientId);
 				patientDao.update(parsedPatient);
+				
+				message.setContent("Patient updated successfully.");
+				message.setType(Message.MessageType.MSG_SUCCESS);
+				
+				HttpSession session = params.getRequest().getSession(true);
+				session.setAttribute("message", message);
+				params.getResponse().sendRedirect(params.getContext().getContextPath() + "/patients/");
+			}
+		} catch (ValidationError e) {
+			message.setContent(e.toString());
+			message.setType(Message.MessageType.MSG_ERROR);
+			
+			params.getRequest().setAttribute("message", message);
+			RequestDispatcher dispatcher = params.getContext().getRequestDispatcher("/app/patients/edit.jsp");
+			dispatcher.forward(params.getRequest(), params.getResponse());
+		}
+
+		return true;
+	}
+	
+	// POST /patients/add
+	boolean commitAddPatient(HandlerParameters params) throws IOException, ServletException {
+		HttpServletRequest request = params.getRequest();
+		Message message = new Message();
+		
+		for (String field : new String[] { "first_name", "last_name", "age", "weight", "height" }) {
+			request.setAttribute(field, request.getParameter(field));
+		}
+
+		// Parse the patient data in POST.
+		try {
+			Patient parsedPatient = patientService.parse(
+					request.getParameter("first_name"),
+					request.getParameter("last_name"),
+					request.getParameter("age"),
+					request.getParameter("weight"),
+					request.getParameter("height"));
+			
+			if (parsedPatient != null) {
+				patientDao.create(parsedPatient);
 				
 				message.setContent("Patient updated successfully.");
 				message.setType(Message.MessageType.MSG_SUCCESS);
