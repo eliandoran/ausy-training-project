@@ -75,7 +75,7 @@ public class PatientsResourceHandler implements ResourceHandler {
 		RequestDispatcher dispatcher = params.getContext().getRequestDispatcher("/app/patients/list.jsp");
 		HttpServletRequest request = params.getRequest();
 
-		Integer entriesPerPage = 3;
+		Integer entriesPerPage = 10;
 		Integer pageCount = patientService.getPageCount(entriesPerPage);
 		Integer page = IntUtils.tryParse(params.getRequest().getParameter("page"));
 
