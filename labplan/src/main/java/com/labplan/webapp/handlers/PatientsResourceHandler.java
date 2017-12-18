@@ -198,7 +198,7 @@ public class PatientsResourceHandler implements ResourceHandler {
 			if (parsedPatient != null) {
 				patientDao.create(parsedPatient);
 				
-				message.setContent("Patient updated successfully.");
+				message.setContent("Patient created successfully.");
 				message.setType(Message.MessageType.MSG_SUCCESS);
 				
 				HttpSession session = params.getRequest().getSession(true);
