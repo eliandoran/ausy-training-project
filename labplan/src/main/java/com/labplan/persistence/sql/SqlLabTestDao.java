@@ -8,6 +8,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -64,6 +66,30 @@ public class SqlLabTestDao implements LabTestDao {
 		}
 
 		return null;
+	}
+	
+	@Override
+	public List<LabTest> read(Integer limit, Integer offset) {
+		Connection conn = DatabaseConnectionFactory.getConnection();
+		String query = "SELECT * FROM `lab_tests` LIMIT ? OFFSET ?";
+		List<LabTest> tests = new LinkedList<>();
+
+		try {
+			PreparedStatement stmt = conn.prepareStatement(query);
+			stmt.setInt(1, limit);
+			stmt.setInt(2, offset);
+
+			ResultSet result = stmt.executeQuery();
+
+			while (result.next()) {
+				tests.add(parseLabTest(result));
+			}
+
+			return tests;
+		} catch (SQLException e) {
+			LOGGER.log(Level.WARNING, MSG_CONNECTION_FAILED, e);
+			return null;
+		}
 	}
 
 	@Override
@@ -167,5 +193,25 @@ public class SqlLabTestDao implements LabTestDao {
 		labTest.setValueMax(result.getFloat("value_max"));
 
 		return labTest;
+	}
+
+	@Override
+	public Integer getCount() {
+		Connection conn = DatabaseConnectionFactory.getConnection();
+		String query = "SELECT COUNT(*) FROM `lab_tests`";
+
+		try {
+			PreparedStatement stmt = conn.prepareStatement(query);
+			ResultSet result = stmt.executeQuery();
+
+			if (result.next()) {
+				return result.getInt(1);
+			}
+
+			return 0;
+		} catch (SQLException e) {
+			LOGGER.log(Level.WARNING, MSG_CONNECTION_FAILED, e);
+			return null;
+		}
 	}
 }

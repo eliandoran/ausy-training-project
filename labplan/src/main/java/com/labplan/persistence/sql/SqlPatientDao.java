@@ -16,7 +16,6 @@ import java.util.logging.Logger;
 import com.labplan.entities.Patient;
 import com.labplan.persistence.DatabaseConnectionFactory;
 import com.labplan.persistence.generic.PatientDao;
-import com.mysql.cj.api.jdbc.Statement;
 
 /**
  * A MySQL-compatible implementation of the {@link PatientDao}.

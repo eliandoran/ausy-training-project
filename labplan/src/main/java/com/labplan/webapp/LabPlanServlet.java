@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import com.labplan.persistence.DatabaseConnectionFactory;
 import com.labplan.webapp.handlers.DefaultResourceHandler;
+import com.labplan.webapp.handlers.lab_test.ListLabTestResourceHandler;
 import com.labplan.webapp.handlers.patient.AddPatientResourceHandler;
 import com.labplan.webapp.handlers.patient.EditPatientResourceHandler;
 import com.labplan.webapp.handlers.patient.ListPatientResourceHandler;
@@ -30,9 +31,12 @@ public class LabPlanServlet extends HttpServlet {
 		DatabaseConnectionFactory.setProfile("production");
 
 		handlers = new HandlerContainer();
+		
 		handlers.register(new ListPatientResourceHandler());
 		handlers.register(new AddPatientResourceHandler());
 		handlers.register(new EditPatientResourceHandler());
+		
+		handlers.register(new ListLabTestResourceHandler());
 	}
 
 	@Override
