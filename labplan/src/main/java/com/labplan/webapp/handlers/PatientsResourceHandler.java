@@ -27,28 +27,22 @@ public class PatientsResourceHandler implements ResourceHandler {
 	}
 	
 	void listPatients(HandlerParameters params) throws ServletException, IOException {		
+		RequestDispatcher dispatcher = params.getContext().getRequestDispatcher("/app/listPatients.jsp");
+		HttpServletRequest request = params.getRequest();
+		
 		PatientDao patientDao = new SqlPatientDao();
 		PatientService patientService = new PatientService(patientDao);
 		
 		Integer entriesPerPage = 3;
 		Integer pageCount = patientService.getPageCount(entriesPerPage);
-		Integer page = IntUtils.tryParse(params.getRequest().getParameter("page"));		
+		Integer page = IntUtils.tryParse(params.getRequest().getParameter("page"));
+							
 		page = (page != null ? page : 1);
-		
-		RequestDispatcher dispatcher = params.getContext().getRequestDispatcher("/app/listPatients.jsp");
-		HttpServletRequest request = params.getRequest();
-					
 		page = Math.max(page, 1);
 		page = Math.min(page, pageCount);
 		
-		PageInformation pageInfo = new PageInformation();
-		pageInfo.setCurrent(page);		
-		pageInfo.setEntriesPerPage(entriesPerPage);
-		pageInfo.setTotal(pageCount);			
-		request.setAttribute("page", pageInfo);
-		
-		List<Patient> patients = patientService.getPage(page, entriesPerPage);
-		request.setAttribute("patients", patients);
+		request.setAttribute("page", new PageInformation(page, pageCount, entriesPerPage));	
+		request.setAttribute("patients", patientService.getPage(page, entriesPerPage));
 		
 		dispatcher.forward(params.getRequest(), params.getResponse());
 	}
