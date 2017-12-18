@@ -6,7 +6,7 @@
 <html>
 	<head>
 		<title>Patients (${page.current}/${page.total}) &rsaquo; LabPlan</title>
-		<%@ include file="header.jspf" %>
+		<%@ include file="../header.jspf" %>
 	</head>
 	
 	<body>

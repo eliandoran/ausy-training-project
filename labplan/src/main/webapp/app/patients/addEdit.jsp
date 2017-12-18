@@ -6,7 +6,7 @@
 <html>
 	<head>
 		<title>LabPlan</title>
-		<%@ include file="header.jspf" %>
+		<%@ include file="../header.jspf" %>
 	</head>
 	
 	<body>

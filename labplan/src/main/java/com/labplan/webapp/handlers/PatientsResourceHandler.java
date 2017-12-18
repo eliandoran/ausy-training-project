@@ -49,7 +49,7 @@ public class PatientsResourceHandler implements ResourceHandler {
 
 	// GET /patients/
 	void listPatients(HandlerParameters params) throws ServletException, IOException {
-		RequestDispatcher dispatcher = params.getContext().getRequestDispatcher("/app/listPatients.jsp");
+		RequestDispatcher dispatcher = params.getContext().getRequestDispatcher("/app/patients/list.jsp");
 		HttpServletRequest request = params.getRequest();
 
 		Integer entriesPerPage = 3;
@@ -79,7 +79,7 @@ public class PatientsResourceHandler implements ResourceHandler {
 			return false;
 		
 		HttpServletRequest request = params.getRequest();
-		RequestDispatcher dispatcher = params.getContext().getRequestDispatcher("/app/addEditPatient.jsp");
+		RequestDispatcher dispatcher = params.getContext().getRequestDispatcher("/app/patients/addEdit.jsp");
 		request.setAttribute("patient", patient);
 		dispatcher.forward(params.getRequest(), params.getResponse());
 		
