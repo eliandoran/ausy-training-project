@@ -50,6 +50,26 @@ public class LabPlanServlet extends HttpServlet {
 		}
 	}
 	
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("text/html");
+
+		String[] path = getPath(request);
+		ServletContext context = getServletContext();
+		HandlerParameters params = new HandlerParameters(context, request, response, path);
+
+		LOGGER.info("POST " + request.getRequestURI());
+		
+		ResourceHandler handler = obtainHandler(path);
+		
+		if (handler != null) {
+			if (!handler.doPost(params)) {
+				response.sendError(404);
+				LOGGER.info("Handler returned 404.");
+			};
+		}
+	}
+	
 	ResourceHandler obtainHandler(String[] path) {
 		if (path.length > 0) {
 			String handlerName = path[0];

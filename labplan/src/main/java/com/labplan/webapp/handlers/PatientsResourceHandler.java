@@ -46,6 +46,20 @@ public class PatientsResourceHandler implements ResourceHandler {
 		
 		return false;
 	}
+	
+	@Override
+	public boolean doPost(HandlerParameters params) throws ServletException, IOException {
+		if (params.getPath().length >= 2) {
+			String action = params.getPath()[1];
+			
+			if (action.equals("edit"))
+				return commitPatient(params);
+			
+			LOGGER.warning("Unknown action: " + action);
+		}
+		
+		return false;
+	}
 
 	// GET /patients/
 	void listPatients(HandlerParameters params) throws ServletException, IOException {
@@ -83,6 +97,40 @@ public class PatientsResourceHandler implements ResourceHandler {
 		request.setAttribute("patient", patient);
 		dispatcher.forward(params.getRequest(), params.getResponse());
 		
+		return true;
+	}
+	
+	// POST /patients/edit?id={id}
+	boolean commitPatient(HandlerParameters params) throws ServletException, IOException {
+		HttpServletRequest request = params.getRequest();
+		
+		// Parse the `id` GET parameter
+		Integer patientId = IntUtils.tryParse(params.getRequest().getParameter("id"));
+		
+		if (patientId == null)
+			return false;
+		
+		// Read the pre-existing patient.
+		Patient patient = patientDao.read(patientId);
+		
+		if (patient == null)
+			return false;
+		
+		// Parse the patient data in POST.
+		Patient parsedPatient = patientService.parse(
+				request.getParameter("first_name"),
+				request.getParameter("last_name"),
+				request.getParameter("age"),
+				request.getParameter("weight"),
+				request.getParameter("height"));
+		
+		
+		if (parsedPatient != null) {
+			parsedPatient.setId(patientId);
+			patientDao.update(parsedPatient);
+		}
+		
+		listPatients(params);
 		return true;
 	}
 }
