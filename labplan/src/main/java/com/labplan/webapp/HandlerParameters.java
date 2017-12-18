@@ -8,10 +8,10 @@ public class HandlerParameters {
 	private ServletContext context;
 	private HttpServletRequest request;
 	private HttpServletResponse response;
-	private String[] path;
+	private String path;
 
 	public HandlerParameters(ServletContext context, HttpServletRequest request, HttpServletResponse response,
-			String[] path) {
+			String path) {
 		this.context = context;
 		this.request = request;
 		this.response = response;
@@ -30,7 +30,7 @@ public class HandlerParameters {
 		return response;
 	}
 
-	public String[] getPath() {
+	public String getPath() {
 		return path;
 	}
 }

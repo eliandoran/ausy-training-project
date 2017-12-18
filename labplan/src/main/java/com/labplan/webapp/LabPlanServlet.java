@@ -13,8 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.labplan.persistence.DatabaseConnectionFactory;
+import com.labplan.webapp.handlers.AddPatientResourceHandler;
 import com.labplan.webapp.handlers.DefaultResourceHandler;
-import com.labplan.webapp.handlers.PatientsResourceHandler;
+import com.labplan.webapp.handlers.EditPatientResourceHandler;
+import com.labplan.webapp.handlers.ListPatientResourceHandler;
 
 public class LabPlanServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -28,19 +30,21 @@ public class LabPlanServlet extends HttpServlet {
 		DatabaseConnectionFactory.setProfile("production");
 
 		handlers = new HandlerContainer();
-		handlers.register("patients", new PatientsResourceHandler());
+		handlers.register(new ListPatientResourceHandler());
+		handlers.register(new AddPatientResourceHandler());
+		handlers.register(new EditPatientResourceHandler());
 	}
 
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
 
-		String[] path = getPath(request);
+		String path = getPath(request);
 		ServletContext context = getServletContext();
 		HandlerParameters params = new HandlerParameters(context, request, response, path);
 		
 		LOGGER.info("GET " + request.getRequestURI());
-
+		
 		processMessages(params);
 		ResourceHandler handler = obtainHandler(path);
 		
@@ -56,7 +60,7 @@ public class LabPlanServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
 
-		String[] path = getPath(request);
+		String path = getPath(request);
 		ServletContext context = getServletContext();
 		HandlerParameters params = new HandlerParameters(context, request, response, path);
 
@@ -83,28 +87,27 @@ public class LabPlanServlet extends HttpServlet {
 		}
 	}
 	
-	ResourceHandler obtainHandler(String[] path) {
-		if (path.length > 0) {
-			String handlerName = path[0];
-			ResourceHandler handler = handlers.obtain(handlerName);
+	ResourceHandler obtainHandler(String path) {
+		LOGGER.info("Searching for handler: " + path);
+		
+		ResourceHandler handler = handlers.obtain(path);
 			
-			if (handler != null) {
-				LOGGER.info("Obtained handler: " + handlerName);
-				return handler;
-			}
+		if (handler != null) {
+			LOGGER.info("Obtained handler: " + path);
+			return handler;
 		}
 		
 		LOGGER.info("Using default handler.");
 		return new DefaultResourceHandler();
 	}
 
-	String[] getPath(HttpServletRequest request) {
+	String getPath(HttpServletRequest request) {
 		try {
 			URI basePath = new URI(request.getContextPath());
 			URI currentPath = new URI(request.getRequestURI());
 			URI relativePath = basePath.relativize(currentPath);
 
-			return relativePath.toString().split("/");
+			return relativePath.toString();
 		} catch (URISyntaxException e) {
 			throw new RuntimeException("Unable to determine server base URI.");
 		}

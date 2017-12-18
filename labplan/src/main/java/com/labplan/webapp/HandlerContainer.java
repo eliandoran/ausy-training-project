@@ -10,7 +10,9 @@ public class HandlerContainer {
 		handlers = new HashMap<>();
 	}
 
-	public boolean register(String name, ResourceHandler handler) {
+	public boolean register(ResourceHandler handler) {
+		String name = handler.getPath();
+		
 		if (handlers.containsKey(name))
 			return false;
 
@@ -18,10 +20,10 @@ public class HandlerContainer {
 		return true;
 	}
 
-	public ResourceHandler obtain(String name) {
-		if (!handlers.containsKey(name))
+	public ResourceHandler obtain(String path) {
+		if (!handlers.containsKey(path))
 			return null;
 
-		return handlers.get(name);
+		return handlers.get(path);
 	}
 }
