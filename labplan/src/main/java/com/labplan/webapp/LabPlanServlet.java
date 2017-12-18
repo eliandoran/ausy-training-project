@@ -41,15 +41,7 @@ public class LabPlanServlet extends HttpServlet {
 		
 		LOGGER.info("GET " + request.getRequestURI());
 
-		HttpSession session = params.getRequest().getSession();
-		Message message = (Message)session.getAttribute("message");
-		
-		if (message != null) {
-			params.getRequest().setAttribute("message", message);
-			session.removeAttribute("message");
-			LOGGER.info("Got a message: " + message.getType() + ": " + message.getContent());
-		}
-		
+		processMessages(params);
 		ResourceHandler handler = obtainHandler(path);
 		
 		if (handler != null) {
@@ -69,7 +61,7 @@ public class LabPlanServlet extends HttpServlet {
 		HandlerParameters params = new HandlerParameters(context, request, response, path);
 
 		LOGGER.info("POST " + request.getRequestURI());
-		
+		processMessages(params);
 		ResourceHandler handler = obtainHandler(path);
 		
 		if (handler != null) {
@@ -77,6 +69,17 @@ public class LabPlanServlet extends HttpServlet {
 				response.sendError(404);
 				LOGGER.info("Handler returned 404.");
 			};
+		}
+	}
+	
+	void processMessages(HandlerParameters params) {
+		HttpSession session = params.getRequest().getSession();
+		Message message = (Message)session.getAttribute("message");
+		
+		if (message != null) {
+			params.getRequest().setAttribute("message", message);
+			session.removeAttribute("message");
+			LOGGER.info("Got a message: " + message.getType() + ": " + message.getContent());
 		}
 	}
 	

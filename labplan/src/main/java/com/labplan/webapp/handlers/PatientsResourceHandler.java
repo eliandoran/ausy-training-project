@@ -141,7 +141,6 @@ public class PatientsResourceHandler implements ResourceHandler {
 		}
 		
 		Message message = new Message();
-		HttpSession session = params.getRequest().getSession(true);
 
 		// Parse the patient data in POST.
 		try {
@@ -159,6 +158,7 @@ public class PatientsResourceHandler implements ResourceHandler {
 				message.setContent("Patient updated successfully.");
 				message.setType(Message.MessageType.MSG_SUCCESS);
 				
+				HttpSession session = params.getRequest().getSession(true);
 				session.setAttribute("message", message);
 				params.getResponse().sendRedirect(params.getContext().getContextPath() + "/patients/");
 			}
@@ -166,7 +166,7 @@ public class PatientsResourceHandler implements ResourceHandler {
 			message.setContent(e.toString());
 			message.setType(Message.MessageType.MSG_ERROR);
 			
-			session.setAttribute("message", message);
+			params.getRequest().setAttribute("message", message);
 			RequestDispatcher dispatcher = params.getContext().getRequestDispatcher("/app/patients/edit.jsp");
 			dispatcher.forward(params.getRequest(), params.getResponse());
 		}
