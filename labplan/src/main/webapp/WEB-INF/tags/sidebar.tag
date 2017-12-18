@@ -15,7 +15,7 @@
 		
 		<ul>
 			<li>
-				<a href="patients.jsp">View all patients</a>
+				<a href="<c:url value="/patients/" />">View all patients</a>
 			</li>
 		</ul>
 	</section>
