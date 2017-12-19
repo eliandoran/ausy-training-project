@@ -1,0 +1,19 @@
+<form class="test-form" method="post">
+	<input type="hidden" name="commit" value="" />
+
+	<div class="two-columns">
+		<div class="row">
+			<label for="name">Patient</label> <input type="text"
+				name="name" value="${name}" class="fill" />
+		</div>
+		
+		<div class="row">
+			<label for="name">Creation date</label> <input type="text"
+				name="name" value="${name}" class="fill" />
+		</div>
+	</div>
+
+	<div class="row actions">
+		<input type="submit" value="Update" />
+	</div>
+</form>

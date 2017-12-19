@@ -51,6 +51,10 @@
 			<li>
 				<a href="<c:url value="/lists/" />">View all lists</a>
 			</li>
+			
+			<li>
+				<a href="<c:url value="/lists/add" />">Add a list</a>
+			</li>
 		</ul>
 	</section>
 </aside>
