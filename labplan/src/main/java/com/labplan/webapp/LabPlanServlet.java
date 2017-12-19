@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import com.labplan.persistence.DatabaseConnectionFactory;
 import com.labplan.webapp.handlers.DefaultResourceHandler;
+import com.labplan.webapp.handlers.lab_list.ListLabListResourceHandler;
 import com.labplan.webapp.handlers.lab_test.AddLabTestResourceHandler;
 import com.labplan.webapp.handlers.lab_test.EditLabTestResourceHandler;
 import com.labplan.webapp.handlers.lab_test.ListLabTestResourceHandler;
@@ -41,6 +42,8 @@ public class LabPlanServlet extends HttpServlet {
 		handlers.register(new ListLabTestResourceHandler());
 		handlers.register(new AddLabTestResourceHandler());
 		handlers.register(new EditLabTestResourceHandler());
+		
+		handlers.register(new ListLabListResourceHandler());
 	}
 
 	@Override

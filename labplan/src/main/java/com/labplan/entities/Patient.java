@@ -108,6 +108,14 @@ public class Patient extends Entity<Integer> {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+	
+	/**
+	 * Returns the full name of this {@link Patient}, that is, a combination of {@link Patient#getFirstName()} and {@link Patient#getLastName()}.
+	 * @return
+	 */
+	public String getFullName() {
+		return this.firstName + " " + this.lastName;
+	}
 
 	/**
 	 * Gets the age of this {@link Patient}, expressed in <em>years</em>.

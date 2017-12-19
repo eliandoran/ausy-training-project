@@ -40,4 +40,17 @@
 			</li>
 		</ul>
 	</section>
+	
+	<section class="tests">
+		<header>
+			<img src="<c:url value="/assets/icon-lists.png" />" />
+			Lab Lists
+		</header>
+		
+		<ul>
+			<li>
+				<a href="<c:url value="/lists/" />">View all lists</a>
+			</li>
+		</ul>
+	</section>
 </aside>

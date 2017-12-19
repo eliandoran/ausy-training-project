@@ -64,6 +64,30 @@ public class SqlLabListDao implements LabListDao {
 
 		return list;
 	}
+	
+	@Override
+	public List<LabList> read(Integer limit, Integer offset) {
+		Connection conn = DatabaseConnectionFactory.getConnection();
+		String query = "SELECT * FROM `lab_lists` LIMIT ? OFFSET ?";
+		List<LabList> lists = new LinkedList<>();
+
+		try {
+			PreparedStatement stmt = conn.prepareStatement(query);
+			stmt.setInt(1, limit);
+			stmt.setInt(2, offset);
+
+			ResultSet result = stmt.executeQuery();
+
+			while (result.next()) {
+				lists.add(parseLabList(result));
+			}
+
+			return lists;
+		} catch (SQLException e) {
+			LOGGER.log(Level.WARNING, MSG_CONNECTION_FAILED, e);
+			return null;
+		}
+	}
 
 	@Override
 	public Set<LabList> readAll() {
@@ -176,6 +200,26 @@ public class SqlLabListDao implements LabListDao {
 		}
 
 		return true;
+	}
+	
+	@Override
+	public Integer getCount() {
+		Connection conn = DatabaseConnectionFactory.getConnection();
+		String query = "SELECT COUNT(*) FROM `lab_lists`";
+
+		try {
+			PreparedStatement stmt = conn.prepareStatement(query);
+			ResultSet result = stmt.executeQuery();
+
+			if (result.next()) {
+				return result.getInt(1);
+			}
+
+			return 0;
+		} catch (SQLException e) {
+			LOGGER.log(Level.WARNING, MSG_CONNECTION_FAILED, e);
+			return null;
+		}
 	}
 
 	private LabList parseLabList(ResultSet result) throws SQLException {
