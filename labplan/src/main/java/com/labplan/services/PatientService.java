@@ -33,6 +33,7 @@ public class PatientService extends Service<Patient, PatientDao> {
 		
 		validator.assertNotNull("First name", firstName);
 		validator.assertNotNull("Last name", lastName);
+		validator.validate();	// Force validation right now in order to assure first name & last name are not null
 		
 		validator.assertStringLength("First name", firstName.trim(), 1, 75);
 		validator.assertStringLength("Last name", lastName.trim(), 1, 75);
@@ -44,7 +45,7 @@ public class PatientService extends Service<Patient, PatientDao> {
 		validator.assertStringIsInteger("Weight", weight);
 		validator.assertStringIsInteger("Height", height);
 		
-		validator.validate();
+		validator.validate();	// Will throw ValidationException if any assertions failed.
 
 		return new Patient(
 				firstName.trim(), lastName.trim(),

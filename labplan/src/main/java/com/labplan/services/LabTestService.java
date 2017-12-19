@@ -32,11 +32,13 @@ public class LabTestService extends Service<LabTest, LabTestDao> {
 		Validator validator = new Validator();
 		
 		validator.assertNotNull("Name", name);
+		validator.validate();	// Force validation right now in order to assure name is not null
+		
 		validator.assertNotEmpty("Name", name.trim());
 		validator.assertStringIsFloat("Minimum value", valueMin);
 		validator.assertStringIsFloat("Maximum value", valueMax);
 		
-		validator.validate();
+		validator.validate();	// Will throw ValidationException if any assertions failed.
 		
 		return new LabTest(name.trim(), description.trim(),
 				Float.parseFloat(valueMin),
