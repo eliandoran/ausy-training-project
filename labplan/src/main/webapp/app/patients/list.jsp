@@ -20,6 +20,8 @@
 			
 				<table class="patients">
 					<thead>
+						<ex:pagination pageInfo="${page}" colspan="7" />
+					
 						<tr>
 							<th>#</th>
 							<th>First Name</th>
@@ -53,11 +55,7 @@
 					</tbody>
 					
 					<tfoot>												
-						<tr class="pagination">
-							<td colspan="7">
-								<ex:pagination pageInfo="${page}" />
-							</td>
-						</tr>
+						<ex:pagination pageInfo="${page}" colspan="7" />
 					</tfoot>
 				</table>
 			</div>
