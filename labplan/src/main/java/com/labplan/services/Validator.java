@@ -90,19 +90,19 @@ public class Validator {
 	 * Asserts that the given {@link String} {@code value} has a length between {@code minLength} and {@code maxLength}.
 	 * @param fieldName		The name of the field being validated, it will represent the key of {@link ValidationException#getFields()}.
 	 * @param value			The value being used for the assertion.
-	 * @param minLength		The minimum length of the string.
-	 * @param maxLength		The maximum length of the string.
+	 * @param minLength		The minimum length of the string, or {@code null} to skip the minimum check.
+	 * @param maxLength		The maximum length of the string, or {@code null} to skip the maximum check.
 	 * @return {@code true} if the assertion succeeded, {@code false} otherwise.
 	 */
 	public boolean assertStringLength(String fieldName, String value, Integer minLength, Integer maxLength) {
 		if (!assertNotEmpty(fieldName, value)) return false;
 		
-		if (value.length() < minLength) {
+		if (minLength != null && value.length() < minLength) {
 			resultingException.addField(fieldName, "should be at least " + minLength + " characters long.");
 			return false;
 		}
 		
-		if (value.length() > maxLength) {
+		if (maxLength != null && value.length() > maxLength) {
 			resultingException.addField(fieldName, "exceeds the maximum length of " + maxLength + " characters.");
 			return false;
 		}
@@ -186,17 +186,17 @@ public class Validator {
 	 * Asserts that the given {@link Integer} {@code value} is between {@code minValue} and {@code maxValue}.
 	 * @param fieldName		The name of the field being validated, it will represent the key of {@link ValidationException#getFields()}.
 	 * @param value			The value being used for the assertion.
-	 * @param minValue		The minimum value.
-	 * @param maxValue		The maximum value.
+	 * @param minValue		The minimum value or {@code null} to skip the minimum check.
+	 * @param maxValue		The maximum value or {@code null} to skip the maximum check.
 	 * @return {@code true} if the assertion succeeded, {@code false} otherwise.
 	 */
 	public boolean assertIntegerInRange(String fieldName, Integer value, Integer minValue, Integer maxValue) {
-		if (value < minValue) {
+		if (minValue != null && value < minValue) {
 			resultingException.addField(fieldName, "should be greater than or equal to " + minValue);
 			return false;
 		}
 		
-		if (value > maxValue) {
+		if (maxValue != null && value > maxValue) {
 			resultingException.addField(fieldName, "should be less than or equal to " + maxValue);
 			return false;
 		}
@@ -208,8 +208,8 @@ public class Validator {
 	 * Asserts that the given {@link String} {@code value} is an {@link Integer} with values between  is between {@code minValue} and {@code maxValue}.
 	 * @param fieldName		The name of the field being validated, it will represent the key of {@link ValidationException#getFields()}.
 	 * @param value			The value being used for the assertion.
-	 * @param minValue		The minimum value.
-	 * @param maxValue		The maximum value.
+	 * @param minValue		The minimum value or {@code null} to skip the minimum check.
+	 * @param maxValue		The maximum value or {@code null} to skip the maximum check.
 	 * @return {@code true} if the assertion succeeded, {@code false} otherwise.
 	 */
 	public boolean assertIntegerInRange(String fieldName, String value, Integer minValue, Integer maxValue) {
