@@ -59,13 +59,16 @@ public class Validator {
 		return true;
 	}
 	
-	public boolean assertStringIsAlphabetic(String fieldName, String value, boolean permitWhitespace) {
+	public boolean assertStringIsAlphabetic(String fieldName, String value, boolean permitWhitespace, String exceptions) {
 		if (!assertNotEmpty(fieldName, value)) return false;
 		
 		for (int pos = 0; pos < value.length(); pos++) {
 			char ch = value.charAt(pos);
 			
 			if (Character.isWhitespace(ch) && permitWhitespace)
+				continue;
+			
+			if (exceptions.indexOf(ch) != -1)
 				continue;
 			
 			if (!Character.isAlphabetic(ch)) {
