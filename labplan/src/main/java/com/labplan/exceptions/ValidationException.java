@@ -3,12 +3,12 @@ package com.labplan.exceptions;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class ValidationError extends RuntimeException {
+public class ValidationException extends RuntimeException {
 	private static final long serialVersionUID = 5963249023483958037L;
 	
 	private Map<String, String> fields;
 
-	public ValidationError() {
+	public ValidationException() {
 		fields = new LinkedHashMap<>();
 	}
 	

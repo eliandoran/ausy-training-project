@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import com.labplan.entities.Patient;
-import com.labplan.exceptions.ValidationError;
+import com.labplan.exceptions.ValidationException;
 import com.labplan.helpers.NumericUtils;
 import com.labplan.persistence.generic.PatientDao;
 import com.labplan.persistence.sql.SqlPatientDao;
@@ -99,7 +99,7 @@ public class EditPatientResourceHandler implements ResourceHandler {
 				session.setAttribute("message", message);
 				params.getResponse().sendRedirect(params.getContext().getContextPath() + "/patients/");
 			}
-		} catch (ValidationError e) {
+		} catch (ValidationException e) {
 			message.setContent(e.toString());
 			message.setType(Message.MessageType.MSG_ERROR);
 			

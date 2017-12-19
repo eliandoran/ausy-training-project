@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.labplan.entities.LabTest;
 import com.labplan.entities.Patient;
-import com.labplan.exceptions.ValidationError;
+import com.labplan.exceptions.ValidationException;
 import com.labplan.helpers.NumericUtils;
 import com.labplan.persistence.generic.LabTestDao;
 
@@ -30,7 +30,7 @@ public class LabTestService extends Service<LabTest, LabTestDao> {
 	}
 	
 	public LabTest parse(String name, String description, String valueMin, String valueMax) {
-		ValidationError err = new ValidationError();
+		ValidationException err = new ValidationException();
 		
 		if (name == null || name.trim().length() == 0)
 			err.addField("Name", "should not be empty.");

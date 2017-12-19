@@ -3,7 +3,7 @@ package com.labplan.services;
 import java.util.List;
 
 import com.labplan.entities.Patient;
-import com.labplan.exceptions.ValidationError;
+import com.labplan.exceptions.ValidationException;
 import com.labplan.helpers.NumericUtils;
 import com.labplan.persistence.generic.PatientDao;
 
@@ -29,7 +29,7 @@ public class PatientService extends Service<Patient, PatientDao> {
 	}
 
 	public Patient parse(String firstName, String lastName, String age, String weight, String height) {
-		ValidationError err = new ValidationError();
+		ValidationException err = new ValidationException();
 		
 		if (firstName == null || firstName.trim().length() == 0)
 			err.addField("First name", "should not be empty.");
