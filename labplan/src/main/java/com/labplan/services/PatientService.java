@@ -31,12 +31,21 @@ public class PatientService extends Service<Patient, PatientDao> {
 	public Patient parse(String firstName, String lastName, String age, String weight, String height) {
 		ValidationException err = new ValidationException();
 		
+		Integer firstNameLengthLimit = 75;
+		Integer lastNameLengthLimit = firstNameLengthLimit;
+		
 		if (firstName == null || firstName.trim().length() == 0)
 			err.addField("First name", "should not be empty.");
 
 		if (lastName == null || lastName.trim().length() == 0)
 			err.addField("Last name", "should not be empty.");
 
+		if (firstName.trim().length() > firstNameLengthLimit)
+			err.addField("First name", "is longer than " + firstNameLengthLimit + " characters.");
+		
+		if (lastName.trim().length() > lastNameLengthLimit)
+			err.addField("Last name", "is longer than " + lastNameLengthLimit + " characters.");
+		
 		Integer _age = NumericUtils.tryParseInteger(age);
 		if (_age == null)
 			err.addField("Age", "is not a number.");
