@@ -37,6 +37,9 @@ public class PatientService extends Service<Patient, PatientDao> {
 		validator.assertStringLength("First name", firstName.trim(), 1, 75);
 		validator.assertStringLength("Last name", lastName.trim(), 1, 75);
 		
+		validator.assertStringIsAlphabetic("First name", firstName.trim(), true);
+		validator.assertStringIsAlphabetic("Last name", lastName.trim(), true);
+		
 		validator.assertStringIsInteger("Age", age);
 		validator.assertStringIsInteger("Weight", weight);
 		validator.assertStringIsInteger("Height", height);
