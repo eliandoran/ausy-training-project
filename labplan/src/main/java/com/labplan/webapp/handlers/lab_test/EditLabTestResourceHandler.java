@@ -40,6 +40,10 @@ public class EditLabTestResourceHandler implements ResourceHandler {
 			return false;
 		
 		HttpServletRequest request = params.getRequest();
+		request.setAttribute("name", test.getName());
+		request.setAttribute("description", test.getDescription());
+		request.setAttribute("value_min", test.getValueMin());
+		request.setAttribute("value_max", test.getValueMax());
 		
 		RequestDispatcher dispatcher = params.getContext().getRequestDispatcher("/app/tests/edit.jsp");
 		request.setAttribute("test", test);

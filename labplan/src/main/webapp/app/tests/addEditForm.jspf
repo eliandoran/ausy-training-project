@@ -3,15 +3,15 @@
 
 	<div class="three-columns">
 		<div class="row">
-			<label for="first_name">Name</label> <input type="text"
-				name="first_name" value="${first_name}" class="fill" />
+			<label for="name">Name</label> <input type="text"
+				name="name" value="${name}" class="fill" />
 		</div>
 		
 		<div class="row">
-			<label for="weight">Minimum value</label>
+			<label for="value_min">Minimum value</label>
 
 			<div class="has-unit" data-unit="decimal">
-				<input type="text" name="weight" value="${weight}" class="fill" />
+				<input type="text" name="value_min" value="${value_min}" class="fill" />
 			</div>
 		</div>
 
@@ -19,14 +19,14 @@
 			<label for="height">Maximum value</label>
 
 			<div class="has-unit" data-unit="decimal">
-				<input type="text" name="height" value="${height}" class="fill" />
+				<input type="text" name="value_max" value="${value_max}" class="fill" />
 			</div>
 		</div>
 	</div>
 	
 	<div class="row">
-		<label for="last_name">Description</label> <input type="text"
-			name="last_name" value="${last_name}" class="fill" />
+		<label for="description">Description</label> <input type="text"
+			name="description" value="${description}" class="fill" />
 	</div>
 
 	<div class="row actions">
