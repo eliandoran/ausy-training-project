@@ -30,6 +30,7 @@ public class AddLabListResourceHandler implements ResourceHandler {
 	public boolean doGet(HandlerParameters params) throws ServletException, IOException {
 		HttpServletRequest request = params.getRequest();
 		request.setAttribute("creation_date", new Date());
+		request.setAttribute("is_new", true);
 		
 		RequestDispatcher dispatcher = params.getContext().getRequestDispatcher("/app/lists/add.jsp");
 		dispatcher.forward(params.getRequest(), params.getResponse());

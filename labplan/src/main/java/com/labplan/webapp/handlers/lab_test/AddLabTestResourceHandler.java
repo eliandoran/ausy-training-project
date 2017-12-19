@@ -1,6 +1,7 @@
 package com.labplan.webapp.handlers.lab_test;
 
 import java.io.IOException;
+import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -31,6 +32,9 @@ public class AddLabTestResourceHandler implements ResourceHandler {
 
 	@Override
 	public boolean doGet(HandlerParameters params) throws ServletException, IOException {
+		HttpServletRequest request = params.getRequest();
+		request.setAttribute("is_new", true);
+		
 		RequestDispatcher dispatcher = params.getContext().getRequestDispatcher("/app/tests/add.jsp");
 		dispatcher.forward(params.getRequest(), params.getResponse());
 		

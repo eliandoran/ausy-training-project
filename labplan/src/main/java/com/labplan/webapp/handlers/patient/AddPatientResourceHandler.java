@@ -32,6 +32,9 @@ public class AddPatientResourceHandler implements ResourceHandler {
 
 	@Override
 	public boolean doGet(HandlerParameters params) throws ServletException, IOException {
+		HttpServletRequest request = params.getRequest();
+		request.setAttribute("is_new", true);
+		
 		RequestDispatcher dispatcher = params.getContext().getRequestDispatcher("/app/patients/add.jsp");
 		dispatcher.forward(params.getRequest(), params.getResponse());
 		
