@@ -225,7 +225,8 @@ form input[type="text"] {
 	border: 0;
 	border-bottom: 1px solid #dedede;
 	background: transparent;
-	padding: 0.5em;
+	color: black;
+	padding: 0.5em;	
 }
 
 form input.fill {
