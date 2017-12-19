@@ -9,7 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import com.labplan.entities.LabTest;
 import com.labplan.exceptions.ValidationError;
-import com.labplan.helpers.IntUtils;
+import com.labplan.helpers.NumericUtils;
 import com.labplan.persistence.sql.SqlLabTestDao;
 import com.labplan.services.LabTestService;
 import com.labplan.webapp.HandlerParameters;
@@ -32,7 +32,7 @@ public class EditLabTestResourceHandler implements ResourceHandler {
 
 	@Override
 	public boolean doGet(HandlerParameters params) throws ServletException, IOException {
-		Integer testId = IntUtils.tryParse(params.getRequest().getParameter("id"));
+		Integer testId = NumericUtils.tryParseInteger(params.getRequest().getParameter("id"));
 		
 		if (testId == null)
 			return false;
@@ -60,7 +60,7 @@ public class EditLabTestResourceHandler implements ResourceHandler {
 		HttpServletRequest request = params.getRequest();
 		
 		// Parse the `id` GET parameter
-		Integer testId = IntUtils.tryParse(params.getRequest().getParameter("id"));
+		Integer testId = NumericUtils.tryParseInteger(params.getRequest().getParameter("id"));
 		
 		if (testId == null)
 			return false;

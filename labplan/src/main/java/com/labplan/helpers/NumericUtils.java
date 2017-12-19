@@ -6,7 +6,7 @@ package com.labplan.helpers;
  * @author Elian Doran
  *
  */
-public class IntUtils {
+public class NumericUtils {
 	/**
 	 * Attempts to parse an {@link Integer} from a {@link String}. Should the string
 	 * be empty or the conversion failed, the function returns {@code null} instead
@@ -17,7 +17,7 @@ public class IntUtils {
 	 * @return An {@link Integer} containing the parsed number or {@code null} if
 	 *         failed.
 	 */
-	public static Integer tryParse(String str) {
+	public static Integer tryParseInteger(String str) {
 		if (str == null || str.length() == 0)
 			return null;
 

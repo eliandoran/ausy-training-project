@@ -5,7 +5,7 @@ import java.util.List;
 import com.labplan.entities.LabTest;
 import com.labplan.entities.Patient;
 import com.labplan.exceptions.ValidationError;
-import com.labplan.helpers.IntUtils;
+import com.labplan.helpers.NumericUtils;
 import com.labplan.persistence.generic.LabTestDao;
 
 public class LabTestService extends Service<LabTest, LabTestDao> {
@@ -35,11 +35,11 @@ public class LabTestService extends Service<LabTest, LabTestDao> {
 		if (name == null || name.trim().length() == 0)
 			err.addField("Name", "should not be empty.");
 		
-		Float _valueMin = IntUtils.tryParseFloat(valueMin);
+		Float _valueMin = NumericUtils.tryParseFloat(valueMin);
 		if (_valueMin == null)
 			err.addField("Minimum value", "is not a number.");
 		
-		Float _valueMax = IntUtils.tryParseFloat(valueMax);
+		Float _valueMax = NumericUtils.tryParseFloat(valueMax);
 		if (_valueMax == null)
 			err.addField("Maximum value", "is not a number.");
 		

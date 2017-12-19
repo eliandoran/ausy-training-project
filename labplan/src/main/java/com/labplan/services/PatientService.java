@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.labplan.entities.Patient;
 import com.labplan.exceptions.ValidationError;
-import com.labplan.helpers.IntUtils;
+import com.labplan.helpers.NumericUtils;
 import com.labplan.persistence.generic.PatientDao;
 
 public class PatientService extends Service<Patient, PatientDao> {
@@ -37,15 +37,15 @@ public class PatientService extends Service<Patient, PatientDao> {
 		if (lastName == null || lastName.trim().length() == 0)
 			err.addField("Last name", "should not be empty.");
 
-		Integer _age = IntUtils.tryParse(age);
+		Integer _age = NumericUtils.tryParseInteger(age);
 		if (_age == null)
 			err.addField("Age", "is not a number.");
 
-		Integer _weight = IntUtils.tryParse(weight);
+		Integer _weight = NumericUtils.tryParseInteger(weight);
 		if (_weight == null)
 			err.addField("Weight", "is not a number.");
 
-		Integer _height = IntUtils.tryParse(height);
+		Integer _height = NumericUtils.tryParseInteger(height);
 		if (_height == null)
 			err.addField("Height", "is not a number.");
 		

@@ -9,7 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import com.labplan.entities.Patient;
 import com.labplan.exceptions.ValidationError;
-import com.labplan.helpers.IntUtils;
+import com.labplan.helpers.NumericUtils;
 import com.labplan.persistence.generic.PatientDao;
 import com.labplan.persistence.sql.SqlPatientDao;
 import com.labplan.services.PatientService;
@@ -33,7 +33,7 @@ public class EditPatientResourceHandler implements ResourceHandler {
 
 	@Override
 	public boolean doGet(HandlerParameters params) throws ServletException, IOException {
-		Integer patientId = IntUtils.tryParse(params.getRequest().getParameter("id"));
+		Integer patientId = NumericUtils.tryParseInteger(params.getRequest().getParameter("id"));
 		
 		if (patientId == null)
 			return false;
@@ -62,7 +62,7 @@ public class EditPatientResourceHandler implements ResourceHandler {
 		HttpServletRequest request = params.getRequest();
 		
 		// Parse the `id` GET parameter
-		Integer patientId = IntUtils.tryParse(params.getRequest().getParameter("id"));
+		Integer patientId = NumericUtils.tryParseInteger(params.getRequest().getParameter("id"));
 		
 		if (patientId == null)
 			return false;

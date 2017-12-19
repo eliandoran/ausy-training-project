@@ -6,7 +6,7 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
-import com.labplan.helpers.IntUtils;
+import com.labplan.helpers.NumericUtils;
 import com.labplan.persistence.sql.SqlLabTestDao;
 import com.labplan.services.LabTestService;
 import com.labplan.webapp.HandlerParameters;
@@ -34,7 +34,7 @@ public class ListLabTestResourceHandler implements ResourceHandler {
 
 		Integer entriesPerPage = 10;
 		Integer pageCount = testService.getPageCount(entriesPerPage);
-		Integer page = IntUtils.tryParse(params.getRequest().getParameter("page"));
+		Integer page = NumericUtils.tryParseInteger(params.getRequest().getParameter("page"));
 
 		page = (page != null ? page : 1);
 		page = Math.max(page, 1);
