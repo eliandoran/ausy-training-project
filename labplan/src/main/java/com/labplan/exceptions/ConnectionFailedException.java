@@ -1,4 +1,4 @@
-package com.labplan.persistence.exceptions;
+package com.labplan.exceptions;
 
 public class ConnectionFailedException extends RuntimeException {
 	public ConnectionFailedException() {

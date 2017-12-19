@@ -8,7 +8,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
-import com.labplan.persistence.exceptions.ConnectionFailedException;
+import com.labplan.exceptions.ConnectionFailedException;
 import com.mysql.cj.jdbc.Driver;
 
 /**
