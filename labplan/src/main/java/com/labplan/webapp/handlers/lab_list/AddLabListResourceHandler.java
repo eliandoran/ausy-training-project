@@ -1,9 +1,11 @@
 package com.labplan.webapp.handlers.lab_list;
 
 import java.io.IOException;
+import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
 
 import com.labplan.persistence.sql.SqlLabListDao;
 import com.labplan.services.LabListService;
@@ -26,6 +28,9 @@ public class AddLabListResourceHandler implements ResourceHandler {
 
 	@Override
 	public boolean doGet(HandlerParameters params) throws ServletException, IOException {
+		HttpServletRequest request = params.getRequest();
+		request.setAttribute("creation_date", new Date());
+		
 		RequestDispatcher dispatcher = params.getContext().getRequestDispatcher("/app/lists/add.jsp");
 		dispatcher.forward(params.getRequest(), params.getResponse());
 		return true;

@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <form class="test-form" method="post">
 	<input type="hidden" name="commit" value="" />
 
@@ -8,8 +9,8 @@
 		</div>
 		
 		<div class="row">
-			<label for="name">Creation date</label> <input type="text"
-				name="name" value="${name}" class="fill" />
+			<label for="name">Creation date</label>
+			<date><fmt:formatDate pattern="yyyy/MM/dd" value="${creation_date}" /></date>
 		</div>
 	</div>
 
