@@ -29,38 +29,22 @@ public class PatientService extends Service<Patient, PatientDao> {
 	}
 
 	public Patient parse(String firstName, String lastName, String age, String weight, String height) {
-		ValidationException err = new ValidationException();
+		Validator validator = new Validator();
 		
-		Integer firstNameLengthLimit = 75;
-		Integer lastNameLengthLimit = firstNameLengthLimit;
+		validator.assertNotNull("First name", firstName);
+		validator.assertNotNull("Last name", lastName);
 		
-		if (firstName == null || firstName.trim().length() == 0)
-			err.addField("First name", "should not be empty.");
-
-		if (lastName == null || lastName.trim().length() == 0)
-			err.addField("Last name", "should not be empty.");
-
-		if (firstName.trim().length() > firstNameLengthLimit)
-			err.addField("First name", "is longer than " + firstNameLengthLimit + " characters.");
+		validator.assertStringLength("First name", firstName.trim(), 1, 75);
+		validator.assertStringLength("Last name", lastName.trim(), 1, 75);
 		
-		if (lastName.trim().length() > lastNameLengthLimit)
-			err.addField("Last name", "is longer than " + lastNameLengthLimit + " characters.");
+		validator.assertStringIsInteger("Age", age);
+		validator.assertStringIsInteger("Weight", weight);
+		validator.assertStringIsInteger("Height", height);
 		
-		Integer _age = NumericUtils.tryParseInteger(age);
-		if (_age == null)
-			err.addField("Age", "is not a number.");
+		validator.validate();
 
-		Integer _weight = NumericUtils.tryParseInteger(weight);
-		if (_weight == null)
-			err.addField("Weight", "is not a number.");
-
-		Integer _height = NumericUtils.tryParseInteger(height);
-		if (_height == null)
-			err.addField("Height", "is not a number.");
-		
-		if (err.getFields().size() > 0)
-			throw err;
-
-		return new Patient(firstName.trim(), lastName.trim(), _age, _height, _weight);
+		return new Patient(
+				firstName.trim(), lastName.trim(),
+				Integer.parseInt(age), Integer.parseInt(height), Integer.parseInt(weight));
 	}
 }
