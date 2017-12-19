@@ -11,7 +11,7 @@ package com.labplan.webapp;
 public class PaginationUrlBuilder {
 	private String baseUrl;
 	private PageInformation pageInfo;
-	private static final String disabledUrl = "";
+	private static final String disabledUrl = "#";
 
 	/**
 	 * Creates a new {@link PaginationUrlBuilder}.

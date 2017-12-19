@@ -179,7 +179,7 @@ tr:nth-child(even) {
 	display: block;
 }
 
-.pagination a[href=""] {
+.pagination a[href="#"] {
 	opacity: 0.5;
 	cursor: pointer;
 }
