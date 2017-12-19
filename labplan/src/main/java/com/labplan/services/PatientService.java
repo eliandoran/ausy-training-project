@@ -44,6 +44,10 @@ public class PatientService extends Service<Patient, PatientDao> {
 		validator.assertStringIsInteger("Weight", weight);
 		validator.assertStringIsInteger("Height", height);
 		
+		validator.assertIntegerInRange("Age", age, 0, 200);
+		validator.assertIntegerInRange("Weight", weight, 0, 200);
+		validator.assertIntegerInRange("Height", height, 0, 250);
+		
 		validator.validate();	// Will throw ValidationException if any assertions failed.
 
 		return new Patient(

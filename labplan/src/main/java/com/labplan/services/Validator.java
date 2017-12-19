@@ -181,4 +181,40 @@ public class Validator {
 		
 		return true;
 	}
+	
+	/**
+	 * Asserts that the given {@link Integer} {@code value} is between {@code minValue} and {@code maxValue}.
+	 * @param fieldName		The name of the field being validated, it will represent the key of {@link ValidationException#getFields()}.
+	 * @param value			The value being used for the assertion.
+	 * @param minValue		The minimum value.
+	 * @param maxValue		The maximum value.
+	 * @return {@code true} if the assertion succeeded, {@code false} otherwise.
+	 */
+	public boolean assertIntegerInRange(String fieldName, Integer value, Integer minValue, Integer maxValue) {
+		if (value < minValue) {
+			resultingException.addField(fieldName, "should be greater than or equal to " + minValue);
+			return false;
+		}
+		
+		if (value > maxValue) {
+			resultingException.addField(fieldName, "should be less than or equal to " + maxValue);
+			return false;
+		}
+		
+		return true;
+	}
+	
+	/**
+	 * Asserts that the given {@link String} {@code value} is an {@link Integer} with values between  is between {@code minValue} and {@code maxValue}.
+	 * @param fieldName		The name of the field being validated, it will represent the key of {@link ValidationException#getFields()}.
+	 * @param value			The value being used for the assertion.
+	 * @param minValue		The minimum value.
+	 * @param maxValue		The maximum value.
+	 * @return {@code true} if the assertion succeeded, {@code false} otherwise.
+	 */
+	public boolean assertIntegerInRange(String fieldName, String value, Integer minValue, Integer maxValue) {
+		if (!assertStringIsInteger(fieldName, value)) return false;
+		
+		return assertIntegerInRange(fieldName, Integer.parseInt(value), minValue, maxValue);
+	}
 }
