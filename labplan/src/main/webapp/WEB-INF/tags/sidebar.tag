@@ -34,6 +34,10 @@
 			<li>
 				<a href="<c:url value="/tests/" />">View all tests</a>
 			</li>
+			
+			<li>
+				<a href="<c:url value="/tests/add" />">Add a test</a>
+			</li>
 		</ul>
 	</section>
 </aside>
