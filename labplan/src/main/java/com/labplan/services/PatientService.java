@@ -3,8 +3,6 @@ package com.labplan.services;
 import java.util.List;
 
 import com.labplan.entities.Patient;
-import com.labplan.exceptions.ValidationException;
-import com.labplan.helpers.NumericUtils;
 import com.labplan.persistence.generic.PatientDao;
 
 public class PatientService extends Service<Patient, PatientDao> {
