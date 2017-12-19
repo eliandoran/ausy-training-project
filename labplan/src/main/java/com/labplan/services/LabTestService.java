@@ -25,21 +25,19 @@ public class LabTestService extends Service<LabTest, LabTestDao> {
 	public Integer getPageCount(int entriesPerPage) {
 		return (int) Math.round(Math.ceil(((double) dao.getCount() / entriesPerPage)));
 	}
-	
+
 	public LabTest parse(String name, String description, String valueMin, String valueMax) {
 		Validator validator = new Validator();
-		
+
 		validator.assertNotNull("Name", name);
-		validator.validate();	// Force validation right now in order to assure name is not null
-		
+		validator.validate(); // Force validation right now in order to assure name is not null
+
 		validator.assertNotEmpty("Name", name.trim());
 		validator.assertStringIsFloat("Minimum value", valueMin);
 		validator.assertStringIsFloat("Maximum value", valueMax);
-		
-		validator.validate();	// Will throw ValidationException if any assertions failed.
-		
-		return new LabTest(name.trim(), description.trim(),
-				Float.parseFloat(valueMin),
-				Float.parseFloat(valueMax));
+
+		validator.validate(); // Will throw ValidationException if any assertions failed.
+
+		return new LabTest(name.trim(), description.trim(), Float.parseFloat(valueMin), Float.parseFloat(valueMax));
 	}
 }

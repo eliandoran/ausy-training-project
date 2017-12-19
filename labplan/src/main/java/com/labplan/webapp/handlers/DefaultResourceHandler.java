@@ -13,15 +13,15 @@ public class DefaultResourceHandler implements ResourceHandler {
 	public String getPath() {
 		return "/";
 	}
-	
+
 	@Override
 	public boolean doGet(HandlerParameters params) throws ServletException, IOException {
 		if (!params.getPath().equals(""))
 			return false;
-		
+
 		RequestDispatcher dispatcher = params.getContext().getRequestDispatcher("/app/index.jsp");
 		dispatcher.forward(params.getRequest(), params.getResponse());
-		
+
 		return true;
 	}
 

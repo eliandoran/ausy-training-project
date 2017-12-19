@@ -21,7 +21,7 @@ public class ListPatientResourceHandler implements ResourceHandler {
 		patientDao = new SqlPatientDao();
 		patientService = new PatientService(patientDao);
 	}
-	
+
 	@Override
 	public String getPath() {
 		return "patients/";

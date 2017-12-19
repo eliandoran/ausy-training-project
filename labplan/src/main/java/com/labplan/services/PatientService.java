@@ -28,30 +28,30 @@ public class PatientService extends Service<Patient, PatientDao> {
 
 	public Patient parse(String firstName, String lastName, String age, String weight, String height) {
 		Validator validator = new Validator();
-		
+
 		validator.assertNotNull("First name", firstName);
 		validator.assertNotNull("Last name", lastName);
-		validator.validate();	// Force validation right now in order to assure first name & last name are not null
-		
+		validator.validate(); // Force validation right now in order to assure first name & last name are not
+								// null
+
 		validator.assertStringLength("First name", firstName.trim(), 1, 75);
 		validator.assertStringLength("Last name", lastName.trim(), 1, 75);
-		
+
 		String nameExceptions = "-";
 		validator.assertStringIsAlphabetic("First name", firstName.trim(), true, nameExceptions);
 		validator.assertStringIsAlphabetic("Last name", lastName.trim(), true, nameExceptions);
-		
+
 		validator.assertStringIsInteger("Age", age);
 		validator.assertStringIsInteger("Weight", weight);
 		validator.assertStringIsInteger("Height", height);
-		
+
 		validator.assertIntegerInRange("Age", age, 0, 200);
 		validator.assertIntegerInRange("Weight", weight, 0, 200);
 		validator.assertIntegerInRange("Height", height, 0, 250);
-		
-		validator.validate();	// Will throw ValidationException if any assertions failed.
 
-		return new Patient(
-				firstName.trim(), lastName.trim(),
-				Integer.parseInt(age), Integer.parseInt(height), Integer.parseInt(weight));
+		validator.validate(); // Will throw ValidationException if any assertions failed.
+
+		return new Patient(firstName.trim(), lastName.trim(), Integer.parseInt(age), Integer.parseInt(height),
+				Integer.parseInt(weight));
 	}
 }

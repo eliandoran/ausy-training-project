@@ -16,12 +16,12 @@ import com.labplan.webapp.ResourceHandler;
 public class ListLabListResourceHandler implements ResourceHandler {
 	private SqlLabListDao listDao;
 	private LabListService listService;
-	
+
 	public ListLabListResourceHandler() {
 		listDao = new SqlLabListDao();
 		listService = new LabListService(listDao);
 	}
-	
+
 	@Override
 	public String getPath() {
 		return "lists/";
@@ -52,5 +52,5 @@ public class ListLabListResourceHandler implements ResourceHandler {
 		// TODO Auto-generated method stub
 		return false;
 	}
-	
+
 }

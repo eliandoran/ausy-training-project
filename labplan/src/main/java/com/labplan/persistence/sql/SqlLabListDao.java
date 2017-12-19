@@ -64,7 +64,7 @@ public class SqlLabListDao implements LabListDao {
 
 		return list;
 	}
-	
+
 	@Override
 	public List<LabList> read(Integer limit, Integer offset) {
 		Connection conn = DatabaseConnectionFactory.getConnection();
@@ -201,7 +201,7 @@ public class SqlLabListDao implements LabListDao {
 
 		return true;
 	}
-	
+
 	@Override
 	public Integer getCount() {
 		Connection conn = DatabaseConnectionFactory.getConnection();

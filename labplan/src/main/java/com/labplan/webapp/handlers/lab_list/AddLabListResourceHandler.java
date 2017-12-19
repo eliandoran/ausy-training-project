@@ -20,7 +20,7 @@ import com.labplan.webapp.ResourceHandler;
 public class AddLabListResourceHandler implements ResourceHandler {
 	private SqlLabListDao listDao;
 	private LabListService listService;
-	
+
 	public AddLabListResourceHandler() {
 		listDao = new SqlLabListDao();
 		listService = new LabListService(listDao);
@@ -37,7 +37,7 @@ public class AddLabListResourceHandler implements ResourceHandler {
 		request.setAttribute("creation_date", new Date());
 		request.setAttribute("is_new", true);
 		request.setAttribute("patients", getPatients());
-		
+
 		RequestDispatcher dispatcher = params.getContext().getRequestDispatcher("/app/lists/add.jsp");
 		dispatcher.forward(params.getRequest(), params.getResponse());
 		return true;
@@ -48,12 +48,12 @@ public class AddLabListResourceHandler implements ResourceHandler {
 		// TODO Auto-generated method stub
 		return false;
 	}
-	
+
 	private List<Patient> getPatients() {
-		PatientDao patientDao = new SqlPatientDao();		
+		PatientDao patientDao = new SqlPatientDao();
 		List<Patient> patientsList = new LinkedList<Patient>();
 		patientsList.addAll(patientDao.readAll());
-		
+
 		return patientsList;
 	}
 }

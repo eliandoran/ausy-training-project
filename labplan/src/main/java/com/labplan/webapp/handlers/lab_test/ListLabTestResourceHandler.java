@@ -16,12 +16,12 @@ import com.labplan.webapp.ResourceHandler;
 public class ListLabTestResourceHandler implements ResourceHandler {
 	private SqlLabTestDao testDao;
 	private LabTestService testService;
-	
+
 	public ListLabTestResourceHandler() {
 		testDao = new SqlLabTestDao();
 		testService = new LabTestService(testDao);
 	}
-	
+
 	@Override
 	public String getPath() {
 		return "tests/";
@@ -48,7 +48,7 @@ public class ListLabTestResourceHandler implements ResourceHandler {
 	}
 
 	@Override
-	public boolean doPost(HandlerParameters params) throws ServletException, IOException { 
+	public boolean doPost(HandlerParameters params) throws ServletException, IOException {
 		return false;
 	}
 

@@ -21,7 +21,7 @@ public interface LabTestDao extends Dao<LabTest, Integer> {
 	 * @return The {@link TabTest} with a matching name.
 	 */
 	LabTest read(String name);
-	
+
 	/**
 	 * Obtains a maximum of {@code limit} {@link LabTest}s read from a data source,
 	 * while skipping the first {@code offset} entities.

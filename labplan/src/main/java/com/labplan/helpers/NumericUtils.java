@@ -1,7 +1,8 @@
 package com.labplan.helpers;
 
 /**
- * Provides a set of utility functions for parsing {@link Integer} and {@link Float} values.
+ * Provides a set of utility functions for parsing {@link Integer} and
+ * {@link Float} values.
  * 
  * @author Elian Doran
  *
@@ -27,11 +28,11 @@ public class NumericUtils {
 			return null;
 		}
 	}
-	
+
 	/**
-	 * Attempts to parse a {@link Float} from a {@link String}. Should the string
-	 * be empty or the conversion failed, the function returns {@code null} instead
-	 * of throwing a {@link NumberFormatException}.
+	 * Attempts to parse a {@link Float} from a {@link String}. Should the string be
+	 * empty or the conversion failed, the function returns {@code null} instead of
+	 * throwing a {@link NumberFormatException}.
 	 * 
 	 * @param str
 	 *            A {@link String} containing the number to be converted.

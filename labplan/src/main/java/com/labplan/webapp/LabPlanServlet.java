@@ -27,7 +27,7 @@ public class LabPlanServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	private static final Logger LOGGER = Logger.getLogger(LabPlanServlet.class.getName());
-	
+
 	private HandlerContainer handlers;
 
 	@Override
@@ -35,15 +35,15 @@ public class LabPlanServlet extends HttpServlet {
 		DatabaseConnectionFactory.setProfile("production");
 
 		handlers = new HandlerContainer();
-		
+
 		handlers.register(new ListPatientResourceHandler());
 		handlers.register(new AddPatientResourceHandler());
 		handlers.register(new EditPatientResourceHandler());
-		
+
 		handlers.register(new ListLabTestResourceHandler());
 		handlers.register(new AddLabTestResourceHandler());
 		handlers.register(new EditLabTestResourceHandler());
-		
+
 		handlers.register(new ListLabListResourceHandler());
 		handlers.register(new AddLabListResourceHandler());
 	}
@@ -56,22 +56,24 @@ public class LabPlanServlet extends HttpServlet {
 		String path = getPath(request);
 		ServletContext context = getServletContext();
 		HandlerParameters params = new HandlerParameters(context, request, response, path);
-		
+
 		LOGGER.info("GET " + request.getRequestURI());
-		
+
 		processMessages(params);
 		ResourceHandler handler = obtainHandler(path);
-		
+
 		if (handler != null) {
 			if (!handler.doGet(params)) {
 				response.sendError(404);
 				LOGGER.info("Handler returned 404.");
-			};
+			}
+			;
 		}
 	}
-	
+
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html");
 
@@ -82,36 +84,37 @@ public class LabPlanServlet extends HttpServlet {
 		LOGGER.info("POST " + request.getRequestURI());
 		processMessages(params);
 		ResourceHandler handler = obtainHandler(path);
-		
+
 		if (handler != null) {
 			if (!handler.doPost(params)) {
 				response.sendError(404);
 				LOGGER.info("Handler returned 404.");
-			};
+			}
+			;
 		}
 	}
-	
+
 	private void processMessages(HandlerParameters params) {
 		HttpSession session = params.getRequest().getSession();
-		Message message = (Message)session.getAttribute("message");
-		
+		Message message = (Message) session.getAttribute("message");
+
 		if (message != null) {
 			params.getRequest().setAttribute("message", message);
 			session.removeAttribute("message");
 			LOGGER.info("Got a message: " + message.getType() + ": " + message.getContent());
 		}
 	}
-	
+
 	private ResourceHandler obtainHandler(String path) {
 		LOGGER.info("Searching for handler: " + path);
-		
+
 		ResourceHandler handler = handlers.obtain(path);
-			
+
 		if (handler != null) {
 			LOGGER.info("Obtained handler: " + path);
 			return handler;
 		}
-		
+
 		LOGGER.info("Using default handler.");
 		return new DefaultResourceHandler();
 	}
@@ -123,11 +126,12 @@ public class LabPlanServlet extends HttpServlet {
 			URI relativePath = basePath.relativize(currentPath);
 
 			String path = relativePath.toString();
-			
-			// The Java servlet container sometimes appends ";jsessionid=XYZ" to URLs which will
+
+			// The Java servlet container sometimes appends ";jsessionid=XYZ" to URLs which
+			// will
 			// confuse the handlers. Removing it from the path is most useful.
 			path = path.split(";")[0];
-			
+
 			return path;
 		} catch (URISyntaxException e) {
 			throw new RuntimeException("Unable to determine server base URI.");

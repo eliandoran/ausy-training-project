@@ -12,7 +12,7 @@ public class HandlerContainer {
 
 	public boolean register(ResourceHandler handler) {
 		String name = handler.getPath();
-		
+
 		if (handlers.containsKey(name))
 			return false;
 

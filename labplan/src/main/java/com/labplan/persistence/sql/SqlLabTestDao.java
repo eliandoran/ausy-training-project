@@ -67,7 +67,7 @@ public class SqlLabTestDao implements LabTestDao {
 
 		return null;
 	}
-	
+
 	@Override
 	public List<LabTest> read(Integer limit, Integer offset) {
 		Connection conn = DatabaseConnectionFactory.getConnection();

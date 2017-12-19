@@ -27,7 +27,7 @@ public interface LabListDao extends Dao<LabList, Integer> {
 	 *         given {@link Patient}.
 	 */
 	Set<LabList> readAllByPatient(Patient patient);
-	
+
 	/**
 	 * Obtains a maximum of {@code limit} {@link LabTest}s read from a data source,
 	 * while skipping the first {@code offset} entities.
