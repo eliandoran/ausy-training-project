@@ -4,8 +4,12 @@
 
 	<div class="two-columns">
 		<div class="row">
-			<label for="name">Patient</label> <input type="text"
-				name="name" value="${name}" class="fill" />
+			<label for="name">Patient</label>
+			<select name="patient_id" class="fill">
+				<c:forEach var="patient" items="${patients}">
+					<option value="${patient.id}">${patient.fullName}</option>
+				</c:forEach>
+			</select>
 		</div>
 		
 		<div class="row">
