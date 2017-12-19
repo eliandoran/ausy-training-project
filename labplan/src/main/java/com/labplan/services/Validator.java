@@ -3,26 +3,63 @@ package com.labplan.services;
 import com.labplan.exceptions.ValidationException;
 import com.labplan.helpers.NumericUtils;
 
+/**
+ * A helper class for validating user input given as a {@link String} with a variety of assertions.
+ * 
+ * <p>An instance of {@link Validator} keeps its own {@link ValidationException}. Should an
+ * assertion like {@link Validator#assertNotNull(String, Object)} fail, {@link Validator} uses
+ * {@link ValidationException#addField(String, String)} to keep track of the failed assertion.
+ * 
+ * <p>To be able to validate multiple fields at once, {@link ValidationException} is only thrown
+ * when {@link Validator#validate()} is called.</p>
+ * 
+ * @author Elian Doran
+ *
+ */
 public class Validator {
 	private ValidationException resultingException;
 	
+	/**
+	 * Creates a new instance of {@link Validator}.
+	 */
 	public Validator() {
 		resultingException = new ValidationException();
 	}
 	
+	/**
+	 * Gets the {@link ValidationException} containing all the failed assertions. The exception is updated
+	 * using {@link ValidationException#addField(String, String)} every time an assertion like
+	 * {@link Validator#assertNotNull(String, Object)} fails.
+	 * @return A {@link ValidationException} containing all the failed assertions.
+	 */
 	public ValidationException getResultingException() {
 		return resultingException;
 	}
 	
+	/**
+	 * Determines whether the all the assertions have succeeded.
+	 * @return {@code true} if no assertions failed, {@code false} otherwise.
+	 */
 	public boolean getValidationSucceeded() {
 		return resultingException.getFields().size() == 0;
 	}
 	
+	/**
+	 * If any assertions have failed, the method throws the underlying {@link ValidationException},
+	 * otherwise nothing happens.
+	 * @throws ValidationException	If any assertions have failed.
+	 */
 	public void validate() throws ValidationException {
 		if (!getValidationSucceeded())
 			throw resultingException;
 	}
 	
+	/**
+	 * Asserts that the given {@code value} is not {@code null}.
+	 * @param fieldName		The name of the field being validated, it will represent the key of {@link ValidationException#getFields()}.
+	 * @param value			The value being used for the assertion.
+	 * @return {@code true} if the assertion succeeded, {@code false} otherwise.
+	 */
 	public boolean assertNotNull(String fieldName, Object value) {
 		if (value == null) {
 			resultingException.addField(fieldName, "should not be empty.");
@@ -32,6 +69,12 @@ public class Validator {
 		return true;
 	}
 	
+	/**
+	 * Asserts that the given {@link String} {@code value} is not {@code null} and its length is non-zero. 
+	 * @param fieldName		The name of the field being validated, it will represent the key of {@link ValidationException#getFields()}.
+	 * @param value			The value being used for the assertion.
+	 * @return {@code true} if the assertion succeeded, {@code false} otherwise.
+	 */
 	public boolean assertNotEmpty(String fieldName, String value) {
 		if (!assertNotNull(fieldName, value)) return false;
 		
@@ -43,6 +86,14 @@ public class Validator {
 		return true;
 	}
 	
+	/**
+	 * Asserts that the given {@link String} {@code value} has a length between {@code minLength} and {@code maxLength}.
+	 * @param fieldName		The name of the field being validated, it will represent the key of {@link ValidationException#getFields()}.
+	 * @param value			The value being used for the assertion.
+	 * @param minLength		The minimum length of the string.
+	 * @param maxLength		The maximum length of the string.
+	 * @return {@code true} if the assertion succeeded, {@code false} otherwise.
+	 */
 	public boolean assertStringLength(String fieldName, String value, Integer minLength, Integer maxLength) {
 		if (!assertNotEmpty(fieldName, value)) return false;
 		
@@ -59,6 +110,19 @@ public class Validator {
 		return true;
 	}
 	
+	/**
+	 * Asserts that the given {@link String} {@code value} contains only alphabetic characters. Whitespace is allowed if
+	 * {@code permitWhitespace} is {@code true} and any character in {@code exceptions} is also allowed.
+	 * 
+	 * <p>The method uses {@link Character#isAlphabetic(char)} and {@link Character#isWhitespace(char)} for
+	 * validation.</p>
+	 * 
+	 * @param fieldName			The name of the field being validated, it will represent the key of {@link ValidationException#getFields()}.
+	 * @param value				The value being used for the assertion.
+	 * @param permitWhitespace	Whether to allow whitespace characters, along alphabetic characters.
+	 * @param exceptions		A string containing characters to be allowed, on top of alphabetic and whitespace characters.
+	 * @return {@code true} if the assertion succeeded, {@code false} otherwise.
+	 */
 	public boolean assertStringIsAlphabetic(String fieldName, String value, boolean permitWhitespace, String exceptions) {
 		if (!assertNotEmpty(fieldName, value)) return false;
 		
@@ -80,6 +144,12 @@ public class Validator {
 		return true;
 	}
 	
+	/**
+	 * Asserts that the given {@link String} {@code value} can be successfully converted to an {@link Integer}.
+	 * @param fieldName		The name of the field being validated, it will represent the key of {@link ValidationException#getFields()}.
+	 * @param value			The value being used for the assertion.
+	 * @return {@code true} if the assertion succeeded, {@code false} otherwise.
+	 */
 	public boolean assertStringIsInteger(String fieldName, String value) {
 		if (!assertNotEmpty(fieldName, value)) return false;
 		
@@ -93,6 +163,12 @@ public class Validator {
 		return true;
 	}
 	
+	/**
+	 * Asserts that the given {@link String} {@code value} can be successfully converted to a {@link Float}.
+	 * @param fieldName		The name of the field being validated, it will represent the key of {@link ValidationException#getFields()}.
+	 * @param value			The value being used for the assertion.
+	 * @return {@code true} if the assertion succeeded, {@code false} otherwise.
+	 */
 	public boolean assertStringIsFloat(String fieldName, String value) {
 		if (!assertNotEmpty(fieldName, value)) return false;
 		
