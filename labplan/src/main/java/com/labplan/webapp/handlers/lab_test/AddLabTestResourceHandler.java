@@ -1,7 +1,6 @@
 package com.labplan.webapp.handlers.lab_test;
 
 import java.io.IOException;
-import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
