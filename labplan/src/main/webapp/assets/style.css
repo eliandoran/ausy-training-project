@@ -220,6 +220,7 @@ form .three-columns .row {
 	box-sizing: border-box;
 }
 
+form input[type="number"],
 form input[type="text"] {
 	border: 0;
 	border-bottom: 1px solid #dedede;

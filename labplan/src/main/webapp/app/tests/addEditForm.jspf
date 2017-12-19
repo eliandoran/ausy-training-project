@@ -11,7 +11,7 @@
 			<label for="value_min">Minimum value</label>
 
 			<div class="has-unit" data-unit="decimal">
-				<input type="text" name="value_min" value="${value_min}" class="fill" />
+				<input type="number" name="value_min" value="${value_min}" step="0.01" class="fill" />
 			</div>
 		</div>
 
@@ -19,7 +19,7 @@
 			<label for="height">Maximum value</label>
 
 			<div class="has-unit" data-unit="decimal">
-				<input type="text" name="value_max" value="${value_max}" class="fill" />
+				<input type="number" name="value_max" value="${value_max}" step="0.01" class="fill" />
 			</div>
 		</div>
 	</div>
