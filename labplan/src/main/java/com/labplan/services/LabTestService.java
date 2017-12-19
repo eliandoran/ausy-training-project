@@ -29,22 +29,17 @@ public class LabTestService extends Service<LabTest, LabTestDao> {
 	}
 	
 	public LabTest parse(String name, String description, String valueMin, String valueMax) {
-		ValidationException err = new ValidationException();
+		Validator validator = new Validator();
 		
-		if (name == null || name.trim().length() == 0)
-			err.addField("Name", "should not be empty.");
+		validator.assertNotNull("Name", name);
+		validator.assertNotEmpty("Name", name.trim());
+		validator.assertStringIsFloat("Minimum value", valueMin);
+		validator.assertStringIsFloat("Maximum value", valueMax);
 		
-		Float _valueMin = NumericUtils.tryParseFloat(valueMin);
-		if (_valueMin == null)
-			err.addField("Minimum value", "is not a number.");
+		validator.validate();
 		
-		Float _valueMax = NumericUtils.tryParseFloat(valueMax);
-		if (_valueMax == null)
-			err.addField("Maximum value", "is not a number.");
-		
-		if (err.getFields().size() > 0)
-			throw err;
-		
-		return new LabTest(name.trim(), description.trim(), _valueMin, _valueMax);
+		return new LabTest(name.trim(), description.trim(),
+				Float.parseFloat(valueMin),
+				Float.parseFloat(valueMax));
 	}
 }

@@ -89,4 +89,17 @@ public class Validator {
 		
 		return true;
 	}
+	
+	public boolean assertStringIsFloat(String fieldName, String value) {
+		if (!assertNotEmpty(fieldName, value)) return false;
+		
+		Float floatValue = NumericUtils.tryParseFloat(value);
+		
+		if (floatValue == null) {
+			resultingException.addField(fieldName, "is not a valid decimal number.");
+			return false;
+		}
+		
+		return true;
+	}
 }
