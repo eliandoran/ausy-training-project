@@ -1,0 +1,35 @@
+<form class="test-form" method="post">
+	<input type="hidden" name="commit" value="" />
+
+	<div class="three-columns">
+		<div class="row">
+			<label for="first_name">Name</label> <input type="text"
+				name="first_name" value="${first_name}" class="fill" />
+		</div>
+		
+		<div class="row">
+			<label for="weight">Minimum value</label>
+
+			<div class="has-unit" data-unit="decimal">
+				<input type="text" name="weight" value="${weight}" class="fill" />
+			</div>
+		</div>
+
+		<div class="row">
+			<label for="height">Maximum value</label>
+
+			<div class="has-unit" data-unit="decimal">
+				<input type="text" name="height" value="${height}" class="fill" />
+			</div>
+		</div>
+	</div>
+	
+	<div class="row">
+		<label for="last_name">Description</label> <input type="text"
+			name="last_name" value="${last_name}" class="fill" />
+	</div>
+
+	<div class="row actions">
+		<input type="submit" value="Update" />
+	</div>
+</form>
