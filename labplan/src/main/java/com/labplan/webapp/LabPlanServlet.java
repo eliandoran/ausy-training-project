@@ -111,7 +111,13 @@ public class LabPlanServlet extends HttpServlet {
 			URI currentPath = new URI(request.getRequestURI());
 			URI relativePath = basePath.relativize(currentPath);
 
-			return relativePath.toString();
+			String path = relativePath.toString();
+			
+			// The Java servlet container sometimes appends ";jsessionid=XYZ" to URLs which will
+			// confuse the handlers. Removing it from the path is most useful.
+			path = path.split(";")[0];
+			
+			return path;
 		} catch (URISyntaxException e) {
 			throw new RuntimeException("Unable to determine server base URI.");
 		}
