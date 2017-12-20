@@ -58,7 +58,15 @@
 								<td class="type">
 									<select class="fill type">
 										<c:forEach var="test" items="${tests}">
-											<option value="${test.id}">${test.name}</option>
+											<c:choose>
+												<c:when test="${test.id.toString() eq field.first}">
+													<option value="${test.id}" selected>${test.name}</option>
+												</c:when>
+											
+												<c:otherwise>
+													<option value="${test.id}">${test.name}</option>
+												</c:otherwise>
+											</c:choose>
 										</c:forEach>
 									</select>
 								</td>
