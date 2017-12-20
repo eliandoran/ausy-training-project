@@ -13,8 +13,10 @@ import com.labplan.entities.LabResult;
 import com.labplan.entities.LabTest;
 import com.labplan.helpers.NumericUtils;
 import com.labplan.persistence.generic.LabResultDao;
+import com.labplan.persistence.generic.LabTestDao;
 import com.labplan.persistence.sql.SqlLabListDao;
 import com.labplan.persistence.sql.SqlLabResultDao;
+import com.labplan.persistence.sql.SqlLabTestDao;
 import com.labplan.services.LabListService;
 import com.labplan.webapp.HandlerParameters;
 import com.labplan.webapp.ResourceHandler;
@@ -48,6 +50,7 @@ public class EditLabListResourceHandler implements ResourceHandler {
 		HttpServletRequest request = params.getRequest();
 		request.setAttribute("list", list);
 		request.setAttribute("results", getResults(list));
+		request.setAttribute("tests", getTests());
 		
 		RequestDispatcher dispatcher = params.getContext().getRequestDispatcher("/app/lists/edit.jsp");
 		dispatcher.forward(params.getRequest(), params.getResponse());
@@ -66,5 +69,12 @@ public class EditLabListResourceHandler implements ResourceHandler {
 		List<LabResult> resultsList = new LinkedList<>();
 		resultsList.addAll(resultDao.readAll());
 		return resultsList;
+	}
+	
+	private List<LabTest> getTests() {
+		LabTestDao testDao = new SqlLabTestDao();
+		List<LabTest> testsList = new LinkedList<>();
+		testsList.addAll(testDao.readAll());
+		return testsList;
 	}
 }

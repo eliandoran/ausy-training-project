@@ -55,7 +55,11 @@
 						<td class="centered">*</td>
 					
 						<td>
-							<select class="fill"></select>
+							<select class="fill">
+								<c:forEach var="test" items="${tests}">
+									<option value="${test.id}">${test.name}</option>
+								</c:forEach>
+							</select>
 						</td>
 						
 						<td>
