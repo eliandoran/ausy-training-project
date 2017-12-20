@@ -3,6 +3,7 @@ package com.labplan.webapp.handlers.lab_list;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,6 +13,7 @@ import com.labplan.entities.LabList;
 import com.labplan.entities.LabResult;
 import com.labplan.entities.LabTest;
 import com.labplan.helpers.NumericUtils;
+import com.labplan.helpers.Pair;
 import com.labplan.persistence.generic.LabResultDao;
 import com.labplan.persistence.generic.LabTestDao;
 import com.labplan.persistence.sql.SqlLabListDao;
@@ -60,8 +62,39 @@ public class EditLabListResourceHandler implements ResourceHandler {
 
 	@Override
 	public boolean doPost(HandlerParameters params) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		return false;
+		Integer listId = NumericUtils.tryParseInteger(params.getRequest().getParameter("id"));
+
+		if (listId == null)
+			return false;
+
+		LabList list = listDao.read(listId);
+
+		if (list == null)
+			return false;
+		
+		HttpServletRequest request = params.getRequest();
+		Integer index = 1;
+		LinkedList<Pair<String, String>> fields = new LinkedList<>();
+		
+		while (true) {
+			String fieldPrefix = "result-" + index.toString();
+			String typeParameter = request.getParameter(fieldPrefix + "-type");
+			String valueParameter = request.getParameter(fieldPrefix + "-value");
+			
+			if (typeParameter == null || valueParameter == null)
+				break;
+			
+			fields.add(new Pair<>(request.getParameter(fieldPrefix + "-type"), request.getParameter(fieldPrefix + "-value")));
+			index++;
+		}
+		
+		request.setAttribute("fieldCount", (index - 1));
+		request.setAttribute("fields", fields);
+		
+		RequestDispatcher dispatcher = params.getContext().getRequestDispatcher("/app/lists/edit.jsp");
+		dispatcher.forward(params.getRequest(), params.getResponse());
+		
+		return true;
 	}
 	
 	private List<LabResult> getResults(LabList parentList) {

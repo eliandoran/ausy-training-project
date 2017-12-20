@@ -51,7 +51,23 @@
 				</thead>
 				
 				<tbody>
-					
+					<c:if test="${not empty fieldCount}">
+						<c:forEach var="field" items="${fields}" varStatus="loop">
+							<tr>
+								<td class="centered index">${loop.index + 1}</td>
+								<td class="type">
+									<select class="fill type">
+										<c:forEach var="test" items="${tests}">
+											<option value="${test.id}">${test.name}</option>
+										</c:forEach>
+									</select>
+								</td>
+								<td>
+									<input class="value fill" type="text" value="${field.second}" />
+								</td>
+							</tr>
+						</c:forEach>
+					</c:if>
 				</tbody>
 				
 				<tfoot>
