@@ -59,7 +59,7 @@
 						<td class="centered index">*</td>
 					
 						<td>
-							<select class="fill type" name="type">
+							<select class="fill type">
 								<c:forEach var="test" items="${tests}">
 									<option value="${test.id}">${test.name}</option>
 								</c:forEach>

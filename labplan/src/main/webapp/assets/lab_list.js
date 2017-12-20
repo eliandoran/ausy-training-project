@@ -14,11 +14,19 @@ function newRow() {
 	var templateClone = templateRow.cloneNode(true);
 	templateClone.id = templateClone.className = "";
 	
-	templateClone.querySelector(".type").value = templateRowType.value;
-	templateClone.querySelector(".index").innerHTML = resultsTable.querySelectorAll("tbody tr").length + 1;
+	var index = resultsTable.querySelectorAll("tbody tr").length + 1;
+	templateClone.querySelector(".index").innerHTML = index;
+	
+	var clonePrefix = "result-" + index;
+	
+	templateCloneType = templateClone.querySelector(".type");
+	templateCloneType.value = templateRowType.value;
+	templateCloneType.name = clonePrefix + "-type";
+	
+	templateCloneValue = templateClone.querySelector(".value");
+	templateCloneValue.name = clonePrefix + "-value";
 	
 	resultsTable.querySelector("tbody").append(templateClone);
-	
 	
 	templateRowType.value = "";
 	templateRowValue.value = "";
