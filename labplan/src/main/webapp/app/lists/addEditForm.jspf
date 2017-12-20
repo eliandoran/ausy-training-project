@@ -5,16 +5,35 @@
 	<div class="two-columns">
 		<div class="row">
 			<label for="name">Patient</label>
-			<select name="patient_id" class="fill">
-				<c:forEach var="patient" items="${patients}">
-					<option value="${patient.id}">${patient.fullName}</option>
-				</c:forEach>
-			</select>
+			
+			<c:choose>
+				<c:when test="${not empty patients}">
+					<select name="patient_id" class="fill">
+						<c:forEach var="patient" items="${patients}">
+							<option value="${patient.id}">${patient.fullName}</option>
+						</c:forEach>
+					</select>
+				</c:when>
+				
+				<c:otherwise>
+					<div class="read-only">${list.patient.getEntity().fullName}</div>
+				</c:otherwise>
+			</c:choose>
 		</div>
 		
 		<div class="row">
 			<label for="name">Creation date</label>
-			<date><fmt:formatDate pattern="yyyy/MM/dd" value="${creation_date}" /></date>
+			<div class="read-only">
+				<c:choose>
+					<c:when test="${not empty creation_date}">
+						<fmt:formatDate pattern="yyyy/MM/dd" value="${creation_date}" />
+					</c:when>
+					
+					<c:when test="${not empty list}">
+						<fmt:formatDate pattern="yyyy/MM/dd HH:MM:ss" value="${list.creationDate}" />
+					</c:when>
+				</c:choose>
+			</div>
 		</div>
 	</div>
 

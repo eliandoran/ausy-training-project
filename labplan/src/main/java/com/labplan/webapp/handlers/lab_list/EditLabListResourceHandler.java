@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
 
 import com.labplan.entities.LabList;
 import com.labplan.entities.LabTest;
@@ -38,6 +39,9 @@ public class EditLabListResourceHandler implements ResourceHandler {
 
 		if (list == null)
 			return false;
+		
+		HttpServletRequest request = params.getRequest();
+		request.setAttribute("list", list);
 		
 		RequestDispatcher dispatcher = params.getContext().getRequestDispatcher("/app/lists/edit.jsp");
 		dispatcher.forward(params.getRequest(), params.getResponse());

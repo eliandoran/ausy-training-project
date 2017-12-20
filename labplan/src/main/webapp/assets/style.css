@@ -290,8 +290,7 @@ form label {
 	opacity: 0.7;
 }
 
-form date {
-	display: block;
+form .read-only {
 	padding: 0.5em 0;
 }
 
