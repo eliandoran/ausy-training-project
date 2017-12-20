@@ -19,6 +19,6 @@
 	</div>
 
 	<div class="row actions">
-		<input type="submit" value="${is_new ? "Create" : "Update" }" />
+		<input type="submit" value="${is_new ? 'Create' : 'Update' }" />
 	</div>
 </form>
