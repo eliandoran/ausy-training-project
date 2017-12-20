@@ -53,10 +53,11 @@
 				<tbody>
 					<c:if test="${not empty fieldCount}">
 						<c:forEach var="field" items="${fields}" varStatus="loop">
+							<c:set var="index" value="${loop.index + 1}" />
 							<tr>
-								<td class="centered index">${loop.index + 1}</td>
+								<td class="centered index">${index}</td>
 								<td class="type">
-									<select class="fill type">
+									<select class="fill type" name="result-${index}-type">
 										<c:forEach var="test" items="${tests}">
 											<c:choose>
 												<c:when test="${test.id.toString() eq field.first}">
@@ -71,7 +72,7 @@
 									</select>
 								</td>
 								<td>
-									<input class="value fill" type="text" value="${field.second}" />
+									<input class="value fill" name="result-${index}-value" type="text" value="${field.second}" />
 								</td>
 							</tr>
 						</c:forEach>
