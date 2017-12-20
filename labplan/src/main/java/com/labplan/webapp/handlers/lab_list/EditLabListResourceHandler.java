@@ -1,15 +1,20 @@
 package com.labplan.webapp.handlers.lab_list;
 
 import java.io.IOException;
+import java.util.LinkedList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
 import com.labplan.entities.LabList;
+import com.labplan.entities.LabResult;
 import com.labplan.entities.LabTest;
 import com.labplan.helpers.NumericUtils;
+import com.labplan.persistence.generic.LabResultDao;
 import com.labplan.persistence.sql.SqlLabListDao;
+import com.labplan.persistence.sql.SqlLabResultDao;
 import com.labplan.services.LabListService;
 import com.labplan.webapp.HandlerParameters;
 import com.labplan.webapp.ResourceHandler;
@@ -42,6 +47,7 @@ public class EditLabListResourceHandler implements ResourceHandler {
 		
 		HttpServletRequest request = params.getRequest();
 		request.setAttribute("list", list);
+		request.setAttribute("results", getResults(list));
 		
 		RequestDispatcher dispatcher = params.getContext().getRequestDispatcher("/app/lists/edit.jsp");
 		dispatcher.forward(params.getRequest(), params.getResponse());
@@ -53,5 +59,12 @@ public class EditLabListResourceHandler implements ResourceHandler {
 	public boolean doPost(HandlerParameters params) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		return false;
+	}
+	
+	private List<LabResult> getResults(LabList parentList) {
+		LabResultDao resultDao = new SqlLabResultDao(parentList);
+		List<LabResult> resultsList = new LinkedList<>();
+		resultsList.addAll(resultDao.readAll());
+		return resultsList;
 	}
 }
