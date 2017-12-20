@@ -315,3 +315,14 @@ section.message.Success {
 section.message .content {
 	white-space: pre;
 }
+
+/*
+ * Page-specific styling
+ */
+.results-table {
+	margin-top: 1em;
+}
+
+.results-table td:nth-of-type(2) {
+	width: 60%;
+}

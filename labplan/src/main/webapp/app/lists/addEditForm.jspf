@@ -36,6 +36,40 @@
 			</div>
 		</div>
 	</div>
+	
+	<c:if test="${empty is_new}">
+		<div class="row">
+			<label>Lab results</label>
+			
+			<table class="results-table">
+				<thead>
+					<tr>
+						<th class="centered">#</th>
+						<th>Type of test</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				
+				<tbody>
+					<tr class="template">
+						<td class="centered">*</td>
+					
+						<td>
+							<select class="fill"></select>
+						</td>
+						
+						<td>
+							<input type="text" class="fill" />
+						</td>	
+					</tr>
+				</tbody>
+				
+				<tfoot>
+					
+				</tfoot>
+			</table>
+		</div>
+	</c:if>
 
 	<div class="row actions">
 		<input type="submit" value="${is_new ? 'Create' : 'Update' }" />
