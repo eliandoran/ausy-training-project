@@ -61,14 +61,14 @@ public class AddLabListResourceHandler implements ResourceHandler {
 			LabList parsedList = listService.parse(request.getParameter("patient_id"));
 						
 			if (parsedList != null) {
-				listDao.create(parsedList);
+				Integer listId = listDao.create(parsedList);
 
-				message.setContent("Lab list created successfully.");
+				message.setContent("Lab list created successfully. You may now enter the corresponding lab results.");
 				message.setType(Message.MessageType.MSG_SUCCESS);
 
 				HttpSession session = params.getRequest().getSession(true);
 				session.setAttribute("message", message);
-				params.getResponse().sendRedirect(params.getContext().getContextPath() + "/lists/");
+				params.getResponse().sendRedirect(params.getContext().getContextPath() + "/lists/edit?id=" + listId.toString());
 			}
 		} catch (ValidationException e) {
 			message.setContent(e.toString());
