@@ -41,7 +41,7 @@
 		<div class="row">
 			<label>Lab results</label>
 			
-			<table class="results-table">
+			<table class="results-table" id="results-table">
 				<thead>
 					<tr>
 						<th class="centered">#</th>
@@ -51,11 +51,15 @@
 				</thead>
 				
 				<tbody>
-					<tr class="template">
+					
+				</tbody>
+				
+				<tfoot>
+					<tr class="template" id="results-template">
 						<td class="centered">*</td>
 					
 						<td>
-							<select class="fill">
+							<select class="fill type" name="type">
 								<c:forEach var="test" items="${tests}">
 									<option value="${test.id}">${test.name}</option>
 								</c:forEach>
@@ -63,13 +67,9 @@
 						</td>
 						
 						<td>
-							<input type="text" class="fill" />
+							<input class="value fill" type="text" />
 						</td>	
 					</tr>
-				</tbody>
-				
-				<tfoot>
-					
 				</tfoot>
 			</table>
 		</div>

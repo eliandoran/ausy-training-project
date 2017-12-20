@@ -21,5 +21,7 @@
 				<%@ include file="addEditForm.jspf" %>
 			</div>
 		</main>
+		
+		<script src="<c:url value="/assets/lab_list.js" />"></script>
 	</body>
 </html>
