@@ -13,9 +13,12 @@ function newRow() {
 	
 	var templateClone = templateRow.cloneNode(true);
 	templateClone.id = templateClone.className = "";
-	resultsTable.querySelector("tbody").append(templateClone);
 	
 	templateClone.querySelector(".type").value = templateRowType.value;
+	templateClone.querySelector(".index").innerHTML = resultsTable.querySelectorAll("tbody tr").length + 1;
+	
+	resultsTable.querySelector("tbody").append(templateClone);
+	
 	
 	templateRowType.value = "";
 	templateRowValue.value = "";
