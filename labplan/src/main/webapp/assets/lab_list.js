@@ -1,22 +1,24 @@
 var resultsTable = document.querySelector("#results-table");
 var templateRow = document.querySelector("#results-template");
 
-templateRow.querySelector(".value").onchange = newRow;
-templateRow.querySelector(".type").onchange = newRow;
+var templateRowValue = templateRow.querySelector(".value");
+var templateRowType = templateRow.querySelector(".type");
+
+templateRowType.onchange = newRow;
+templateRowValue.onchange = newRow;
 
 function newRow() {
-	if (templateRow.querySelector(".type").value == "" ||
-		templateRow.querySelector(".value").value == "")
+	if (templateRowType.value == "" || templateRowValue.value == "")
 		return;
 	
 	var templateClone = templateRow.cloneNode(true);
 	templateClone.id = templateClone.className = "";
 	resultsTable.querySelector("tbody").append(templateClone);
 	
-	templateClone.querySelector(".type").value = templateRow.querySelector(".type").value;
+	templateClone.querySelector(".type").value = templateRowType.value;
 	
-	templateRow.querySelector(".type").value = "";
-	templateRow.querySelector(".value").value = "";
+	templateRowType.value = "";
+	templateRowValue.value = "";
 	
 	console.log("Changed!");
 }
