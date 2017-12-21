@@ -14,7 +14,9 @@
 		
 		<main>
 			<div class="content-wrapper">
-				<h1>Edit a patient</h1>
+				<header>
+					<h1>Edit a patient</h1>
+				</header>
 				
 				<ex:message message="${message}" />
 				

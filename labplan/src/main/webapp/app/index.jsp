@@ -14,7 +14,9 @@
 		
 		<main>
 			<div class="content-wrapper">
-				<h1>Home page</h1>
+				<header>
+					<h1>Home page</h1>
+				</header>
 			
 				Welcome home.
 			</div>
