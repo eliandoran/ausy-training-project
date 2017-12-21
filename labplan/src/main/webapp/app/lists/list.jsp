@@ -57,7 +57,7 @@
 								</a>
 							</td>
 							
-							<c:set var="testIndex" value="${listIndex + 1}" />
+							<c:set var="listIndex" value="${listIndex + 1}" />
 						</tr>
 						</c:forEach>
 					</tbody>
