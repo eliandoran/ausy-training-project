@@ -14,7 +14,7 @@
 		
 		<main>
 			<div class="content-wrapper">
-				<h1>Add a lab list</h1>
+				<h1>Edit a lab list</h1>
 				
 				<ex:message message="${message}" />
 				
