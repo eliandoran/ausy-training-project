@@ -17,6 +17,12 @@
 				<h1>Lab Lists</h1>
 				
 				<ex:message message="${message}" />
+				
+				<c:if test="${not empty patient}">
+					<section>
+						<ex:patientBox patient="${patient}" />
+					</section>
+				</c:if>
 			
 				<table class="tests">
 					<thead>

@@ -69,6 +69,7 @@ public class ListLabListResourceHandler implements ResourceHandler {
 		
 		if (patient != null) {
 			lists = listService.getPage(patient, page, entriesPerPage);
+			request.setAttribute("patient", patient);
 		} else {
 			lists = listService.getPage(page, entriesPerPage);
 		}

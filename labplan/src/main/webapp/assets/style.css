@@ -115,6 +115,10 @@ body > main {
 	overflow: auto;
 }
 
+body > main section {
+	margin: 2em 0;
+}
+
 .content-wrapper {
 	max-width: 800px;
 	margin: auto;
