@@ -39,6 +39,21 @@ public interface LabListDao extends Dao<LabList, Integer> {
 	 * @return A {@link List} of {@link LabTest} obtained form the data source.
 	 */
 	List<LabList> read(Integer limit, Integer offset);
+	
+	/**
+	 * Obtains a maximum of {@code limit} {@link LabTest}s read from a data source,
+	 * while skipping the first {@code offset} entities. The {@link LabList} are
+	 * filtered by {@link Patient}.
+	 * 
+	 * @param patient
+	 * 			  The patient whose lists to obtain.
+	 * @param limit
+	 *            The maximum number of {@link LabTest} to return.
+	 * @param offset
+	 *            The number of {@link LabTest} to skip.
+	 * @return A {@link List} of {@link LabTest} obtained form the data source.
+	 */
+	List<LabList> read(Patient patient, Integer limit, Integer offset);
 
 	/**
 	 * Obtains the total number of {@link Patient}s from the data source.
@@ -46,4 +61,12 @@ public interface LabListDao extends Dao<LabList, Integer> {
 	 * @return The total number of {@link Patient}s from the data source.
 	 */
 	Integer getCount();
+	
+	/**
+	 * Obtains the total number of {@link LabList}s from the data source which
+	 * belong to the given {@link Patient}.
+	 * @param patient	The {@link Patient} to use as a filter for {@link LabList}.
+	 * @return			The total number of {@link LabLists}s which belong to the given {@link Patient}.
+	 */
+	Integer getCount(Patient patient);
 }
