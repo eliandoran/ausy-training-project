@@ -119,6 +119,24 @@ body > main section {
 	margin: 2em 0;
 }
 
+body > main header {
+	padding: 2em 0;
+	overflow: auto;
+}
+
+body > main header h1 {
+	margin: 0;
+	padding: 0;
+	float: left;
+}
+
+body > main header .button {
+	float: right;
+	margin: 0;
+	padding-left: 2em;
+	padding-right: 2em;
+}
+
 .content-wrapper {
 	max-width: 800px;
 	margin: auto;
@@ -266,6 +284,7 @@ form .actions {
 	margin-top: 1em;
 }
 
+a.button,
 form input[type="submit"] {
 	display: inline-block;
 	background-color: #3F51B5;
@@ -277,8 +296,11 @@ form input[type="submit"] {
 	font-weight: 300;
 	cursor: pointer;
 	transition: background-color 250ms ease-in-out;
+	text-decoration: none;
+	margin: 1em 0;
 }
 
+a.button:hover,
 form input[type="submit"]:hover {
 	background-color: #5C6BC0;
 }

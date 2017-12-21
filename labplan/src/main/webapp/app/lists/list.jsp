@@ -14,7 +14,10 @@
 		
 		<main>
 			<div class="content-wrapper">
-				<h1>Lab Lists</h1>
+				<header>
+					<h1>Lab Lists</h1>
+					<a class="button" href="<c:url value="/lists/add" />">Add a new list</a>
+				</header>
 				
 				<ex:message message="${message}" />
 				
