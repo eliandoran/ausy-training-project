@@ -35,7 +35,7 @@
 							<th>Patient</th>
 							</c:if>
 							
-							<th>Creation date</th>
+							<th>Creation Date</th>
 							<th>Actions</th>
 						</tr>
 					</thead>

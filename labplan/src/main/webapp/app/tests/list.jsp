@@ -26,8 +26,8 @@
 							<th>#</th>
 							<th>Name</th>
 							<th>Description</th>
-							<th class="centered">Min. value</th>
-							<th class="centered">Max. value</th>
+							<th class="centered">Min. Value</th>
+							<th class="centered">Max. Value</th>
 							<th>Actions</th>
 						</tr>
 					</thead>

@@ -4,7 +4,7 @@
 <table>
 	<thead>
 		<tr>
-			<th colspan="5">Patient information</th>
+			<th colspan="5">Patient Information</th>
 		</tr>
 	
 		<tr>
