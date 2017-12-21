@@ -50,7 +50,7 @@
 							<td class="right-aligned">${listIndex}</td>
 							
 							<c:if test="${empty patient}">
-							<td>${list.patient.entity.fullName}</td>
+							<td><a href="?patient=${list.patient.entity.id}">${list.patient.entity.fullName}</a></td>
 							</c:if>
 							
 							<td>${list.creationDate}</td>
