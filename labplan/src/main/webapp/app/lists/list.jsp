@@ -30,7 +30,11 @@
 						
 						<tr>
 							<th>#</th>
+							
+							<c:if test="${empty patient}">
 							<th>Patient</th>
+							</c:if>
+							
 							<th>Creation date</th>
 							<th>Actions</th>
 						</tr>
@@ -41,7 +45,11 @@
 						<c:forEach items="${lists}" var="list">
 						<tr>
 							<td class="right-aligned">${listIndex}</td>
+							
+							<c:if test="${empty patient}">
 							<td>${list.patient.entity.fullName}</td>
+							</c:if>
+							
 							<td>${list.creationDate}</td>
 							<td class="actions">
 								<a href="<c:url value="/lists/edit?id=${list.id}" />" title="Edit this lab list">
