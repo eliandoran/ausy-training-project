@@ -83,7 +83,7 @@ public class EditLabListResourceHandler implements ResourceHandler {
 			if (typeParameter == null || valueParameter == null)
 				break;
 			
-			fields.add(new Pair<>(request.getParameter(fieldPrefix + "-type"), request.getParameter(fieldPrefix + "-value")));
+			fields.add(new Pair<>(typeParameter, valueParameter));
 			index++;
 		}
 		
