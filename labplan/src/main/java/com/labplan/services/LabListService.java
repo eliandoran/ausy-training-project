@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.List;
 
 import com.labplan.entities.LabList;
-import com.labplan.entities.LabTest;
 import com.labplan.entities.Patient;
 import com.labplan.entities.generic.LazyLoadedEntity;
 import com.labplan.persistence.generic.LabListDao;
