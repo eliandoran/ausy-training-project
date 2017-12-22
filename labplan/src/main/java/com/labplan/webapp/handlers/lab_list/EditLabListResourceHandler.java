@@ -90,6 +90,7 @@ public class EditLabListResourceHandler implements ResourceHandler {
 		request.setAttribute("fieldCount", (index - 1));
 		request.setAttribute("fields", fields);
 		request.setAttribute("tests", getTests());
+		request.setAttribute("list", list);
 		
 		RequestDispatcher dispatcher = params.getContext().getRequestDispatcher("/app/lists/edit.jsp");
 		dispatcher.forward(params.getRequest(), params.getResponse());
