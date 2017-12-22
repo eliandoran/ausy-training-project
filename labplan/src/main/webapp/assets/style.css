@@ -349,6 +349,10 @@ form .read-only {
 	padding: 0.5em 0;
 }
 
+form .read-only.error {
+	color: red;
+}
+
 /*
  * Message section
  */

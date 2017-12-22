@@ -15,8 +15,12 @@
 					</select>
 				</c:when>
 				
-				<c:otherwise>
+				<c:when test="${not empty list.patient.getEntity()}">
 					<div class="read-only">${list.patient.getEntity().fullName}</div>
+				</c:when>
+				
+				<c:otherwise>
+					<div class="read-only error">No patients</div>
 				</c:otherwise>
 			</c:choose>
 		</div>
