@@ -201,6 +201,14 @@ tr:nth-child(even) {
 	background-color: #fcfcfc;
 }
 
+.placeholder {
+	border: 2px dashed #eaeaea;
+	padding: 3em 2em;
+	text-align: center;
+	font-size: 18pt;
+	font-weight: 100;
+}
+
 /*
  * Pagination
  */

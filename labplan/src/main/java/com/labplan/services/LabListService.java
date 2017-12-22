@@ -1,6 +1,7 @@
 package com.labplan.services;
 
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 import com.labplan.entities.LabList;
@@ -18,6 +19,9 @@ public class LabListService extends Service<LabList, LabListDao> {
 
 	@Override
 	public List<LabList> getPage(int page, int entriesPerPage) {
+		if (page == 0)
+			return new LinkedList<LabList>();
+		
 		if (page < 1)
 			throw new RuntimeException("`page` argument should be a positive number.");
 
@@ -28,6 +32,9 @@ public class LabListService extends Service<LabList, LabListDao> {
 	}
 
 	public List<LabList> getPage(Patient patient, int page, int entriesPerPage) {
+		if (page == 0)
+			return new LinkedList<LabList>();
+		
 		if (page < 1)
 			throw new RuntimeException("`page` argument should be a positive number.");
 

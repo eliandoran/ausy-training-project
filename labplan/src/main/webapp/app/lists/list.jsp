@@ -27,48 +27,57 @@
 					</section>
 				</c:if>
 			
-				<table class="tests">
-					<thead>
-						<ex:pagination pageInfo="${page}" colspan="4" />
-						
-						<tr>
-							<th>#</th>
+				<c:choose>
+				<c:when test="${not empty lists}">
+					<table class="tests">
+						<thead>
+							<ex:pagination pageInfo="${page}" colspan="4" />
 							
-							<c:if test="${empty patient}">
-							<th>Patient</th>
-							</c:if>
-							
-							<th>Creation Date</th>
-							<th>Actions</th>
-						</tr>
-					</thead>
-				
-					<tbody>
-						<c:set var="listIndex" value="${page.startIndex}" />
-						<c:forEach items="${lists}" var="list">
-						<tr>
-							<td class="right-aligned">${listIndex}</td>
-							
-							<c:if test="${empty patient}">
-							<td><a href="?patient=${list.patient.entity.id}">${list.patient.entity.fullName}</a></td>
-							</c:if>
-							
-							<td>${list.creationDate}</td>
-							<td class="actions">
-								<a href="<c:url value="/lists/edit?id=${list.id}" />" title="Edit this lab list">
-									<img src="<c:url value="/assets/action-edit.png" />" alt="Edit" />
-								</a>
-							</td>
-							
-							<c:set var="listIndex" value="${listIndex + 1}" />
-						</tr>
-						</c:forEach>
-					</tbody>
+							<tr>
+								<th>#</th>
+								
+								<c:if test="${empty patient}">
+								<th>Patient</th>
+								</c:if>
+								
+								<th>Creation Date</th>
+								<th>Actions</th>
+							</tr>
+						</thead>
 					
-					<tfoot>												
-						<ex:pagination pageInfo="${page}" colspan="4" />
-					</tfoot>
-				</table>
+						<tbody>
+							<c:set var="listIndex" value="${page.startIndex}" />
+							<c:forEach items="${lists}" var="list">
+							<tr>
+								<td class="right-aligned">${listIndex}</td>
+								
+								<c:if test="${empty patient}">
+								<td><a href="?patient=${list.patient.entity.id}">${list.patient.entity.fullName}</a></td>
+								</c:if>
+								
+								<td>${list.creationDate}</td>
+								<td class="actions">
+									<a href="<c:url value="/lists/edit?id=${list.id}" />" title="Edit this lab list">
+										<img src="<c:url value="/assets/action-edit.png" />" alt="Edit" />
+									</a>
+								</td>
+								
+								<c:set var="listIndex" value="${listIndex + 1}" />
+							</tr>
+							</c:forEach>
+						</tbody>
+						
+						<tfoot>												
+							<ex:pagination pageInfo="${page}" colspan="4" />
+						</tfoot>
+					</table>
+				</c:when>
+				<c:otherwise>
+					<div class="placeholder">
+						No lab lists.
+					</div>
+				</c:otherwise>
+				</c:choose>
 			</div>
 		</main>
 	</body>
