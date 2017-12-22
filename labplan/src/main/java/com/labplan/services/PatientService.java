@@ -1,5 +1,6 @@
 package com.labplan.services;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import com.labplan.entities.Patient;
@@ -12,6 +13,9 @@ public class PatientService extends Service<Patient, PatientDao> {
 
 	@Override
 	public List<Patient> getPage(int page, int entriesPerPage) {
+		if (page == 0)
+			return new LinkedList<Patient>();
+			
 		if (page < 1)
 			throw new RuntimeException("`page` argument should be a positive number.");
 

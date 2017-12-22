@@ -21,6 +21,8 @@
 				
 				<ex:message message="${message}" />
 			
+				<c:choose>
+				<c:when test="${not empty patients}">
 				<table class="patients">
 					<thead>
 						<ex:pagination pageInfo="${page}" colspan="7" />
@@ -65,6 +67,13 @@
 						<ex:pagination pageInfo="${page}" colspan="7" />
 					</tfoot>
 				</table>
+				</c:when>
+				<c:otherwise>
+					<div class="placeholder">
+						No patients.
+					</div>
+				</c:otherwise>
+				</c:choose>
 			</div>
 		</main>
 	</body>
