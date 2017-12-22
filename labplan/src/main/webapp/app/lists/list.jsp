@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Lab Lists (${page.current}/${page.total}) &rsaquo; LabPlan</title>
+		<title><ex:pageTitle title="Lab Lists" pageInfo="${page}" /></title>
 		<%@ include file="../header.jspf" %>
 	</head>
 	

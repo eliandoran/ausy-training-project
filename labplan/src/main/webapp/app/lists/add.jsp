@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>LabPlan</title>
+		<title><ex:pageTitle title="Add a lab list" /></title>
 		<%@ include file="../header.jspf" %>
 	</head>
 	
