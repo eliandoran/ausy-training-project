@@ -21,17 +21,24 @@
 				
 				<ex:message message="${message}" />
 				
-				<c:if test="${not empty patient}">
+				<c:choose>
+				<c:when test="${not empty patient}">
+					<c:set var="baseUrl" value="?patient=${patient.id}&page=" />
 					<section>
 						<ex:patientBox patient="${patient}" />
 					</section>
-				</c:if>
+				</c:when>
+				
+				<c:otherwise>
+					<c:set var="baseUrl" value="?page" />
+				</c:otherwise>
+				</c:choose>
 			
 				<c:choose>
 				<c:when test="${not empty lists}">
 					<table class="tests">
 						<thead>
-							<ex:pagination pageInfo="${page}" colspan="4" />
+							<ex:pagination pageInfo="${page}" colspan="4" baseUrl="${baseUrl}" />
 							
 							<tr>
 								<th>#</th>
@@ -68,7 +75,7 @@
 						</tbody>
 						
 						<tfoot>												
-							<ex:pagination pageInfo="${page}" colspan="4" />
+							<ex:pagination pageInfo="${page}" colspan="4" baseUrl="${baseUrl}" />
 						</tfoot>
 					</table>
 				</c:when>

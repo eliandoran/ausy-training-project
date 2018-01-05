@@ -1,8 +1,9 @@
 <%@ tag language="java" pageEncoding="UTF-8"%>
 <%@ attribute name="pageInfo" required="true" type="com.labplan.webapp.PageInformation" %>
 <%@ attribute name="colspan" required="true" type="java.lang.Integer" %>
+<%@ attribute name="baseUrl" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<c:set var="pagination" value="${pageInfo.getPaginationUrlBuilder()}" />
+<c:set var="pagination" value="${pageInfo.getPaginationUrlBuilder(baseUrl)}" />
 
 <tr class="pagination">
 	<td colspan="${colspan}">
