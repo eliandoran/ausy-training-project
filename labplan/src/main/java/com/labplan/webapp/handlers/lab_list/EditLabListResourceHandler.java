@@ -46,15 +46,25 @@ public class EditLabListResourceHandler implements ResourceHandler {
 		if (listId == null)
 			return false;
 
-		LabList list = listDao.read(listId);
+		LabList list = listDao.read(listId, true);
 
 		if (list == null)
 			return false;
 		
 		HttpServletRequest request = params.getRequest();
 		request.setAttribute("list", list);
-		request.setAttribute("results", getResults(list));
 		request.setAttribute("tests", getTests());
+		
+		List<Pair<String, String>> fields = new LinkedList<>();
+		for (LabResult result : list.getResults()) {
+			Pair<String, String> field = new Pair<>();
+			field.setFirst(result.getId().getKey().toString());
+			field.setSecond(result.getValue().toString());
+			fields.add(field);
+		}
+		
+		request.setAttribute("fieldCount", fields.size());
+		request.setAttribute("fields", fields);
 		
 		RequestDispatcher dispatcher = params.getContext().getRequestDispatcher("/app/lists/edit.jsp");
 		dispatcher.forward(params.getRequest(), params.getResponse());
@@ -123,13 +133,6 @@ public class EditLabListResourceHandler implements ResourceHandler {
 		}
 		
 		return true;
-	}
-	
-	private List<LabResult> getResults(LabList parentList) {
-		LabResultDao resultDao = new SqlLabResultDao(parentList);
-		List<LabResult> resultsList = new LinkedList<>();
-		resultsList.addAll(resultDao.readAll());
-		return resultsList;
 	}
 	
 	private List<LabTest> getTests() {
