@@ -5,11 +5,14 @@ import java.util.LinkedList;
 import java.util.List;
 
 import com.labplan.entities.LabList;
+import com.labplan.entities.LabTest;
 import com.labplan.entities.Patient;
 import com.labplan.entities.generic.LazyLoadedEntity;
 import com.labplan.helpers.Pair;
 import com.labplan.persistence.generic.LabListDao;
+import com.labplan.persistence.generic.LabTestDao;
 import com.labplan.persistence.generic.PatientDao;
+import com.labplan.persistence.sql.SqlLabTestDao;
 import com.labplan.persistence.sql.SqlPatientDao;
 
 public class LabListService extends Service<LabList, LabListDao> {
@@ -67,12 +70,17 @@ public class LabListService extends Service<LabList, LabListDao> {
 		validator.validate();
 		
 		Integer index = 1;
+		LabTestDao testDao = new SqlLabTestDao();
 		for (Pair<String, String> field : fields) {
 			String fieldName = "Lab Result #" + index.toString();
 			
-			// TODO: Validate test ID
 			validator.assertStringIsInteger(fieldName + " type", field.getFirst());
 			validator.assertStringIsFloat(fieldName + " value", field.getSecond());
+			
+			validator.validate();
+			
+			LabTest test = testDao.read(Integer.parseInt(field.getFirst()));
+			validator.assertNotNull(fieldName + " type", test);
 			
 			index++;
 		}
