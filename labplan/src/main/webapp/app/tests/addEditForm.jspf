@@ -1,6 +1,4 @@
 <form class="test-form" method="post">
-	<input type="hidden" name="commit" value="" />
-
 	<div class="three-columns">
 		<div class="row">
 			<label for="name">Name</label> <input type="text"

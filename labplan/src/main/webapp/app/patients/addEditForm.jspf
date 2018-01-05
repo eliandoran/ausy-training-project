@@ -1,6 +1,4 @@
 <form class="patient-form" method="post">
-	<input type="hidden" name="commit" value="" />
-
 	<div class="two-columns">
 		<div class="row">
 			<label for="first_name">First Name</label> <input type="text"
