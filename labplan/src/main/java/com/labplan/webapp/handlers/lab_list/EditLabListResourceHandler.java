@@ -51,18 +51,17 @@ public class EditLabListResourceHandler implements ResourceHandler {
 		if (list == null)
 			return false;
 		
+		List<Pair<String, String>> fields = new LinkedList<>();
+		for (LabResult result : list.getResults()) {
+			fields.add(new Pair<>(
+				result.getId().getKey().toString(),
+				result.getValue().toString()
+			));
+		}
+		
 		HttpServletRequest request = params.getRequest();
 		request.setAttribute("list", list);
 		request.setAttribute("tests", getTests());
-		
-		List<Pair<String, String>> fields = new LinkedList<>();
-		for (LabResult result : list.getResults()) {
-			Pair<String, String> field = new Pair<>();
-			field.setFirst(result.getId().getKey().toString());
-			field.setSecond(result.getValue().toString());
-			fields.add(field);
-		}
-		
 		request.setAttribute("fieldCount", fields.size());
 		request.setAttribute("fields", fields);
 		
