@@ -108,6 +108,7 @@ public class EditLabListResourceHandler implements ResourceHandler {
 			
 			if (parsedList != null) {
 				parsedList.setId(listId);
+				parsedList.setCreationDate(list.getCreationDate());
 				listDao.update(parsedList);
 				
 				message.setContent("Lab test updated successfully.");
