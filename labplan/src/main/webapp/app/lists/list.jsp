@@ -30,7 +30,7 @@
 				</c:when>
 				
 				<c:otherwise>
-					<c:set var="baseUrl" value="?page" />
+					<c:set var="baseUrl" value="?page=" />
 				</c:otherwise>
 				</c:choose>
 			

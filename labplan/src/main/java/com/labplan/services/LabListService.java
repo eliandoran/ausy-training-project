@@ -69,34 +69,36 @@ public class LabListService extends Service<LabList, LabListDao> {
 		
 		validator.assertNotNull("Patient", patient);
 		validator.validate();
-
-		Integer index = 1;
-		LabTestDao testDao = new SqlLabTestDao();
-		List<LabResult> results = new LinkedList<>();
-		for (Pair<String, String> field : fields) {
-			String fieldName = "Lab Result #" + index.toString();
-			
-			validator.assertStringIsInteger(fieldName + " type", field.getFirst());
-			validator.assertStringIsFloat(fieldName + " value", field.getSecond());
-			
-			validator.validate();
-			
-			LabTest test = testDao.read(Integer.parseInt(field.getFirst()));
-			validator.assertNotNull(fieldName + " type", test);
-			
-			LabResult currentResult = new LabResult();
-			currentResult.setId(new LazyLoadedEntity<Integer, LabTest>(test));
-			currentResult.setValue(Float.parseFloat(field.getSecond()));
-			
-			results.add(currentResult);
-			
-			index++;
-		}
 		
 		LabList list = new LabList(new LazyLoadedEntity<Integer, Patient>(patient), new Date());
-		list.setResults(results);
 		
-		validator.validate();
+		if (fields != null) {
+			Integer index = 1;
+			LabTestDao testDao = new SqlLabTestDao();
+			List<LabResult> results = new LinkedList<>();
+			for (Pair<String, String> field : fields) {
+				String fieldName = "Lab Result #" + index.toString();
+				
+				validator.assertStringIsInteger(fieldName + " type", field.getFirst());
+				validator.assertStringIsFloat(fieldName + " value", field.getSecond());
+				
+				validator.validate();
+				
+				LabTest test = testDao.read(Integer.parseInt(field.getFirst()));
+				validator.assertNotNull(fieldName + " type", test);
+				
+				LabResult currentResult = new LabResult();
+				currentResult.setId(new LazyLoadedEntity<Integer, LabTest>(test));
+				currentResult.setValue(Float.parseFloat(field.getSecond()));
+				
+				results.add(currentResult);
+				
+				index++;
+			}
+						
+			list.setResults(results);
+			validator.validate();
+		}
 		
 		return list;
 	}
