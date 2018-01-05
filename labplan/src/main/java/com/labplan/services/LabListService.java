@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import com.labplan.entities.LabList;
+import com.labplan.entities.LabResult;
 import com.labplan.entities.LabTest;
 import com.labplan.entities.Patient;
 import com.labplan.entities.generic.LazyLoadedEntity;
@@ -68,9 +69,10 @@ public class LabListService extends Service<LabList, LabListDao> {
 		
 		validator.assertNotNull("Patient", patient);
 		validator.validate();
-		
+
 		Integer index = 1;
 		LabTestDao testDao = new SqlLabTestDao();
+		List<LabResult> results = new LinkedList<>();
 		for (Pair<String, String> field : fields) {
 			String fieldName = "Lab Result #" + index.toString();
 			
@@ -82,12 +84,20 @@ public class LabListService extends Service<LabList, LabListDao> {
 			LabTest test = testDao.read(Integer.parseInt(field.getFirst()));
 			validator.assertNotNull(fieldName + " type", test);
 			
+			LabResult currentResult = new LabResult();
+			currentResult.setId(new LazyLoadedEntity<Integer, LabTest>(test));
+			currentResult.setValue(Float.parseFloat(field.getSecond()));
+			
+			results.add(currentResult);
+			
 			index++;
 		}
 		
+		LabList list = new LabList(new LazyLoadedEntity<Integer, Patient>(patient), new Date());
+		list.setResults(results);
+		
 		validator.validate();
 		
-		LabList list = new LabList(new LazyLoadedEntity<Integer, Patient>(patient), new Date());
 		return list;
 	}
 }

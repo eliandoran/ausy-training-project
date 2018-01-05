@@ -58,7 +58,7 @@ public class AddLabListResourceHandler implements ResourceHandler {
 		request.setAttribute("patients", getPatients());
 		
 		try {
-			LabList parsedList = listService.parse(request.getParameter("patient_id"));
+			LabList parsedList = listService.parse(request.getParameter("patient_id"), null);
 						
 			if (parsedList != null) {
 				Integer listId = listDao.create(parsedList);

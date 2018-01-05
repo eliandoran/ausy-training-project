@@ -7,6 +7,7 @@ import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import com.labplan.entities.LabList;
 import com.labplan.entities.LabResult;
@@ -95,6 +96,18 @@ public class EditLabListResourceHandler implements ResourceHandler {
 			LabList parsedList = listService.parse(
 					list.getPatient().getKey().toString(),
 					fields);
+			
+			if (parsedList != null) {
+				parsedList.setId(listId);
+				listDao.update(parsedList);
+				
+				message.setContent("Lab test updated successfully.");
+				message.setType(Message.MessageType.MSG_SUCCESS);
+
+				HttpSession session = params.getRequest().getSession(true);
+				session.setAttribute("message", message);
+				params.getResponse().sendRedirect(params.getContext().getContextPath() + "/lists/");
+			}
 		} catch (ValidationException e) {
 			message.setContent(e.toString());
 			message.setType(Message.MessageType.MSG_ERROR);
@@ -108,9 +121,6 @@ public class EditLabListResourceHandler implements ResourceHandler {
 			RequestDispatcher dispatcher = params.getContext().getRequestDispatcher("/app/lists/edit.jsp");
 			dispatcher.forward(params.getRequest(), params.getResponse());
 		}
-		
-		RequestDispatcher dispatcher = params.getContext().getRequestDispatcher("/app/lists/edit.jsp");
-		dispatcher.forward(params.getRequest(), params.getResponse());
 		
 		return true;
 	}
