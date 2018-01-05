@@ -7,6 +7,7 @@ import java.util.List;
 import com.labplan.entities.LabList;
 import com.labplan.entities.Patient;
 import com.labplan.entities.generic.LazyLoadedEntity;
+import com.labplan.helpers.Pair;
 import com.labplan.persistence.generic.LabListDao;
 import com.labplan.persistence.generic.PatientDao;
 import com.labplan.persistence.sql.SqlPatientDao;
@@ -53,7 +54,7 @@ public class LabListService extends Service<LabList, LabListDao> {
 		return (int) Math.round(Math.ceil(((double) dao.getCount(patient) / entriesPerPage)));
 	}
 
-	public LabList parse(String patientId) {
+	public LabList parse(String patientId, List<Pair<String, String>> fields) {
 		Validator validator = new Validator();
 		
 		validator.assertStringIsInteger("Patient (ID)", patientId);
@@ -63,6 +64,19 @@ public class LabListService extends Service<LabList, LabListDao> {
 		Patient patient = patientDao.read(Integer.parseInt(patientId));
 		
 		validator.assertNotNull("Patient", patient);
+		validator.validate();
+		
+		Integer index = 1;
+		for (Pair<String, String> field : fields) {
+			String fieldName = "Lab Result #" + index.toString();
+			
+			// TODO: Validate test ID
+			validator.assertStringIsInteger(fieldName + " type", field.getFirst());
+			validator.assertStringIsFloat(fieldName + " value", field.getSecond());
+			
+			index++;
+		}
+		
 		validator.validate();
 		
 		LabList list = new LabList(new LazyLoadedEntity<Integer, Patient>(patient), new Date());

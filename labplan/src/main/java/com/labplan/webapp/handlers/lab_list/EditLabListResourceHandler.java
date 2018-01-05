@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import com.labplan.entities.LabList;
 import com.labplan.entities.LabResult;
 import com.labplan.entities.LabTest;
+import com.labplan.exceptions.ValidationException;
 import com.labplan.helpers.NumericUtils;
 import com.labplan.helpers.Pair;
 import com.labplan.persistence.generic.LabResultDao;
@@ -20,6 +21,7 @@ import com.labplan.persistence.sql.SqlLabResultDao;
 import com.labplan.persistence.sql.SqlLabTestDao;
 import com.labplan.services.LabListService;
 import com.labplan.webapp.HandlerParameters;
+import com.labplan.webapp.Message;
 import com.labplan.webapp.ResourceHandler;
 
 public class EditLabListResourceHandler implements ResourceHandler {
@@ -87,10 +89,25 @@ public class EditLabListResourceHandler implements ResourceHandler {
 			index++;
 		}
 		
-		request.setAttribute("fieldCount", (index - 1));
-		request.setAttribute("fields", fields);
-		request.setAttribute("tests", getTests());
-		request.setAttribute("list", list);
+		Message message = new Message();
+		
+		try {
+			LabList parsedList = listService.parse(
+					list.getPatient().getKey().toString(),
+					fields);
+		} catch (ValidationException e) {
+			message.setContent(e.toString());
+			message.setType(Message.MessageType.MSG_ERROR);
+
+			request.setAttribute("message", message);
+			request.setAttribute("fieldCount", (index - 1));
+			request.setAttribute("fields", fields);
+			request.setAttribute("tests", getTests());
+			request.setAttribute("list", list);
+			
+			RequestDispatcher dispatcher = params.getContext().getRequestDispatcher("/app/lists/edit.jsp");
+			dispatcher.forward(params.getRequest(), params.getResponse());
+		}
 		
 		RequestDispatcher dispatcher = params.getContext().getRequestDispatcher("/app/lists/edit.jsp");
 		dispatcher.forward(params.getRequest(), params.getResponse());
