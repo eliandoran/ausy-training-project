@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import com.labplan.entities.LabList;
 import com.labplan.entities.Patient;
 import com.labplan.exceptions.ValidationException;
+import com.labplan.helpers.NumericUtils;
 import com.labplan.persistence.generic.PatientDao;
 import com.labplan.persistence.sql.SqlLabListDao;
 import com.labplan.persistence.sql.SqlPatientDao;
@@ -40,7 +41,8 @@ public class AddLabListResourceHandler implements ResourceHandler {
 		HttpServletRequest request = params.getRequest();
 		request.setAttribute("creation_date", new Date());
 		request.setAttribute("is_new", true);
-		request.setAttribute("patients", getPatients());
+		request.setAttribute("patients", getPatients());	
+		request.setAttribute("selectedPatient", NumericUtils.tryParseInteger(request.getParameter("patient")));
 
 		RequestDispatcher dispatcher = params.getContext().getRequestDispatcher("/app/lists/add.jsp");
 		dispatcher.forward(params.getRequest(), params.getResponse());

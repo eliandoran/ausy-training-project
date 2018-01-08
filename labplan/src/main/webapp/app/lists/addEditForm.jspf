@@ -8,7 +8,12 @@
 				<c:when test="${not empty patients}">
 					<select name="patient_id" class="fill">
 						<c:forEach var="patient" items="${patients}">
-							<option value="${patient.id}">${patient.fullName}</option>
+							<c:set var="selected" value="" />
+							<c:if test="${(not empty patient.id) and (patient.id eq selectedPatient)}">
+								<c:set var="selected" value="selected" />
+							</c:if>
+							
+							<option value="${patient.id}" ${selected}>${patient.fullName}</option>
 						</c:forEach>
 					</select>
 				</c:when>

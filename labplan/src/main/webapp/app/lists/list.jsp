@@ -13,17 +13,23 @@
 		<ex:sidebar />
 		
 		<main>
+			<c:set var="urlSuffix" value="?" />
+			<c:if test="${not empty patient}">
+				<c:set var="urlSuffix" value="?patient=${patient.id}" />
+			</c:if>
+					
 			<div class="content-wrapper">
 				<header>
 					<h1>Lab Lists</h1>
-					<a class="button" href="<c:url value="/lists/add" />">Add a new list</a>
+					
+					<a class="button" href="<c:url value="/lists/add${urlSuffix}" />">Add a new list</a>
 				</header>
 				
 				<ex:message message="${message}" />
 				
 				<c:choose>
 				<c:when test="${not empty patient}">
-					<c:set var="baseUrl" value="?patient=${patient.id}&page=" />
+					<c:set var="baseUrl" value="${urlSuffix}&page=" />
 					<section>
 						<ex:patientBox patient="${patient}" />
 					</section>
