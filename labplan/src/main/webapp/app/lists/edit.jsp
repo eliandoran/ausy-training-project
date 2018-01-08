@@ -24,6 +24,6 @@
 			</div>
 		</main>
 		
-		<script src="<c:url value="/assets/lab_list.js" />"></script>
+		<script src="<c:url value="/static/lab_list.js" />"></script>
 	</body>
 </html>
