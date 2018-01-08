@@ -1,27 +1,31 @@
-<web-app xmlns="http://java.sun.com/xml/ns/javaee" version="2.5">
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
 	<!-- Resources not handled by servlet -->
 	<servlet-mapping>
-    	<servlet-name>default</servlet-name>
-    	<url-pattern>/assets/*</url-pattern>
-    </servlet-mapping>
-    
-    <servlet-mapping>
-    	<servlet-name>default</servlet-name>
-    	<url-pattern>/static/*</url-pattern>
-    </servlet-mapping>
-    
-    <servlet-mapping>
-    	<servlet-name>jsp</servlet-name>
-    	<url-pattern>/app/*</url-pattern>
-    </servlet-mapping>
-    
-    <!-- Main servlet -->
-    <servlet>
-        <servlet-name>labplan</servlet-name>
-        <servlet-class>com.labplan.webapp.LabPlanServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>labplan</servlet-name>
-        <url-pattern>/*</url-pattern>
-    </servlet-mapping>    
+		<servlet-name>default</servlet-name>
+		<url-pattern>/assets/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>/static/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>jsp</servlet-name>
+		<url-pattern>/app/*</url-pattern>
+	</servlet-mapping>
+
+	<!-- Main servlet -->
+	<servlet>
+		<servlet-name>labplan</servlet-name>
+		<servlet-class>com.labplan.webapp.LabPlanServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>labplan</servlet-name>
+		<url-pattern>/*</url-pattern>
+	</servlet-mapping>
 </web-app>
