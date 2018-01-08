@@ -3,6 +3,11 @@
 <%@ attribute name="colspan" required="true" type="java.lang.Integer" %>
 <%@ attribute name="baseUrl" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<c:if test="${empty baseUrl}">
+	<c:set var="baseUrl" value="?page=" />
+</c:if>
+
 <c:set var="pagination" value="${pageInfo.getPaginationUrlBuilder(baseUrl)}" />
 
 <tr class="pagination">
