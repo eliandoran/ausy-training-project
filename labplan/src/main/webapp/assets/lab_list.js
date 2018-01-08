@@ -4,8 +4,8 @@ var templateRow = document.querySelector("#results-template");
 var templateRowValue = templateRow.querySelector(".value");
 var templateRowType = templateRow.querySelector(".type");
 
-templateRowType.onchange = newRow;
-templateRowValue.onchange = newRow;
+templateRowType.oninput = newRow;
+templateRowValue.oninput = newRow;
 
 function newRow() {
 	if (templateRowType.value == "" || templateRowValue.value == "")
@@ -31,5 +31,6 @@ function newRow() {
 	templateRowType.value = "";
 	templateRowValue.value = "";
 	
-	console.log("Changed!");
+	templateCloneValue.focus();
+	templateCloneValue.scrollIntoView();
 }
