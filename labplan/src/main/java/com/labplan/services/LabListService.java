@@ -79,19 +79,18 @@ public class LabListService extends Service<LabList, LabListDao> {
 			for (Pair<String, String> field : fields) {
 				String fieldName = "Lab Result #" + index.toString();
 				
-				validator.assertStringIsInteger(fieldName + " type", field.getFirst());
-				validator.assertStringIsFloat(fieldName + " value", field.getSecond());
-				
-				validator.validate();
-				
-				LabTest test = testDao.read(Integer.parseInt(field.getFirst()));
-				validator.assertNotNull(fieldName + " type", test);
-				
-				LabResult currentResult = new LabResult();
-				currentResult.setId(new LazyLoadedEntity<Integer, LabTest>(test));
-				currentResult.setValue(Float.parseFloat(field.getSecond()));
-				
-				results.add(currentResult);
+				if (!validator.assertStringIsFloat(fieldName + " value", field.getSecond()))
+					continue;
+
+				if (validator.assertStringIsInteger(fieldName + " type", field.getFirst())) {
+					LabTest test = testDao.read(Integer.parseInt(field.getFirst()));
+					validator.assertNotNull(fieldName + " type", test);
+					
+					LabResult currentResult = new LabResult();
+					currentResult.setId(new LazyLoadedEntity<Integer, LabTest>(test));
+					currentResult.setValue(Float.parseFloat(field.getSecond()));
+					results.add(currentResult);
+				}
 				
 				index++;
 			}
