@@ -183,11 +183,17 @@ public class LabTest extends Entity<Integer> {
 	@Override
 	public int hashCode() {
 		int hash = 17;
-		hash = 31 * hash + id.hashCode();
-		hash = 31 * hash + name.hashCode();
-		hash = 31 * hash + description.hashCode();
-		hash = 31 * hash + valueMin.hashCode();
-		hash = 31 * hash + valueMax.hashCode();
+		
+		if (id != null)
+			hash = 31 * hash + id.hashCode();
+		if (name != null)
+			hash = 31 * hash + name.hashCode();
+		if (description != null)
+			hash = 31 * hash + description.hashCode();
+		if (valueMin != null)
+			hash = 31 * hash + valueMin.hashCode();
+		if (valueMax != null)
+			hash = 31 * hash + valueMax.hashCode();
 		return hash;
 	}
 }
