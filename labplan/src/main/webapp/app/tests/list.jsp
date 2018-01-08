@@ -48,7 +48,7 @@
 							<td class="centered">${test.valueMax}</td>
 							<td class="actions">
 								<a href="<c:url value="/tests/edit?id=${test.id}" />" title="Edit this lab test">
-									<img src="<c:url value="/assets/action-edit.png" />" alt="Edit" />
+									<img src="<c:url value="/static/assets/action-edit.png" />" alt="Edit" />
 								</a>
 							</td>
 							

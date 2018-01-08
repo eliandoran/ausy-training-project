@@ -2,14 +2,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <aside>
 	<header>
-		<img class="logo" src="<c:url value="/assets/logo.svg" />" alt="Platform logo" />
+		<img class="logo" src="<c:url value="/static/assets/logo.svg" />" alt="Platform logo" />
 		
 		<h1>LabTest</h1>
 	</header>
 	
 	<section class="patients">
 		<header>
-			<img src="<c:url value="/assets/icon-patients.png" />" />
+			<img src="<c:url value="/static/assets/icon-patients.png" />" />
 			Patients
 		</header>
 		
@@ -26,7 +26,7 @@
 	
 	<section class="tests">
 		<header>
-			<img src="<c:url value="/assets/icon-tests.png" />" />
+			<img src="<c:url value="/static/assets/icon-tests.png" />" />
 			Lab Tests
 		</header>
 		
@@ -43,7 +43,7 @@
 	
 	<section class="tests">
 		<header>
-			<img src="<c:url value="/assets/icon-lists.png" />" />
+			<img src="<c:url value="/static/assets/icon-lists.png" />" />
 			Lab Lists
 		</header>
 		

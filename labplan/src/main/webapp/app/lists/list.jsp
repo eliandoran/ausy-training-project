@@ -71,7 +71,7 @@
 								<td>${list.creationDate}</td>
 								<td class="actions">
 									<a href="<c:url value="/lists/edit?id=${list.id}" />" title="Edit this lab list">
-										<img src="<c:url value="/assets/action-edit.png" />" alt="Edit" />
+										<img src="<c:url value="/static/assets/action-edit.png" />" alt="Edit" />
 									</a>
 								</td>
 								

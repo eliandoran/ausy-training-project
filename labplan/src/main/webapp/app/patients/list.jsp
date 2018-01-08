@@ -50,11 +50,11 @@
 							<td class="centered">${patient.height} cm</td>
 							<td class="actions">
 								<a href="<c:url value="/patients/edit?id=${patient.id}" />" title="Edit this patient">
-									<img src="<c:url value="/assets/action-edit.png" />" alt="Edit" />
+									<img src="<c:url value="/static/assets/action-edit.png" />" alt="Edit" />
 								</a>
 								
 								<a href="<c:url value="/lists/?patient=${patient.id}" />" title="View this patient's lab lists">
-									<img src="<c:url value="/assets/action-view-list.png" />" alt="View lists" />
+									<img src="<c:url value="/static/assets/action-view-list.png" />" alt="View lists" />
 								</a>
 							</td>
 							
