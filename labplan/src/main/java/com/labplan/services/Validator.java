@@ -31,6 +31,13 @@ public class Validator {
 	public Validator() {
 		resultingException = new ValidationException();
 	}
+	
+	/**
+	 * Creates a new instance of {@link Validator} with the given {@code resultingObject} to be passed to {@link Validator}.
+	 */
+	public Validator(Object resultingObject) {
+		resultingException = new ValidationException(resultingObject);
+	}
 
 	/**
 	 * Gets the {@link ValidationException} containing all the failed assertions.

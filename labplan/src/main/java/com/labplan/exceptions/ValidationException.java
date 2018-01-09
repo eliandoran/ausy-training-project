@@ -3,6 +3,8 @@ package com.labplan.exceptions;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import com.labplan.services.Validator;
+
 /**
  * Represents an exception that is generated when a user enters invalid data in a {@code <form>}.
  * Because validating a single field at once might be undesirable for a user, this exception is
@@ -14,12 +16,24 @@ public class ValidationException extends RuntimeException {
 	private static final long serialVersionUID = 5963249023483958037L;
 
 	private Map<String, String> fields;
+	
+	private Object resultingObject;
 
 	/**
 	 * Creates a new, empty {@link ValidationException}.
 	 */
 	public ValidationException() {
 		fields = new LinkedHashMap<>();
+	}
+	
+	/**
+	 * Creates a new, empty {@link ValidationException} with the {@code resultingObject} property set to the given {@link Object}.
+	 * @param resultingObject The {@link Object} that would result in the parsing process. If {@link Validator#validate()} fails by
+	 * throwing this exception, the partially parsed object can still be accessed.
+	 */
+	public ValidationException(Object resultingObject) {
+		this();
+		this.resultingObject = resultingObject;
 	}
 
 	/**
@@ -47,6 +61,14 @@ public class ValidationException extends RuntimeException {
 	 */
 	public Map<String, String> getFields() {
 		return fields;
+	}
+	
+	/**
+	 * Returns an {@link Object} representing the partially parsed object of the {@link Validator}.
+	 * @return An {@link Object} representing the partially parsed object.
+	 */
+	public Object getResultingObject() {
+		return resultingObject;
 	}
 
 	@Override

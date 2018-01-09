@@ -62,7 +62,8 @@ public class LabListService extends Service<LabList, LabListDao> {
 	}
 
 	public LabList parse(String patientId, String data) {
-		Validator validator = new Validator();
+		LabList list = new LabList();
+		Validator validator = new Validator(list);
 		
 		validator.assertStringIsInteger("Patient (ID)", patientId);
 		validator.validate();
@@ -73,7 +74,8 @@ public class LabListService extends Service<LabList, LabListDao> {
 		validator.assertNotNull("Patient", patient);
 		validator.validate();
 		
-		LabList list = new LabList(new LazyLoadedEntity<Integer, Patient>(patient), new Date());
+		list.setPatient(new LazyLoadedEntity<Integer, Patient>(patient));
+		list.setCreationDate(new Date());
 
 		if (data != null) {
 			JSONObject parsedData = new JSONObject(data);

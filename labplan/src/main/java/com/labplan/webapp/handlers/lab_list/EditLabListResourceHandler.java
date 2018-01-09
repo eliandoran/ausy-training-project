@@ -49,13 +49,7 @@ public class EditLabListResourceHandler implements ResourceHandler {
 		if (list == null)
 			return false;
 		
-		List<Pair<String, String>> fields = new LinkedList<>();
-		for (LabResult result : list.getResults()) {
-			fields.add(new Pair<>(
-				result.getId().getKey().toString(),
-				result.getValue().toString()
-			));
-		}
+		List<Pair<String, String>> fields = getFields(list);
 		
 		HttpServletRequest request = params.getRequest();
 		request.setAttribute("list", list);
@@ -111,11 +105,31 @@ public class EditLabListResourceHandler implements ResourceHandler {
 			request.setAttribute("tests", getTests());
 			request.setAttribute("list", list);
 			
+			LabList parsedList = (LabList)e.getResultingObject();
+			if (parsedList != null) {
+				LinkedList<Pair<String, String>> fields = getFields(parsedList);
+				
+				request.setAttribute("fieldCount", fields.size());
+				request.setAttribute("fields", fields);
+			}
+			
 			RequestDispatcher dispatcher = params.getContext().getRequestDispatcher("/app/lists/edit.jsp");
 			dispatcher.forward(params.getRequest(), params.getResponse());
 		}
 		
 		return true;
+	}
+	
+	private LinkedList<Pair<String, String>> getFields(LabList list) {
+		LinkedList<Pair<String, String>> fields = new LinkedList<>();
+		for (LabResult result : list.getResults()) {
+			fields.add(new Pair<>(
+				result.getId().getKey().toString(),
+				result.getValue().toString()
+			));
+		}
+		
+		return fields;
 	}
 	
 	private List<LabTest> getTests() {
