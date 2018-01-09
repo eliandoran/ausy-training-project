@@ -1,5 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<form class="test-form" method="post">
+<form class="test-form" id="test-form" method="post">
 	<div class="two-columns">
 		<div class="row">
 			<label for="name">Patient</label>

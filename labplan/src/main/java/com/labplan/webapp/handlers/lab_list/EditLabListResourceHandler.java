@@ -81,28 +81,15 @@ public class EditLabListResourceHandler implements ResourceHandler {
 		if (list == null)
 			return false;
 		
+		
 		HttpServletRequest request = params.getRequest();
-		Integer index = 1;
-		LinkedList<Pair<String, String>> fields = new LinkedList<>();
-		
-		while (true) {
-			String fieldPrefix = "result-" + index.toString();
-			String typeParameter = request.getParameter(fieldPrefix + "-type");
-			String valueParameter = request.getParameter(fieldPrefix + "-value");
-			
-			if (typeParameter == null || valueParameter == null)
-				break;
-			
-			fields.add(new Pair<>(typeParameter, valueParameter));
-			index++;
-		}
-		
+		String data = request.getParameter("data");
 		Message message = new Message();
 		
 		try {
 			LabList parsedList = listService.parse(
 					list.getPatient().getKey().toString(),
-					fields);
+					data);
 			
 			if (parsedList != null) {
 				parsedList.setId(listId);
@@ -121,8 +108,6 @@ public class EditLabListResourceHandler implements ResourceHandler {
 			message.setType(Message.MessageType.MSG_ERROR);
 
 			request.setAttribute("message", message);
-			request.setAttribute("fieldCount", (index - 1));
-			request.setAttribute("fields", fields);
 			request.setAttribute("tests", getTests());
 			request.setAttribute("list", list);
 			

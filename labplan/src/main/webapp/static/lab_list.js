@@ -1,3 +1,5 @@
+var form = document.querySelector(".test-form");
+
 var resultsTable = document.querySelector("#results-table");
 var templateRow = document.querySelector("#results-template");
 
@@ -6,6 +8,8 @@ var templateRowType = templateRow.querySelector(".type");
 
 templateRowType.oninput = newRow;
 templateRowValue.oninput = newRow;
+
+form.onsubmit = submit;
 
 function newRow() {
 	if (templateRowType.value == "" || templateRowValue.value == "")
@@ -44,4 +48,23 @@ function moveCaretToEnd(el) {
         range.collapse(false);
         range.select();
     }
+}
+
+function submit() {
+	var rows = resultsTable.querySelectorAll("tbody > tr");
+	var data = {};
+
+	for (var index = 0; index < rows.length; index++) {
+		var row = rows[index];
+		var type = row.cells[1].querySelector("select").value;
+		var value = row.cells[2].querySelector("input").value;
+		
+		data[type] = value;
+	}
+	
+	var dataInput = document.createElement("input");
+	dataInput.setAttribute("type", "hidden");
+	dataInput.setAttribute("name", "data");
+	dataInput.setAttribute("value", JSON.stringify(data));
+	form.appendChild(dataInput);
 }

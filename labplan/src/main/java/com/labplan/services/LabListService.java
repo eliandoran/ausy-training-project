@@ -3,6 +3,9 @@ package com.labplan.services;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+
+import org.json.JSONObject;
 
 import com.labplan.entities.LabList;
 import com.labplan.entities.LabResult;
@@ -58,7 +61,7 @@ public class LabListService extends Service<LabList, LabListDao> {
 		return (int) Math.round(Math.ceil(((double) dao.getCount(patient) / entriesPerPage)));
 	}
 
-	public LabList parse(String patientId, List<Pair<String, String>> fields) {
+	public LabList parse(String patientId, String data) {
 		Validator validator = new Validator();
 		
 		validator.assertStringIsInteger("Patient (ID)", patientId);
@@ -71,30 +74,34 @@ public class LabListService extends Service<LabList, LabListDao> {
 		validator.validate();
 		
 		LabList list = new LabList(new LazyLoadedEntity<Integer, Patient>(patient), new Date());
-		
-		if (fields != null) {
-			Integer index = 1;
+
+		if (data != null) {
+			JSONObject parsedData = new JSONObject(data);
 			LabTestDao testDao = new SqlLabTestDao();
 			List<LabResult> results = new LinkedList<>();
-			for (Pair<String, String> field : fields) {
+			
+			Integer index = 1;
+			for (String key : parsedData.keySet()) {
 				String fieldName = "Lab Result #" + index.toString();
+				String testId = key;
+				String value = parsedData.getString(key);
 				
-				if (!validator.assertStringIsFloat(fieldName + " value", field.getSecond()))
+				if (!validator.assertStringIsFloat(fieldName + " value", value))
 					continue;
-
-				if (validator.assertStringIsInteger(fieldName + " type", field.getFirst())) {
-					LabTest test = testDao.read(Integer.parseInt(field.getFirst()));
+				
+				if (validator.assertStringIsInteger(fieldName + " type", testId)) {
+					LabTest test = testDao.read(Integer.parseInt(testId));
 					validator.assertNotNull(fieldName + " type", test);
 					
 					LabResult currentResult = new LabResult();
 					currentResult.setId(new LazyLoadedEntity<Integer, LabTest>(test));
-					currentResult.setValue(Float.parseFloat(field.getSecond()));
+					currentResult.setValue(Float.parseFloat(value));
 					results.add(currentResult);
 				}
 				
 				index++;
 			}
-						
+				
 			list.setResults(results);
 			validator.validate();
 		}
