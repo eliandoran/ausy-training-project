@@ -158,31 +158,6 @@ table a:hover {
 	text-decoration: underline;
 }
 
-table .actions {
-	text-align: center;
-}
-
-table .actions a {
-	opacity: 0.7;
-	transition: opacity 250ms ease-in-out;
-	margin: 0 0.15em;
-	display: inline-block;
-	text-decoration: none !important;
-}
-
-table .actions a:first-of-type {
-	margin-left: 0;	
-}
-
-table .actions a:last-of-type {
-	margin-right: 0;
-}
-
-table .actions img {
-	width: 20px;
-	height: auto;
-}
-
 table tr:hover .actions a {
 	opacity: 1;
 }
@@ -300,6 +275,35 @@ form .fill {
 form .actions {
 	text-align: right;
 	margin-top: 1em;
+}
+
+table .actions {
+	text-align: center;
+}
+
+table .actions a {
+	opacity: 0.7;
+	transition: opacity 250ms ease-in-out;
+	margin: 0 0.15em;
+	display: inline-block;
+	text-decoration: none !important;
+}
+
+table .actions.hidden {
+	display: none;
+}
+
+table .actions a:first-of-type {
+	margin-left: 0;	
+}
+
+table .actions a:last-of-type {
+	margin-right: 0;
+}
+
+table .actions img {
+	width: 20px;
+	height: auto;
 }
 
 a.button,

@@ -10,6 +10,13 @@ templateRowType.oninput = newRow;
 templateRowValue.oninput = newRow;
 
 form.onsubmit = submit;
+var existingRows = resultsTable.querySelectorAll("tbody tr");
+
+for (var index = 0; index < existingRows.length; index++) {
+	var row = existingRows[index];
+	
+	row.querySelector(".delete").onclick = deleteRow;
+}
 
 function newRow() {
 	if (templateRowType.value == "" || templateRowValue.value == "")
@@ -22,6 +29,10 @@ function newRow() {
 	templateClone.querySelector(".index").innerHTML = index;
 	
 	var clonePrefix = "result-" + index;
+	
+	var templateCloneActions = templateClone.querySelector(".actions");
+	templateCloneActions.className = "actions";
+	templateCloneActions.querySelector(".delete").onclick = deleteRow;
 	
 	templateCloneType = templateClone.querySelector(".type");
 	templateCloneType.value = templateRowType.value;
@@ -37,6 +48,13 @@ function newRow() {
 	
 	moveCaretToEnd(templateCloneValue);
 	templateCloneValue.scrollIntoView();
+}
+
+function deleteRow() {
+	var row = this.parentElement.parentElement;
+	var table = row.parentElement;
+	
+	table.removeChild(row);
 }
 
 function moveCaretToEnd(el) {

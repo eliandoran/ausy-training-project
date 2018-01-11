@@ -54,6 +54,7 @@
 						<th class="centered">#</th>
 						<th>Type of test</th>
 						<th>Value</th>
+						<th class="centered">Actions</th>
 					</tr>
 				</thead>
 				
@@ -81,6 +82,11 @@
 								<td>
 									<input class="value fill" name="result-${index}-value" type="text" value="${field.second}" />
 								</td>
+								<td class="actions">
+									<a href="#" class="delete">
+										<img src="<c:url value="/static/assets/action-delete.png" />" alt="Delete" title="Delete this result" />
+									</a>
+								</td>
 							</tr>
 						</c:forEach>
 					</c:if>
@@ -100,7 +106,13 @@
 						
 						<td>
 							<input class="value fill" type="text" />
-						</td>	
+						</td>
+						
+						<td class="actions hidden">
+							<a href="#" class="delete">
+								<img src="<c:url value="/static/assets/action-delete.png" />" />
+							</a>
+						</td>
 					</tr>
 				</tfoot>
 			</table>
