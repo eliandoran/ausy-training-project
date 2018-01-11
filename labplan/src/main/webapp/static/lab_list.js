@@ -55,6 +55,7 @@ function deleteRow() {
 	var table = row.parentElement;
 	
 	table.removeChild(row);
+	renumber();
 }
 
 function moveCaretToEnd(el) {
@@ -85,4 +86,14 @@ function submit() {
 	dataInput.setAttribute("name", "data");
 	dataInput.setAttribute("value", JSON.stringify(data));
 	form.appendChild(dataInput);
+}
+
+function renumber() {
+	var existingRows = resultsTable.querySelectorAll("tbody tr");
+	
+	for (var index = 0; index < existingRows.length; index++) {
+		var row = existingRows[index];
+		
+		row.cells[0].innerHTML = index + 1;
+	}
 }
