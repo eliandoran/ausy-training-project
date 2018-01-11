@@ -80,7 +80,7 @@
 									</select>
 								</td>
 								<td>
-									<input class="value fill" name="result-${index}-value" type="text" value="${field.second}" />
+									<input class="value fill" name="result-${index}-value" type="number" step="0.01" value="${field.second}" />
 								</td>
 								<td class="actions">
 									<a href="#" class="delete">
