@@ -3,7 +3,6 @@ package com.labplan.services;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 import org.json.JSONObject;
 
@@ -12,7 +11,6 @@ import com.labplan.entities.LabResult;
 import com.labplan.entities.LabTest;
 import com.labplan.entities.Patient;
 import com.labplan.entities.generic.LazyLoadedEntity;
-import com.labplan.helpers.Pair;
 import com.labplan.persistence.generic.LabListDao;
 import com.labplan.persistence.generic.LabTestDao;
 import com.labplan.persistence.generic.PatientDao;
