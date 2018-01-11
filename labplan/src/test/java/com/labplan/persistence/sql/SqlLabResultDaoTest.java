@@ -113,7 +113,6 @@ public class SqlLabResultDaoTest
 		// UPDATE the same LabResult.
 		dummyResult.setValue(dummyResult.getValue() + 1);
 
-		assertTrue("Update failed.", dao.updateOrCreate(dummyResult));
 		LabResult updatedResult = dao.read(dummyResult.getId());
 		assertEquals("Update failed.", dummyResult, updatedResult);
 		assertNotEquals("Update failed.", sameResult, updatedResult);

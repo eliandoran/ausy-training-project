@@ -295,9 +295,10 @@ public class SqlLabListDao implements LabListDao {
 		entity.setId(key);
 
 		SqlLabResultDao resultDao = new SqlLabResultDao(entity);
+		resultDao.deleteAll();
 
 		for (LabResult result : entity.getResults()) {
-			resultDao.updateOrCreate(result);
+			resultDao.create(result);
 		}
 	}
 

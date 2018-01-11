@@ -135,19 +135,14 @@ public class SqlLabResultDao implements LabResultDao {
 			return false;
 		}
 	}
-
-	@Override
-	public boolean updateOrCreate(LabResult entity) {
+	
+	public boolean deleteAll() {
 		Connection conn = DatabaseConnectionFactory.getConnection();
-		String query = "INSERT INTO `lab_results` " + "(`test_id`, `list_id`, `value`) " + "VALUES (?, ?, ?) "
-				+ "ON DUPLICATE KEY UPDATE " + "`value`=?";
+		String query = "DELETE FROM `lab_results` WHERE `list_id`=?";
 
 		try {
 			PreparedStatement stmt = conn.prepareStatement(query);
-			stmt.setInt(1, entity.getId().getKey());
-			stmt.setInt(2, list.getId());
-			stmt.setFloat(3, entity.getValue());
-			stmt.setFloat(4, entity.getValue());
+			stmt.setInt(1, list.getId());
 			stmt.execute();
 
 			return true;
