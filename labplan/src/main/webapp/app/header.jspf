@@ -1,5 +1,6 @@
 <meta charset="utf-8" />
 <link rel="stylesheet" type="text/css" href="<c:url value="/static/style.css" />" />
+<link rel="stylesheet" type="text/css" href="<c:url value="/static/responsive.css" />" />
 
 <link rel="apple-touch-icon" sizes="180x180" href="<c:url value="/static/assets/favicon/apple-touch-icon.png" />"/>
 <link rel="icon" type="image/png" sizes="32x32" href="<c:url value="/static/assets/favicon/favicon-32x32.png" />"/>
@@ -11,3 +12,5 @@
 <meta name="application-name" content="LabPlan" />
 <meta name="msapplication-config" content="<c:url value="/static/assets/favicon/browserconfig.xml" />" />
 <meta name="theme-color" content="#ffffff" />	
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />

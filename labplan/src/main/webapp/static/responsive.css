@@ -1,0 +1,39 @@
+@media (max-width: 650px) {
+	body {
+		overflow: auto;
+		padding-bottom: 5em;
+	}
+	
+	body > aside {
+		width: 100%;
+		top: unset;
+		right: 0;
+		text-align: center;
+	}
+	
+	body > aside section ul {
+		display: none;
+	}
+	
+	body > aside > header {
+		display: none;
+	}
+	
+	body > aside section {
+		padding: 0 !important;
+		margin: 0 1.5em;
+		text-align: center;
+		display: inline-block;
+	}
+	
+	body > aside section header img {
+		display: block;
+		margin: auto;
+	}
+	
+	body > main {
+		position: static;
+		padding: 1em;
+		min-height: 100%;
+	}
+}
