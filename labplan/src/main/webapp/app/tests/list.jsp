@@ -43,7 +43,7 @@
 						<tr>
 							<td class="right-aligned">${testIndex}</td>
 							<td>${test.name}</td>
-							<td>${test.description}</td>
+							<td><ex:excerpt text="${test.description}" /></td>
 							<td class="centered">${test.valueMin}</td>
 							<td class="centered">${test.valueMax}</td>
 							<td class="actions">

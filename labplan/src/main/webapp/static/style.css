@@ -184,6 +184,14 @@ tr:nth-child(even) {
 	font-weight: 100;
 }
 
+.excerpt details[open] summary {
+	opacity: 0.5;
+}
+
+.excerpt span {
+	font-size: 0.9em;
+}
+
 /*
  * Pagination
  */
