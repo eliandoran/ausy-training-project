@@ -83,7 +83,6 @@ public class ListLabListResourceHandler implements ResourceHandler {
 	
 	@Override
 	public boolean doPost(HandlerParameters params) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
