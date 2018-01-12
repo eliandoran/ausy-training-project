@@ -90,7 +90,7 @@ public class EditLabListResourceHandler implements ResourceHandler {
 				parsedList.setCreationDate(list.getCreationDate());
 				listDao.update(parsedList);
 				
-				message.setContent("Lab test updated successfully.");
+				message.setContent("Lab list updated successfully.");
 				message.setType(Message.MessageType.MSG_SUCCESS);
 
 				HttpSession session = params.getRequest().getSession(true);
