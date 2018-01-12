@@ -11,12 +11,19 @@ templateRowValue.oninput = newRow;
 
 form.onsubmit = submit;
 var existingRows = resultsTable.querySelectorAll("tbody tr");
+var disabledIndices = {};
 
 for (var index = 0; index < existingRows.length; index++) {
 	var row = existingRows[index];
+	var typeSelect = row.querySelector(".type select");
+	
+	applySelectEvents(typeSelect);
+	disabledIndices[typeSelect.value] = true;
 	
 	row.querySelector(".delete").onclick = deleteRow;
 }
+
+applySelectEvents(templateRowType);
 
 function newRow() {
 	if (templateRowType.value == "" || templateRowValue.value == "")
@@ -37,6 +44,7 @@ function newRow() {
 	templateCloneType = templateClone.querySelector(".type");
 	templateCloneType.value = templateRowType.value;
 	templateCloneType.name = clonePrefix + "-type";
+	applySelectEvents(templateCloneType);
 	
 	templateCloneValue = templateClone.querySelector(".value");
 	templateCloneValue.name = clonePrefix + "-value";
@@ -86,6 +94,32 @@ function submit() {
 	dataInput.setAttribute("name", "data");
 	dataInput.setAttribute("value", JSON.stringify(data));
 	form.appendChild(dataInput);
+}
+
+function applySelectEvents(el) {
+	(function() {
+		var previousValue = null;
+		
+		el.onfocus = function() {
+			previousValue = this.value;
+		};
+		
+		el.onchange = function() {
+			var row = this.parentElement.parentElement;
+			
+			if (previousValue != null)
+				disabledIndices[previousValue] = false;
+			
+			disabledIndices[this.value] = true;
+		};
+		
+		el.onclick = function() {
+			for (var index in disabledIndices) {
+				var option = el.querySelector('option[value="' + index + '"]');
+				option.disabled = (disabledIndices[index] == true && option.value !== el.value);
+			}
+		};
+	})();
 }
 
 function renumber() {
