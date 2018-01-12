@@ -32,6 +32,21 @@ public class HandlerContainer {
 		handlers.put(name, handler);
 		return true;
 	}
+	
+	/**
+	 * Adds multiple {@link ResourceHandler} to this {@link HandlerContainer}.
+	 * @param handlers	A number of {@link ResourceHandler} to add.
+	 * @return {@code true} if all the {@code handlers} were added, {@code false} if at least one has a path that is already registered.
+	 */
+	public boolean registerAll(ResourceHandler... handlers) {
+		boolean result = true;
+		
+		for (ResourceHandler handler : handlers) {
+			result &= register(handler);
+		}
+		
+		return result;
+	}
 
 	/**
 	 * Retrieves a {@link ResourceHandler} by its {@link ResourceHandler#getPath()}.

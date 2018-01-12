@@ -36,18 +36,21 @@ public class LabPlanServlet extends HttpServlet {
 		DatabaseConnectionFactory.setProfile("production");
 
 		handlers = new HandlerContainer();
+		
+		handlers.registerAll(
+			new ListPatientResourceHandler(),
+			new AddPatientResourceHandler(),
+			new EditPatientResourceHandler());
 
-		handlers.register(new ListPatientResourceHandler());
-		handlers.register(new AddPatientResourceHandler());
-		handlers.register(new EditPatientResourceHandler());
+		handlers.registerAll(
+			new ListLabTestResourceHandler(),
+			new AddLabTestResourceHandler(),
+			new EditLabTestResourceHandler());
 
-		handlers.register(new ListLabTestResourceHandler());
-		handlers.register(new AddLabTestResourceHandler());
-		handlers.register(new EditLabTestResourceHandler());
-
-		handlers.register(new ListLabListResourceHandler());
-		handlers.register(new AddLabListResourceHandler());
-		handlers.register(new EditLabListResourceHandler());
+		handlers.registerAll(
+			new ListLabListResourceHandler(),
+			new AddLabListResourceHandler(),
+			new EditLabListResourceHandler());
 	}
 
 	@Override
