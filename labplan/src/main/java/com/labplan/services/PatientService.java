@@ -15,7 +15,7 @@ public class PatientService extends Service<Patient, PatientDao> {
 	public List<Patient> getPage(int page, int entriesPerPage) {
 		if (page == 0)
 			return new LinkedList<Patient>();
-			
+
 		if (page < 1)
 			throw new RuntimeException("`page` argument should be a positive number.");
 

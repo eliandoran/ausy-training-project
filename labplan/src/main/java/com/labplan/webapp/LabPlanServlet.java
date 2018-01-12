@@ -36,21 +36,15 @@ public class LabPlanServlet extends HttpServlet {
 		DatabaseConnectionFactory.setProfile("production");
 
 		handlers = new HandlerContainer();
-		
-		handlers.registerAll(
-			new ListPatientResourceHandler(),
-			new AddPatientResourceHandler(),
-			new EditPatientResourceHandler());
 
-		handlers.registerAll(
-			new ListLabTestResourceHandler(),
-			new AddLabTestResourceHandler(),
-			new EditLabTestResourceHandler());
+		handlers.registerAll(new ListPatientResourceHandler(), new AddPatientResourceHandler(),
+				new EditPatientResourceHandler());
 
-		handlers.registerAll(
-			new ListLabListResourceHandler(),
-			new AddLabListResourceHandler(),
-			new EditLabListResourceHandler());
+		handlers.registerAll(new ListLabTestResourceHandler(), new AddLabTestResourceHandler(),
+				new EditLabTestResourceHandler());
+
+		handlers.registerAll(new ListLabListResourceHandler(), new AddLabListResourceHandler(),
+				new EditLabListResourceHandler());
 	}
 
 	@Override
@@ -133,8 +127,7 @@ public class LabPlanServlet extends HttpServlet {
 			String path = relativePath.toString();
 
 			// The Java servlet container sometimes appends ";jsessionid=XYZ" to URLs which
-			// will
-			// confuse the handlers. Removing it from the path is most useful.
+			// will confuse the handlers. Removing it from the path is most useful.
 			path = path.split(";")[0];
 
 			return path;

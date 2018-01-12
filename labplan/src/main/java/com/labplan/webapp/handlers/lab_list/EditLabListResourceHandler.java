@@ -26,12 +26,12 @@ import com.labplan.webapp.ResourceHandler;
 public class EditLabListResourceHandler implements ResourceHandler {
 	private SqlLabListDao listDao;
 	private LabListService listService;
-	
+
 	public EditLabListResourceHandler() {
 		listDao = new SqlLabListDao();
 		listService = new LabListService(listDao);
 	}
-	
+
 	@Override
 	public String getPath() {
 		return "lists/edit";
@@ -48,15 +48,15 @@ public class EditLabListResourceHandler implements ResourceHandler {
 
 		if (list == null)
 			return false;
-		
+
 		List<Pair<String, String>> fields = getFields(list);
-		
+
 		HttpServletRequest request = params.getRequest();
 		request.setAttribute("list", list);
 		request.setAttribute("tests", getTests());
 		request.setAttribute("fieldCount", fields.size());
 		request.setAttribute("fields", fields);
-		
+
 		RequestDispatcher dispatcher = params.getContext().getRequestDispatcher("/app/lists/edit.jsp");
 		dispatcher.forward(params.getRequest(), params.getResponse());
 
@@ -74,28 +74,26 @@ public class EditLabListResourceHandler implements ResourceHandler {
 
 		if (list == null)
 			return false;
-		
-		
+
 		HttpServletRequest request = params.getRequest();
 		String data = request.getParameter("data");
 		Message message = new Message();
-		
+
 		try {
-			LabList parsedList = listService.parse(
-					list.getPatient().getKey().toString(),
-					data);
-			
+			LabList parsedList = listService.parse(list.getPatient().getKey().toString(), data);
+
 			if (parsedList != null) {
 				parsedList.setId(listId);
 				parsedList.setCreationDate(list.getCreationDate());
 				listDao.update(parsedList);
-				
+
 				message.setContent("Lab list updated successfully.");
 				message.setType(Message.MessageType.MSG_SUCCESS);
 
 				HttpSession session = params.getRequest().getSession(true);
 				session.setAttribute("message", message);
-				params.getResponse().sendRedirect(params.getContext().getContextPath() + "/lists/?patient=" + parsedList.getPatient().getKey());
+				params.getResponse().sendRedirect(
+						params.getContext().getContextPath() + "/lists/?patient=" + parsedList.getPatient().getKey());
 			}
 		} catch (ValidationException e) {
 			message.setContent(e.toString());
@@ -104,34 +102,31 @@ public class EditLabListResourceHandler implements ResourceHandler {
 			request.setAttribute("message", message);
 			request.setAttribute("tests", getTests());
 			request.setAttribute("list", list);
-			
-			LabList parsedList = (LabList)e.getResultingObject();
+
+			LabList parsedList = (LabList) e.getResultingObject();
 			if (parsedList != null) {
 				LinkedList<Pair<String, String>> fields = getFields(parsedList);
-				
+
 				request.setAttribute("fieldCount", fields.size());
 				request.setAttribute("fields", fields);
 			}
-			
+
 			RequestDispatcher dispatcher = params.getContext().getRequestDispatcher("/app/lists/edit.jsp");
 			dispatcher.forward(params.getRequest(), params.getResponse());
 		}
-		
+
 		return true;
 	}
-	
+
 	private LinkedList<Pair<String, String>> getFields(LabList list) {
 		LinkedList<Pair<String, String>> fields = new LinkedList<>();
 		for (LabResult result : list.getResults()) {
-			fields.add(new Pair<>(
-				result.getId().getKey().toString(),
-				result.getValue().toString()
-			));
+			fields.add(new Pair<>(result.getId().getKey().toString(), result.getValue().toString()));
 		}
-		
+
 		return fields;
 	}
-	
+
 	private List<LabTest> getTests() {
 		LabTestDao testDao = new SqlLabTestDao();
 		List<LabTest> testsList = new LinkedList<>();

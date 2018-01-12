@@ -88,7 +88,7 @@ public class SqlLabListDao implements LabListDao {
 			return null;
 		}
 	}
-	
+
 	@Override
 	public List<LabList> read(Patient patient, Integer limit, Integer offset) {
 		Connection conn = DatabaseConnectionFactory.getConnection();
@@ -246,7 +246,7 @@ public class SqlLabListDao implements LabListDao {
 			return null;
 		}
 	}
-	
+
 	@Override
 	public Integer getCount(Patient patient) {
 		Connection conn = DatabaseConnectionFactory.getConnection();
@@ -255,7 +255,7 @@ public class SqlLabListDao implements LabListDao {
 		try {
 			PreparedStatement stmt = conn.prepareStatement(query);
 			stmt.setInt(1, patient.getId());
-			
+
 			ResultSet result = stmt.executeQuery();
 
 			if (result.next()) {

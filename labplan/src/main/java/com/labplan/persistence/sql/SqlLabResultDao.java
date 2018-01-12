@@ -135,7 +135,7 @@ public class SqlLabResultDao implements LabResultDao {
 			return false;
 		}
 	}
-	
+
 	public boolean deleteAll() {
 		Connection conn = DatabaseConnectionFactory.getConnection();
 		String query = "DELETE FROM `lab_results` WHERE `list_id`=?";

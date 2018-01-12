@@ -27,7 +27,7 @@ public class LabListService extends Service<LabList, LabListDao> {
 	public List<LabList> getPage(int page, int entriesPerPage) {
 		if (page == 0)
 			return new LinkedList<LabList>();
-		
+
 		if (page < 1)
 			throw new RuntimeException("`page` argument should be a positive number.");
 
@@ -40,7 +40,7 @@ public class LabListService extends Service<LabList, LabListDao> {
 	public List<LabList> getPage(Patient patient, int page, int entriesPerPage) {
 		if (page == 0)
 			return new LinkedList<LabList>();
-		
+
 		if (page < 1)
 			throw new RuntimeException("`page` argument should be a positive number.");
 
@@ -49,12 +49,12 @@ public class LabListService extends Service<LabList, LabListDao> {
 
 		return dao.read(patient, entriesPerPage, (page - 1) * entriesPerPage);
 	}
-	
+
 	@Override
 	public Integer getPageCount(int entriesPerPage) {
 		return (int) Math.round(Math.ceil(((double) dao.getCount() / entriesPerPage)));
 	}
-	
+
 	public Integer getPageCount(Patient patient, int entriesPerPage) {
 		return (int) Math.round(Math.ceil(((double) dao.getCount(patient) / entriesPerPage)));
 	}
@@ -62,16 +62,16 @@ public class LabListService extends Service<LabList, LabListDao> {
 	public LabList parse(String patientId, String data) {
 		LabList list = new LabList();
 		Validator validator = new Validator(list);
-		
+
 		validator.assertStringIsInteger("Patient (ID)", patientId);
 		validator.validate();
-		
+
 		PatientDao patientDao = new SqlPatientDao();
 		Patient patient = patientDao.read(Integer.parseInt(patientId));
-		
+
 		validator.assertNotNull("Patient", patient);
 		validator.validate();
-		
+
 		list.setPatient(new LazyLoadedEntity<Integer, Patient>(patient));
 		list.setCreationDate(new Date());
 
@@ -79,33 +79,33 @@ public class LabListService extends Service<LabList, LabListDao> {
 			JSONObject parsedData = new JSONObject(data);
 			LabTestDao testDao = new SqlLabTestDao();
 			List<LabResult> results = new LinkedList<>();
-			
+
 			Integer index = 1;
 			for (String key : parsedData.keySet()) {
 				String fieldName = "Lab Result #" + index.toString();
 				String testId = key;
 				String value = parsedData.getString(key);
-				
+
 				if (!validator.assertStringIsFloat(fieldName + " value", value))
 					continue;
-				
+
 				if (validator.assertStringIsInteger(fieldName + " type", testId)) {
 					LabTest test = testDao.read(Integer.parseInt(testId));
 					validator.assertNotNull(fieldName + " type", test);
-					
+
 					LabResult currentResult = new LabResult();
 					currentResult.setId(new LazyLoadedEntity<Integer, LabTest>(test));
 					currentResult.setValue(Float.parseFloat(value));
 					results.add(currentResult);
 				}
-				
+
 				index++;
 			}
-				
+
 			list.setResults(results);
 			validator.validate();
 		}
-		
+
 		return list;
 	}
 }

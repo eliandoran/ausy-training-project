@@ -1,20 +1,26 @@
 package com.labplan.webapp;
 
 /**
- * A message is a generic information presented to the user in a visually distinctive way.
+ * A message is a generic information presented to the user in a visually
+ * distinctive way.
  * 
- * <p>It consists of:</p>
+ * <p>
+ * It consists of:
+ * </p>
  * <ul>
- * 	<li>A title describing the message as short as possible;</li>
- *  <li>The content of the message per se;</li>
- *  <li>The type of the message (i.e. an error, an information, etc.);</li>
+ * <li>A title describing the message as short as possible;</li>
+ * <li>The content of the message per se;</li>
+ * <li>The type of the message (i.e. an error, an information, etc.);</li>
  * </ul>
+ * 
  * @author elian
  *
  */
 public class Message {
 	/**
-	 * An enumeration which describes the type of a {@link Message} (i.e. an error, an information, etc.).
+	 * An enumeration which describes the type of a {@link Message} (i.e. an error,
+	 * an information, etc.).
+	 * 
 	 * @author elian
 	 *
 	 */
@@ -46,8 +52,12 @@ public class Message {
 
 	/**
 	 * Creates a new instance of a {@link Message} with the given {@code content}.
-	 * <p>The type of the message is assumed to be {@link MessageType#MSG_INFO}.</p>
-	 * @param content	The content of the message.
+	 * <p>
+	 * The type of the message is assumed to be {@link MessageType#MSG_INFO}.
+	 * </p>
+	 * 
+	 * @param content
+	 *            The content of the message.
 	 */
 	public Message(String content) {
 		this();
@@ -55,10 +65,16 @@ public class Message {
 	}
 
 	/**
-	 * Creates a new instance of a {@link Message} with the given {@code title} and {@code content}.
-	 * <p>The type of the message is assumed to be {@link MessageType#MSG_INFO}.</p>
-	 * @param title		The title of the message.
-	 * @param content	The content of the message.
+	 * Creates a new instance of a {@link Message} with the given {@code title} and
+	 * {@code content}.
+	 * <p>
+	 * The type of the message is assumed to be {@link MessageType#MSG_INFO}.
+	 * </p>
+	 * 
+	 * @param title
+	 *            The title of the message.
+	 * @param content
+	 *            The content of the message.
 	 */
 	public Message(String title, String content) {
 		this();
@@ -68,9 +84,13 @@ public class Message {
 
 	/**
 	 * Creates a new instance of a {@link Message} with all the given information.
-	 * @param title		The title of the message.
-	 * @param content	The content of the message.
-	 * @param type		The type of the message.
+	 * 
+	 * @param title
+	 *            The title of the message.
+	 * @param content
+	 *            The content of the message.
+	 * @param type
+	 *            The type of the message.
 	 */
 	public Message(String title, String content, MessageType type) {
 		this();
@@ -80,6 +100,7 @@ public class Message {
 
 	/**
 	 * Gets the type of the message.
+	 * 
 	 * @return The type of the message.
 	 */
 	public MessageType getType() {
@@ -88,7 +109,9 @@ public class Message {
 
 	/**
 	 * Sets the type of the message.
-	 * @param type The type of the message.
+	 * 
+	 * @param type
+	 *            The type of the message.
 	 */
 	public void setType(MessageType type) {
 		this.type = type;
@@ -96,6 +119,7 @@ public class Message {
 
 	/**
 	 * Gets the title of the message.
+	 * 
 	 * @return The title of the message.
 	 */
 	public String getTitle() {
@@ -104,7 +128,9 @@ public class Message {
 
 	/**
 	 * Sets the title of the message.
-	 * @param title	The title of the message.
+	 * 
+	 * @param title
+	 *            The title of the message.
 	 */
 	public void setTitle(String title) {
 		this.title = title;
@@ -112,6 +138,7 @@ public class Message {
 
 	/**
 	 * Gets the content of the message.
+	 * 
 	 * @return The content of the message.
 	 */
 	public String getContent() {
@@ -120,7 +147,9 @@ public class Message {
 
 	/**
 	 * Sets the content of the message.
-	 * @param content The content of the message.
+	 * 
+	 * @param content
+	 *            The content of the message.
 	 */
 	public void setContent(String content) {
 		this.content = content;

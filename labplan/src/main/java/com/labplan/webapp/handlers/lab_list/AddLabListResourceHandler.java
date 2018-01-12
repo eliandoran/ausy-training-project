@@ -41,7 +41,7 @@ public class AddLabListResourceHandler implements ResourceHandler {
 		HttpServletRequest request = params.getRequest();
 		request.setAttribute("creation_date", new Date());
 		request.setAttribute("is_new", true);
-		request.setAttribute("patients", getPatients());	
+		request.setAttribute("patients", getPatients());
 		request.setAttribute("selectedPatient", NumericUtils.tryParseInteger(request.getParameter("patient")));
 
 		RequestDispatcher dispatcher = params.getContext().getRequestDispatcher("/app/lists/add.jsp");
@@ -53,15 +53,15 @@ public class AddLabListResourceHandler implements ResourceHandler {
 	public boolean doPost(HandlerParameters params) throws ServletException, IOException {
 		HttpServletRequest request = params.getRequest();
 		Message message = new Message();
-		
+
 		request.setAttribute("patient_id", request.getParameter("patient_id"));
 		request.setAttribute("is_new", true);
 		request.setAttribute("creation_date", new Date());
 		request.setAttribute("patients", getPatients());
-		
+
 		try {
 			LabList parsedList = listService.parse(request.getParameter("patient_id"), null);
-						
+
 			if (parsedList != null) {
 				Integer listId = listDao.create(parsedList);
 
@@ -70,7 +70,8 @@ public class AddLabListResourceHandler implements ResourceHandler {
 
 				HttpSession session = params.getRequest().getSession(true);
 				session.setAttribute("message", message);
-				params.getResponse().sendRedirect(params.getContext().getContextPath() + "/lists/edit?id=" + listId.toString());
+				params.getResponse()
+						.sendRedirect(params.getContext().getContextPath() + "/lists/edit?id=" + listId.toString());
 			}
 		} catch (ValidationException e) {
 			message.setContent(e.toString());
@@ -80,7 +81,7 @@ public class AddLabListResourceHandler implements ResourceHandler {
 			RequestDispatcher dispatcher = params.getContext().getRequestDispatcher("/app/lists/add.jsp");
 			dispatcher.forward(params.getRequest(), params.getResponse());
 		}
-		
+
 		return true;
 	}
 

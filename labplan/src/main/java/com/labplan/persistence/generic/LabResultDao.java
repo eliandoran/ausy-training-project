@@ -22,7 +22,9 @@ import com.labplan.entities.generic.LazyLoadedEntity;
 public interface LabResultDao extends ChildDao<LabList, LabResult, LazyLoadedEntity<Integer, LabTest>> {
 	/**
 	 * Removes all {@link LabResult} belonging to the corresponding {@link LabList}.
-	 * @return {@code true} if the delete operation succeeded, {@code false} otherwise.
+	 * 
+	 * @return {@code true} if the delete operation succeeded, {@code false}
+	 *         otherwise.
 	 */
 	boolean deleteAll();
 }

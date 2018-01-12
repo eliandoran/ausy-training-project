@@ -15,7 +15,7 @@ public class LabTestService extends Service<LabTest, LabTestDao> {
 	public List<LabTest> getPage(int page, int entriesPerPage) {
 		if (page == 0)
 			return new LinkedList<LabTest>();
-		
+
 		if (page < 1)
 			throw new RuntimeException("`page` argument should be a positive number.");
 

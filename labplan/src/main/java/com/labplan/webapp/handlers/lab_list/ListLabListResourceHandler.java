@@ -40,33 +40,33 @@ public class ListLabListResourceHandler implements ResourceHandler {
 		Integer entriesPerPage = 10;
 		Integer pageCount = null;
 		Integer page = NumericUtils.tryParseInteger(params.getRequest().getParameter("page"));
-		
+
 		Patient patient = null;
 		List<LabList> lists;
-		
+
 		if (request.getParameter("patient") != null) {
 			// Try to parse the patient ID.
 			Integer patientId = NumericUtils.tryParseInteger(request.getParameter("patient"));
-			
+
 			if (patientId == null)
 				return false;
-			
+
 			// Try to read the given patient.
 			PatientDao patientDao = new SqlPatientDao();
 			patient = patientDao.read(patientId);
-			
+
 			if (patient == null)
 				return false;
-			
+
 			pageCount = listService.getPageCount(patient, entriesPerPage);
 		} else {
 			pageCount = listService.getPageCount(entriesPerPage);
 		}
-		
+
 		page = (page != null ? page : 1);
 		page = Math.max(page, 1);
 		page = Math.min(page, pageCount);
-		
+
 		if (patient != null) {
 			lists = listService.getPage(patient, page, entriesPerPage);
 			request.setAttribute("patient", patient);
@@ -80,7 +80,7 @@ public class ListLabListResourceHandler implements ResourceHandler {
 		dispatcher.forward(params.getRequest(), params.getResponse());
 		return true;
 	}
-	
+
 	@Override
 	public boolean doPost(HandlerParameters params) throws ServletException, IOException {
 		return false;
