@@ -95,7 +95,7 @@ public class EditLabListResourceHandler implements ResourceHandler {
 
 				HttpSession session = params.getRequest().getSession(true);
 				session.setAttribute("message", message);
-				params.getResponse().sendRedirect(params.getContext().getContextPath() + "/lists/");
+				params.getResponse().sendRedirect(params.getContext().getContextPath() + "/lists/?patient=" + parsedList.getPatient().getKey());
 			}
 		} catch (ValidationException e) {
 			message.setContent(e.toString());
