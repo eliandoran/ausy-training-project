@@ -6,9 +6,11 @@ import java.util.Set;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import com.labplan.api.exceptions.EntityNotFoundException;
 import com.labplan.entities.Patient;
 import com.labplan.persistence.DatabaseConnectionFactory;
 import com.labplan.persistence.generic.PatientDao;
@@ -29,5 +31,18 @@ public class PatientsController {
 		List<Patient> patientList = new LinkedList<>();
 		patientList.addAll(patientSet);
 		return patientList;
+	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("{id}")
+	public Patient getPatientById(@PathParam("id") Integer id) {
+		Patient patient = patientDao.read(id);
+		
+		if (patient == null) {
+			throw new EntityNotFoundException();
+		}
+		
+		return patient;
 	}
 }
