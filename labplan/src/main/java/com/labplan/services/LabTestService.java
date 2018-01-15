@@ -5,6 +5,8 @@ import java.util.List;
 
 import com.labplan.entities.LabTest;
 import com.labplan.persistence.generic.LabTestDao;
+import com.labplan.services.generic.Service;
+import com.labplan.services.generic.Validator;
 
 public class LabTestService extends Service<Integer, LabTest, LabTestDao> {
 	public LabTestService(LabTestDao dao) {

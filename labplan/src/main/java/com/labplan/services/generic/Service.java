@@ -1,4 +1,4 @@
-package com.labplan.services;
+package com.labplan.services.generic;
 
 import java.util.List;
 

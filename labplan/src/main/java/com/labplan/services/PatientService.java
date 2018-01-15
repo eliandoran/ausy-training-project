@@ -7,6 +7,8 @@ import java.util.Set;
 import com.labplan.entities.Patient;
 import com.labplan.exceptions.EntityNotFoundException;
 import com.labplan.persistence.generic.PatientDao;
+import com.labplan.services.generic.Service;
+import com.labplan.services.generic.Validator;
 
 public class PatientService extends Service<Integer, Patient, PatientDao> {
 	public PatientService(PatientDao dao) {

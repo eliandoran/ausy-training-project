@@ -3,7 +3,7 @@ package com.labplan.exceptions;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import com.labplan.services.Validator;
+import com.labplan.services.generic.Validator;
 
 /**
  * Represents an exception that is generated when a user enters invalid data in

@@ -16,6 +16,8 @@ import com.labplan.persistence.generic.LabTestDao;
 import com.labplan.persistence.generic.PatientDao;
 import com.labplan.persistence.sql.SqlLabTestDao;
 import com.labplan.persistence.sql.SqlPatientDao;
+import com.labplan.services.generic.Service;
+import com.labplan.services.generic.Validator;
 
 public class LabListService extends Service<Integer, LabList, LabListDao> {
 

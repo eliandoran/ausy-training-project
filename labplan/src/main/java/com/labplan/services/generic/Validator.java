@@ -1,4 +1,4 @@
-package com.labplan.services;
+package com.labplan.services.generic;
 
 import com.labplan.exceptions.ValidationException;
 import com.labplan.helpers.NumericUtils;
