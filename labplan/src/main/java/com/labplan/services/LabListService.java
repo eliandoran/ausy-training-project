@@ -114,4 +114,10 @@ public class LabListService extends Service<Integer, LabList, LabListDao> {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public List<LabList> getAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

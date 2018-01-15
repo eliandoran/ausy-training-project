@@ -24,4 +24,11 @@ public abstract class Service<TKey, TEntity extends Entity<TKey>, TDao extends D
 	 * @throws EntityNotFoundException	A {@link RuntimeException} if there is no entity corresponding to the given {@code key}.
 	 */
 	public abstract TEntity get(TKey key) throws EntityNotFoundException;
+	
+	/**
+	 * Obtains a {@link List<>} containing all the entities in the data source.
+	 * @return A {@link List<>} containing all the entities.
+	 * @see #getPage(int, int)
+	 */
+	public abstract List<TEntity> getAll();
 }

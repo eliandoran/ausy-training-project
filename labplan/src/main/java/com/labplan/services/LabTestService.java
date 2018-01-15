@@ -50,4 +50,10 @@ public class LabTestService extends Service<Integer, LabTest, LabTestDao> {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public List<LabTest> getAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

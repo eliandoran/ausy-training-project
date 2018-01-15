@@ -69,4 +69,10 @@ public class PatientService extends Service<Integer, Patient, PatientDao> {
 		
 		return patient;
 	}
+
+	@Override
+	public List<Patient> getAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
