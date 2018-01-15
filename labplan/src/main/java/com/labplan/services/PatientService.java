@@ -4,8 +4,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-import com.labplan.api.exceptions.EntityNotFoundException;
 import com.labplan.entities.Patient;
+import com.labplan.exceptions.EntityNotFoundException;
 import com.labplan.persistence.generic.PatientDao;
 
 public class PatientService extends Service<Integer, Patient, PatientDao> {

@@ -1,4 +1,4 @@
-package com.labplan.api.exceptions;
+package com.labplan.exceptions;
 
 /**
  * A {@link RuntimeException} indicating that a request to get an entity (for example, by ID) failed because no corresponding entity

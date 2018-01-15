@@ -2,8 +2,8 @@ package com.labplan.services;
 
 import java.util.List;
 
-import com.labplan.api.exceptions.EntityNotFoundException;
 import com.labplan.entities.generic.Entity;
+import com.labplan.exceptions.EntityNotFoundException;
 import com.labplan.persistence.generic.Dao;
 
 public abstract class Service<TKey, TEntity extends Entity<TKey>, TDao extends Dao<TEntity, TKey>> {
