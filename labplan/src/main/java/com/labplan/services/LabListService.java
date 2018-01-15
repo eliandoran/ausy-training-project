@@ -17,7 +17,7 @@ import com.labplan.persistence.generic.PatientDao;
 import com.labplan.persistence.sql.SqlLabTestDao;
 import com.labplan.persistence.sql.SqlPatientDao;
 
-public class LabListService extends Service<LabList, LabListDao> {
+public class LabListService extends Service<Integer, LabList, LabListDao> {
 
 	public LabListService(LabListDao dao) {
 		super(dao);
@@ -107,5 +107,11 @@ public class LabListService extends Service<LabList, LabListDao> {
 		}
 
 		return list;
+	}
+
+	@Override
+	public LabList get(Integer key) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

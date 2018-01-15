@@ -6,7 +6,7 @@ import java.util.List;
 import com.labplan.entities.Patient;
 import com.labplan.persistence.generic.PatientDao;
 
-public class PatientService extends Service<Patient, PatientDao> {
+public class PatientService extends Service<Integer, Patient, PatientDao> {
 	public PatientService(PatientDao dao) {
 		super(dao);
 	}
@@ -57,5 +57,11 @@ public class PatientService extends Service<Patient, PatientDao> {
 
 		return new Patient(firstName.trim(), lastName.trim(), Integer.parseInt(age), Integer.parseInt(height),
 				Integer.parseInt(weight));
+	}
+
+	@Override
+	public Patient get(Integer key) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

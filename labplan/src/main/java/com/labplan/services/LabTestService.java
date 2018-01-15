@@ -6,7 +6,7 @@ import java.util.List;
 import com.labplan.entities.LabTest;
 import com.labplan.persistence.generic.LabTestDao;
 
-public class LabTestService extends Service<LabTest, LabTestDao> {
+public class LabTestService extends Service<Integer, LabTest, LabTestDao> {
 	public LabTestService(LabTestDao dao) {
 		super(dao);
 	}
@@ -43,5 +43,11 @@ public class LabTestService extends Service<LabTest, LabTestDao> {
 		validator.validate(); // Will throw ValidationException if any assertions failed.
 
 		return new LabTest(name.trim(), description.trim(), Float.parseFloat(valueMin), Float.parseFloat(valueMax));
+	}
+
+	@Override
+	public LabTest get(Integer key) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
