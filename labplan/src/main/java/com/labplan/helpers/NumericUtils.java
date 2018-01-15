@@ -3,11 +3,17 @@ package com.labplan.helpers;
 /**
  * Provides a set of utility functions for parsing {@link Integer} and
  * {@link Float} values.
+ *
+ * <p>This class contains only static methods and cannot be instantiated.</p>
  * 
  * @author Elian Doran
  *
  */
-public class NumericUtils {
+public final class NumericUtils {
+	private NumericUtils() {
+		
+	}
+	
 	/**
 	 * Attempts to parse an {@link Integer} from a {@link String}. Should the string
 	 * be empty or the conversion failed, the function returns {@code null} instead
