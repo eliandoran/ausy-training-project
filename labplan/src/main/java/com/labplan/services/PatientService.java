@@ -2,6 +2,7 @@ package com.labplan.services;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import com.labplan.api.exceptions.EntityNotFoundException;
 import com.labplan.entities.Patient;
@@ -72,7 +73,9 @@ public class PatientService extends Service<Integer, Patient, PatientDao> {
 
 	@Override
 	public List<Patient> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		Set<Patient> patientSet = dao.readAll();
+		List<Patient> patientList = new LinkedList<>();
+		patientList.addAll(patientSet);
+		return patientList;
 	}
 }

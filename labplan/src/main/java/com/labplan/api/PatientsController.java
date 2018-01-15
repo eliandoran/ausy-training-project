@@ -1,9 +1,6 @@
 package com.labplan.api;
 
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
-
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -28,10 +25,7 @@ public class PatientsController {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Patient> getPatients() {
-		Set<Patient> patientSet = patientDao.readAll();
-		List<Patient> patientList = new LinkedList<>();
-		patientList.addAll(patientSet);
-		return patientList;
+		return patientService.getAll();
 	}
 	
 	@GET
