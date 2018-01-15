@@ -3,6 +3,7 @@ package com.labplan.services;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.labplan.api.exceptions.EntityNotFoundException;
 import com.labplan.entities.Patient;
 import com.labplan.persistence.generic.PatientDao;
 
@@ -60,8 +61,12 @@ public class PatientService extends Service<Integer, Patient, PatientDao> {
 	}
 
 	@Override
-	public Patient get(Integer key) {
-		// TODO Auto-generated method stub
-		return null;
+	public Patient get(Integer key) throws EntityNotFoundException {
+		Patient patient = dao.read(key);
+		
+		if (patient == null)
+			throw new EntityNotFoundException();
+		
+		return patient;
 	}
 }

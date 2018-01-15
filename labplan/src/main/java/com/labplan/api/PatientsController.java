@@ -10,15 +10,16 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import com.labplan.api.exceptions.EntityNotFoundException;
 import com.labplan.entities.Patient;
 import com.labplan.persistence.DatabaseConnectionFactory;
 import com.labplan.persistence.generic.PatientDao;
 import com.labplan.persistence.sql.SqlPatientDao;
+import com.labplan.services.PatientService;
 
 @Path("/patients")
 public class PatientsController {
 	private static final PatientDao patientDao = new SqlPatientDao();
+	private static final PatientService patientService = new PatientService(patientDao);
 	
 	public PatientsController() {
 		DatabaseConnectionFactory.setProfile("production");
@@ -37,12 +38,6 @@ public class PatientsController {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("{id}")
 	public Patient getPatientById(@PathParam("id") Integer id) {
-		Patient patient = patientDao.read(id);
-		
-		if (patient == null) {
-			throw new EntityNotFoundException();
-		}
-		
-		return patient;
+		return patientService.get(id);
 	}
 }
