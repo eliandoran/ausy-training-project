@@ -28,6 +28,9 @@ applySelectEvents(templateRowType);
 var testsJSON = document.querySelector("#testsJSON");
 var tests = JSON.parse(testsJSON.innerHTML);
 console.log(tests);
+
+ownDropdown(templateRowType, tests);
+
 function newRow() {
 	if (templateRowType.value == "" || templateRowValue.value == "")
 		return;

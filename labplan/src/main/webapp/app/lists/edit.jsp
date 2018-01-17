@@ -7,6 +7,7 @@
 	<head>
 		<title><ex:pageTitle title="Edit a lab list" /></title>
 		<%@ include file="../header.jspf" %>
+		<link rel="stylesheet" type="text/css" href="<c:url value="/static/own_dropdown.css" />" />
 	</head>
 	
 	<body>
@@ -24,6 +25,7 @@
 			</div>
 		</main>
 		
+		<script src="<c:url value="/static/own_dropdown.js" />"></script>
 		<script src="<c:url value="/static/lab_list.js" />"></script>
 	</body>
 </html>

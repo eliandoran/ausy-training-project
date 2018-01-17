@@ -122,6 +122,12 @@
 	<div class="row actions">
 		<input type="submit" value="${is_new ? 'Create' : 'Update' }" />
 	</div>
-</form><script type="text/plain" id="testsJSON">
+</form>
+
+<div id="own-dropdown--container">
+			
+</div>
+
+<script type="text/plain" id="testsJSON">
 ${testsJSON}
 </script>
