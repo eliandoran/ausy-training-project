@@ -6,6 +6,7 @@ function ownDropdown(el, data) {
 	
 	function init() {
 		window.onresize = onResize;
+		optionsList.onkeydown = onKeyDown;
 		open();
 	}
 	
@@ -58,6 +59,34 @@ function ownDropdown(el, data) {
 	function onResize() {
 		if (!isOpen) return;
 		reposition();
+	}
+	
+	function getActiveInput() {
+		var activeEl = document.activeElement;
+		
+		if (!optionsList.contains(activeEl))
+			return null;
+		
+		return activeEl;
+	}
+	
+	function onKeyDown(e) {
+		if (e.key != "ArrowUp" && e.key != "ArrowDown")
+			return true;
+		
+		var activeLink = getActiveInput();
+		var activeItem = activeLink.parentElement;
+		var newEl;
+		
+		if (e.key == "ArrowUp")
+			newEl = activeItem.previousSibling;
+		else if (e.key == "ArrowDown")
+			newEl = activeItem.nextSibling;
+		
+		if (newEl instanceof HTMLElement) {
+			newEl.querySelector("a").focus();
+			return false;
+		}
 	}
 	
 	init();
