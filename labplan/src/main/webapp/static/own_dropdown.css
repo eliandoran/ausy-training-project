@@ -1,7 +1,19 @@
+/*
+ * Generic styling
+ */
 #own-dropdown--container {
 	display: none;
 	position: absolute;
 	width: 200px;
 	height: 300px;
-	background: red;
+	overflow-x: hidden;
+	overflow-y: scroll;
+}
+
+/*
+ * LabPlan UI specific styling
+ */
+#own-dropdown--container {
+	background-color: #fafafa;
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }

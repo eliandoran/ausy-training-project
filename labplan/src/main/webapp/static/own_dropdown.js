@@ -1,6 +1,7 @@
 function ownDropdown(el, data) {
 	var parent = document.querySelector("body > main");
 	var container = document.getElementById("own-dropdown--container");
+	var optionsList = document.getElementById("own-dropdown--options");
 	var isOpen = false;
 	
 	function init() {
@@ -11,6 +12,7 @@ function ownDropdown(el, data) {
 	function open() {
 		isOpen = true;
 		reposition();
+		loadOptions();
 	}
 	
 	function popAt(x, y, width) {
@@ -33,6 +35,20 @@ function ownDropdown(el, data) {
 		var width = clientRect.right - clientRect.left;
 		
 		popAt(coordToPixel(x), coordToPixel(y), coordToPixel(width));
+	}
+	
+	function loadOptions() {
+		for (var optionId in data) {
+			var option = data[optionId];
+			var newOption = document.createElement("li");
+			
+			var nameEl = document.createElement("span");
+			nameEl.className = "name";
+			nameEl.innerHTML = option.name;
+			
+			newOption.append(nameEl);
+			optionsList.append(newOption);
+		}
 	}
 	
 	function onResize() {
