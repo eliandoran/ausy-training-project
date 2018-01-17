@@ -42,11 +42,15 @@ function ownDropdown(el, data) {
 			var option = data[optionId];
 			var newOption = document.createElement("li");
 			
+			var linkEl= document.createElement("a");
+			linkEl.href = "#";
+			
 			var nameEl = document.createElement("span");
 			nameEl.className = "name";
 			nameEl.innerHTML = option.name;
 			
-			newOption.append(nameEl);
+			linkEl.append(nameEl);
+			newOption.append(linkEl);
 			optionsList.append(newOption);
 		}
 	}
