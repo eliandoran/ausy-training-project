@@ -1,6 +1,17 @@
 function ownDropdown(el, data) {
 	var parent = document.querySelector("body > main");
 	var container = document.getElementById("own-dropdown--container");
+	var isOpen = false;
+	
+	function init() {
+		window.onresize = onResize;
+		open();
+	}
+	
+	function open() {
+		isOpen = true;
+		reposition();
+	}
 	
 	function popAt(x, y, width) {
 		container.style.display = "block";
@@ -13,7 +24,7 @@ function ownDropdown(el, data) {
 		return Math.round(coord) + "px";
 	}
 	
-	function open() {
+	function reposition() {		
 		var clientRect = el.getBoundingClientRect();
 		var parentRect = parent.getBoundingClientRect();
 		
@@ -24,5 +35,10 @@ function ownDropdown(el, data) {
 		popAt(coordToPixel(x), coordToPixel(y), coordToPixel(width));
 	}
 	
-	open();
+	function onResize() {
+		if (!isOpen) return;
+		reposition();
+	}
+	
+	init();
 }
