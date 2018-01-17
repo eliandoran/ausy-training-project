@@ -26,7 +26,7 @@ public final class ErrorResponseBuilder {
 	/**
 	 * Given an HTTP {@link Status} code and an underlying {@link Exception}
 	 * generates a {@link Response} which can be passed onto a client mentioning
-	 * that a RESET resource failed and the reason why.
+	 * that a REST resource failed and the reason why.
 	 * 
 	 * <h2>Example</h2> A call to
 	 * {@code getResponse(Status.NOT_FOUND, new EntityNotFoundException())} would
