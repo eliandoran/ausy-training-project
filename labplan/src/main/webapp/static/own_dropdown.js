@@ -45,6 +45,7 @@ function ownDropdown(el, data) {
 			
 			var linkEl= document.createElement("a");
 			linkEl.href = "#";
+			linkEl.onclick = onItemClick;
 			
 			var nameEl = document.createElement("span");
 			nameEl.className = "name";
@@ -56,9 +57,22 @@ function ownDropdown(el, data) {
 		}
 	}
 	
+	function select(el) {
+		console.log(el);
+	}
+	
 	function onResize() {
 		if (!isOpen) return;
 		reposition();
+	}
+	
+	function onItemClick(e) {
+		var node = e.target;
+		
+		while (node.tagName != "LI")
+			node = node.parentElement;
+		
+		select(node);
 	}
 	
 	function getActiveInput() {
