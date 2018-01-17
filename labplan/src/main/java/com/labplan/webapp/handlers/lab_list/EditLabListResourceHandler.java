@@ -9,6 +9,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONObject;
+
 import com.labplan.entities.LabList;
 import com.labplan.entities.LabResult;
 import com.labplan.entities.LabTest;
@@ -50,10 +52,12 @@ public class EditLabListResourceHandler implements ResourceHandler {
 			return false;
 
 		List<Pair<String, String>> fields = getFields(list);
-
+		List<LabTest> tests = getTests();
+		
 		HttpServletRequest request = params.getRequest();
 		request.setAttribute("list", list);
-		request.setAttribute("tests", getTests());
+		request.setAttribute("tests", tests);
+		request.setAttribute("testsJSON", getTestsJSON(tests));
 		request.setAttribute("fieldCount", fields.size());
 		request.setAttribute("fields", fields);
 
@@ -132,5 +136,21 @@ public class EditLabListResourceHandler implements ResourceHandler {
 		List<LabTest> testsList = new LinkedList<>();
 		testsList.addAll(testDao.readAll());
 		return testsList;
+	}
+	
+	private JSONObject getTestsJSON(List<LabTest> tests) {
+		JSONObject result = new JSONObject();
+		
+		for (LabTest test : tests) {
+			JSONObject testJSON = new JSONObject();
+			testJSON.put("name", test.getName());
+			testJSON.put("description", test.getDescription());
+			testJSON.put("valueMin", test.getValueMin());
+			testJSON.put("valueMax", test.getValueMax());
+			
+			result.put(test.getId().toString(), testJSON);
+		}
+		
+		return result;
 	}
 }

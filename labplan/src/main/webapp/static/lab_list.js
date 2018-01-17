@@ -25,6 +25,9 @@ for (var index = 0; index < existingRows.length; index++) {
 
 applySelectEvents(templateRowType);
 
+var testsJSON = document.querySelector("#testsJSON");
+var tests = JSON.parse(testsJSON.innerHTML);
+console.log(tests);
 function newRow() {
 	if (templateRowType.value == "" || templateRowValue.value == "")
 		return;
