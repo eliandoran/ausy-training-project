@@ -10,10 +10,25 @@
 	overflow-y: scroll;
 }
 
+#own-dropdown--options {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+
+#own-dropdown--options li {
+	padding: 0.75em;
+}
+
 /*
  * LabPlan UI specific styling
  */
 #own-dropdown--container {
 	background-color: #fafafa;
 	box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+#own-dropdown--options li:hover {
+	background-color: rgb(92, 107, 192);
+	color: white;
 }
