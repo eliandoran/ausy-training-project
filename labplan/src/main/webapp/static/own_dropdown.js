@@ -11,6 +11,7 @@ function ownDropdown(el, data) {
 		optionsList.onkeydown = onKeyDown;
 		searchBox.oninput = startSearching;
 		searchBox.value = "";
+		tokenize();
 		open();
 	}
 	
@@ -18,6 +19,14 @@ function ownDropdown(el, data) {
 		isOpen = true;
 		reposition();
 		loadOptions();
+	}
+	
+	function tokenize() {
+		for (var optionId in data) {
+			var option = data[optionId];
+			
+			option.tokens = option.name.toLowerCase().split(" ");
+		}
 	}
 	
 	function startSearching() {
@@ -62,7 +71,7 @@ function ownDropdown(el, data) {
 			var option = data[optionId];
 			
 			if (filter !== undefined && filter != "") {
-				var tokens = option.name.toLowerCase().split(" ");
+				var tokens = option.tokens;
 				var found = false;
 				
 				for (tokenIndex=0; tokenIndex<tokens.length; tokenIndex++) {
