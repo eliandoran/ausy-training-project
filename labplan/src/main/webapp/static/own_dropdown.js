@@ -82,7 +82,7 @@ function ownDropdown(el, data) {
 						var filterToken = filterTokens[filterTokenIndex];
 						if (!filterToken.length) continue;
 						
-						if (token.startsWith(filterToken)) {
+						if (token.search(filterToken) !== -1) {
 							found = true;
 							break;
 						}
