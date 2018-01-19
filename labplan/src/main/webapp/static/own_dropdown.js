@@ -73,9 +73,14 @@ function ownDropdown(el, data) {
 						var filterToken = filterTokens[filterTokenIndex];
 						if (!filterToken.length) continue;
 						
-						if (token.startsWith(filterToken))
-							found |= true;
+						if (token.startsWith(filterToken)) {
+							found = true;
+							break;
+						}
 					}
+					
+					if (found)
+						break;
 				}
 					
 				if (!found)
