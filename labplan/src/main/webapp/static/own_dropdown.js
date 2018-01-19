@@ -65,13 +65,17 @@ function ownDropdown(el, data) {
 				var tokens = option.name.toLowerCase().split(" ");
 				var found = false;
 				
-				for (tokenIndex=0; tokenIndex<tokens.length; tokenIndex++)
-				for (filterTokenIndex=0; filterTokenIndex<filterTokens.length; filterTokenIndex++) {
+				for (tokenIndex=0; tokenIndex<tokens.length; tokenIndex++) {
 					var token = tokens[tokenIndex];
-					var filterToken = filterTokens[filterTokenIndex];
+					if (!token.length) continue;
 					
-					if (token.startsWith(filterToken))
-						found |= true;
+					for (filterTokenIndex=0; filterTokenIndex<filterTokens.length; filterTokenIndex++) {
+						var filterToken = filterTokens[filterTokenIndex];
+						if (!filterToken.length) continue;
+						
+						if (token.startsWith(filterToken))
+							found |= true;
+					}
 				}
 					
 				if (!found)
