@@ -51,14 +51,16 @@ function newRow() {
 	templateCloneType.value = templateRowType.value;
 	templateCloneType.name = clonePrefix + "-type";
 	applySelectEvents(templateCloneType);
+	ownDropdown(templateCloneType, tests);
 	
 	templateCloneValue = templateClone.querySelector(".value");
 	templateCloneValue.name = clonePrefix + "-value";
 	
 	resultsTable.querySelector("tbody").append(templateClone);
 	
-	templateRowType.value = "";
+	templateRowType.value = null;
 	templateRowValue.value = "";
+	templateRowType.refresh();
 	
 	moveCaretToEnd(templateCloneValue);
 	templateCloneValue.scrollIntoView();

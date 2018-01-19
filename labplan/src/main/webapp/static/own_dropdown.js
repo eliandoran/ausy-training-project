@@ -14,19 +14,22 @@ function ownDropdown(el, data) {
 		optionsList.onkeydown = onKeyDown;
 		searchBox.oninput = startSearching;
 		searchBox.value = "";
-		tokenize();
 		
 		hiddenEl = document.createElement("input");
 		hiddenEl.type = "hidden";
 		
 		textEl = document.createElement("span");
-		textEl.innerHTML = "&nbsp;";
 		
 		el.append(hiddenEl);
 		el.append(textEl);
 		
 		el.value = null;
 		el.previousValue = null;
+		
+		el.refresh = refresh;
+		
+		tokenize();
+		refresh();
 	}
 	
 	function open() {
@@ -138,17 +141,28 @@ function ownDropdown(el, data) {
 		if (selectedEl instanceof HTMLElement) {
 			var id = selectedEl.dataset.id;
 			var option = data[id];
-			hiddenEl.value = id;
-			textEl.innerHTML = option.name;
 			
 			if (el.value !== null)
 				el.previousValue = el.value;
 			el.value = id;
 
+			refresh();
 			emitEvent("change");
 		}
 		
 		close();
+	}
+	
+	function refresh() {
+		var id = el.value;
+		var option;
+		
+		if (id != null) {
+			hiddenEl.value = id;
+			option = data[id];
+		}
+		
+		textEl.innerHTML = (option != null ? option.name : "&nbsp;");
 	}
 	
 	function onResize() {
