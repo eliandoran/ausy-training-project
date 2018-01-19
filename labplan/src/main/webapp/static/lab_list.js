@@ -104,27 +104,26 @@ function submit() {
 
 function applySelectEvents(el) {
 	(function() {
-		var previousValue = null;
+		var previousValue;
 		
 		el.addEventListener("change", function(e) {
 			var row = this.parentElement.parentElement;
 			
-			if (previousValue != null)
-				disabledIndices[previousValue] = false;
+			if (previousValue !== undefined)
+				tests[previousValue].disabled = false;
 			
-			disabledIndices[this.value] = true;
-			console.log(disabledIndices);
+			tests[this.value].disabled = true;
 		})
 		
 		el.onfocus = function() {
 			previousValue = this.value;
-		};
-		
-		el.onclick = function() {
-			for (var index in disabledIndices) {
-				var option = el.querySelector('option[value="' + index + '"]');
-				option.disabled = (disabledIndices[index] == true && option.value !== el.value);
-			}
+			
+			console.log(previousValue);
+			
+			if (previousValue === undefined)
+				return;
+				
+			tests[previousValue].disabled = false;
 		};
 	})();
 }

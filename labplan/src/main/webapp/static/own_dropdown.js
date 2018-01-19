@@ -115,6 +115,7 @@ function ownDropdown(el, data) {
 			
 			var newOption = document.createElement("li");
 			newOption.dataset.id = optionId;
+			newOption.className = (option.disabled ? "disabled" : "");
 			
 			var linkEl= document.createElement("a");
 			linkEl.href = "#";

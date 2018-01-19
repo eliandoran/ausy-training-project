@@ -83,3 +83,7 @@
 #own-dropdown--options a:focus {
 	background-color: rgb(92, 107, 192);
 }
+
+#own-dropdown--options li.disabled {
+	opacity: 0.5;
+}
