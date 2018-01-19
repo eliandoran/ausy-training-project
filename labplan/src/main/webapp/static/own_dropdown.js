@@ -2,11 +2,15 @@ function ownDropdown(el, data) {
 	var parent = document.querySelector("body > main");
 	var container = document.getElementById("own-dropdown--container");
 	var optionsList = document.getElementById("own-dropdown--options");
+	var searchBox = document.getElementById("own-dropdown--search").querySelector("input");
 	var isOpen = false;
+	var searchInterval;
 	
 	function init() {
 		window.onresize = onResize;
 		optionsList.onkeydown = onKeyDown;
+		searchBox.oninput = startSearching;
+		searchBox.value = "";
 		open();
 	}
 	
@@ -14,6 +18,15 @@ function ownDropdown(el, data) {
 		isOpen = true;
 		reposition();
 		loadOptions();
+	}
+	
+	function startSearching() {
+		if (searchInterval !== undefined)
+			clearInterval(searchInterval);
+		
+		searchInterval = setTimeout(function() {
+			loadOptions(searchBox.value);
+		}, 100);
 	}
 	
 	function popAt(x, y, width) {
@@ -38,9 +51,33 @@ function ownDropdown(el, data) {
 		popAt(coordToPixel(x), coordToPixel(y), coordToPixel(width));
 	}
 	
-	function loadOptions() {
+	function loadOptions(filter) {
+		var filterTokens;
+		if (filter !== undefined) 
+			filterTokens = filter.toLowerCase().split(" ");
+		
+		optionsList.innerHTML = "";
+		
 		for (var optionId in data) {
 			var option = data[optionId];
+			
+			if (filter !== undefined && filter != "") {
+				var tokens = option.name.toLowerCase().split(" ");
+				var found = false;
+				
+				for (tokenIndex=0; tokenIndex<tokens.length; tokenIndex++)
+				for (filterTokenIndex=0; filterTokenIndex<filterTokens.length; filterTokenIndex++) {
+					var token = tokens[tokenIndex];
+					var filterToken = filterTokens[filterTokenIndex];
+					
+					if (token.startsWith(filterToken))
+						found |= true;
+				}
+					
+				if (!found)
+					continue;
+			}
+			
 			var newOption = document.createElement("li");
 			
 			var linkEl= document.createElement("a");
