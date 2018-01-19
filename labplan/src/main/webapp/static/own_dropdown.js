@@ -14,6 +14,9 @@ function ownDropdown(el, data) {
 		el.onclick = open;
 		window.onresize = onResize;
 		
+		if (el.dataset.value !== undefined)
+			el.value = el.dataset.value;
+		
 		hiddenEl = document.createElement("input");
 		hiddenEl.type = "hidden";
 		

@@ -64,8 +64,8 @@
 							<c:set var="index" value="${loop.index + 1}" />
 							<tr>
 								<td class="centered index">${index}</td>
-								<td class="type">
-									<div class="own-dropdown fill type"></div>
+								<td>
+									<div class="own-dropdown fill type" data-value="${field.first}"></div>
 								</td>
 								<td>
 									<input class="value fill" name="result-${index}-value" type="number" step="0.01" value="${field.second}" />

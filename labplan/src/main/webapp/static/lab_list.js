@@ -16,15 +16,12 @@ templateRowType.addEventListener("change", newRow);
 
 form.onsubmit = submit;
 var existingRows = resultsTable.querySelectorAll("tbody tr");
-var disabledIndices = {};
 
 for (var index = 0; index < existingRows.length; index++) {
 	var row = existingRows[index];
-	var typeSelect = row.querySelector(".type select");
-	
+	var typeSelect = row.querySelector(".type");
+	typeSelect = ownDropdown(typeSelect, tests);
 	applySelectEvents(typeSelect);
-	disabledIndices[typeSelect.value] = true;
-	
 	row.querySelector(".delete").onclick = deleteRow;
 }
 
@@ -90,7 +87,7 @@ function submit() {
 
 	for (var index = 0; index < rows.length; index++) {
 		var row = rows[index];
-		var type = row.cells[1].querySelector("select").value;
+		var type = row.cells[1].querySelector("input").value;
 		var value = row.cells[2].querySelector("input").value;
 		
 		data[type] = value;
