@@ -24,6 +24,9 @@ function ownDropdown(el, data) {
 		
 		el.append(hiddenEl);
 		el.append(textEl);
+		
+		el.value = null;
+		el.previousValue = null;
 	}
 	
 	function open() {
@@ -136,8 +139,12 @@ function ownDropdown(el, data) {
 			var id = selectedEl.dataset.id;
 			var option = data[id];
 			hiddenEl.value = id;
-			el.value = id;
 			textEl.innerHTML = option.name;
+			
+			if (el.value !== null)
+				el.previousValue = el.value;
+			el.value = id;
+
 			emitEvent("change");
 		}
 		

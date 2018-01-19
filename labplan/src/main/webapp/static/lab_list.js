@@ -103,29 +103,17 @@ function submit() {
 }
 
 function applySelectEvents(el) {
-	(function() {
-		var previousValue;
+	el.addEventListener("change", function(e) {
+		var previousValue = this.previousValue;
+		var value = this.value;
 		
-		el.addEventListener("change", function(e) {
-			var row = this.parentElement.parentElement;
-			
-			if (previousValue !== undefined)
-				tests[previousValue].disabled = false;
-			
-			tests[this.value].disabled = true;
-		})
-		
-		el.onfocus = function() {
-			previousValue = this.value;
-			
-			console.log(previousValue);
-			
-			if (previousValue === undefined)
-				return;
-				
+		if (previousValue !== undefined && previousValue) {
+			console.log("Previous value: " + previousValue);
 			tests[previousValue].disabled = false;
-		};
-	})();
+		}
+		
+		tests[value].disabled = true;
+	});
 }
 
 function renumber() {
