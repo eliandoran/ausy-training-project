@@ -11,11 +11,6 @@ function ownDropdown(el, data) {
 	function init() {
 		el.onclick = open;
 		window.onresize = onResize;
-		optionsList.onkeydown = onKeyDown;
-		
-		searchBox.oninput = startSearching;
-		searchBox.onkeydown = searchKeyDown;
-		searchBox.value = "";
 		
 		hiddenEl = document.createElement("input");
 		hiddenEl.type = "hidden";
@@ -30,17 +25,10 @@ function ownDropdown(el, data) {
 		
 		el.refresh = refresh;
 		
-		tokenize();
-		refresh();
+		enableNavigation();
+		enableSearch();
 		
-		container.onkeydown = function(e) {
-			if (e.key === "Escape") {
-				close();
-				return false;
-			}
-			
-			return true;
-		};
+		refresh();
 	}
 	
 	function open() {
@@ -55,33 +43,7 @@ function ownDropdown(el, data) {
 		isOpen = false;
 		container.style.display = "none";
 	}
-	
-	function tokenize() {
-		for (var optionId in data) {
-			var option = data[optionId];
-			
-			option.tokens = option.name.toLowerCase().split(" ");
-		}
-	}
-	
-	function searchKeyDown(e) {
-		if (e.key === "ArrowDown") {
-			optionsList.querySelector("a").focus();
-			return false;
-		}
 		
-		return true;
-	}
-	
-	function startSearching() {
-		if (searchInterval !== undefined)
-			clearInterval(searchInterval);
-		
-		searchInterval = setTimeout(function() {
-			loadOptions(searchBox.value);
-		}, 100);
-	}
-	
 	function popAt(x, y, width) {
 		container.style.display = "block";
 		container.style.left = x;
@@ -209,28 +171,6 @@ function ownDropdown(el, data) {
 		return activeEl;
 	}
 	
-	function onKeyDown(e) {
-		if (e.key != "ArrowUp" && e.key != "ArrowDown")
-			return true;
-		
-		var activeLink = getActiveInput();
-		var activeItem = activeLink.parentElement;
-		var newEl;
-		
-		if (e.key == "ArrowUp")
-			newEl = activeItem.previousSibling;
-		else if (e.key == "ArrowDown")
-			newEl = activeItem.nextSibling;
-		
-		if (newEl instanceof HTMLElement) {
-			newEl.querySelector("a").focus();
-			return false;
-		}
-		
-		if (!(newEl instanceof HTMLElement) && e.key == "ArrowUp")
-			searchBox.focus();
-	}
-	
 	function emitEvent(eventName) {
 		if ("createEvent" in document) {
 			var event = document.createEvent("HTMLEvents");
@@ -239,6 +179,71 @@ function ownDropdown(el, data) {
 		} else {
 			el.fireEvent("on" + eventName);
 		}
+	}
+	
+	function enableNavigation() {
+		container.onkeydown = function(e) {
+			if (e.key === "Escape") {
+				close();
+				return false;
+			}
+			
+			return true;
+		};
+		
+		searchBox.onkeydown = function(e) {
+			if (e.key === "ArrowDown") {
+				optionsList.querySelector("a").focus();
+				return false;
+			}
+			
+			return true;
+		};
+		
+		optionsList.onkeydown = function(e) {
+			if (e.key != "ArrowUp" && e.key != "ArrowDown")
+				return true;
+			
+			var activeLink = getActiveInput();
+			var activeItem = activeLink.parentElement;
+			var newEl;
+			
+			if (e.key == "ArrowUp")
+				newEl = activeItem.previousSibling;
+			else if (e.key == "ArrowDown")
+				newEl = activeItem.nextSibling;
+			
+			if (newEl instanceof HTMLElement) {
+				newEl.querySelector("a").focus();
+				return false;
+			}
+			
+			if (!(newEl instanceof HTMLElement) && e.key == "ArrowUp")
+				searchBox.focus();
+		};
+	}
+	
+	function enableSearch() {
+		function tokenize() {
+			for (var optionId in data) {
+				var option = data[optionId];
+				
+				option.tokens = option.name.toLowerCase().split(" ");
+			}
+		}
+		
+		searchBox.value = "";
+		
+		searchBox.oninput = function(e) {
+			if (searchInterval !== undefined)
+				clearInterval(searchInterval);
+			
+			searchInterval = setTimeout(function() {
+				loadOptions(searchBox.value);
+			}, 100);
+		};
+		
+		tokenize();
 	}
 	
 	init();
