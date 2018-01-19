@@ -8,8 +8,6 @@ function ownDropdown(el, data) {
 	
 	var hiddenEl, textEl;
 	
-	var onChangeEvent;
-	
 	function init() {
 		el.onclick = open;
 		window.onresize = onResize;
@@ -26,8 +24,6 @@ function ownDropdown(el, data) {
 		
 		el.append(hiddenEl);
 		el.append(textEl);
-		
-		onChangeEvent = new Event("change");
 	}
 	
 	function open() {
@@ -140,7 +136,7 @@ function ownDropdown(el, data) {
 			hiddenEl.value = id;
 			el.value = id;
 			textEl.innerHTML = option.name;
-			el.dispatchEvent(onChangeEvent);
+			fireOnChange();
 		}
 		
 		close();
@@ -185,6 +181,16 @@ function ownDropdown(el, data) {
 		if (newEl instanceof HTMLElement) {
 			newEl.querySelector("a").focus();
 			return false;
+		}
+	}
+	
+	function fireOnChange() {
+		if ("createEvent" in document) {
+			var event = document.createEvent("HTMLEvents");
+			event.initEvent("change", false, true);
+			el.dispatchEvent(event);
+		} else {
+			el.fireEvent("onchange");
 		}
 	}
 	
