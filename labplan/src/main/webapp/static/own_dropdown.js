@@ -12,7 +12,9 @@ function ownDropdown(el, data) {
 		el.onclick = open;
 		window.onresize = onResize;
 		optionsList.onkeydown = onKeyDown;
+		
 		searchBox.oninput = startSearching;
+		searchBox.onkeydown = searchKeyDown;
 		searchBox.value = "";
 		
 		hiddenEl = document.createElement("input");
@@ -30,6 +32,15 @@ function ownDropdown(el, data) {
 		
 		tokenize();
 		refresh();
+		
+		container.onkeydown = function(e) {
+			if (e.key === "Escape") {
+				close();
+				return false;
+			}
+			
+			return true;
+		};
 	}
 	
 	function open() {
@@ -37,6 +48,7 @@ function ownDropdown(el, data) {
 		reposition();
 		loadOptions();
 		emitEvent("focus");
+		searchBox.focus();
 	}
 	
 	function close() {
@@ -50,6 +62,15 @@ function ownDropdown(el, data) {
 			
 			option.tokens = option.name.toLowerCase().split(" ");
 		}
+	}
+	
+	function searchKeyDown(e) {
+		if (e.key === "ArrowDown") {
+			optionsList.querySelector("a").focus();
+			return false;
+		}
+		
+		return true;
 	}
 	
 	function startSearching() {
@@ -205,6 +226,9 @@ function ownDropdown(el, data) {
 			newEl.querySelector("a").focus();
 			return false;
 		}
+		
+		if (!(newEl instanceof HTMLElement) && e.key == "ArrowUp")
+			searchBox.focus();
 	}
 	
 	function emitEvent(eventName) {
