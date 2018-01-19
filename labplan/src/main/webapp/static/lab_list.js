@@ -1,3 +1,6 @@
+var testsJSON = document.querySelector("#testsJSON");
+var tests = JSON.parse(testsJSON.innerHTML);
+
 var form = document.querySelector(".test-form");
 
 var resultsTable = document.querySelector("#results-table");
@@ -6,8 +9,10 @@ var templateRow = document.querySelector("#results-template");
 var templateRowValue = templateRow.querySelector(".value");
 var templateRowType = templateRow.querySelector(".type");
 
-templateRowType.oninput = newRow;
+templateRowType = ownDropdown(templateRowType, tests);
+
 templateRowValue.oninput = newRow;
+templateRowType.addEventListener("change", newRow);
 
 form.onsubmit = submit;
 var existingRows = resultsTable.querySelectorAll("tbody tr");
@@ -24,12 +29,6 @@ for (var index = 0; index < existingRows.length; index++) {
 }
 
 applySelectEvents(templateRowType);
-
-var testsJSON = document.querySelector("#testsJSON");
-var tests = JSON.parse(testsJSON.innerHTML);
-console.log(tests);
-
-ownDropdown(templateRowType, tests);
 
 function newRow() {
 	if (templateRowType.value == "" || templateRowValue.value == "")
@@ -48,10 +47,11 @@ function newRow() {
 	templateCloneActions.querySelector(".delete").onclick = deleteRow;
 	
 	templateCloneType = templateClone.querySelector(".type");
+	
 	templateCloneType.value = templateRowType.value;
 	templateCloneType.name = clonePrefix + "-type";
+	templateCloneType = ownDropdown(templateCloneType, tests);
 	applySelectEvents(templateCloneType);
-	ownDropdown(templateCloneType, tests);
 	
 	templateCloneValue = templateClone.querySelector(".value");
 	templateCloneValue.name = clonePrefix + "-value";
@@ -60,7 +60,6 @@ function newRow() {
 	
 	templateRowType.value = null;
 	templateRowValue.value = "";
-	templateRowType.refresh();
 	
 	moveCaretToEnd(templateCloneValue);
 	templateCloneValue.scrollIntoView();

@@ -9,6 +9,8 @@ function ownDropdown(el, data) {
 	var hiddenEl, textEl;
 	
 	function init() {
+		reconstruct();
+		
 		el.onclick = open;
 		window.onresize = onResize;
 		
@@ -19,16 +21,23 @@ function ownDropdown(el, data) {
 		
 		el.append(hiddenEl);
 		el.append(textEl);
-		
-		el.value = null;
-		el.previousValue = null;
-		
 		el.refresh = refresh;
 		
 		enableNavigation();
 		enableSearch();
 		
 		refresh();
+		
+		return el;
+	}
+	
+	function reconstruct() {
+		var newEl = el.cloneNode();
+		newEl.innerHTML = "";
+		newEl.value = el.value;
+		newEl.previousValue = el.previousValue;
+		el.parentNode.replaceChild(newEl, el);
+		el = newEl;
 	}
 	
 	function open() {
@@ -246,5 +255,5 @@ function ownDropdown(el, data) {
 		tokenize();
 	}
 	
-	init();
+	return init();
 }
