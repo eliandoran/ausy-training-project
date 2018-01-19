@@ -6,19 +6,35 @@ function ownDropdown(el, data) {
 	var isOpen = false;
 	var searchInterval;
 	
+	var hiddenEl, textEl;
+	
 	function init() {
+		el.onclick = open;
 		window.onresize = onResize;
 		optionsList.onkeydown = onKeyDown;
 		searchBox.oninput = startSearching;
 		searchBox.value = "";
 		tokenize();
-		open();
+		
+		hiddenEl = document.createElement("input");
+		hiddenEl.type = "hidden";
+		
+		textEl = document.createElement("span");
+		textEl.innerHTML = "&nbsp;";
+		
+		el.append(hiddenEl);
+		el.append(textEl);
 	}
 	
 	function open() {
 		isOpen = true;
 		reposition();
 		loadOptions();
+	}
+	
+	function close() {
+		isOpen = false;
+		container.style.display = "none";
 	}
 	
 	function tokenize() {
@@ -97,6 +113,7 @@ function ownDropdown(el, data) {
 			}
 			
 			var newOption = document.createElement("li");
+			newOption.dataset.id = optionId;
 			
 			var linkEl= document.createElement("a");
 			linkEl.href = "#";
@@ -113,7 +130,14 @@ function ownDropdown(el, data) {
 	}
 	
 	function select(el) {
-		console.log(el);
+		if (el instanceof HTMLElement) {
+			var id = el.dataset.id;
+			var option = data[id];
+			hiddenEl.value = id;
+			textEl.innerHTML = option.name;
+		}
+		
+		close();
 	}
 	
 	function onResize() {

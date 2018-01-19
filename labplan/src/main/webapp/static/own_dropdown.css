@@ -54,6 +54,12 @@
 /*
  * LabPlan UI specific styling
  */
+.own-dropdown {
+	border: 1px solid #dedede;
+	cursor: pointer;
+	padding: 0.3em 0.5em;
+}
+ 
 #own-dropdown--container {
 	background-color: #fafafa;
 	box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
