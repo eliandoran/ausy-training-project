@@ -30,6 +30,7 @@ function ownDropdown(el, data) {
 		isOpen = true;
 		reposition();
 		loadOptions();
+		fireOnFocus();
 	}
 	
 	function close() {
@@ -191,6 +192,16 @@ function ownDropdown(el, data) {
 			el.dispatchEvent(event);
 		} else {
 			el.fireEvent("onchange");
+		}
+	}
+	
+	function fireOnFocus() {
+		if ("createEvent" in document) {
+			var event = document.createEvent("HTMLEvents");
+			event.initEvent("focus", false, true);
+			el.dispatchEvent(event);
+		} else {
+			el.fireEvent("onfocus");
 		}
 	}
 	
