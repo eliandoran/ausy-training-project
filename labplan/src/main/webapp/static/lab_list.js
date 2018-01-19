@@ -106,17 +106,18 @@ function applySelectEvents(el) {
 	(function() {
 		var previousValue = null;
 		
-		el.onfocus = function() {
-			previousValue = this.value;
-		};
-		
-		el.onchange = function() {
+		el.addEventListener("change", function(e) {
 			var row = this.parentElement.parentElement;
 			
 			if (previousValue != null)
 				disabledIndices[previousValue] = false;
 			
 			disabledIndices[this.value] = true;
+			console.log(disabledIndices);
+		})
+		
+		el.onfocus = function() {
+			previousValue = this.value;
 		};
 		
 		el.onclick = function() {

@@ -8,6 +8,8 @@ function ownDropdown(el, data) {
 	
 	var hiddenEl, textEl;
 	
+	var onChangeEvent;
+	
 	function init() {
 		el.onclick = open;
 		window.onresize = onResize;
@@ -24,6 +26,8 @@ function ownDropdown(el, data) {
 		
 		el.append(hiddenEl);
 		el.append(textEl);
+		
+		onChangeEvent = new Event("change");
 	}
 	
 	function open() {
@@ -129,12 +133,14 @@ function ownDropdown(el, data) {
 		}
 	}
 	
-	function select(el) {
-		if (el instanceof HTMLElement) {
-			var id = el.dataset.id;
+	function select(selectedEl) {
+		if (selectedEl instanceof HTMLElement) {
+			var id = selectedEl.dataset.id;
 			var option = data[id];
 			hiddenEl.value = id;
+			el.value = id;
 			textEl.innerHTML = option.name;
+			el.dispatchEvent(onChangeEvent);
 		}
 		
 		close();
