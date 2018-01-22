@@ -82,7 +82,7 @@ function ownDropdown(el, data) {
 		var parentRect = parent.getBoundingClientRect();
 		
 		var x = clientRect.x - parentRect.x;
-		var y = clientRect.y - parentRect.y;
+		var y = parent.scrollTop + clientRect.y - parentRect.y;
 		var width = clientRect.right - clientRect.left;
 		
 		popAt(coordToPixel(x), coordToPixel(y), coordToPixel(width));
