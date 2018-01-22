@@ -1,5 +1,6 @@
 function ownDropdown(el, data) {
 	var parent = document.querySelector("body > main");
+	var shade = document.getElementById("own-dropdown--shade");
 	var container = document.getElementById("own-dropdown--container");
 	var optionsList = document.getElementById("own-dropdown--options");
 	var searchBox = document.getElementById("own-dropdown--search").querySelector("input");
@@ -13,6 +14,7 @@ function ownDropdown(el, data) {
 		
 		el.onclick = open;
 		window.onresize = onResize;
+		shade.onclick = close;
 		
 		if (el.dataset.value !== undefined)
 			el.value = el.dataset.value;
@@ -48,12 +50,13 @@ function ownDropdown(el, data) {
 		reposition();
 		loadOptions();
 		emitEvent("focus");
+		shade.style.display = "block";
 		searchBox.focus();
 	}
 	
 	function close() {
 		isOpen = false;
-		container.style.display = "none";
+		shade.style.display = "none";
 	}
 	
 	function reposition() {
@@ -75,7 +78,7 @@ function ownDropdown(el, data) {
 		var y = clientRect.y - parentRect.y;
 		var width = clientRect.right - clientRect.left;
 		
-		popAt(coordToPixel(x), coordToPixel(y), coordToPixel(width));
+		popAt(coordToPixel(clientRect.x), coordToPixel(clientRect.y), coordToPixel(width));
 	}
 	
 	function loadOptions(filter) {

@@ -108,16 +108,6 @@
 	</div>
 </form>
 
-<div id="own-dropdown--container">
-	<div id="own-dropdown--search">
-		<input type="search" placeholder="Search" autocomplete="off" />
-	</div>
-
-	<ul id="own-dropdown--options">
-		
-	</ul>			
-</div>
-
 <script type="text/plain" id="testsJSON">
 ${testsJSON}
 </script>
