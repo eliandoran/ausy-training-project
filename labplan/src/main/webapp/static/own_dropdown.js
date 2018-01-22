@@ -133,18 +133,21 @@ function ownDropdown(el, data) {
 	}
 	
 	function select(selectedEl) {
-		if (selectedEl instanceof HTMLElement) {
-			var id = selectedEl.dataset.id;
-			var option = data[id];
-			
-			if (el.value !== null)
-				el.previousValue = el.value;
-			el.value = id;
-
-			refresh();
-			emitEvent("change");
-		}
+		if (!selectedEl instanceof HTMLElement)
+			return;
 		
+		var id = selectedEl.dataset.id;
+		var option = data[id];
+		
+		if (option.disabled)
+			return;
+		
+		if (el.value !== null)
+			el.previousValue = el.value;
+		el.value = id;
+
+		refresh();
+		emitEvent("change");
 		close();
 	}
 	
