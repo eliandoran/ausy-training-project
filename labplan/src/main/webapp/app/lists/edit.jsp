@@ -25,18 +25,6 @@
 			</div>
 		</main>
 		
-		<div id="own-dropdown--shade">
-			<div id="own-dropdown--container">
-				<div id="own-dropdown--search">
-					<input type="search" placeholder="Search" autocomplete="off" />
-				</div>
-			
-				<ul id="own-dropdown--options">
-					
-				</ul>			
-			</div>
-		</div>
-		
 		<script src="<c:url value="/static/own_dropdown.js" />"></script>
 		<script src="<c:url value="/static/lab_list.js" />"></script>
 	</body>
