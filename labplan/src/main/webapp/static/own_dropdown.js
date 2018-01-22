@@ -158,6 +158,7 @@ function ownDropdown(el, data) {
 		if (id != null) {
 			hiddenEl.value = id;
 			option = data[id];
+			option.disabled = true;
 		}
 		
 		textEl.innerHTML = (option != null ? option.name : "&nbsp;");
