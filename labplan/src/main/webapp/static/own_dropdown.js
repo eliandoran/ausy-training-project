@@ -3,7 +3,7 @@ function ownDropdown(el, data) {
 	var container = document.getElementById("own-dropdown--container");
 	var optionsList = document.getElementById("own-dropdown--options");
 	var searchBox = document.getElementById("own-dropdown--search").querySelector("input");
-	var isOpen = false;
+	var isOpen;
 	var searchInterval;
 	
 	var hiddenEl, textEl;
@@ -11,8 +11,7 @@ function ownDropdown(el, data) {
 	function init() {
 		reconstruct();
 		
-		el.onclick = open;
-		window.onresize = onResize;
+		el.addEventListener("click", open);
 		
 		if (el.dataset.value !== undefined)
 			el.value = el.dataset.value;
@@ -26,22 +25,22 @@ function ownDropdown(el, data) {
 		el.append(textEl);
 		el.refresh = refresh;
 		
-		container.addEventListener("focusout", function(e) {
-			var target = e.relatedTarget;
-			
-			if (target != null &&
-			   (target == container || container.contains(target)))
-				return;
-		
-			close();
-		});
-		
 		enableNavigation();
 		enableSearch();
 		
 		refresh();
 		
 		return el;
+	}
+	
+	function attachEvents() {
+		container.addEventListener("focusout", onFocusOut);
+		window.addEventListener("resize", onResize);
+	}
+	
+	function detachEvents() {
+		container.removeEventListener("focusout", onFocusOut);
+		window.removeEventListener("resize", onResize);
 	}
 	
 	function reconstruct() {
@@ -55,13 +54,28 @@ function ownDropdown(el, data) {
 	
 	function open() {
 		isOpen = true;
+		attachEvents();
 		reposition();
 		loadOptions();
 		emitEvent("focus");
 		searchBox.focus();
 	}
 	
+	function onFocusOut(e) {
+		var target = e.relatedTarget;
+		
+		if (target != null &&
+		   (target == container || container.contains(target)))
+			return;
+	
+		close();
+	}
+	
 	function close() {
+		if (!isOpen)
+			return;
+		
+		detachEvents();
 		isOpen = false;
 		container.style.display = "none";
 	}
