@@ -57,6 +57,13 @@ function ownDropdown(el, data) {
 		attachEvents();
 		reposition();
 		loadOptions();
+		
+		/**
+		 * A second reposition treats an edge case in which the pop-up appearing causes the scroll bar to show.
+		 * The scroll bar takes an amount of horizontal space, causing the pop-up to be horizontally offset by a few pixels.
+		 */
+		reposition();
+		
 		emitEvent("focus");
 		searchBox.focus();
 	}
