@@ -61,7 +61,6 @@ function ownDropdown(el, data) {
 	
 	function reposition() {
 		function popAt(x, y, width) {
-			container.style.display = "block";
 			container.style.left = x;
 			container.style.top = y;
 			container.style.width = width;
@@ -71,12 +70,24 @@ function ownDropdown(el, data) {
 			return Math.round(coord) + "px";
 		}
 		
+		container.style.display = "block";
+		
+		var viewportWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+		var viewportHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+		
 		var clientRect = el.getBoundingClientRect();
 		var parentRect = parent.getBoundingClientRect();
 		
 		var x = clientRect.x - parentRect.x;
 		var y = clientRect.y - parentRect.y;
 		var width = clientRect.right - clientRect.left;
+		var height = 300;
+		
+		var bottomPadding = 20;
+		if (y + height > viewportHeight - bottomPadding) {
+			console.log("Overflow");
+			y = viewportHeight - height - bottomPadding;
+		}
 		
 		popAt(coordToPixel(clientRect.x), coordToPixel(clientRect.y), coordToPixel(width));
 	}
