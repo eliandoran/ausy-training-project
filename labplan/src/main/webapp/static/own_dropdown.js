@@ -26,6 +26,16 @@ function ownDropdown(el, data) {
 		el.append(textEl);
 		el.refresh = refresh;
 		
+		container.addEventListener("focusout", function(e) {
+			var target = e.relatedTarget;
+			
+			if (target != null &&
+			   (target == container || container.contains(target)))
+				return;
+		
+			close();
+		});
+		
 		enableNavigation();
 		enableSearch();
 		
