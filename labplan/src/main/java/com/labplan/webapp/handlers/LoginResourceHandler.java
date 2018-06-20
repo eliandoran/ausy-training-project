@@ -4,11 +4,20 @@ import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
 
+import com.labplan.persistence.generic.AdministratorDao;
+import com.labplan.persistence.sql.SqlAdministratorDao;
 import com.labplan.webapp.HandlerParameters;
 import com.labplan.webapp.ResourceHandler;
 
 public class LoginResourceHandler implements ResourceHandler {
+	private AdministratorDao administratorDao;
+	
+	public LoginResourceHandler() {
+		administratorDao = new SqlAdministratorDao();
+	}
+	
 	@Override
 	public String getPath() {
 		return "login";
@@ -24,6 +33,17 @@ public class LoginResourceHandler implements ResourceHandler {
 
 	@Override
 	public boolean doPost(HandlerParameters params) throws ServletException, IOException {
-		return false;
+		HttpServletRequest request = params.getRequest();
+		
+		String userName = request.getParameter("username");
+		String password = request.getParameter("password");		
+
+		if (administratorDao.validateAuthentication(userName, password)) {
+			System.out.println("Authentication successful.");
+		} else {
+			System.out.println("Authentication failed.");
+		}
+		
+		return true;
 	}	
 }

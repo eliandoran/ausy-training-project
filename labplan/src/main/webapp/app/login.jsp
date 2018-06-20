@@ -19,7 +19,7 @@
 					<h1>Login to LabTest</h1>
 				</header>
 									
-				<form class="login-form">
+				<form class="login-form" method="post">
 					<div class="row">
 						<label for="username">User name:</label>
 						<input type="text" name="username" class="fill" />
