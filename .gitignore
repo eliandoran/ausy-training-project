@@ -1,8 +1,5 @@
 *.bak
-.metadata
-.settings
 .recommenders
-.classpath
 Servers
 target
 labplan/src/main/resources/db.properties
