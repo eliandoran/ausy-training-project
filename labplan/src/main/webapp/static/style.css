@@ -270,6 +270,7 @@ form .three-columns .row {
 
 form input[type="number"],
 form input[type="text"],
+form input[type="password"],
 form select {
 	border: 0;
 	border-bottom: 1px solid #dedede;

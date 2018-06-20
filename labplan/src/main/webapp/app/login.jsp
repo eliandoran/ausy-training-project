@@ -27,7 +27,7 @@
 					
 					<div class="row">
 						<label for="password">Password:</label>
-						<input type="text" name="password" class="fill" />
+						<input type="password" name="password" class="fill" />
 					</div>
 					
 					<div class="row actions">
