@@ -54,18 +54,25 @@ public class DatabaseConnectionFactory {
 	 * @see DatabaseConnectionFactory
 	 */
 	public static Connection getConnection() throws ConnectionFailedException {
+		String connectionString = "";
+		
 		try {
 			if (properties == null)
 				load();
 
 			DriverManager.registerDriver(new Driver());
-
+			
 			String prefix = profile + ".";
-
-			return DriverManager.getConnection(properties.getProperty(prefix + "address", ""),
-					properties.getProperty(prefix + "username", ""), properties.getProperty(prefix + "password", ""));
+			String userName = properties.getProperty(prefix + "username", "");
+			String password = properties.getProperty(prefix + "password", "");			
+			connectionString = properties.getProperty(prefix + "address", "");	
+			
+			if (connectionString.isEmpty())
+				throw new ConnectionFailedException("Empty connection string. Please check database properties file.");
+			
+			return DriverManager.getConnection(connectionString, userName, password);
 		} catch (IOException | SQLException e) {
-			ConnectionFailedException newException = new ConnectionFailedException();
+			ConnectionFailedException newException = new ConnectionFailedException(connectionString);
 			newException.addSuppressed(e);
 			throw newException;
 		}
