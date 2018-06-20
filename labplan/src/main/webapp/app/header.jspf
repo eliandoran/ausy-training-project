@@ -1,6 +1,7 @@
 <meta charset="utf-8" />
 <link rel="stylesheet" type="text/css" href="<c:url value="/static/style.css" />" />
 <link rel="stylesheet" type="text/css" href="<c:url value="/static/responsive.css" />" />
+<link rel="stylesheet" type="text/css" href="<c:url value="/static/own_dropdown.css" />" />
 
 <link rel="apple-touch-icon" sizes="180x180" href="<c:url value="/static/assets/favicon/apple-touch-icon.png" />"/>
 <link rel="icon" type="image/png" sizes="32x32" href="<c:url value="/static/assets/favicon/favicon-32x32.png" />"/>
