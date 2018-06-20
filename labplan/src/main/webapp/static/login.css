@@ -1,0 +1,25 @@
+.login-wrapper {
+	position: relative;
+	height: 100%;
+	min-height: 300px;
+}
+
+.login-wrapper .content-wrapper {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 600px;
+	padding: 0;
+	background-color: #fafafa;
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+	transform: translate(-50%, -50%);
+}
+
+.login-wrapper .content-wrapper > header {
+	background: white;
+}
+
+.login-wrapper form {
+	padding: 2em 3em;
+	padding-bottom: 0;
+}

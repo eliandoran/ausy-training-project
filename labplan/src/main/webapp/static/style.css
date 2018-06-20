@@ -43,19 +43,22 @@ body > aside {
 	overflow: auto;
 }
 
-body > aside > header {
+body > aside > header,
+.login-wrapper .content-wrapper > header {
 	font-size: 30pt;
 	padding: 0.3em;
 	border-bottom: 1px solid #dedede;
 }
 
-body > aside > header .logo {
+body > aside > header .logo,
+.login-wrapper .content-wrapper > header .logo {
 	width: 80px;
 	height: auto;
 	vertical-align: middle;
 }
 
-body > aside > header h1 {
+body > aside > header h1,
+.login-wrapper .content-wrapper > header h1 {
 	display: inline-block;
 	margin: 0;
 	padding: 0;
