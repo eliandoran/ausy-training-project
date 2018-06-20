@@ -57,4 +57,17 @@
 			</li>
 		</ul>
 	</section>
+	
+	<section class="tests">
+		<header>
+			<img src="<c:url value="/static/assets/icon-admin.png" />" />
+			Administration
+		</header>
+		
+		<ul>
+			<li>
+				<a href="<c:url value="/admin/disconnect" />">Log out</a>
+			</li>
+		</ul>
+	</section>
 </aside>

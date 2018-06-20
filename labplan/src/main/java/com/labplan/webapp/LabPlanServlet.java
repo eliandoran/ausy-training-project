@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import com.labplan.persistence.DatabaseConnectionFactory;
 import com.labplan.webapp.handlers.DefaultResourceHandler;
 import com.labplan.webapp.handlers.LoginResourceHandler;
+import com.labplan.webapp.handlers.admin.DisconnectResourceHandler;
 import com.labplan.webapp.handlers.lab_list.AddLabListResourceHandler;
 import com.labplan.webapp.handlers.lab_list.EditLabListResourceHandler;
 import com.labplan.webapp.handlers.lab_list.ListLabListResourceHandler;
@@ -32,25 +33,31 @@ public class LabPlanServlet extends HttpServlet {
 
 	private HandlerContainer handlers;
 	
-	private LoginResourceHandler loginHandler;
+	private LoginResourceHandler authHandler;
 
 	@Override
 	public void init() throws ServletException {
 		DatabaseConnectionFactory.setProfile("production");
 
 		handlers = new HandlerContainer();
-		loginHandler = new LoginResourceHandler();
+		authHandler = new LoginResourceHandler();
 		
-		handlers.register(loginHandler);
+		handlers.register(authHandler);
 
+		// Patients
 		handlers.registerAll(new ListPatientResourceHandler(), new AddPatientResourceHandler(),
 				new EditPatientResourceHandler());
 
+		// Lab Tests
 		handlers.registerAll(new ListLabTestResourceHandler(), new AddLabTestResourceHandler(),
 				new EditLabTestResourceHandler());
 
+		// Lab Lists
 		handlers.registerAll(new ListLabListResourceHandler(), new AddLabListResourceHandler(),
 				new EditLabListResourceHandler());
+		
+		// Administration
+		handlers.registerAll(new DisconnectResourceHandler());
 	}
 
 	@Override
@@ -60,7 +67,7 @@ public class LabPlanServlet extends HttpServlet {
 
 		String path = getPath(request);
 		ServletContext context = getServletContext();
-		HandlerParameters params = new HandlerParameters(context, request, response, path);
+		HandlerParameters params = new HandlerParameters(context, request, response, authHandler, path);
 
 		LOGGER.info("GET " + request.getRequestURI());
 
@@ -86,7 +93,7 @@ public class LabPlanServlet extends HttpServlet {
 
 		String path = getPath(request);
 		ServletContext context = getServletContext();
-		HandlerParameters params = new HandlerParameters(context, request, response, path);
+		HandlerParameters params = new HandlerParameters(context, request, response, authHandler, path);
 
 		LOGGER.info("POST " + request.getRequestURI());
 					
@@ -121,10 +128,10 @@ public class LabPlanServlet extends HttpServlet {
 			return true;
 		
 		try {
-			boolean isAuthenticated = loginHandler.checkAuthentication(params);
+			boolean isAuthenticated = authHandler.checkAuthentication(params);
 			
 			if (!isAuthenticated) {
-				loginHandler.redirectToLogin(params);
+				authHandler.redirectToLogin(params);
 				LOGGER.info("Attempt to access a secure page without authorization.");
 				return false;
 			}

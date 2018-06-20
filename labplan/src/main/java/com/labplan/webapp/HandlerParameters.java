@@ -16,6 +16,7 @@ public class HandlerParameters {
 	private ServletContext context;
 	private HttpServletRequest request;
 	private HttpServletResponse response;
+	private AuthenticationHandler authHandler;
 	private String path;
 
 	/**
@@ -28,14 +29,17 @@ public class HandlerParameters {
 	 *            The current request of the servlet.
 	 * @param response
 	 *            The current response of the servlet.
+	 * @param authHandler
+	 *            The {@link AuthenticationHandler} acting as a middle-ware, if any.
 	 * @param path
 	 *            The URI (relative to the context root) that is being accessed.
 	 */
-	public HandlerParameters(ServletContext context, HttpServletRequest request, HttpServletResponse response,
+	public HandlerParameters(ServletContext context, HttpServletRequest request, HttpServletResponse response, AuthenticationHandler authHandler,
 			String path) {
 		this.context = context;
 		this.request = request;
 		this.response = response;
+		this.authHandler = authHandler;
 		this.path = path;
 	}
 
@@ -77,5 +81,13 @@ public class HandlerParameters {
 	 */
 	public String getPath() {
 		return path;
+	}
+
+	/**
+	 * Gets the {@link AuthenticationHandler} acting as a middle-ware, if any.
+	 * @return The {@link AuthenticationHandler} acting as a middle-ware, if any.
+	 */
+	public AuthenticationHandler getAuthHandler() {
+		return authHandler;
 	}
 }

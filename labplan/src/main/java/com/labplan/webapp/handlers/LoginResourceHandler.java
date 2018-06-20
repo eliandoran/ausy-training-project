@@ -69,7 +69,7 @@ public class LoginResourceHandler implements ResourceHandler, AuthenticationHand
 	}
 
 	@Override
-	public boolean checkAuthentication(HandlerParameters params) throws ServletException, IOException {
+	public boolean checkAuthentication(HandlerParameters params) {
 		HttpSession session = params.getRequest().getSession(true);
 		
 		Object authUserNameObject = session.getAttribute("login_user");
@@ -80,4 +80,12 @@ public class LoginResourceHandler implements ResourceHandler, AuthenticationHand
 	public void redirectToLogin(HandlerParameters params) throws ServletException, IOException {
 		params.getResponse().sendRedirect("/LabPlan/login");
 	}	
+	
+	@Override
+	public void disconnect(HandlerParameters params) {
+		HttpSession session = params.getRequest().getSession(true);
+		
+		LOGGER.info("Disconnecting user: " + session.getAttribute("login_user"));
+		session.setAttribute("login_user", null);
+	}
 }
