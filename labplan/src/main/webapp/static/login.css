@@ -23,3 +23,10 @@
 	padding: 2em 3em;
 	padding-bottom: 0;
 }
+
+.login-wrapper .message.error {
+	background-color: #E53935;
+	color: white;
+	padding: 1em;
+	transform: translateY(-1px);
+}

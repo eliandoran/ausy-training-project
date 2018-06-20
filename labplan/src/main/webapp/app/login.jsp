@@ -18,6 +18,12 @@
 					
 					<h1>Login to LabTest</h1>
 				</header>
+				
+				<c:if test="${not empty login_failed}">
+					<div class="message error">
+						User name or password invalid.					
+					</div>
+				</c:if>
 									
 				<form class="login-form" method="post">
 					<div class="row">

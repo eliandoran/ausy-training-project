@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import com.labplan.persistence.generic.AdministratorDao;
 import com.labplan.persistence.sql.SqlAdministratorDao;
@@ -25,8 +26,15 @@ public class LoginResourceHandler implements ResourceHandler {
 
 	@Override
 	public boolean doGet(HandlerParameters params) throws ServletException, IOException {
+		HttpSession session = params.getRequest().getSession(true);
+		
+		HttpServletRequest request = params.getRequest();
+		request.setAttribute("login_failed", session.getAttribute("login_failed"));
+		
 		RequestDispatcher dispatcher = params.getContext().getRequestDispatcher("/app/login.jsp");
-		dispatcher.forward(params.getRequest(), params.getResponse());
+		dispatcher.forward(params.getRequest(), params.getResponse());		
+		
+		session.setAttribute("login_failed", null);
 
 		return true;
 	}
@@ -37,12 +45,19 @@ public class LoginResourceHandler implements ResourceHandler {
 		
 		String userName = request.getParameter("username");
 		String password = request.getParameter("password");		
-
+		String newURL;
+		
 		if (administratorDao.validateAuthentication(userName, password)) {
-			System.out.println("Authentication successful.");
+			newURL = "/app/index.jsp";
 		} else {
-			System.out.println("Authentication failed.");
+			newURL = "/app/login.jsp";
+			
+			HttpSession session = params.getRequest().getSession(true);
+			session.setAttribute("login_failed", true);
 		}
+		
+		RequestDispatcher dispatcher = params.getContext().getRequestDispatcher(newURL);
+		dispatcher.forward(params.getRequest(), params.getResponse());
 		
 		return true;
 	}	
