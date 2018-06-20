@@ -9,5 +9,7 @@ public interface AuthenticationHandler {
 	
 	void redirectToLogin(HandlerParameters params) throws ServletException, IOException;
 	
+	void redirectToIndex(HandlerParameters params) throws ServletException, IOException;
+	
 	void disconnect(HandlerParameters params);
 }

@@ -31,6 +31,11 @@ public class LoginResourceHandler implements ResourceHandler, AuthenticationHand
 
 	@Override
 	public boolean doGet(HandlerParameters params) throws ServletException, IOException {
+		if (checkAuthentication(params)) {
+			redirectToIndex(params);
+			return true;
+		}
+		
 		HttpSession session = params.getRequest().getSession(true);
 		
 		HttpServletRequest request = params.getRequest();
@@ -51,19 +56,18 @@ public class LoginResourceHandler implements ResourceHandler, AuthenticationHand
 		
 		String userName = request.getParameter("username");
 		String password = request.getParameter("password");		
-		String newURL;
 		
 		if (administratorDao.validateAuthentication(userName, password)) {
-			newURL = "/LabPlan/";
-			session.setAttribute("login_user", userName);
 			LOGGER.info("Authenticated user: " + userName);
-		} else {
-			newURL = "/LabPlan/login";						
-			session.setAttribute("login_failed", true);
+			session.setAttribute("login_user", userName);
+			
+			redirectToIndex(params);			
+		} else {						
 			LOGGER.info("Authentication failed for user: " + userName);
+			session.setAttribute("login_failed", true);
+			
+			redirectToLogin(params);
 		}		
-		
-		params.getResponse().sendRedirect(newURL);
 		
 		return true;
 	}
@@ -79,7 +83,12 @@ public class LoginResourceHandler implements ResourceHandler, AuthenticationHand
 	@Override
 	public void redirectToLogin(HandlerParameters params) throws ServletException, IOException {
 		params.getResponse().sendRedirect("/LabPlan/login");
-	}	
+	}
+	
+	@Override
+	public void redirectToIndex(HandlerParameters params) throws ServletException, IOException {
+		params.getResponse().sendRedirect("/LabPlan/");
+	}
 	
 	@Override
 	public void disconnect(HandlerParameters params) {
