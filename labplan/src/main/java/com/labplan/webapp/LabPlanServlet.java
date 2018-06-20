@@ -31,14 +31,17 @@ public class LabPlanServlet extends HttpServlet {
 	private static final Logger LOGGER = Logger.getLogger(LabPlanServlet.class.getName());
 
 	private HandlerContainer handlers;
+	
+	private LoginResourceHandler loginHandler;
 
 	@Override
 	public void init() throws ServletException {
 		DatabaseConnectionFactory.setProfile("production");
 
 		handlers = new HandlerContainer();
+		loginHandler = new LoginResourceHandler();
 		
-		handlers.register(new LoginResourceHandler());
+		handlers.register(loginHandler);
 
 		handlers.registerAll(new ListPatientResourceHandler(), new AddPatientResourceHandler(),
 				new EditPatientResourceHandler());
@@ -63,13 +66,15 @@ public class LabPlanServlet extends HttpServlet {
 
 		processMessages(params);
 		ResourceHandler handler = obtainHandler(path);
+		
+		if (!doAuth(params, handler))
+			return;		
 
 		if (handler != null) {
 			if (!handler.doGet(params)) {
 				response.sendError(404);
 				LOGGER.info("Handler returned 404.");
 			}
-			;
 		}
 	}
 
@@ -84,15 +89,18 @@ public class LabPlanServlet extends HttpServlet {
 		HandlerParameters params = new HandlerParameters(context, request, response, path);
 
 		LOGGER.info("POST " + request.getRequestURI());
+					
 		processMessages(params);
 		ResourceHandler handler = obtainHandler(path);
+		
+		if (!doAuth(params, handler))
+			return;		
 
 		if (handler != null) {
 			if (!handler.doPost(params)) {
 				response.sendError(404);
 				LOGGER.info("Handler returned 404.");
 			}
-			;
 		}
 	}
 
@@ -105,6 +113,26 @@ public class LabPlanServlet extends HttpServlet {
 			session.removeAttribute("message");
 			LOGGER.info("Got a message: " + message.getType() + ": " + message.getContent());
 		}
+	}
+	
+	private boolean doAuth(HandlerParameters params, ResourceHandler resourceHandler) {
+		LOGGER.info(resourceHandler.getClass().getName());
+		if (resourceHandler instanceof AuthenticationHandler)
+			return true;
+		
+		try {
+			boolean isAuthenticated = loginHandler.checkAuthentication(params);
+			
+			if (!isAuthenticated) {
+				loginHandler.redirectToLogin(params);
+				LOGGER.info("Attempt to access a secure page without authorization.");
+				return false;
+			}
+		} catch (ServletException | IOException e) {
+			e.printStackTrace();
+		}			
+		
+		return true;
 	}
 
 	private ResourceHandler obtainHandler(String path) {
